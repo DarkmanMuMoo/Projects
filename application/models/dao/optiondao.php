@@ -60,7 +60,7 @@ $obj = null;
     
      public function findbyid($optionno){
          $this->db->where('optionno', $optionno);
-            $query = $this->db->get('option');
+            $query = $this->db->get('ordoption');
          $obj = null;
 
         foreach ($query->result() as $row) {
@@ -75,7 +75,7 @@ $obj = null;
      public function findall() {
         
      
-        $query = $this->db->get('option');
+        $query = $this->db->get('ordoption');
 
         $array = array();
         foreach ($query->result() as $row) {
@@ -102,7 +102,7 @@ $obj = null;
            
         );
 
-        return $this->db->insert('option', $data);
+        return $this->db->insert('ordoption', $data);
     }
 
     
