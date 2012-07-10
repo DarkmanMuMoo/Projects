@@ -169,9 +169,18 @@ class Orders extends CI_Controller {
     }
 
     public function viewOrderdetail($orderno) {
-$orderlinlist= $this->orderlinedao->
+$sql = 'select *  from orderline  as ol  join paper as p on ol.paperno=p.paperno 
+join template as t on t.tempno=ol.tempno
+join ordoption as op on ol.optionno=op.optionno
+where ol.orderno=?';
 
-
+$query = $this->db->query($sql, array(intval($orderno)));
+ $data=array();
+             foreach ($query->result() as $row) {
+                 
+                 
+                 
+             }
 
         $this->load->view(lang('viewOrderdetail'));
     }

@@ -41,7 +41,7 @@ $obj = null;
     
       public function findbytype($type){
              
-           $sql =' SELECT * FROM option_type ot inner join `option` o on ot.optionno=o.optionno WHERE ot.`type` = ?';
+           $sql =' SELECT * FROM option_type ot inner join `ordoption` o on ot.optionno=o.optionno WHERE ot.`type` = ?';
            
            $query = $this->db->query($sql, array($type));
         
