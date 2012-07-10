@@ -1,4 +1,4 @@
-<? echo 'helloworld naja';
+<? echo 'helloworld najawew';
 
 ?>
  
