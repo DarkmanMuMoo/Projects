@@ -19,6 +19,10 @@ class Orddao extends CI_Model  {
          
     }
    
+    public function delete($orderno){
+       
+        $this->db->delete('ord', array('orderno' => $orderno)); 
+    }
       public function findbyid($orderno){
          $this->db->where('orderno', $orderno);
             $query = $this->db->get('ord');

@@ -31,6 +31,10 @@ class Orderlinedao  extends CI_Model{
         return $obj;
         
     }
+      public function delete($orderno){
+         $this->db->delete('orderline', array('orderno' => $orderno));
+        
+    }
     public function findbyorderno($orderno){
          $this->db->where('orderno', $orderno);
             $query = $this->db->get('orderline');
