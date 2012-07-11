@@ -33,6 +33,12 @@ class Orders extends CI_Controller {
         $email = $user->getEmail();
         $condition=array();
        $condition['email']=$email;
+       if($this->input->post('status') ){
+           $staus=$this->input->post('status');
+           if($staus!=''){
+            $condition['ord_status']=$staus;
+           }
+       }
        if($this->input->post('fromdate')){
            
             $condition['orderdate >=']=$this->input->post('fromdate');
@@ -53,7 +59,16 @@ class Orders extends CI_Controller {
 
         $this->load->view(lang('orderpage'), $data);
     }
-
+ public function delete($orderno) {
+     
+    $$this->orderlinedao->delete($orderno);
+      $this->orddao->delete($orderno);
+   
+              $javascript =" <script>
+   document.location.reload();
+    </script>";
+          echo  $javascript;
+ }
     public function showcart() {
 
 
