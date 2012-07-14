@@ -38,12 +38,12 @@
                 <?php foreach ($_SESSION['temp_orderlinelist'] as $index => $cart): ?>
                     <tr>
 
-                        <td>   <?php foreach ($templatelist as $template): ?>
+                        <td>   <?php foreach ($templatelist as $orderline): ?>
 
 
-                                <?php if ($template->getTempno() == $cart->getTempno()): ?>
-                                    <strong> <? echo $template->getName(); ?> &nbsp; <? echo $template->getType(); ?>&nbsp;
-                                        <? echo $template->getSize(); ?>
+                                <?php if ($orderline->getTempno() == $cart->getTempno()): ?>
+                                    <strong> <? echo $orderline->getName(); ?> &nbsp; <? echo $orderline->getType(); ?>&nbsp;
+                                        <? echo $orderline->getSize(); ?>
                                     </strong>
                                 <?php endif; ?>
                             <? endforeach; ?>

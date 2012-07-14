@@ -29,9 +29,9 @@
     
          <p  >
         <label>template: </label> <select  name="template" >
-            <?php foreach ($templatelist as $template): ?>
-                <option value="<? echo $template->getTempno() ?>" >
-                    <? echo $template->getName() ?></option>
+            <?php foreach ($templatelist as $orderline): ?>
+                <option value="<? echo $orderline->getTempno() ?>" >
+                    <? echo $orderline->getName() ?></option>
             <?php endforeach; ?>
         </select>
           <label>paper: </label> <select  name="paper" >

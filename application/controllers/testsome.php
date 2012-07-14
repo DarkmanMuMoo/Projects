@@ -26,7 +26,11 @@ class Testsome extends CI_Controller {
      echo anchor("/testsome/index/$encode", 'Email ได้รับการยืนยันแล้ว คลิกที่นี่เพื่อกลับไปหน้า Homepage', 'title="SignUp"');
     }
 
-    
+    public function viewsession(){
+        var_dump($_SESSION);
+        
+        
+    }
 public function testextends(){
 
      /*$this->load->model('extends/orderline_extends');

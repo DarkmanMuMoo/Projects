@@ -204,10 +204,11 @@ class Orders extends CI_Controller {
         $email = $user->getEmail();
  $ordstatuslist = $this->ordstatusdao->findall();
  $orderlinelist = $this->orderlinedao->findjoinbyorderno($orderno);
+ $order = $this->orddao->findbyid($orderno);
         $data = array();
-     
+     $data['order']=$order;
         $data['ordstatuslist'] = $ordstatuslist;
-$data['$orderlinelist'] = $orderlinelist;
+$data['orderlinelist'] = $orderlinelist;
         $this->load->view(lang('viewOrderdetail'),$data);
     }
 

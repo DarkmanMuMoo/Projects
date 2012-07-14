@@ -75,6 +75,7 @@ class User extends CI_Controller{
       public function performlogout(){
          //session_start();
          unset($_SESSION['user']);
+         unset($_SESSION['cart']);
          
       $_SESSION['hasuser']=false;
       

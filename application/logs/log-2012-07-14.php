@@ -28,3 +28,8 @@ ERROR - 2012-07-14 16:37:38 --> Severity: Notice  --> Trying to get property of 
 ERROR - 2012-07-14 16:41:24 --> Severity: Notice  --> Undefined index: user C:\wamp\www\Projects\application\controllers\orders.php 32
 ERROR - 2012-07-14 16:45:13 --> Could not find the language line "pleselogin"
 ERROR - 2012-07-14 17:00:15 --> Severity: Notice  --> Undefined property: Orders::$ordstatusdao C:\wamp\www\Projects\application\controllers\orders.php 205
+ERROR - 2012-07-14 19:01:46 --> Severity: Notice  --> Undefined index: tmp_ordline C:\wamp\www\Projects\application\controllers\orders.php 108
+ERROR - 2012-07-14 19:01:46 --> Severity: Warning  --> Cannot modify header information - headers already sent by (output started at C:\wamp\www\Projects\system\core\Exceptions.php:185) C:\wamp\www\Projects\system\helpers\url_helper.php 544
+ERROR - 2012-07-14 19:45:31 --> Severity: Notice  --> Undefined variable: orderlinelist C:\wamp\www\Projects\application\views\OnlinePrinting\Orders\viewOrderdetail.php 22
+ERROR - 2012-07-14 19:45:31 --> Severity: Warning  --> Invalid argument supplied for foreach() C:\wamp\www\Projects\application\views\OnlinePrinting\Orders\viewOrderdetail.php 22
+ERROR - 2012-07-14 20:05:03 --> Severity: Notice  --> Undefined variable: order C:\wamp\www\Projects\application\views\OnlinePrinting\Orders\viewOrderdetail.php 24
