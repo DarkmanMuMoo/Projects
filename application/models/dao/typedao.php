@@ -88,7 +88,7 @@ $obj = null;
 
         $data = array(
             'type' => $type->getType(),
-            'description' => $type->getDescription(),
+            'type_description' => $type->getDescription(),
            'pic_url'=>$type->getPicurl()
         );
 
@@ -101,7 +101,7 @@ $obj = null;
         $type = new Type;
 
         $type->setType($row->type);
-        $type->setDescription($row->description);
+        $type->setDescription($row->type_description);
        $type->setPicurl($row->pic_url);
 
         return $type;

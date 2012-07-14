@@ -55,7 +55,7 @@ class Paperdao extends CI_Model   {
 
         $data = array(
             'paperno' => $paper->getPaperno(),
-            'name' => $paper->getName(),
+            'paper_name' => $paper->getName(),
              'gram' => $paper->getGrame()
            
         );
@@ -88,7 +88,7 @@ $obj = null;
 
         $paper->setPapaerno($row->paperno);
         
-        $paper->setName($row->name);
+        $paper->setName($row->paper_name);
      
        $paper->setGrame($row->gram);
 

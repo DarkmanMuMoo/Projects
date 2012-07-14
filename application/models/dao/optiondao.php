@@ -97,8 +97,8 @@ $obj = null;
      
         $data = array(
          
-            'description' => $option->getDescription(),
-             'price' => $option->getPrice()
+            'option_description' => $option->getDescription(),
+             'option_price' => $option->getPrice()
            
         );
 
@@ -113,8 +113,8 @@ $obj = null;
 
         $option->setOptionno($row->optionno);
         
-        $option->setDescription($row->description);
-       $option->setPrice($row->price);
+        $option->setDescription($row->option_description);
+       $option->setPrice($row->option_price);
     
 
         return $option;

@@ -69,7 +69,7 @@ class Cusdao extends CI_Model {
         $address2 = $cus->getAddress2();
         $data = array(
             'email' => $cus->getEmail(),
-            'name' => $cus->getName(),
+            'cus_name' => $cus->getName(),
             'lastname' => $cus->getLastname(),
             'phone' => $cus->getPhone(),
             'password' => $cus->getPassword(),
@@ -123,7 +123,7 @@ return $this->db->update('custormer', $data);
         $cus = new Custormer();
 
         $cus->setEmail($row->email);
-        $cus->setName($row->name);
+        $cus->setName($row->cus_name);
         $cus->setLastname($row->lastname);
         $cus->setPassword($row->password);
         $cus->setPhone($row->phone);

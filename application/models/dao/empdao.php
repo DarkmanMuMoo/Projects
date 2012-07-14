@@ -57,7 +57,7 @@ class Empdao extends CI_Model{
 
         $data = array(
             'empno' => $emp->getEmpno(),
-            'name' => $emp->getName(),
+            'emp_name' => $emp->getName(),
              'lastname' => $emp->getLastname(),
                  'email' => $emp->getEmail(),
             'phone' => $emp->getPhone(),
@@ -72,7 +72,7 @@ class Empdao extends CI_Model{
   private function  makeObj($row){
         $emp = new Emp();
         $emp->setEmpno($row->empno);
-        $emp->setName($row->name);
+        $emp->setName($row->emp_name);
         $emp->setPhone($row->phone);
         $emp->setLastname($row->lastname);
         $emp->setPosition($row->position);

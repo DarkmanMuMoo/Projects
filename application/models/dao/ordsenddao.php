@@ -20,7 +20,7 @@ class Ordsenddao extends CI_Model {
     }
  public function findbyid($ordsendmethod){
      
-     echo $ordsendmethod;
+   
          $this->db->where('sendmethod', $ordsendmethod);
             $query = $this->db->get('ordsend');
          $obj = null;
@@ -59,7 +59,7 @@ class Ordsenddao extends CI_Model {
 
         $data = array(
             'sendmethod' =>$ordsend->getSendmethod(),
-            'description' =>$ordsend->getDescription()
+            'send_description' =>$ordsend->getDescription()
           
         );
 
@@ -72,7 +72,7 @@ class Ordsenddao extends CI_Model {
         $ordsend = new Ordsend();
 
         $ordsend->setSendmethod($row->sendmethod);
-        $ordsend->setDescription($row->description);
+        $ordsend->setDescription($row->send_description);
       
 
         return $ordsend;

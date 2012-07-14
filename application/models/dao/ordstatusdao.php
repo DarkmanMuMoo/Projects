@@ -57,7 +57,7 @@ class Ordstatusdao extends CI_Model{
 
         $data = array(
             'status' =>$ordstatus->getStatus(),
-            'description' =>$ordstatus->getDescription()
+            'status_description' =>$ordstatus->getDescription()
           
         );
 
@@ -70,7 +70,7 @@ class Ordstatusdao extends CI_Model{
         $ordstatus = new Ordstatus();
 
         $ordstatus->setStatus($row->status);
-        $ordstatus->setDescription($row->description);
+        $ordstatus->setDescription($row->status_description);
       
 
         return $ordstatus;

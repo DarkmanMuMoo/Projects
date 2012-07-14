@@ -31,7 +31,8 @@ class Product  extends CI_Controller{
        
         $data['type']=$this->typedao->findbyid($type);
       $data['templatelist'] =  $this->templatedao->findbytype($type);
-        //echo var_dump($template);
+      
+      //  echo var_dump($data['templatelist']);
          $data['paperlist'] =  $this->paperdao->findbytype($type);
             $data['optionlist'] =  $this->optiondao->findbytype($type);
  
@@ -48,11 +49,11 @@ class Product  extends CI_Controller{
            $_SESSION['tmp_ordline']->setPaperno($paperno);
           $_SESSION['tmp_ordline']->setOptionno($optionno);
               $_SESSION['tmp_ordline']->setQty($qty);
-          
-           $sql ='select pr.price as price, pr.qty as qty, pa.name as papername, pa.gram as gram,tmp.name as tmpname,tmp.size as size ,tmp.`type` as`type`,tmp.url as filepath from price pr join paper pa  on pr.paperno=pa.paperno
- join template tmp  on pr.tempno=tmp.tempno where pr.paperno =? and pr.tempno=? and pr.qty=?';
-         
-         
+              
+              
+       //   need to fix later
+           $sql =  lang('sqlcalprice');
+
         $query = $this->db->query($sql, array(intval($paperno),intval($tempno),  intval($qty)));
       $data=array();
              foreach ($query->result() as $row) {
@@ -66,7 +67,7 @@ $data['price']=$row->price;
         }
         $option =$this->optiondao->findbyid($optionno);
 $data['option'] =  $option->getDescription();
-
+//need to fix later
               $this->load->view(lang('showpriceframe'),$data);
     }
     

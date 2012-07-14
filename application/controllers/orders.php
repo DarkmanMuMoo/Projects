@@ -28,7 +28,21 @@ class Orders extends CI_Controller {
     }
 
     public function index() {
-        $this->load->model('dao/ordstatusdao');
+       if($_SESSION['hasuser']){
+           
+           $this->orderpage();
+           
+       }else{
+           
+           
+           
+           redirect('home');
+           
+       }
+    }
+    public function orderpage(){
+        
+         $this->load->model('dao/ordstatusdao');
         $user = $_SESSION['user'];
         $email = $user->getEmail();
         $condition=array();
@@ -58,15 +72,16 @@ class Orders extends CI_Controller {
         $data['ordstatuslist'] = $ordstatuslist;
 
         $this->load->view(lang('orderpage'), $data);
+        
     }
- public function delete($orderno) {
+ public function cancleorder($orderno) {
      
-    $$this->orderlinedao->delete($orderno);
+    $this->orderlinedao->delete($orderno);
       $this->orddao->delete($orderno);
    
-              $javascript =" <script>
+              $javascript ="
    document.location.reload();
-    </script>";
+   ";
           echo  $javascript;
  }
     public function showcart() {
@@ -98,7 +113,7 @@ class Orders extends CI_Controller {
         array_push($_SESSION['cart'], $ordline);
         unset($_SESSION['tmp_ordline']);
 
-        redirect('homepage', 'refresh');
+        redirect('home', 'refresh');
     }
 
     public function removeCartItem($index) {
@@ -140,7 +155,7 @@ class Orders extends CI_Controller {
         $data['paperlist'] = $this->paperdao->findall();
         $data['optionlist'] = $this->optiondao->findall();
 
-        echo $ordsendmethod;
+       // echo $ordsendmethod;
         $data['ordpay'] = $this->ordpaydao->findbyid($ordpaymethod);
         $data['ordsend'] = $this->ordsenddao->findbyid($ordsendmethod);
 
@@ -165,7 +180,7 @@ class Orders extends CI_Controller {
         $ord->setEmail($user->getEmail());
         $ord->setPaymethod($ordpay);
         $ord->setSendmethod($ordsend);
-        $ord->setOrdstatus('waitupload');
+        $ord->setOrdstatus('10');
         $ord->setTotalprice($totalprice);
         $ord->setOrderdate(date("Y-m-d"));
         $result = $this->orddao->insert($ord);
@@ -184,20 +199,16 @@ class Orders extends CI_Controller {
     }
 
     public function viewOrderdetail($orderno) {
-$sql = 'select *  from orderline  as ol  join paper as p on ol.paperno=p.paperno 
-join template as t on t.tempno=ol.tempno
-join ordoption as op on ol.optionno=op.optionno
-where ol.orderno=?';
-
-$query = $this->db->query($sql, array(intval($orderno)));
- $data=array();
-             foreach ($query->result() as $row) {
-                 
-                 
-                 
-             }
-
-        $this->load->view(lang('viewOrderdetail'));
+ $this->load->model('dao/ordstatusdao');
+ $user = $_SESSION['user'];
+        $email = $user->getEmail();
+ $ordstatuslist = $this->ordstatusdao->findall();
+ $orderlinelist = $this->orderlinedao->findjoinbyorderno($orderno);
+        $data = array();
+     
+        $data['ordstatuslist'] = $ordstatuslist;
+$data['$orderlinelist'] = $orderlinelist;
+        $this->load->view(lang('viewOrderdetail'),$data);
     }
 
 }

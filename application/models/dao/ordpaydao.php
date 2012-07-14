@@ -56,7 +56,7 @@ class Ordpaydao extends CI_Model{
 
         $data = array(
             'paymethod' =>$ordpay->getPaymethod(),
-            'description' =>$ordpay->getDescription()
+            'pay_description' =>$ordpay->getDescription()
           
         );
 
@@ -69,7 +69,7 @@ class Ordpaydao extends CI_Model{
         $ordpay = new Ordpay();
 
         $ordpay->setPaymethod($row->paymethod);
-        $ordpay->setDescription($row->description);
+        $ordpay->setDescription($row->pay_description);
       
 
         return $ordpay;

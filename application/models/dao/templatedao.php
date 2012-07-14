@@ -86,7 +86,7 @@ class Templatedao extends CI_Model {
             'type' => $template->getType(),
              'size' => $template->getSize(),
             'url' => $template->getUrl(),
-             'name' => $template->getName()
+             'tmp_name' => $template->getName()
 
         );
 
@@ -103,7 +103,7 @@ class Templatedao extends CI_Model {
         $template->setType($row->type);
        $template->setSize($row->size);
        $template->setUrl($row->url);
-       $template->setName($row->name);
+       $template->setName($row->tmp_name);
 
         return $template;
     }

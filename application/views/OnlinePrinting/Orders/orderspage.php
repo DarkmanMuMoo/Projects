@@ -16,10 +16,9 @@
         {
 
               $.post('<? echo site_url('orders/cancleorder')?>/'+orderno, function(data){
-                  alert(data);
+                  //alert(data);
                   eval(data);
-                  
-                  
+
               });
 
         }
@@ -80,7 +79,7 @@
                     <?php foreach ($orderlist as $index => $ord): ?>
                         <tr> <td  ><? echo $index + 1 ?> </td>  
                             <td  >
-                                <a href="<? site_url('orders/vieworderdetail') . "/" . $ord->getOrderno(); ?>"> 
+                                <a href="<?echo site_url('orders/vieworderdetail') . "/" . $ord->getOrderno(); ?>"> 
                                     <? echo $ord->getOrderno(); ?> 
                                 </a>
                             </td> 
@@ -90,7 +89,7 @@
                             </td> 
                             <td style="text-align: right;" ><? echo $ord->getTotalprice(); ?> </td>                      
                             <td >
-                                <button class="btn btn-danger" onclick="Confirmdelete(<? echo $ord->getOrderno();?>);" >cancle </button> 
+                                <button class="btn btn-danger" onclick="Confirmdelete('<? echo $ord->getOrderno();?>');" >cancle </button> 
                             </td>  
                         </tr>
                     <?php endforeach; ?>

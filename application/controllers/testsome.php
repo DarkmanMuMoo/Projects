@@ -27,9 +27,13 @@ class Testsome extends CI_Controller {
     }
 
     
-public function testdropdown(){
-$this->load->view('testdropdown');
-   
+public function testextends(){
+
+     /*$this->load->model('extends/orderline_extends');
+    $obj  = new Orderline_extends();*/
+    $this->load->model('dao/orderlinedao');
+    $obj=$this->orderlinedao->joinbyorderno(7);
+    var_dump($obj);
 }
     
       public function testdownload(){
