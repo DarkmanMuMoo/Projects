@@ -24,6 +24,8 @@ $lang['logindialog'] = 'testlogin';
 $lang['productpage'] = 'OnlinePrinting/Product/productpage';
 $lang['chooseproduct'] = 'OnlinePrinting/Product/Chooseproduct';
 
+$lang['templatefileroot']='./asset/templatefile/';
+$lang['uploadframe']='OnlinePrinting/frame/uploadframe';
 
 $lang['orderpage']='OnlinePrinting/Orders/orderspage';
 $lang['createorder'] = 'OnlinePrinting/Orders/CreateOrder';

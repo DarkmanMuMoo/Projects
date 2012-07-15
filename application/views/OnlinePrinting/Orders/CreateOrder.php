@@ -71,7 +71,7 @@
                             
                             <?php if ($orderline->getTempno() == $cart->getTempno()): ?>
                             <strong> <? echo $orderline->getName();?> &nbsp; <? echo $orderline->getType();?>&nbsp;
-                            <? echo $orderline->getSize();?>
+                            <? echo $orderline->getSize(); break;?>
                             </strong>
                             <?php endif; ?>
                              <?endforeach;?>
@@ -79,7 +79,7 @@
                    
                          <td>   <?php foreach ($paperlist as  $paper): ?>
                               <?php if ($paper->getPaperno() == $cart->getPaperno()): ?>
-                            <strong> <? echo $paper->getName();?> &nbsp; <? echo $paper->getGrame();?></strong>
+                            <strong> <? echo $paper->getName();?> &nbsp; <? echo $paper->getGrame(); break;?></strong>
                             <?php endif; ?>
                        
                              <? endforeach;?>
@@ -87,7 +87,7 @@
                          <td>   <?php foreach ($optionlist as $option): ?>
                             
                            <?php if ($option->getOptionno() == $cart->getOptionno()): ?>
-                            <strong> <? echo $option->getDescription();?> </strong>
+                            <strong> <? echo $option->getDescription(); break;?> </strong>
                             <?php endif; ?>
                              <? endforeach;?>
                         </td>

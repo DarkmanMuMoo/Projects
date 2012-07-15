@@ -85,7 +85,11 @@
                             </td> 
                             <td > <? echo $ord->getOrderdate(); ?> </td>
                             <td >
-                                <? echo $ord->getOrdstatus(); ?>
+                                 <?php foreach ($ordstatuslist as $ordstatus): ?>
+                                <?php if ($ordstatus->getStatus() ==$ord->getOrdstatus() ): ?>
+                                <? echo $ordstatus->getDescription(); break; ?>
+                               <?php endif; ?>
+                                 <?php endforeach; ?>
                             </td> 
                             <td style="text-align: right;" ><? echo $ord->getTotalprice(); ?> </td>                      
                             <td >

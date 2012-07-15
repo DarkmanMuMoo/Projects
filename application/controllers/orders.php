@@ -28,43 +28,40 @@ class Orders extends CI_Controller {
     }
 
     public function index() {
-       if($_SESSION['hasuser']){
-           
-           $this->orderpage();
-           
-       }else{
-           
-           
-           
-           redirect('home');
-           
-       }
+        if ($_SESSION['hasuser']) {
+
+            $this->orderpage();
+        } else {
+
+
+
+            redirect('home');
+        }
     }
-    public function orderpage(){
-        
-         $this->load->model('dao/ordstatusdao');
+
+    public function orderpage() {
+
+        $this->load->model('dao/ordstatusdao');
         $user = $_SESSION['user'];
         $email = $user->getEmail();
-        $condition=array();
-       $condition['email']=$email;
-       if($this->input->post('status') ){
-           $staus=$this->input->post('status');
-           if($staus!=''){
-            $condition['ord_status']=$staus;
-           }
-       }
-       if($this->input->post('fromdate')){
-           
-            $condition['orderdate >=']=$this->input->post('fromdate');
-           
-       }
-       if($this->input->post('todate')){
-         
-            $condition['orderdate <=']=$this->input->post('todate');
-           
-       }
-       
-   
+        $condition = array();
+        $condition['email'] = $email;
+        if ($this->input->post('status')) {
+            $staus = $this->input->post('status');
+            if ($staus != '') {
+                $condition['ord_status'] = $staus;
+            }
+        }
+        if ($this->input->post('fromdate')) {
+
+            $condition['orderdate >='] = $this->input->post('fromdate');
+        }
+        if ($this->input->post('todate')) {
+
+            $condition['orderdate <='] = $this->input->post('todate');
+        }
+
+
         $orderlist = $this->orddao->findbymultifield($condition);
         $ordstatuslist = $this->ordstatusdao->findall();
         $data = array();
@@ -72,18 +69,19 @@ class Orders extends CI_Controller {
         $data['ordstatuslist'] = $ordstatuslist;
 
         $this->load->view(lang('orderpage'), $data);
-        
     }
- public function cancleorder($orderno) {
-     
-    $this->orderlinedao->delete($orderno);
-      $this->orddao->delete($orderno);
-   
-              $javascript ="
+
+    public function cancleorder($orderno) {
+
+        $this->orderlinedao->delete($orderno);
+        $this->orddao->delete($orderno);
+
+        $javascript = "
    document.location.reload();
    ";
-          echo  $javascript;
- }
+        echo $javascript;
+    }
+
     public function showcart() {
 
 
@@ -155,7 +153,7 @@ class Orders extends CI_Controller {
         $data['paperlist'] = $this->paperdao->findall();
         $data['optionlist'] = $this->optiondao->findall();
 
-       // echo $ordsendmethod;
+        // echo $ordsendmethod;
         $data['ordpay'] = $this->ordpaydao->findbyid($ordpaymethod);
         $data['ordsend'] = $this->ordsenddao->findbyid($ordsendmethod);
 
@@ -199,19 +197,44 @@ class Orders extends CI_Controller {
     }
 
     public function viewOrderdetail($orderno) {
- $this->load->model('dao/ordstatusdao');
- $user = $_SESSION['user'];
+        $this->load->model('dao/ordstatusdao');
+        $user = $_SESSION['user'];
         $email = $user->getEmail();
- $ordstatuslist = $this->ordstatusdao->findall();
- $orderlinelist = $this->orderlinedao->findjoinbyorderno($orderno);
- $order = $this->orddao->findbyid($orderno);
+        $ordstatuslist = $this->ordstatusdao->findall();
+        $orderlinelist = $this->orderlinedao->findjoinbyorderno($orderno);
+        $ordsendlist = $this->ordsenddao->findall();
+        $ordpaylist = $this->ordpaydao->findall();
+        $order = $this->orddao->findbyid($orderno);
         $data = array();
-     $data['order']=$order;
+        $data['ordsendlist'] = $ordsendlist;
+        $data['ordpaylist'] = $ordpaylist;
+        $data['order'] = $order;
         $data['ordstatuslist'] = $ordstatuslist;
-$data['orderlinelist'] = $orderlinelist;
-        $this->load->view(lang('viewOrderdetail'),$data);
+        $data['orderlinelist'] = $orderlinelist;
+        $this->load->view(lang('viewOrderdetail'), $data);
     }
 
+    
+    public  function downloadtemplate($tempeno){
+        
+        $template= $this->templatedao->findbyid($tempeno);
+          $this->load->helper('download');
+         $templatefileroot=  lang('templatefileroot');
+          $data = file_get_contents($templatefileroot.$template->getUrl()); // Read the file's contents
+$name = $template->getName().'.ai';
+
+
+force_download($name, $data);
+        
+    }
+    
+    
+    public function showuploadframe($orderlineno){
+        $data=array();
+        $data['orderlineno']=$orderlineno;
+        $this->load->view(lang('uploadframe'),$data);
+        
+    }
 }
 
 ?>

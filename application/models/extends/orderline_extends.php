@@ -26,6 +26,9 @@ class Orderline_extends extends Orderline {
   private $optiondescription;
   private $optionprice;
   
+  
+
+
   public function getPapername() {
       return $this->papername;
   }

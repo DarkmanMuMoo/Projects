@@ -28,7 +28,7 @@ class Templatedao extends CI_Model {
 
             $obj = $this->makeObj($row);
         }
-         echo var_dump($obj);
+         //echo var_dump($obj);
 
         return $obj;
         
