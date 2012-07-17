@@ -10,7 +10,7 @@
  *
  * @author Dark
  */
-class homepage  extends CI_Controller{
+class Home extends CI_Controller{
     //put your code here
     public function index()
 	{
@@ -18,7 +18,7 @@ class homepage  extends CI_Controller{
         
         //session_start();
         
-        if(isset($_SESSION['emp'])){
+        if($_SESSION['hasemp']){
             
             $this->load->view(lang('bakhome'));
         }else{
@@ -27,6 +27,8 @@ class homepage  extends CI_Controller{
             
         }
         }
+        
+      
     
 }
 
