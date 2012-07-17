@@ -1,4 +1,4 @@
-<? echo 'awew';
+<? echo 'amingew';
 
 ?>
  
