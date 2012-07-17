@@ -85,7 +85,7 @@
 </p>
 <hr style="color: orangered;
 background-color: orange;
-height: 1px;""></hr>
+height: 1px;"></hr>
     <?php
     echo form_open('register', array('class' => 'email', 'id' => 'signupForm'));
     ?>
