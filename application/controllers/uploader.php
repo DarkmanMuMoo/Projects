@@ -54,7 +54,7 @@ $message='';
         $orderlineno=$this->input->post('orderlineno');
         $orderline=$this->orderlinedao->findbyid($orderlineno);
       $ord = $this->orddao->findbyid($orderline->getOrderno());
-        
+        $ord->setOrdstatus('20');
          $config=array();
         $config['upload_path'] = './uploads';
 		$config['allowed_types'] = 'pdf';

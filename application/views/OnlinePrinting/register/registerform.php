@@ -80,6 +80,7 @@
         <?php
   echo form_open('register', array('class' => 'email', 'id' => 'signupForm'));
         ?>
+      <table>
         email <input type="text" name="email" id="email"  /><br/>
         name <input type="text" name="name" id="name" /><br/>
         lastname<input type="text" name="lastname" id="lastname" /><br/>
@@ -112,7 +113,7 @@ postcode<input type="text" name="postcode2" id="postcode2" /><br/>
        </p>
        <input  type="submit"  value="submit"/>
         <?echo form_close();?>
-        
+        </table>
         <p>
             
             <?php echo validation_errors(); ?>
