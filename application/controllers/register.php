@@ -103,8 +103,8 @@ $config['newline']="\r\n";
 
        $this->email->send();
 
-       echo $this->email->print_debugger();
-       echo  $message;
+       //echo $this->email->print_debugger();
+       //echo  $message;
     }
     
    

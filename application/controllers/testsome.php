@@ -102,16 +102,11 @@ echo anchor('testsome/testverify/'.$encrypted_string, 'My News', array('title' =
          
          $this->load->model('dao/empdao');
           $this->load->model('obj/emp');
-       $emp = new Emp();
-       $emp->setEmail('bla');
-         $emp->setLastname('blabla');
-          $emp->setName('mumoo');
-            $emp->setPassword('mumoo');
-              $emp->setPhone('0000');
-              $emp->setPosition('Boss');
-       echo var_dump( $this->empdao->insert($emp));
+     
+       echo var_dump( $this->empdao->findall());
+       //$this->db->close();
        //  $list = $this->empdao->findall() ;
-         echo $this->db->insert_id();
+        // echo $this->db->insert_id();
      }
     
     public function testmail2(){

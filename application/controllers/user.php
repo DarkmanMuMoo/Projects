@@ -43,7 +43,7 @@ class User extends CI_Controller{
     public function performlogin(){
      
         $password=$this->input->post('password'); 
-      $data['typelist'] =$this->typedao->findall();
+     // $data['typelist'] =$this->typedao->findall();
    
        $this->form_validation->set_rules('email', 'Email', "callback_user_check[$password]");
          if ($this->form_validation->run() == FALSE) {

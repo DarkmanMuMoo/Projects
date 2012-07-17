@@ -55,19 +55,29 @@ $message='';
         $orderline=$this->orderlinedao->findbyid($orderlineno);
       $ord = $this->orddao->findbyid($orderline->getOrderno());
         $ord->setOrdstatus('20');
+      
          $config=array();
         $config['upload_path'] = './uploads';
 		$config['allowed_types'] = 'pdf';
 		$config['max_size']	= '51200';
-                 $user = $_SESSION['user'];
-                $uname= $user->getName();
-                $filename=$uname.'_'.date("Y-m-d_H-i-s");
-		$config['file_name']= $filename;
+
+                $user = $_SESSION['user'];
+                 $uname= $user->getName();
+                  $filename=$uname.'_'.date("Y-m-d_H-i-s");
+                  $config['file_name']= $filename;  
+                
   $orderline->setFilepath($filename.".pdf");
+  
+  $this->orddao->update($ord);
   
   $this->orderlinedao->update($orderline);
   
-		$this->load->library('upload');
+		$mesg = $this->upload($config);
+        echo $mesg;
+        
+    }
+    private function upload($config){
+        $this->load->library('upload');
                  $this->upload->initialize($config);
 $message='error';
         if ( ! $this->upload->do_upload('myfile'))
@@ -82,7 +92,7 @@ $message='error';
 			$message='complete';
 		}
                 
-                echo $message;
+                return $message;
         
         
     }

@@ -52,7 +52,7 @@ $lang['bakhome'] ='Backend/home';
 
 $lang['Bakincludeheader'] ='Backend/include/headinclude';
 
-
-
+$lang['bakheader'] ='Backend/include/header';
+$lang['bakfooter'] ='Backend/include/footer';
 
 ?>
