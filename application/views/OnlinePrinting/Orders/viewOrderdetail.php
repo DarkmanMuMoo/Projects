@@ -19,8 +19,15 @@
 </style>
 <script>
 
+ function closedialog(){
+     
+     
+      $('#showuploaddialog').dialog( "close" );
+ }
+
 function showupload(orderlineno){
     
+     document.getElementById('uploaddialog').src = '<? echo site_url("orders/showuploadframe"); ?>/'+orderlineno; 
         $('#showuploaddialog').dialog({ 
                     autoOpen: true,
                     modal: true,
@@ -32,7 +39,7 @@ function showupload(orderlineno){
             );
                     
                    
-                document.getElementById('uploaddialog').src = '<? echo site_url("orders/showuploadframe"); ?>/'+orderlineno; 
+               
     
     
     
@@ -142,5 +149,5 @@ height: 3px;"></hr>
 
 <!-- upload dialog-->
 <div id="showuploaddialog" style="display:none;">
-    <iframe id="uploaddialog" ></iframe>
+    <iframe id="uploaddialog" width="500"  style="border-style:none;" scrolling="no"  ></iframe>
 </div>

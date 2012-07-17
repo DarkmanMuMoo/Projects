@@ -235,6 +235,8 @@ force_download($name, $data);
         $this->load->view(lang('uploadframe'),$data);
         
     }
+    
+ 
 }
 
 ?>

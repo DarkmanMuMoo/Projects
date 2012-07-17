@@ -10,7 +10,7 @@
          <script>
          
 $().ready(function() {
-$( "#progressbar" ).progressbar({ value: 0 });
+//$( "#progressbar" ).progressbar({ value: 0 });
 $('#uploadform').ajaxForm({
     beforeSend: function() {
            
@@ -24,17 +24,19 @@ $('#uploadform').ajaxForm({
     uploadProgress: function(event, position, total, percentComplete) {
       
         var percentVal = percentComplete + '%';
-        $( "#progressbar" ).progressbar({ value: percentComplete });
+        //$( "#progressbar" ).progressbar({ value: percentComplete });
        $('.bar').width(percentVal);
        $('.percent').html(percentVal);
      
  
     },
 	complete: function(xhr) {
-                 $( "#progressbar" ).hide();
-       
-          
-		$('#status').html(xhr.responseText);
+               //  $( "#progressbar" ).hide();
+         $('.bar').width('100%');
+       $('.percent').html('complete');
+	$('#status').html(xhr.responseText);
+        
+        //parent.closedialog();
 	}
 }); 
 
@@ -44,10 +46,10 @@ $('#uploadform').ajaxForm({
     </head>
     <body>
         <div class="container">
-            <form  id="uploadform" action="<? echo  site_url("uploader/do_upload"); ?>" method="post" enctype="multipart/form-data">
+            <form  id="uploadform" action="<? echo  site_url("uploader/uploadfile"); ?>" method="post" enctype="multipart/form-data">
         <input type="file" name="myfile"><br>
         <input type="hidden" name="orderlineno" value="<?echo $orderlineno;?>" >
-        <input type="submit" value="Upload File to Server">
+        <input class="btn btn-warning" type="submit" value="Upload File to Server">
     </form>
         
         <div class="progress">

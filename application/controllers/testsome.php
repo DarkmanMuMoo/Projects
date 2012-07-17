@@ -61,7 +61,7 @@ force_download($name, $data);
     }
     public function  testdate(){
     $this->load->helper('date');
-     //echo  date("Y-m-d");
+     echo  date("Ymd-H:i:s");
     // echo"\n";
      //echo strtotime("2012/07/02");
         

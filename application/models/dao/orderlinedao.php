@@ -17,6 +17,22 @@ class Orderlinedao  extends CI_Model{
         $this->load->model('obj/orderline');
          
     }
+    public function update(Orderline $ordline){
+        $data = array(
+         
+                     'orderno' => $ordline->getOrderno(),
+             'paperno' => $ordline->getPaperno(),
+                'tempno' => $ordline->getTempno(),
+             'optionno' => $ordline->getOptionno(),
+            'qty' => $ordline->getQty(),
+             'price' => $ordline->getPrice(),
+            'filepath' => $ordline->getFilepath()
+            );
+
+$this->db->where('ordlineno', $ordline->getOrdlineno());
+ return $this->db->update('orderline', $data); 
+        
+    }
       public function findbyid($ordlineno){
          $this->db->where('ordlineno', $ordlineno);
             $query = $this->db->get('orderline');
