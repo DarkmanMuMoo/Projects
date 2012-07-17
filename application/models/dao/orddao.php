@@ -18,7 +18,24 @@ class Orddao extends CI_Model  {
         $this->load->model('obj/ord');
          
     }
-   
+    public function update(Orders $ord){
+        $data = array(
+         
+                    'email' => $ord->getEmail(),
+             'orderdate' => $ord->getOrderdate(),
+                'paymethod' => $ord->getPaymethod(),
+             'sendmethod' => $ord->getSendmethod(),
+            'ord_status' => $ord->getOrdstatus(),
+             'total_price' => $ord->getTotalprice(),
+            'address' => $ord->getAddress(),
+             'province' => $ord->getProvince(),
+             'postcode' => $ord->getPostcode()
+            );
+
+$this->db->where('orderno', $ordline->getOrdlineno());
+ return $this->db->update('ord', $data); 
+        
+    }
     public function delete($orderno){
        
         $this->db->delete('ord', array('orderno' => $orderno)); 
