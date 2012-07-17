@@ -1,8 +1,4 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -17,6 +13,11 @@ and open the template in the editor.
    
             width: 50%;
             
+        }
+        #login input[type=text]{
+            
+            
+            height: auto;
         }
        
         
@@ -43,14 +44,14 @@ and open the template in the editor.
         <div class="container" align="center">
             <div id="login"  >
                   <?php
-        echo form_open("user/performlogin", array('class' => 'well', 'id' => 'loginForm'));
+        echo form_open("Backend/user/performlogin", array('class' => 'well', 'id' => 'loginForm'));
         ?>
                       <fieldset>
                           <h4>Login</h4>
     <br>
 
-    &nbsp; &nbsp; &nbsp;Name:     <input type="text" id="name" name="name"/><br>
-      Password: <input type="text" id="password" name="password" /><br>
+    &nbsp; &nbsp; &nbsp;Name:     <input class="input-medium"  value=""type="text" id="name" name="name"/><br>
+    Password: <input  class="input-medium" type="text" value="" id="password" name="password" /><br>
       <br>
       <p><button type="submit" class="btn btn-primary">login</button></p>
                       </fieldset>

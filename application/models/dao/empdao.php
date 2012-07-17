@@ -19,8 +19,8 @@ class Empdao extends CI_Model{
         $this->load->model('obj/emp');
          
     }
-      public function findbyid($empno){
-         $this->db->where('employee', $empno);
+      public function findbyid($empname){
+         $this->db->where('emp_name', $empname);
             $query = $this->db->get('employee');
          $obj = null;
 
@@ -56,7 +56,7 @@ class Empdao extends CI_Model{
     public function insert(Emp $emp) {
 
         $data = array(
-            'empno' => $emp->getEmpno(),
+         
             'emp_name' => $emp->getName(),
              'lastname' => $emp->getLastname(),
                  'email' => $emp->getEmail(),
@@ -71,7 +71,7 @@ class Empdao extends CI_Model{
     
   private function  makeObj($row){
         $emp = new Emp();
-        $emp->setEmpno($row->empno);
+
         $emp->setName($row->emp_name);
         $emp->setPhone($row->phone);
         $emp->setLastname($row->lastname);
