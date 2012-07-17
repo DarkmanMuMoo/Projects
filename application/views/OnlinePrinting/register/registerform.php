@@ -75,11 +75,22 @@
      
  
 </script>
-
+   
 <div style="margin: 0 auto ; width: 60%;" > 
+    <p style ="margin-bottom: 10px;">
+    <h1><b>ลงทะเบียน</b></h1>
+    <h4>สมัครฟรี ไม่เสียค่าใช้จ่าย</h4>
+    
+    
+</p>
+<hr style="color: orangered;
+background-color: orange;
+height: 1px;""></hr>
     <?php
     echo form_open('register', array('class' => 'email', 'id' => 'signupForm'));
     ?>
+    
+    
     <table>
 
         <tr>
