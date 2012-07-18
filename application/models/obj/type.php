@@ -11,7 +11,11 @@
  * @author Dark
  */
 class Type extends CI_Model {
-
+    
+  private $type;
+private $description;
+    private $typeno;
+    private $picurl;
     //put your code here
     public function getType() {
         return $this->type;
@@ -28,8 +32,7 @@ class Type extends CI_Model {
     public function setDescription($description) {
         $this->description = $description;
     }
-
-    private $typeno;
+  
 
     public function getTypeno() {
         return $this->typeno;

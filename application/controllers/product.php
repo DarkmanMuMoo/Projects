@@ -39,6 +39,10 @@ class Product  extends CI_Controller{
          $this->load->view(lang('chooseproduct'),$data);
     }
     public function calprice(){
+         $this->load->model('dao/pricedao');
+        
+        
+        
        // session_start();
         $_SESSION['tmp_ordline']= new Orderline();
         $tempno=$this->input->post('template');
@@ -52,19 +56,16 @@ class Product  extends CI_Controller{
               
               
        //   need to fix later
-           $sql =  lang('sqlcalprice');
-
-        $query = $this->db->query($sql, array(intval($paperno),intval($tempno),  intval($qty)));
-      $data=array();
-             foreach ($query->result() as $row) {
-$data['paper']=$row->papername.' '.$row->gram .'g';
-$data['template']=$row->tmpname.' '.$row->size;
-$data['qty']=$row->qty;
-$data['typeno']=$row->typeno;
-$data['price']=$row->price;
-   $_SESSION['tmp_ordline']-> setFilepath($row->filepath);
-    $_SESSION['tmp_ordline']->setPrice($row->price);
-        }
+             $priceextends=$this->pricedao->findPriceExtendsby(intval($paperno),intval($tempno),  intval($qty));
+              
+         if($priceextends!=null){
+$data['paper']=$priceextends->getPapername().' '.$priceextends->getGrame().'g';
+$data['template']=$priceextends->tmpname.' '.$priceextends->size;
+$data['qty']=$priceextends->getQty();
+$data['type']=$priceextends->getType();
+$data['price']=$priceextends->getPrice();
+$_SESSION['tmp_ordline']->setPrice($priceextends->getPrice());
+         }
         $option =$this->optiondao->findbyid($optionno);
 $data['option'] =  $option->getDescription();
 //need to fix later
