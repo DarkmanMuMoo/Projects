@@ -42,7 +42,7 @@
 
 
                                 <?php if ($orderline->getTempno() == $cart->getTempno()): ?>
-                                    <strong> <? echo $orderline->getName(); ?> &nbsp; <? echo $orderline->getType(); ?>&nbsp;
+                                    <strong> <? echo $orderline->getName(); ?> &nbsp; <? echo $orderline->getTypeno(); ?>&nbsp;
                                         <? echo $orderline->getSize();  break;?>
                                     </strong>
                                 <?php endif; ?>

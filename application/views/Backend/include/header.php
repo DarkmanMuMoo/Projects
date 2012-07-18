@@ -18,3 +18,6 @@
            <? $this->load->view(lang('Bakincludeheader')) ?>
   </head>
     <body>
+        <div id="head" > <span class="label label-info"><? echo $_SESSION['emp']->getName();?></span>  <a class="btn btn-danger" href="<? echo site_url('Backend/user/performlogout') ?>">
+               <i class="icon-off icon-white"></i>Logout</a>    
+        </div>

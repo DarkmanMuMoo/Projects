@@ -37,6 +37,14 @@ class User extends CI_Controller {
              $this->load->view(lang('bakhome'));
         }
      }
+     
+     
+     
+     public function performlogout(){
+         
+         unset($_SESSION['emp']);
+           $this->load->view(lang('baklogin'));
+     }
            public function user_check($name,$password) {
                
                

@@ -15,10 +15,7 @@ class Typedao extends  CI_Model {
   
       public function __construct() {
      
-          
-       
-       
-     
+        
           $this->load->model('obj/type');
     }
     
@@ -50,8 +47,8 @@ $obj = null;
     
     
     
-    public function findbyid($type){
-         $this->db->where('type', $type);
+    public function findbyid($typeno){
+         $this->db->where('type_no', $typeno);
             $query = $this->db->get('type');
          $obj = null;
 
@@ -87,6 +84,7 @@ $obj = null;
     public function insert(Type $type) {
 
         $data = array(
+            'type_no' => $type->getTypeno(),
             'type' => $type->getType(),
             'type_description' => $type->getDescription(),
            'pic_url'=>$type->getPicurl()
@@ -99,7 +97,7 @@ $obj = null;
      public function makeObj($row) {
 
         $type = new Type;
-
+$type->setTypeno($row->type_no);
         $type->setType($row->type);
         $type->setDescription($row->type_description);
        $type->setPicurl($row->pic_url);

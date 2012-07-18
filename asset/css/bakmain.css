@@ -1,0 +1,51 @@
+/* 
+    Document   : bakmain
+    Created on : Jul 18, 2012, 11:06:57 AM
+    Author     : Dark
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+  #mainmenu{
+        
+        margin: 0 auto;
+    padding-top: 100px;
+    width: 40%;
+    text-align: center;
+  
+    }
+    
+   #mainmenu  ul {
+list-style: none;
+margin: 0;
+padding: 0;
+
+}
+#mainmenu  li  {
+   
+    line-height: 50px;
+   margin-bottom: 10px;
+ 
+}
+#mainmenu  a  {    
+    width: 320px;
+     height: 50px;
+    font-size: 20px;
+   letter-spacing: 2px;
+  
+}
+
+#mainmenu  a  span {   
+ vertical-align: middle;
+line-height: 50px;
+
+}
+
+#head{
+   
+    float: right;
+    clear: both;
+    margin-right: 20px;
+    margin-top: 20px;
+    
+}

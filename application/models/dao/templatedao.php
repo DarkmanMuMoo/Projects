@@ -35,13 +35,13 @@ class Templatedao extends CI_Model {
     }
     public function getType(Template $template){
       $this->load->model('dao/typedao');
-      return  $this->typedao->findbyid($template->getType());
+      return  $this->typedao->findbyid($template->getTypeno());
     }
     
     
     
-      public function findbytype($type) {
-          $this->db->where('type', $type);
+      public function findbytypeno($typeno) {
+          $this->db->where('type_no', $typeno);
      
         $query = $this->db->get('template');
 
@@ -83,7 +83,7 @@ class Templatedao extends CI_Model {
 
         $data = array(
         
-            'type' => $template->getType(),
+            'type_no' => $template->getTypeno(),
              'size' => $template->getSize(),
             'url' => $template->getUrl(),
              'tmp_name' => $template->getName()
@@ -100,7 +100,7 @@ class Templatedao extends CI_Model {
 
         $template->setTempno($row->tempno);
         
-        $template->setType($row->type);
+        $template->setTypeno($row->type_no);
        $template->setSize($row->size);
        $template->setUrl($row->url);
        $template->setName($row->tmp_name);

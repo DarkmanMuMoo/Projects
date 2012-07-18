@@ -13,7 +13,7 @@
                 <p>  
       
                 <table class="table table-bordered" id="Ccolum">
-                    <tr><td> <strong> ประเภทงาน </strong></td><td> <?echo (isset($type))? $type:'-' ?> </td></tr>
+                    <tr><td> <strong> ประเภทงาน </strong></td><td> <?echo (isset($type))? $typeno:'-' ?> </td></tr>
                      <tr><td><strong> กระดาษ  </strong></td><td><?echo (isset($paper))? $paper:'-' ?>  </td></tr>
                       <tr><td><strong> template  </strong></td><td>  <?echo (isset($template))? $template:'-' ?> </td></tr>
                        <tr><td><strong> จำนวน  </strong></td><td> <?echo (isset($qty))? $qty:'-' ?>  </td></tr>

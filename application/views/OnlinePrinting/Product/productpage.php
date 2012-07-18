@@ -7,8 +7,10 @@
 
                         <p>    <img src="<? echo base_url($type->getPicurl()); ?>"   />  
 
-                            <a href="<? echo site_url("product/chooseProduct") . "/" . $type->getType(); ?>"  > 
-                                <h1> <? echo $type->getDescription(); ?>  </h1></a>
+                            <a href="<? echo site_url("product/chooseProduct") . "/" . $type->getTypeno(); ?>"  > 
+                                <h1> <? echo $type->getType();?>  </h1></a>
+                            
+                        <p><? echo $type->getDescription(); ?></p>
                         </p>
 
 <?php endforeach; ?>

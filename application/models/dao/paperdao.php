@@ -62,12 +62,12 @@ class Paperdao extends CI_Model   {
 
         return $this->db->insert('paper', $data);
     }
-     public function findbytype($type){
+     public function findbytypeno($typeno){
          
-     $sql ='select * from paper_type pt join  paper p on pt.paperno=p.paperno   where pt.`type` = ?';
+     $sql ='select * from paper_type pt join  paper p on pt.paperno=p.paperno   where pt.type_no = ?';
          
          
-        $query = $this->db->query($sql, array($type));
+        $query = $this->db->query($sql, array($typeno));
            $array = array();
              foreach ($query->result() as $row) {
 $obj = null;

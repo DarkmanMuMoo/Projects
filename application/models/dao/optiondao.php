@@ -25,7 +25,7 @@ class Optiondao  extends CI_Model{
     public function gettypeOf(Option $option){
          $this->load->model('dao/typedao');
          
-         $sql ='SELECT * FROM option_type ot inner join type t  on ot.type = t.type where optionno = ? ';
+         $sql ='SELECT * FROM option_type ot inner join type t  on ot.type_no = t.type_no where optionno = ? ';
          
          
         $query = $this->db->query($sql, array($option->getOptionno()));
@@ -39,11 +39,11 @@ $obj = null;
         return $array;
     }
     
-      public function findbytype($type){
+      public function findbytypeno($typeno){
              
-           $sql =' SELECT * FROM option_type ot inner join `ordoption` o on ot.optionno=o.optionno WHERE ot.`type` = ?';
+           $sql =' SELECT * FROM option_type ot inner join `ordoption` o on ot.optionno=o.optionno WHERE ot.type_no = ?';
            
-           $query = $this->db->query($sql, array($type));
+           $query = $this->db->query($sql, array($typeno));
         
            $array = array();
              foreach ($query->result() as $row) {

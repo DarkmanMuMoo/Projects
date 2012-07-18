@@ -27,14 +27,14 @@ class Product  extends CI_Controller{
        $this->load->view(lang('productpage'),$data);
      
  }
-   public function chooseProduct($type){
+   public function chooseProduct($typeno){
        
-        $data['type']=$this->typedao->findbyid($type);
-      $data['templatelist'] =  $this->templatedao->findbytype($type);
+        $data['type']=$this->typedao->findbyid($typeno);
+      $data['templatelist'] =  $this->templatedao->findbytypeno($typeno);
       
-      //  echo var_dump($data['templatelist']);
-         $data['paperlist'] =  $this->paperdao->findbytype($type);
-            $data['optionlist'] =  $this->optiondao->findbytype($type);
+     // var_dump($data['type']);
+         $data['paperlist'] =  $this->paperdao->findbytypeno($typeno);
+            $data['optionlist'] =  $this->optiondao->findbytypeno($typeno);
  
          $this->load->view(lang('chooseproduct'),$data);
     }
@@ -60,7 +60,7 @@ class Product  extends CI_Controller{
 $data['paper']=$row->papername.' '.$row->gram .'g';
 $data['template']=$row->tmpname.' '.$row->size;
 $data['qty']=$row->qty;
-$data['type']=$row->type;
+$data['typeno']=$row->typeno;
 $data['price']=$row->price;
    $_SESSION['tmp_ordline']-> setFilepath($row->filepath);
     $_SESSION['tmp_ordline']->setPrice($row->price);

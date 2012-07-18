@@ -21,7 +21,7 @@ class Template extends CI_Model{
     }
 
       private $tempno;
-  private $type;
+  private $typeno;
   private $size;
   private $url;
     private $name;
@@ -33,14 +33,18 @@ class Template extends CI_Model{
   public function setTempno($tempno) {
       $this->tempno = $tempno;
   }
-
-  public function getType() {
-      return $this->type;
+  public function getTypeno() {
+      return $this->typeno;
+  }
+  public function setType() {
+      return $this->typeno;
   }
 
-  public function setType($type) {
-      $this->type = $type;
+  public function setTypeno($typeno) {
+      $this->typeno = $typeno;
   }
+
+   
 
   public function getSize() {
       return $this->size;

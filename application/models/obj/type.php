@@ -10,7 +10,8 @@
  *
  * @author Dark
  */
-class Type  extends CI_Model  {
+class Type extends CI_Model {
+
     //put your code here
     public function getType() {
         return $this->type;
@@ -28,9 +29,16 @@ class Type  extends CI_Model  {
         $this->description = $description;
     }
 
-          private $type;
-    private  $description;
-    private $picurl;
+    private $typeno;
+
+    public function getTypeno() {
+        return $this->typeno;
+    }
+
+    public function setTypeno($typeno) {
+        $this->typeno = $typeno;
+    }
+
     public function getPicurl() {
         return $this->picurl;
     }
@@ -38,7 +46,6 @@ class Type  extends CI_Model  {
     public function setPicurl($picurl) {
         $this->picurl = $picurl;
     }
-
 
 }
 
