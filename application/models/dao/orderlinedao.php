@@ -155,7 +155,7 @@ $this->load->model('extends/orderline_extends');
          $ordline->setGram($row->gram);
          $ordline->setTmpname($row->tmp_name);
          $ordline->setTmpsize($row->size);
-           $ordline->setTmptype($row->type);
+           $ordline->setTmptypeno($row->type_no);
          $ordline->setTmpurl($row->url);
          
          $ordline->setOptiondescription($row->option_description);

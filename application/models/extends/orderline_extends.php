@@ -21,7 +21,7 @@ class Orderline_extends extends Orderline {
   private $tmpname;
   private $tmpurl;
   private $tmpsize;
-  private $tmptype;
+  private $tmptypeno;
   
   private $optiondescription;
   private $optionprice;
@@ -69,14 +69,15 @@ class Orderline_extends extends Orderline {
       $this->tmpsize = $tmpsize;
   }
 
-  public function getTmptype() {
-      return $this->tmptype;
+  public function getTmptypeno() {
+      return $this->tmptypeno;
   }
 
-  public function setTmptype($tmptype) {
-      $this->tmptype = $tmptype;
+  public function setTmptypeno($tmptypeno) {
+      $this->tmptypeno = $tmptypeno;
   }
 
+  
   public function getOptiondescription() {
       return $this->optiondescription;
   }
