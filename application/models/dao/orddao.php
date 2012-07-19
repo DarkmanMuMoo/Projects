@@ -92,23 +92,51 @@ if ($query->num_rows() > 0)
     return 0;
 }
     }
-     public function findbymultifield($array){
-         foreach ($array as $index=>$row) {
+    
+    public function findorderbackbyCustormer($condition=array(),$keyword=''){
+        $this->db->select('*');
+        $this->db->from('ord');
+        $this->db->join('custormer', 'custormer.email = ord.email');
+        if($keyword!=''){
+        $this->db->or_like('ord.email', $keyword); 
+        $this->db->or_like('cus_name', $keyword); 
+        $this->db->or_like('lastname', $keyword); 
+        }
+           foreach ($condition as $index=>$row) {
+
+         $this->db->where($index, $row);
+        }
+          $query = $this->db->get();
+        $condition = array();
+    
+        foreach ($query->result() as $row) {
+$obj=null;
+            $obj = $this->makeObjextends($row);
+             array_push($condition, $obj);
+        }
+        // echo var_dump($obj);
+    var_dump($this->db->last_query());
+        return $condition;
+       
+        
+    }
+     public function findbymultifield($condition){
+         foreach ($condition as $index=>$row) {
 
          $this->db->where($index, $row);
         }
        
             $query = $this->db->get('ord');
-        $array = array();
+        $condition = array();
     
         foreach ($query->result() as $row) {
 $obj=null;
             $obj = $this->makeObj($row);
-             array_push($array, $obj);
+             array_push($condition, $obj);
         }
         // echo var_dump($obj);
    // var_dump($this->db->last_query());
-        return $array;
+        return $condition;
         
     }
      public function findall() {
@@ -170,7 +198,25 @@ $obj=null;
 $ord->setOrderdate($row->orderdate);
         return $ord;
     }
+    private function makeObjextends($row) {
+$this->load->model('extends/ord_extends');
+        $ord = new Ord_extends();
 
+        $ord->setOrderno($row->orderno);
+        $ord->setEmail($row->email);
+        $ord->setOrdstatus($row->ord_status);
+        $ord->setPaymethod($row->paymethod);
+        $ord->setSendmethod($row->sendmethod);
+        $ord->setTotalprice($row->total_price);
+        $ord->setAddress($row->address);
+        $ord->setProvince($row->province);
+        $ord->setPostcode($row->postcode);
+$ord->setOrderdate($row->orderdate);
+
+$ord->setCusname($row->cus_name);
+$ord->setLastname($row->lastname);
+        return $ord;
+    }
 }
 
 ?>

@@ -62,6 +62,12 @@
                     Orderno 
                 </th>
                 <th>
+                    Custormer
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
                     Date
                 </th>
                 <th>

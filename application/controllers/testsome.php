@@ -35,9 +35,9 @@ public function testextends(){
 
      /*$this->load->model('extends/orderline_extends');
     $obj  = new Orderline_extends();*/
-    $this->load->model('dao/orderlinedao');
-    $obj=$this->orderlinedao->joinbyorderno(7);
-    var_dump($obj);
+    $this->load->model('dao/orddao');
+    $obj=$this->orddao->findorderbackbyCustormer(array(),'mumoo');
+    //var_dump($obj);
 }
     
       public function testdownload(){

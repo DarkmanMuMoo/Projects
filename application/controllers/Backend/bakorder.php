@@ -27,11 +27,11 @@ class Bakorder extends CI_Controller{
         
         $condition = array();
        
-        
-        if ($this->input->post('email')) {
-            $email = $this->input->post('email');
+        $keyword='';
+        if ($this->input->post('keyword')) {
+            $keyword = $this->input->post('keyword');
           
-                $condition['email'] = $email;
+               
             
         }
         if ($this->input->post('status')) {
@@ -48,17 +48,8 @@ class Bakorder extends CI_Controller{
 
             $condition['orderdate <='] = $this->input->post('todate');
         }
-     $orderlist = null;
-if(empty($condition)){
-    
-         $orderlist = $this->orddao->findall();
-    
-}else{
-    
-         $orderlist = $this->orddao->findbymultifield($condition);
-    
-}
-        
+
+       $this->orddao->findorderbackbyCustormer($condition,$keyword);
         $ordstatuslist = $this->ordstatusdao->findall();
         $data = array();
         $data['orderlist'] = $orderlist;
