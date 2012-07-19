@@ -20,6 +20,68 @@
                 <button type="submit" class="btn">Search</button>
             </form>
         </div>
+    <div id="result"  align="center">
+            <table class="table table-bordered" >
+                <thead>
+                <th>
+                    Number
+                </th>
+                <th>
+                    Orderno 
+                </th>
+                <th>
+                    Custormer
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Total-Price
+                </th>
+                <th>
+                    Cancle Order
+                </th>
+                </thead>
+
+                <tbody>
+                    <?php foreach ($orderlist as $index => $ord): ?>
+                        <tr> <td  ><? echo $index + 1 ?> </td>  
+                            <td  >
+                                <a href="<?echo site_url('orders/vieworderdetail') . "/" . $ord->getOrderno(); ?>"> 
+                                    <? echo $ord->getOrderno(); ?> 
+                                </a>
+                            </td> 
+                            <td>
+                                
+                            </td>
+                            <td > <? echo $ord->getOrderdate(); ?> </td>
+                            <td >
+                                 <?php foreach ($ordstatuslist as $ordstatus): ?>
+                                <?php if ($ordstatus->getStatus() ==$ord->getOrdstatus() ): ?>
+                                <? echo $ordstatus->getDescription(); break; ?>
+                               <?php endif; ?>
+                                 <?php endforeach; ?>
+                            </td> 
+                            <td style="text-align: right;" ><? echo $ord->getTotalprice(); ?> </td>                      
+                            <td >
+                                <button class="btn btn-danger" onclick="Confirmdelete('<? echo $ord->getOrderno();?>');" >cancle </button> 
+                            </td>  
+                        </tr>
+                    <?php endforeach; ?>
+
+
+                </tbody>
+
+            </table>
+
+
+        </div>
 </div>
 
 

@@ -60,7 +60,7 @@ class Product  extends CI_Controller{
               
          if($priceextends!=null){
 $data['paper']=$priceextends->getPapername().' '.$priceextends->getGrame().'g';
-$data['template']=$priceextends->tmpname.' '.$priceextends->size;
+$data['template']=$priceextends->getTmpname().' '.$priceextends->getSize();
 $data['qty']=$priceextends->getQty();
 $data['type']=$priceextends->getType();
 $data['price']=$priceextends->getPrice();
