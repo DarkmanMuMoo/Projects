@@ -27,14 +27,19 @@ class Home extends CI_Controller {
         public function index()
 	{
             //session_start();
-            
 
-            
-         
 		$this->load->view(lang('hompage'));
                 
                 
 	}
+        public function opencartdialog(){
+            $data=array();
+            $data['opencart']="<script> window.showcart();  </script>";
+            
+            
+            $this->load->view(lang('hompage'),$data);
+            
+        }
         
          public function loginframe(){
              

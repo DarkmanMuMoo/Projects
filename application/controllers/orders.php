@@ -111,7 +111,8 @@ class Orders extends CI_Controller {
         array_push($_SESSION['cart'], $ordline);
         unset($_SESSION['tmp_ordline']);
 
-        redirect('home', 'refresh');
+       // redirect('home', 'refresh');
+ redirect('home/opencartdialog');
     }
 
     public function removeCartItem($index) {
