@@ -97,8 +97,9 @@ $config['newline']="\r\n";
 
         $encrypted_email = $this->myencrypt->encode($cus->getEmail());
         $this->email->subject('ยืนยันการเป็นสมาชิก');
-      
-        $message = 'validate email link ' . '<br> <p>'.anchor("/register/validate_user/$encrypted_email", 'คลิดเพื่อกดยืนยันการเป็นสมาชิก', 'title="confirm"').'</p> \r\n';
+      $url = site_url("register/validate_user/$encrypted_email");
+      $alink="<a href=\"$url\" >คลิดเพื่อกดยืนยันการเป็นสมาชิก</a>";
+        $message = 'validate email link ' . '<br> <p>'.$alink.'</p> \r\n';
         $this->email->message($message);
 
        $this->email->send();
