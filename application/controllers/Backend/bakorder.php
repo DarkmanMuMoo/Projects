@@ -49,13 +49,13 @@ class Bakorder extends CI_Controller{
             $condition['orderdate <='] = $this->input->post('todate');
         }
 
-       $this->orddao->findorderbackbyCustormer($condition,$keyword);
+      $orderlist=$this->orddao->findorderbackbyCustormer($condition,$keyword);
         $ordstatuslist = $this->ordstatusdao->findall();
         $data = array();
         $data['orderlist'] = $orderlist;
         $data['ordstatuslist'] = $ordstatuslist;
-         
-         $this->load->view(lang(bakorder));
+      
+         $this->load->view(lang('bakorder'),$data);
      }
 }
 
