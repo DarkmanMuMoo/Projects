@@ -43,8 +43,7 @@ $lang['loginframe'] = 'OnlinePrinting/frame/loginframe';
 
 
 
-$lang['sqlcalprice']='select pr.price as price, pr.qty as qty, pa.paper_name as papername, pa.gram as gram,tmp.tmp_name as tmpname,tmp.size as size ,tmp.type_no as`typeno`,tmp.url as filepath from price pr join paper pa  on pr.paperno=pa.paperno
- join template tmp  on pr.tempno=tmp.tempno where pr.paperno =? and pr.tempno=? and pr.qty=?';
+
 //----------------------------Back-------------------------------//
 
 $lang['baklogin'] ='Backend/login';
@@ -55,4 +54,9 @@ $lang['Bakincludeheader'] ='Backend/include/headinclude';
 $lang['bakheader'] ='Backend/include/header';
 $lang['bakfooter'] ='Backend/include/footer';
 
+
+$lang['bakorder'] ='Backend/Orders/bakorder';
+
+
+$lang['bakemp'] ='Backend/Emp/bakemp';
 ?>

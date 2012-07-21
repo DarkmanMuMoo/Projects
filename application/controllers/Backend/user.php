@@ -31,8 +31,8 @@ class User extends CI_Controller {
          $this->load->view(lang('baklogin'));
              //$this->load->view('dsf');
         }else{
-            
-            $_SESSION['emp']=$this->empdao->findbyid($this->input->post('name') );
+       
+            $_SESSION['emp']=$this->empdao->findbyempname($this->input->post('name') );
             
              $this->load->view(lang('bakhome'));
         }
@@ -51,7 +51,7 @@ class User extends CI_Controller {
                
                $emp=null;
 
-         $emp = $this->empdao->findbyid($name);
+         $emp = $this->empdao->findbyempname($name);
 
         if ( $emp==null) {
 

@@ -123,16 +123,16 @@ if ($query->num_rows() > 0)
          $this->db->where($index, $row);
         }
           $query = $this->db->get();
-        $condition = array();
+        $result = array();
     
         foreach ($query->result() as $row) {
 $obj=null;
             $obj = $this->makeObjextends($row);
-             array_push($condition, $obj);
+             array_push($result, $obj);
         }
         // echo var_dump($obj);
-    var_dump($this->db->last_query());
-        return $condition;
+    //var_dump($this->db->last_query());
+        return $result;
        
         
     }
