@@ -18,12 +18,13 @@ class Ord_extends extends Ord {
     
     private $cusname;
     private $lastname;
-    
+
     public function getCusname() {
         return $this->cusname;
     }
+    
 
-    public function setCusname($cusname) {
+        public function setCusname($cusname) {
         $this->cusname = $cusname;
     }
 

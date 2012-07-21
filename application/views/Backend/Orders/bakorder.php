@@ -1,19 +1,20 @@
 <? $this->load->view(lang('bakheader'));?>
-<style>
+
+<div class="container" >
+    <style>
 
     #result th{text-align: center;}
     #result td{text-align: center;}
 </style>
-<div class="container">
-<div id="search-bar">  
+<div id="search-bar" style="margin-top: 100px;">  
             <form id="searchform"action="<? echo site_url('orders') ?>" class="form-search" align="center"  method="post">
                 Keyword:<input type="text"  name="keyword" id="email" class="input-small datepicker" />
                 From :<input type="text" name="fromdate" id="fromdate" class="input-small datepicker" />
-                To:<input type="text" name="todate" id="todate"  class="input-small datepicker"  /> >
+                To:<input type="text" name="todate" id="todate"  class="input-small datepicker"  /> 
                 
-                Status: <select name="status" id="status" >    <?php foreach ($ordstatuslist as $ordstatus): ?>
+                Status: <select name="status" id="status" >    <?php foreach ($ordstatuslist as $pos): ?>
                                 
-                    <option value="<?echo $ordstatus->getStatus();?>" >   <? echo $ordstatus->getDescription();  ?></option>
+                    <option value="<?echo $pos->getStatus();?>">  <? echo $pos->getDescription();  ?></option>
                               
                                  <?php endforeach; ?></select>
                 
@@ -45,35 +46,38 @@
                     Total-Price
                 </th>
                 <th>
-                    Cancle Order
+                  
                 </th>
                 </thead>
 
                 <tbody>
-                    <?php foreach ($orderlist as $index => $ord): ?>
+                    <?php foreach ($orderlist as $index => $emp): ?>
                         <tr> <td  ><? echo $index + 1 ?> </td>  
                             <td  >
                                 
-                                    <? echo $ord->getOrderno(); ?> 
+                                    <? echo $emp->getOrderno(); ?> 
                               
                             </td> 
                             <td>
-                                
+                                 <? echo $emp->getCusname(); ?> &nbsp; <? echo $emp->getLastname(); ?> 
                             </td>
-                            <td > <? echo $ord->getOrderdate(); ?> </td>
+                                <td>
+                                 <? echo $emp->getEmail(); ?>
+                            </td>
+                            <td > <? echo $emp->getOrderdate(); ?> </td>
                             <td >
-                                 <?php foreach ($ordstatuslist as $ordstatus): ?>
-                                <?php if ($ordstatus->getStatus() ==$ord->getOrdstatus() ): ?>
-                                <? echo $ordstatus->getDescription(); break; ?>
+                                 <?php foreach ($ordstatuslist as $pos): ?>
+                                <?php if ($pos->getStatus() ==$emp->getOrdstatus() ): ?>
+                                <? echo $pos->getDescription(); break; ?>
                                <?php endif; ?>
                                  <?php endforeach; ?>
                             </td> 
-                            <td style="text-align: right;" ><? echo $ord->getTotalprice(); ?> </td>                      
+                            <td style="text-align: right;" ><? echo $emp->getTotalprice(); ?> </td>                      
                             <td >
-                                <a class="btn btn-info" href="<?echo site_url('orders/vieworderdetail') . "/" . $ord->getOrderno(); ?>"> 
+                                <a class="btn btn-info" href="<?echo site_url('orders/vieworderdetail') . "/" . $emp->getOrderno(); ?>"> 
                                    View
                                 </a>
-                                <button class="btn btn-danger" onclick="Confirmdelete('<? echo $ord->getOrderno();?>');" >cancle </button> 
+                              
                             </td>  
                         </tr>
                     <?php endforeach; ?>

@@ -12,7 +12,7 @@
  */
 class Emp extends CI_Model {
     //put your code here
-
+private $empno;
     private $name;
     private $lastname;
     private $email;
@@ -42,9 +42,17 @@ class Emp extends CI_Model {
     public function setName($name) {
         $this->name = $name;
     }
+    public function getEmpno() {
+        return $this->empno;
+    }
 
-    public function getLastname() {
+    public function setEmpno($empno) {
+        $this->empno = $empno;
+    }
+
+        public function getLastname() {
         return $this->lastname;
+        
     }
 
     public function setLastname($lastname) {

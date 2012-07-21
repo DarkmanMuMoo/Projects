@@ -73,9 +73,9 @@ function showupload(orderlineno){
 
     <div id="head" style="clear:both;"><div id="order">
             <h2>Orderno: <? echo $order->getOrderno(); ?></h2><br>
-            <?php foreach ($ordstatuslist as $ordstatus): ?>
-                <?php if ($ordstatus->getStatus() == $order->getOrdstatus()): ?>
-                    <? echo $ordstatus->getDescription();  break;?>
+            <?php foreach ($ordstatuslist as $pos): ?>
+                <?php if ($pos->getStatus() == $order->getOrdstatus()): ?>
+                    <? echo $pos->getDescription();  break;?>
                 <?php endif; ?>
             <?php endforeach; ?><br>
            Orderdate : <? echo $order->getOrderdate(); ?><br>
