@@ -214,6 +214,18 @@ class Orders extends CI_Controller {
         $data['orderlinelist'] = $orderlinelist;
         $this->load->view(lang('viewOrderdetail'), $data);
     }
+    
+    public function ajaxcheckuploadfile(){
+           $orderno=$this->input->post('order');
+        $this->load->model('dao/orddao');
+         $notupload=$this->orddao->countfilenotupload($orderno);
+         if($notupload==0){
+       echo 'true';
+      }else{
+          
+          echo $notupload;
+      }
+    }
 
     
     public  function downloadtemplate($tempeno){

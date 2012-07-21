@@ -15,8 +15,12 @@
         margin-left: 20%;
     }
 
-
+ #orderline th{text-align: center;}
+    #orderline td{text-align: center;}
 </style>
+
+   
+
 <script>
 
  function closedialog(){
@@ -24,7 +28,21 @@
      
       $('#showuploaddialog').dialog( "close" );
  }
+function checkuploadfile(orderno){
+    var url='<? echo site_url('orders/ajaxcheckuploadfile')?>';
+    $.post(url, {order: orderno}, function(data) { 
+                                
+                                    if(data=='true'){
+                                        $('#changestatusform').submit();
 
+                                    }else{
+                                        
+           alert('you have'+data+'orderline did,t not upload file');
+
+                                    }
+                                });
+    
+}
 function showupload(orderlineno){
     
      document.getElementById('uploaddialog').src = '<? echo site_url("orders/showuploadframe"); ?>/'+orderlineno; 
@@ -32,7 +50,11 @@ function showupload(orderlineno){
                     autoOpen: true,
                     modal: true,
                     width:500,
-                    title: "Upload"
+                    title: "Upload",
+                     close: function(event, ui) {
+                     window.location.reload();
+                 
+             }
 
                 }
             
@@ -83,7 +105,7 @@ function showupload(orderlineno){
         </div>
      </div>
 
-    <div id="orderline" align="center" style="clear: both">
+    <div id="orderline" align="center" style="clear: both; margin: 5% auto;">
         <hr style="color: orange;
 background-color: orange;
 height: 3px;"></hr>
@@ -103,27 +125,37 @@ height: 3px;"></hr>
             <th>option</th>
             <th>จำนวน</th>
             <th>ราคา</th>
-            <th>file</th>
+            
+            <th colspan="2" >file</th>
             </thead>
 
             <tbody>
                 <? $totalprice = 0; ?>
                 <?php foreach ($orderlinelist as $index => $orderline): ?>   
                     <tr>
-                        <td><? echo $index + 1; ?>   </td>
-                        <td><? echo $orderline->getOrdlineno(); ?>   </td>
-                        <td><? echo $orderline->getTmpname(); ?> &nbsp; <? echo $orderline->getTmptype(); ?>&nbsp;
-                            <? echo $orderline->getTmpsize(); ?>  </td>
-                        <td>  <? echo $orderline->getPapername(); ?> &nbsp; <? echo $orderline->getGram(); ?>        </td>
-                        <td>  <? echo $orderline->getOptiondescription(); ?>     </td>
-                        <td>
+                        <td width="5%" ><? echo $index + 1; ?>   </td>
+                        <td width="5%"  ><? echo $orderline->getOrdlineno(); ?>   </td>
+                        <td width="15%" ><? echo $orderline->getTmpname(); ?> &nbsp; 
+                            <? echo $orderline->getTmpsize(); ?> &nbsp;
+                           
+                             </td>
+                        <td width="15%"  >  <? echo $orderline->getPapername(); ?> &nbsp; <? echo $orderline->getGram(); ?>        </td>
+                        <td width="10%" >  <? echo $orderline->getOptiondescription(); ?>     </td>
+                        <td width="10%"  >
                             <? echo $orderline->getQty(); ?>
                         </td>
-                        <td>
+                        <td width="10%" style="text-align: right;"  >
                             <? echo $orderline->getPrice();
                             $totalprice+=$orderline->getPrice(); ?>
                         </td>
-                        <td><a href="<? echo site_url('orders/downloadtemplate').'/'.$orderline->getTempno(); ?>" class="btn btn-primary">Download</a>&nbsp;&nbsp;&nbsp;
+                        <td width="10%"  >  <?php if (($orderline->getFilepath() == '') || ($orderline->getFilepath() == null)):?>
+                        <?  echo '<h6 style="color:red" >notupload</h6>' ?>
+                            <?php else: ?>
+                                    <?  echo '<h6>upload</h6>' ?>
+                <?php endif; ?></td>
+                        <td  width="30%" >
+                          
+                            <a href="<? echo site_url('orders/downloadtemplate').'/'.$orderline->getTempno(); ?>" class="btn btn-primary">Download</a>
                             <button onclick="showupload('<? echo $orderline->getOrdlineno(); ?>');" class="btn btn-warning">Upload</button> </td>
                     </tr>  
 <? endforeach; ?>
@@ -139,8 +171,13 @@ height: 3px;"></hr>
         </table>
 
     </div>
+    <div align="left"  > <span style="margin-right: 3%; margin-left: 10%"> เมื่อ upload file ครบแล้ว คลิกที่นี่เพื่อดำเนินการต่อไป------> </span>
+        <button onclick="checkuploadfile('<? echo $order->getOrderno(); ?>');" class="btn btn-success">Approve</button> <a class="btn btn-danger" href="<?echo site_url('orders') ?>" >Back</a>    </div>
 
-
+    <form  id="changestatusform"action="<?echo site_url('changestatus'); ?>" >
+ <input type="hidden" name="status" value="20">
+        <input type="hidden" name="orderno" value="<? echo $order->getOrderno(); ?>">
+    </form>
 
 </div>
 

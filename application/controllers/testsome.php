@@ -88,9 +88,9 @@ $encrypted_string = $this->encrypt->encode($msg);
 echo anchor('testsome/testverify/'.$encrypted_string, 'My News', array('title' => 'The best news!'));
     }
       public function testDB(){
-            $this->load->model('dao/pricedao');
+            $this->load->model('dao/orddao');
             
-        $ordlist = $this->pricedao->findPriceExtendsby(1,1,100);
+        $ordlist = $this->orddao->countfilenotupload(1);
         
         var_dump($ordlist);
        // echo $paper;

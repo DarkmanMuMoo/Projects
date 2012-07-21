@@ -93,6 +93,22 @@ if ($query->num_rows() > 0)
 }
     }
     
+    public function countfilenotupload($orderno){
+        
+        $sql="select count(*) as nfile from orderline where  orderno =? and  (orderline.filepath is null  or orderline.filepath ='')";
+        $query = $this->db->query($sql,array($orderno));
+        if ($query->num_rows() > 0)
+{
+   $row = $query->row(); 
+
+   return intval($row->nfile);
+
+}else{
+    
+    
+    return null;
+}
+    }
     public function findorderbackbyCustormer($condition=array(),$keyword=''){
         $this->db->select('*');
         $this->db->from('ord');
