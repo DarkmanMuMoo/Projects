@@ -199,8 +199,7 @@ class Orders extends CI_Controller {
 
     public function viewOrderdetail($orderno) {
         $this->load->model('dao/ordstatusdao');
-        $user = $_SESSION['user'];
-        $email = $user->getEmail();
+    
         $ordstatuslist = $this->ordstatusdao->findall();
         $orderlinelist = $this->orderlinedao->findjoinbyorderno($orderno);
         $ordsendlist = $this->ordsenddao->findall();
@@ -249,6 +248,19 @@ force_download($name, $data);
         
     }
     
+    public function waitforvalidate(){
+        $orderno=$this->input->post('orderno');
+     $this->changestatus('20',$orderno);
+       redirect("orders/viewOrderdetail/$orderno");
+    }
+       private function changestatus($status,$orderno){
+ 
+        $order =$this->orddao->findbyid($orderno);
+        $order->setOrdstatus($status);//wait for validate
+       $result= $this->orddao->update($order);
+       log_message('error', 'update result ='.$result);
+        
+    }
  
 }
 

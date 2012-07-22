@@ -55,8 +55,8 @@ $lang['bakheader'] ='Backend/include/header';
 $lang['bakfooter'] ='Backend/include/footer';
 
 
-$lang['bakorder'] ='Backend/Orders/bakorder';
+$lang['bakorder'] ='Backend/Orders/orderpage';
 
-
+$lang['BakviewOrderdetail'] ='Backend/Orders/viewOrderdetail';
 $lang['bakemp'] ='Backend/Emp/bakemp';
 ?>

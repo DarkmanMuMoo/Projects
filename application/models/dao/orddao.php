@@ -18,7 +18,7 @@ class Orddao extends CI_Model  {
         $this->load->model('obj/ord');
          
     }
-    public function update(Orders $ord){
+    public function update(Ord $ord){
         $data = array(
          
                     'email' => $ord->getEmail(),
@@ -32,7 +32,7 @@ class Orddao extends CI_Model  {
              'postcode' => $ord->getPostcode()
             );
 
-$this->db->where('orderno', $ordline->getOrdlineno());
+$this->db->where('orderno', $ord->getOrderno());
  return $this->db->update('ord', $data); 
         
     }

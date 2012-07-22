@@ -77,27 +77,27 @@
                 </thead>
 
                 <tbody>
-                    <?php foreach ($orderlist as $index => $emp): ?>
+                    <?php foreach ($orderlist as $index => $order): ?>
                         <tr> <td  ><? echo $index + 1 ?> </td>  
                             <td  >
                                
-                                    <? echo $emp->getOrderno(); ?> 
+                                    <? echo $order->getOrderno(); ?> 
                                
                             </td> 
-                            <td > <? echo $emp->getOrderdate(); ?> </td>
+                            <td > <? echo $order->getOrderdate(); ?> </td>
                             <td >
                                  <?php foreach ($ordstatuslist as $pos): ?>
-                                <?php if ($pos->getStatus() ==$emp->getOrdstatus() ): ?>
+                                <?php if ($pos->getStatus() ==$order->getOrdstatus() ): ?>
                                 <? echo $pos->getDescription(); break; ?>
                                <?php endif; ?>
                                  <?php endforeach; ?>
                             </td> 
-                            <td style="text-align: right;" ><? echo $emp->getTotalprice(); ?> </td>                      
+                            <td style="text-align: right;" ><? echo $order->getTotalprice(); ?> </td>                      
                             <td >
-                                 <a class="btn btn-info" href="<?echo site_url('orders/vieworderdetail') . "/" . $emp->getOrderno(); ?>"> 
+                                 <a class="btn btn-info" href="<?echo site_url('orders/vieworderdetail') . "/" . $order->getOrderno(); ?>"> 
                                    View
                                 </a>
-                                <button class="btn btn-danger" onclick="Confirmdelete('<? echo $emp->getOrderno();?>');" >cancle </button> 
+                                <button class="btn btn-danger" onclick="Confirmdelete('<? echo $order->getOrderno();?>');" >cancle </button> 
                             </td>  
                         </tr>
                     <?php endforeach; ?>

@@ -1,6 +1,10 @@
-<? $this->load->view(lang('header')) ?>
-<style>
-    #order{
+<? $this->load->view(lang('bakheader'));?>
+
+<div class="container" >
+    <style>
+
+
+      #order{
 
         float:left;
         width: 50%;
@@ -17,61 +21,14 @@
 
  #orderline th{text-align: center;}
     #orderline td{text-align: center;}
+    #headline{
+        clear: both;
+margin-top: 100px;
+
+    }
 </style>
-
-   
-
-<script>
-// not use right now may be some day
- function closedialog(){
-     
-     
-      $('#showuploaddialog').dialog( "close" );
- }
-function checkuploadfile(orderno){
-    var url='<? echo site_url('orders/ajaxcheckuploadfile')?>';
-    $.post(url, {order: orderno}, function(data) { 
-                                
-                                    if(data=='true'){
-                                        $('#changestatusform').submit();
-
-                                    }else{
-                                        
-           alert('you have'+data+'orderline did,t not upload file');
-
-                                    }
-                                });
-    
-}
-function showupload(orderlineno){
-    
-     document.getElementById('uploaddialog').src = '<? echo site_url("orders/showuploadframe"); ?>/'+orderlineno; 
-        $('#showuploaddialog').dialog({ 
-                    autoOpen: true,
-                    modal: true,
-                    width:500,
-                    title: "Upload",
-                     close: function(event, ui) {
-                     window.location.reload();
-                 
-             }
-
-                }
-            
-            );
-                    
-                   
-               
-    
-    
-    
-}
-
-
-</script>
-<div id="page">
-
-    <div id="head" style="clear:both;"><div id="order">
+<div id="headline" >
+    <div id="order">
             <h2>Orderno: <? echo $order->getOrderno(); ?></h2><br>
             <?php foreach ($ordstatuslist as $pos): ?>
                 <?php if ($pos->getStatus() == $order->getOrdstatus()): ?>
@@ -102,11 +59,10 @@ function showupload(orderlineno){
 
         </div>
      </div>
-
-    <div id="orderline" align="center" style="clear: both; margin: 5% auto;">
+  <div id="orderline" align="center" style="clear: both; margin: 0 auto;">
         <hr style="color: orange;
 background-color: orange;
-height: 3px;"></hr>
+height: 3px; margin: 0 0;"></hr>
         <p>
         <h2>Orderline</h2>
     </p>
@@ -153,8 +109,8 @@ height: 3px;"></hr>
                 <?php endif; ?></td>
                         <td  width="30%" >
                           
-                            <a href="<? echo site_url('orders/downloadtemplate').'/'.$orderline->getTempno(); ?>" class="btn btn-primary">Download</a>
-                            <button onclick="showupload('<? echo $orderline->getOrdlineno(); ?>');" class="btn btn-warning">Upload</button> </td>
+                            <a href="<? echo site_url('Backend/bakorders/downloadtemplate').'/'.$orderline->getTempno(); ?>" class="btn btn-primary">viewFile</a>
+                            </td>
                     </tr>  
 <? endforeach; ?>
 
@@ -169,20 +125,19 @@ height: 3px;"></hr>
         </table>
 
     </div>
-    <div align="left"  > <span style="margin-right: 3%; margin-left: 10%"> เมื่อ upload file ครบแล้ว คลิกที่นี่เพื่อดำเนินการต่อไป------> </span>
-        <button onclick="checkuploadfile('<? echo $order->getOrderno(); ?>');" class="btn btn-success">Approve</button> <a class="btn btn-danger" href="<?echo site_url('orders') ?>" >Back</a>    </div>
-
-    <form  id="changestatusform"action="<?echo site_url('orders/waitforvalidate'); ?>" >
- <input type="hidden" name="status" value="20">
-        <input type="hidden" name="orderno" value="<? echo $order->getOrderno(); ?>">
-    </form>
-
+<div align="center" style="margin :5% auto;">  
+    <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/waitforpay').'/'.$order->getOrderno();?>">Approve</a> 
+<a class="btn btn-danger" href="<? echo site_url('Backend/bakorders/rejects').'/'.$order->getOrderno();?>">Rejects</a>
+</div>
 </div>
 
-<? $this->load->view(lang('footer')) ?>
 
 
-<!-- upload dialog-->
-<div id="showuploaddialog" style="display:none;">
-    <iframe id="uploaddialog" width="500"  style="border-style:none;" scrolling="no"  ></iframe>
-</div>
+
+
+
+
+
+
+
+<? $this->load->view(lang('bakfooter'));?>

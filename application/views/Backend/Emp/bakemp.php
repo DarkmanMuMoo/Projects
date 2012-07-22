@@ -48,31 +48,31 @@
                 </thead>
 
                 <tbody>
-                    <?php foreach ($emplist as $index => $emp): ?>
+                    <?php foreach ($emplist as $index => $order): ?>
                         <tr> <td  ><? echo $index + 1 ?> </td>  
                             <td  >
                                 
-                                    <? echo $emp->getEmpno(); ?> 
+                                    <? echo $order->getEmpno(); ?> 
                               
                             </td> 
                             <td>
-                                 <? echo $emp->getName(); ?> 
+                                 <? echo $order->getName(); ?> 
                             </td>
                                 <td>
-                                 <? echo $emp->getLastname(); ?> 
+                                 <? echo $order->getLastname(); ?> 
                             </td>
-                            <td > <? echo $emp->getEmail(); ?> </td>
-                             <td ><? echo $emp->getPhone(); ?> </td>      
+                            <td > <? echo $order->getEmail(); ?> </td>
+                             <td ><? echo $order->getPhone(); ?> </td>      
                             <td >
                                  <?php foreach ($positionlist as $pos): ?>
-                                <?php if ($pos->getPosition() == $emp->getPosition() ): ?>
+                                <?php if ($pos->getPosition() == $order->getPosition() ): ?>
                                 <? echo $pos->getPosdescription(); break; ?>
                                <?php endif; ?>
                                  <?php endforeach; ?>
                             </td> 
                      
                             <td >
-                                <a class="btn btn-info" href="<?echo site_url('Backend/bakemp/viewempdetail') . "/" .$emp->getEmpno();   ?>"> 
+                                <a class="btn btn-info" href="<?echo site_url('Backend/bakemp/viewempdetail') . "/" .$order->getEmpno();   ?>"> 
                                    View
                                 </a>
                               
