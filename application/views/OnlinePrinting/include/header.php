@@ -115,6 +115,17 @@ and open the template in the editor.
    // Your code here
   // alert('<?echo get_class(get_instance())?>');
         $('#menu #<?echo get_class(get_instance())?>').addClass('current_page_item');
+        
+       if( $('#slider').length!=0){
+           
+            $("#slider").easySlider({
+		auto: false,
+		continuous: true,
+		numeric: true
+	});
+           
+       }
+
  });      
                 
                 

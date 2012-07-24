@@ -397,3 +397,40 @@ a {
 #footer a {
 	color: #464032;
 }
+
+
+ol#controls {
+margin: 1em 0;
+padding: 0;
+height: 28px;
+display: block;
+list-style-type: decimal;
+-webkit-margin-before: 1em;
+-webkit-margin-after: 1em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+-webkit-padding-start: 40px;
+}
+ol#controls li {
+margin: 0 10px 0 0;
+padding: 0;
+float: left;
+list-style: none;
+height: 28px;
+line-height: 28px;
+}
+ol#controls li a {
+float: left;
+height: 28px;
+line-height: 28px;
+border: 1px solid #CCC;
+background: #DAF3F8;
+color: #555;
+padding: 0 10px;
+text-decoration: none;
+}
+
+ol#controls li.current a {
+background: #5DC9E1;
+color: white;
+}
