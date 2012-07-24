@@ -4,7 +4,8 @@
      
     $().ready(function() {
         // validate the comment form when it is submitted
-        $("#phone").mask("999-999-9999");
+        $("#mphone").mask("999-999-9999");
+        $("#phone").mask("99-999-9999");
         // validate signup form on keyup and submit
         $("#signupForm").validate({
             rules: {
@@ -34,6 +35,7 @@
                 },
                 address:"required",
                 address2:"required",
+                mphone:"required",
                 phone:"required"
                       
                         
@@ -61,8 +63,8 @@
                 },
                 address:"required",
                 address2:"required",
-                phone:"required"
-		
+                mphone:"required",
+		 phone:"required"
             }
             
             
@@ -114,7 +116,7 @@ height: 1px;"></hr>
         <tr>
         <td>โทรศัพท์มือถือ</td>
         <td></td>
-        <td><input type="text" name="phone"  id="phone"/></td>
+        <td><input type="text" name="mphone"  id="mphone"/></td>
         </tr>
         
         <tr>
@@ -140,10 +142,10 @@ height: 1px;"></hr>
             <td>จังหวัด</td>
             <td></td>
             <td><select name="province" id="province">
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C" selected="selected">C</option>
-            </select><br/></td>
+                     <?php foreach ($provincelist as $province): ?>
+                <option value="<? echo $province->getProvinceid(); ?>"><? echo $province->getProvincename(); ?></option>
+                <? endforeach; ?>
+            </select></td>
         </tr>
         
         <tr>
@@ -178,10 +180,10 @@ The cat was playing in the garden.
             <td>จังหวัด</td> 
             <td></td>
             <td><select name="province2" id="province2">
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C" selected="selected">C</option>
-            </select><br/></td>
+                     <?php foreach ($provincelist as $province): ?>
+                <option value="<? echo $province->getProvinceid(); ?>"><? echo $province->getProvincename(); ?></option>
+                <? endforeach; ?>
+            </select></td>
             </tr>
             
             <tr>

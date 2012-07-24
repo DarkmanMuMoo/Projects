@@ -19,11 +19,19 @@ class Custormer extends CI_Model  {
            private $address1;
            private $address2;
            private $validate;
+           private $mobilephone;
            public function getValidate() {
                return $this->validate;
            }
+           public function getMobilephone() {
+               return $this->mobilephone;
+           }
 
-           public function setValidate($validate) {
+           public function setMobilephone($mobilephone) {
+               $this->mobilephone = $mobilephone;
+           }
+
+                      public function setValidate($validate) {
                $this->validate = $validate;
            }
 

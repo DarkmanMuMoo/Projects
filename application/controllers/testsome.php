@@ -66,6 +66,12 @@ force_download($name, $data);
      //echo strtotime("2012/07/02");
         
     }
+    public function testutil(){
+        
+        $this->load->library('thailandutil');
+       $provincelist= $this->thailandutil->getAllprovinceList();
+       var_dump($provincelist);
+    }
         public function  testDirectory(){
       $this->load->helper('directory');
       $map = directory_map('./');

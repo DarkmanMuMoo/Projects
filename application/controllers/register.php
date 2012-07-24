@@ -29,7 +29,11 @@ class Register extends CI_Controller {
         $this->form_validation->set_rules('email', 'Email', 'callback_email_check');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view(lang('registerform'));
+            $this->load->library('thailandutil');
+                $provincelist= $this->thailandutil->getAllprovinceList();
+                $data=array();
+            $data['provincelist']=$provincelist;
+            $this->load->view(lang('registerform'),$data);
         } else {
             $cus = new Custormer();
             $cus->setEmail($this->input->post('email'));
@@ -37,6 +41,7 @@ class Register extends CI_Controller {
             $cus->setLastname($this->input->post('lastname'));
             $cus->setPassword($this->input->post('password'));
             $cus->setPhone($this->input->post('phone'));
+            $cus->setMobilephone($this->input->post('mphone'));
             $address1 = array('address' => $this->input->post('address'),
                 'province' => $this->input->post('province'),
                 'postcode' => $this->input->post('postcode'),

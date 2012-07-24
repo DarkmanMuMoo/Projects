@@ -46,6 +46,7 @@ class Cusdao extends CI_Model {
             'cus_name' => $cus->getName(),
             'lastname' => $cus->getLastname(),
             'phone' => $cus->getPhone(),
+             'mobilephone'=>$cus->getMobilephone(),
             'password' => $cus->getPassword(),
             'address' => $address1['address'],
             'province' => $address1['province'],
@@ -93,6 +94,7 @@ class Cusdao extends CI_Model {
             'cus_name' => $cus->getName(),
             'lastname' => $cus->getLastname(),
             'phone' => $cus->getPhone(),
+            'mobilephone'=>$cus->getMobilephone(),
             'password' => $cus->getPassword(),
             'address' => $address1['address'],
             'province' => $address1['province'],
@@ -148,6 +150,7 @@ return $this->db->update('custormer', $data);
         $cus->setLastname($row->lastname);
         $cus->setPassword($row->password);
         $cus->setPhone($row->phone);
+        $cus->setMobilephone($row->mobilephone);
         $cus->setAddress1(array('address' => $row->address, 'province' => $row->province, 'postcode' => $row->postcode));
  $cus->setValidate($row->validate);
 
