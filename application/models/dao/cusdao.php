@@ -37,7 +37,28 @@ class Cusdao extends CI_Model {
         return $cus;
     }
 
-    
+    public function update(Custormer $cus){
+        
+         $address1 = $cus->getAddress1();
+        $address2 = $cus->getAddress2();
+        $data = array(
+            'email' => $cus->getEmail(),
+            'cus_name' => $cus->getName(),
+            'lastname' => $cus->getLastname(),
+            'phone' => $cus->getPhone(),
+            'password' => $cus->getPassword(),
+            'address' => $address1['address'],
+            'province' => $address1['province'],
+            'postcode' => $address1['postcode'],
+            'address_2' => $address2['address'],
+            'province_2' => $address2['province'],
+            'postcode_2' => $address2['postcode']
+           
+        );
+    $this->db->where('email', $cus->getEmail());
+        return $this->db->update('custormer', $data);
+        
+    }
     //หาข้อมูลลูกค้าทุกคนที่(ที่activateแล้ว T  ,ไม่Activate F,ทั้งหมด default)
     public function findall($activate='') {
         

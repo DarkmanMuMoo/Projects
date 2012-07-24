@@ -32,6 +32,8 @@ $lang['createorder'] = 'OnlinePrinting/Orders/CreateOrder';
 $lang['confirmorder']='OnlinePrinting/Orders/ConfirmOrder';
 $lang['ordersumary']='OnlinePrinting/Orders/OrderSumary';
 $lang['viewOrderdetail']='OnlinePrinting/Orders/viewOrderdetail';
+$lang['paymentlist']='OnlinePrinting/Orders/paymentlist';
+
 
 $lang['showpriceframe'] = 'OnlinePrinting/frame/showPriceframe';
 $lang['showcartframe'] = 'OnlinePrinting/frame/showCartframe';

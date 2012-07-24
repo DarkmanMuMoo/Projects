@@ -26,7 +26,15 @@ class Orders extends CI_Controller {
         $this->load->model('dao/ordpaydao');
         $this->load->model('dao/ordsenddao');
     }
-
+public function  getpaymentlist($orderno){
+    $this->load->model('dao/paymentdao');
+    $paymentlist=$this->paymentdao->findbyorderno($orderno);
+    $order=$this->orddao->findbyid($orderno);
+    $data['paymentlist']=$paymentlist;
+    $data['order']=$order;
+    
+    $this->load->view(lang('paymentlist'),$data);
+}
     public function index() {
         if ($_SESSION['hasuser']) {
 
