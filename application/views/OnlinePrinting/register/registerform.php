@@ -13,11 +13,11 @@
 	
                 password:{
                     required: true,
-                    minlength: 5
+                    minlength: 8
                 },
                 confirm_password:{
                     required: true,
-                    minlength: 5,
+                    minlength: 8,
                     equalTo: "#password"
                 },
                 email: {
@@ -50,7 +50,7 @@
                     minlength: "Your password must be at least 5 characters long",
                     equalTo: "Please enter the same password as above"
                 },
-                email: "Please enter a valid email address",
+                email: "Please enter a valid email address Example: printing@example.com",
                 postcode2:{
                     required: "required",
                     digits:"digit"
@@ -112,7 +112,7 @@ height: 1px;"></hr>
         </tr>
         
         <tr>
-        <td>โทรศัพท์</td>
+        <td>โทรศัพท์มือถือ</td>
         <td></td>
         <td><input type="text" name="phone"  id="phone"/></td>
         </tr>
@@ -153,6 +153,12 @@ height: 1px;"></hr>
         </tr>
         
         <tr>
+        <td>โทรศัพท์</td>
+        <td></td>
+        <td><input type="text" name="phone"  id="phone"/></td>
+        </tr>
+        
+        <tr>
             <td><b>ที่อยู่สำรอง</b></td>
             <td></td>
         <td></td>
@@ -183,6 +189,12 @@ The cat was playing in the garden.
             <td></td>
             <td><input type="text" name="postcode2" id="postcode2" /></td>
             </tr>
+            
+            <tr>
+        <td>โทรศัพท์</td>
+        <td></td>
+        <td><input type="text" name="phone"  id="phone"/></td>
+        </tr>
             
             <tr>
                 <td></td>
