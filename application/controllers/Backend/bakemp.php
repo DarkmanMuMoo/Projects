@@ -50,7 +50,10 @@ class Bakemp extends CI_Controller{
     public function viewempdetail($empno){
         
         
+        $tmp_emp=$this->empdao->findbyid($empno);
+        $data['tmpemp']=$tmp_emp;
         
+        $this->load->view(lang('empdetail'),$data);
     }
 }
 
