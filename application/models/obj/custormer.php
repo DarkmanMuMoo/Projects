@@ -15,7 +15,8 @@ class Custormer extends CI_Model  {
     private $name;
       private $lastname;
           private $password;
-           private $phone;
+           private $phone1;
+              private $phone2;
            private $address1;
            private $address2;
            private $validate;
@@ -39,14 +40,23 @@ class Custormer extends CI_Model  {
                           public function getEmail() {
                return $this->email;
            }
-           public function getPhone() {
-               return $this->phone;
+           public function getPhone1() {
+               return $this->phone1;
            }
 
-           public function setPhone($phone) {
-               $this->phone = $phone;
+           public function setPhone1($phone1) {
+               $this->phone1 = $phone1;
            }
 
+           public function getPhone2() {
+               return $this->phone2;
+           }
+
+           public function setPhone2($phone2) {
+               $this->phone2 = $phone2;
+           }
+
+           
                       public function setEmail($email) {
                $this->email = $email;
            }

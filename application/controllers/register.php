@@ -40,15 +40,17 @@ class Register extends CI_Controller {
             $cus->setName($this->input->post('name'));
             $cus->setLastname($this->input->post('lastname'));
             $cus->setPassword($this->input->post('password'));
-            $cus->setPhone($this->input->post('phone'));
+          
             $cus->setMobilephone($this->input->post('mphone'));
             $address1 = array('address' => $this->input->post('address'),
                 'province' => $this->input->post('province'),
                 'postcode' => $this->input->post('postcode'),
+                'phone1' => $this->input->post('phone1')
                 );
              $address2 = array('address' => $this->input->post('address2'),
                 'province' => $this->input->post('province2'),
                 'postcode' => $this->input->post('postcode2'),
+                   'phone2' => $this->input->post('phone2')
                 );
              $cus->setAddress1($address1);
              $cus->setAddress2($address2);

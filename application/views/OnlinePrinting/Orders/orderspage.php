@@ -97,7 +97,13 @@
                                  <a class="btn btn-info" href="<?echo site_url('orders/vieworderdetail') . "/" . $order->getOrderno(); ?>"> 
                                    View
                                 </a>
+                                <?php if ($order->getOrdstatus()=='10'||$order->getOrdstatus()=='40'): ?>
                                 <button class="btn btn-danger" onclick="Confirmdelete('<? echo $order->getOrderno();?>');" >cancle </button> 
+                                 <?php endif; ?>
+                                 <?php if ($order->getOrdstatus()=='30'): ?>
+                                <button class="btn btn-warning" >Payment</button> 
+                                 <?php endif; ?>
+                                
                             </td>  
                         </tr>
                     <?php endforeach; ?>

@@ -48,6 +48,8 @@ class Cusdao extends CI_Model {
             'phone' => $cus->getPhone(),
              'mobilephone'=>$cus->getMobilephone(),
             'password' => $cus->getPassword(),
+            'phone1' => $address1['phone1'],
+            'phone2' => $address2['phone2'],
             'address' => $address1['address'],
             'province' => $address1['province'],
             'postcode' => $address1['postcode'],
@@ -93,7 +95,8 @@ class Cusdao extends CI_Model {
             'email' => $cus->getEmail(),
             'cus_name' => $cus->getName(),
             'lastname' => $cus->getLastname(),
-            'phone' => $cus->getPhone(),
+            'phone1' => $address1['phone1'],
+            'phone2' => $address2['phone2'],
             'mobilephone'=>$cus->getMobilephone(),
             'password' => $cus->getPassword(),
             'address' => $address1['address'],
@@ -151,10 +154,10 @@ return $this->db->update('custormer', $data);
         $cus->setPassword($row->password);
         $cus->setPhone($row->phone);
         $cus->setMobilephone($row->mobilephone);
-        $cus->setAddress1(array('address' => $row->address, 'province' => $row->province, 'postcode' => $row->postcode));
+        $cus->setAddress1(array('address' => $row->address, 'province' => $row->province, 'postcode' => $row->postcode,'phone1'=>$row->phone1));
  $cus->setValidate($row->validate);
 
-        $cus->setAddress2(array('address' => $row->address_2, 'province' => $row->province_2, 'postcode' => $row->postcode_2));
+        $cus->setAddress2(array('address' => $row->address_2, 'province' => $row->province_2, 'postcode' => $row->postcode_2,'phone2'=>$row->phone1));
 
         return $cus;
     }

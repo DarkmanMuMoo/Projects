@@ -154,7 +154,10 @@ height: 3px;"></hr>
                         <td  width="30%" >
                           
                             <a href="<? echo site_url('orders/downloadtemplate').'/'.$orderline->getTempno(); ?>" class="btn btn-primary">Download</a>
-                            <button onclick="showupload('<? echo $orderline->getOrdlineno(); ?>');" class="btn btn-warning">Upload</button> </td>
+                  <?php if ($order->getOrdstatus()=='10'||$order->getOrdstatus()=='40'): ?>
+                            <button onclick="showupload('<? echo $orderline->getOrdlineno(); ?>');" class="btn btn-warning">Upload</button> 
+                         <?php endif; ?>
+                        </td>
                     </tr>  
 <? endforeach; ?>
 
