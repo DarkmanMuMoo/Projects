@@ -31,15 +31,7 @@ class Testsome extends CI_Controller {
         
         
     }
-public function testextends(){
 
-     /*$this->load->model('extends/orderline_extends');
-    $obj  = new Orderline_extends();*/
-    $this->load->model('dao/orddao');
-    $obj=$this->orddao->findorderbackbyCustormer(array(),'mumoo');
-    //var_dump($obj);
-}
-    
       public function testdownload(){
           
           $this->load->helper('download');
@@ -68,9 +60,18 @@ force_download($name, $data);
     }
     public function testutil(){
         
-        $this->load->library('thailandutil');
+        /*$this->load->library('thailandutil');
        $provincelist= $this->thailandutil->getAllprovinceList();
-       var_dump($provincelist);
+       var_dump($provincelist);*/
+$this->load->library('captchautil');
+
+        $array=$this->captchautil->captcha();
+        $_SESSION['word']=$array['word'];
+        $image=$array['img'];
+        header("Content-type:image/png");	//กำหนดชนิดของภาพตอนแสดงผลผ่าน browser
+imagepng($image); //แสดงผลภาพที่สร้าง
+imagedestroy($image);
+        
     }
         public function  testDirectory(){
       $this->load->helper('directory');

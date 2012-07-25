@@ -51,7 +51,7 @@
     <br>
 
     &nbsp; &nbsp; &nbsp;Name:     <input class="input-medium"  value=""type="text" id="name" name="name"/><br>
-    Password: <input  class="input-medium" type="text" value="" id="password" name="password" /><br>
+    Password: <input  class="input-medium" type="password" value="" id="password" name="password" /><br>
       <br>
       <p><button type="submit" class="btn btn-primary">login</button></p>
                       </fieldset>

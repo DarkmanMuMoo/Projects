@@ -47,9 +47,9 @@ class User extends CI_Controller{
    
        $this->form_validation->set_rules('email', 'Email', "callback_user_check[$password]");
          if ($this->form_validation->run() == FALSE) {
-              
+              $data['email']=$this->input->post('email'); 
              //redirect('false');
-          $this->load->view(lang('loginframe'));
+          $this->load->view(lang('loginframe'),$data);
              //$this->load->view('dsf');
         } else {
             
@@ -92,7 +92,7 @@ $user=null;
 
         if ( $user==null) {
 
-            $this->form_validation->set_message('user_check', 'email นี้ไม่มีในระบบ');
+            $this->form_validation->set_message('user_check', 'email หรือ password ไม่ถุกต้อง');
             return FALSE;
              
         } else  if( $user->getValidate() == 'F'){
@@ -102,7 +102,7 @@ $user=null;
              
         }else if($user->getPassword()!= $password ){
         
-             $this->form_validation->set_message('user_check', 'password ไม่ถุกต้อง');
+             $this->form_validation->set_message('user_check', 'email หรือ password ไม่ถุกต้อง');
             return FALSE;
           
             }else{
@@ -111,6 +111,18 @@ $user=null;
                
             }
         
+    }
+    public function ajaxcheckemail(){
+        $email= $this->input->post('email'); 
+         $user = $this->cusdao->findbyemail($email);
+        if($user==null){
+            
+            echo 'true';
+        }else{
+            
+             echo 'false';
+            
+        }
     }
     
    

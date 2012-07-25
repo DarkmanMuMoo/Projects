@@ -1,11 +1,33 @@
 <? $this->load->view(lang('header')) ?>
 <br>
 <script>
-     
+     function check_email (){
+
+       var vemail= $.trim($("#signupForm #email").val());
+         if(vemail==''){
+           alert('กรุณากรอกemail');  
+         }else{
+             
+             var url = '<? echo site_url('user/ajaxcheckemail'); ?>'
+                $.post(url, {email:vemail}, function(data){
+                  
+                    if(data=='true'){
+                           alert('คุณสามารถใช้Emailนี้ได้');  
+                        
+                    }else{
+                        
+                           alert('มีEmailนี้ในระบบแล้ว');  
+                        
+                    }
+                    
+                });
+         }
+     }
     $().ready(function() {
         // validate the comment form when it is submitted
         $("#mphone").mask("999-999-9999");
-        $("#phone").mask("99-999-9999");
+        $("#phone1").mask("99-999-9999");
+           $("#phone2").mask("99-999-9999");
         // validate signup form on keyup and submit
         $("#signupForm").validate({
             rules: {
@@ -14,11 +36,13 @@
 	
                 password:{
                     required: true,
-                    minlength: 8
+                    minlength: 8,
+                    maxlength:15
                 },
                 confirm_password:{
                     required: true,
                     minlength: 8,
+                    maxlength:15,
                     equalTo: "#password"
                 },
                 email: {
@@ -36,7 +60,9 @@
                 address:"required",
                 address2:"required",
                 mphone:"required",
-                phone:"required"
+                phone1:"required",
+                 phone2:"required",
+                 captcha:"required"
                       
                         
             },messages: {
@@ -45,11 +71,14 @@
 		
                 password: {
                     required: "Please provide a password",
-                    minlength: "Your password must be at least 5 characters long"
+                  
+                    minlength: "Your password must be at least 5 characters long",
+                       maxlength:"Your password must max 15 characters long"
                 },
                 confirm_password: {
                     required: "Please provide a confirmpassword",
                     minlength: "Your password must be at least 5 characters long",
+                      maxlength:"Your password must max 15 characters long",
                     equalTo: "Please enter the same password as above"
                 },
                 email: "Please enter a valid email address Example: someone@example.com",
@@ -63,8 +92,10 @@
                 },
                 address:"required",
                 address2:"required",
-                mphone:"required",
-		 phone:"required"
+                   mphone:"required",
+                phone1:"required",
+                 phone2:"required",
+                  captcha:"required"
             }
             
             
@@ -77,29 +108,42 @@
      
  
 </script>
+<style>
+    hr{color: orangered;
+background-color: orange;
+height: 1px;}
+    input.error { border: 1px dotted red; }
+    label.error {
+color: red;
+font-style: italic;
+}
+table{
    
-<div style="margin: 0 auto ; width: 60%;" > 
+    width: 100%;
+   
+}
+
+</style>
+<div style="margin: 0 auto ; width: 80%;" > 
     <p style ="margin-bottom: 10px;">
     <h1><b>ลงทะเบียน</b></h1>
     <h4>สมัครฟรี ไม่เสียค่าใช้จ่าย</h4>
     
     
 </p>
-<hr style="color: orangered;
-background-color: orange;
-height: 1px;"></hr>
+<hr></hr>
     <?php
     echo form_open('register', array('class' => 'email', 'id' => 'signupForm'));
     ?>
     
     
-    <table>
-
+<table>
+    <tbody>
         <tr>
             <td>อีเมลล์ </td>
             <td></td>
-            <td><input type="text" name="email" id="email" />
-                <input class="btn" type="button"  value="ตรวจสอบอีเมลล์"/></td>
+            <td><input type="text" name="email" id="email"  />
+                <input class="btn" type="button" onclick="check_email();"  value="ตรวจสอบอีเมลล์"/></td>
         </tr>
 
         <tr>
@@ -158,7 +202,7 @@ height: 1px;"></hr>
         <tr>
         <td>โทรศัพท์</td>
         <td></td>
-        <td><input type="text" name="phone"  id="phone"/></td>
+        <td><input type="text" name="phone1"  id="phone1"/></td>
         </tr>
         
         <tr>
@@ -196,7 +240,17 @@ The cat was playing in the garden.
             <tr>
         <td>โทรศัพท์</td>
         <td></td>
-        <td><input type="text" name="phone"  id="phone"/></td>
+        <td><input type="text" name="phone2"  id="phone2"/></td>
+        </tr>
+         <tr><td></td>
+             <td></td>
+                <td> <img  src="<? echo site_url('register/getcaptcha') ?>" width="150" heigth="40" /><br><br></td>
+                  
+            </tr>
+              <tr>
+        <td>กรอกตัวอักษรในภาพ</td>
+        <td></td>
+        <td><input type="text" name="captcha"  id="captcha"/></td>
         </tr>
             
             <tr>
@@ -204,7 +258,7 @@ The cat was playing in the garden.
                 <td></td>
                 <td><input class="btn-info" type="submit"  value="ตกลง"/></td>
             </tr>
-            
+              </tbody>
         <? echo form_close(); ?>
     </table>
     <p>

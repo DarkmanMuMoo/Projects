@@ -23,10 +23,23 @@ class Register extends CI_Controller {
         $this->load->model('obj/custormer');
        $this->load->library('myencrypt');
     }
+public function  getcaptcha(){
+    $this->load->library('captchautil');
 
+        $array=$this->captchautil->captcha();
+        $_SESSION['word']=$array['word'];
+        $image=$array['img'];
+        header("Content-type:image/png");	//กำหนดชนิดของภาพตอนแสดงผลผ่าน browser
+imagepng($image); //แสดงผลภาพที่สร้าง
+imagedestroy($image);
+    
+    
+    
+}
     public function index() {
 
         $this->form_validation->set_rules('email', 'Email', 'callback_email_check');
+         $this->form_validation->set_rules('captcha', 'Captcha', 'callback_captcha_check');
 $this->load->library('thailandutil');
         if ($this->form_validation->run() == FALSE) {
             
@@ -63,6 +76,27 @@ $this->load->library('thailandutil');
         }
     }
 
+    public function captcha_check($captcha){
+        
+        if(!isset($_SESSION['word'])){
+            
+              $this->form_validation->set_message('captcha_check', 'กรอกอักษรตรวจสอบผิด');
+            return FALSE;
+        }else if ($captcha!= $_SESSION['word']) {
+             
+              $this->form_validation->set_message('captcha_check', 'กรอกอักษรตรวจสอบผิด');
+            return FALSE;
+             
+             
+         }else{
+             
+              return true;
+             
+         }
+        
+        
+        
+    }
     public function email_check($email) {
 
         $check = $this->cusdao->checkemail($email);

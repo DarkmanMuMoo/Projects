@@ -53,7 +53,11 @@
                         required: true,
                         email: true
                     },
-                    password:"required"
+                  password:{
+                    required: true,
+                    minlength: 8,
+                    maxlength:15
+                }
                 },messages: {
                             
                             
@@ -61,7 +65,12 @@
                         required: "plese enter email",
                         email:  "plese enter valid email"
                     },
-                    password:"password required"
+                   password: {
+                    required: "Please provide a password",
+                  
+                    minlength: " password must be at least 8 characters long",
+                       maxlength:"password must max 15 characters long"
+                }
                 }	
             }	
         );
@@ -73,7 +82,7 @@
         echo form_open("user/performlogin", array('class' => 'well', 'id' => 'loginForm'));
         ?>
     <strong>Email </strong>
-    <input type="text"  class="input-xlarge" style="height: 28px;" name="email" id="email"  /><br/>
+    <input type="text"  class="input-xlarge" style="height: 28px;" name="email" id="email"  value="<? echo (isset($email))? $email:''; ?>" /><br/>
          <strong  >Password </strong>
          <input class="input-xlarge" style="height: 28px;" type="password" name="password" id="password" /><br/>
     <!--remember me<input type="checkbox" name="remember" value="remember" /> I have a bike<br />-->
