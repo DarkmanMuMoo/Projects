@@ -101,7 +101,7 @@
                                 <button class="btn btn-danger" onclick="Confirmdelete('<? echo $order->getOrderno();?>');" >cancle </button> 
                                  <?php endif; ?>
                                  <?php if ($order->getOrdstatus()=='30'): ?>
-                                <button class="btn btn-warning" >Payment</button> 
+                                <a href="<? echo site_url('orders/getpaymentlist'). "/" . $order->getOrderno();    ?>" class="btn btn-warning" >Payment</a> 
                                  <?php endif; ?>
                                 
                             </td>  

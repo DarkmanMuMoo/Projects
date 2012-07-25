@@ -37,13 +37,25 @@
                 
             <h5>จัดส่ง</h5>
             <div id="mainaddress" >
-                <? print_r($_SESSION['user']->getAddress1())   ?>
+                     <? $addr1=$_SESSION['user']->getAddress1();   ?>
+                <address>
+                    <?echo $addr1['address'];?><br/>
+                      <?echo $addr1['province'];?><br/>
+                        <?echo $addr1['postcode'];?><br/>
+                    
+                </address>
+           
                 
                 
             </div>
+            
             <div id="subaddress" style="display: none;">
-                <? print_r($_SESSION['user']->getAddress2())   ?>
-                
+                   <? $addr2=$_SESSION['user']->getAddress1();   ?>
+                 <address>
+                    
+                    
+                    
+                </address>
                 
             </div>
                 

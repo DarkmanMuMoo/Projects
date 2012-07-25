@@ -152,7 +152,7 @@ return $this->db->update('custormer', $data);
         $cus->setName($row->cus_name);
         $cus->setLastname($row->lastname);
         $cus->setPassword($row->password);
-        $cus->setPhone($row->phone);
+     
         $cus->setMobilephone($row->mobilephone);
         $cus->setAddress1(array('address' => $row->address, 'province' => $row->province, 'postcode' => $row->postcode,'phone1'=>$row->phone1));
  $cus->setValidate($row->validate);

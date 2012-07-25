@@ -27,9 +27,9 @@ class Register extends CI_Controller {
     public function index() {
 
         $this->form_validation->set_rules('email', 'Email', 'callback_email_check');
-
+$this->load->library('thailandutil');
         if ($this->form_validation->run() == FALSE) {
-            $this->load->library('thailandutil');
+            
                 $provincelist= $this->thailandutil->getAllprovinceList();
                 $data=array();
             $data['provincelist']=$provincelist;
@@ -40,15 +40,16 @@ class Register extends CI_Controller {
             $cus->setName($this->input->post('name'));
             $cus->setLastname($this->input->post('lastname'));
             $cus->setPassword($this->input->post('password'));
-          
+         $province= $this->thailandutilfindbyid($this->input->post('province'));
+          $province2= $this->thailandutilfindbyid($this->input->post('province2'));
             $cus->setMobilephone($this->input->post('mphone'));
             $address1 = array('address' => $this->input->post('address'),
-                'province' => $this->input->post('province'),
+                'province' => $province,
                 'postcode' => $this->input->post('postcode'),
                 'phone1' => $this->input->post('phone1')
                 );
              $address2 = array('address' => $this->input->post('address2'),
-                'province' => $this->input->post('province2'),
+                'province' => $province2,
                 'postcode' => $this->input->post('postcode2'),
                    'phone2' => $this->input->post('phone2')
                 );
