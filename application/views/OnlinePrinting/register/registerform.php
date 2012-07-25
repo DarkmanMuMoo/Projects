@@ -52,7 +52,7 @@
                     minlength: "Your password must be at least 5 characters long",
                     equalTo: "Please enter the same password as above"
                 },
-                email: "Please enter a valid email address Example: printing@example.com",
+                email: "Please enter a valid email address Example: someone@example.com",
                 postcode2:{
                     required: "required",
                     digits:"digit"
@@ -96,9 +96,10 @@ height: 1px;"></hr>
     <table>
 
         <tr>
-            <td>อีเมลล์</td>
+            <td>อีเมลล์ </td>
             <td></td>
-            <td><input type="text" name="email" id="email" /></td>
+            <td><input type="text" name="email" id="email" />
+                <input class="btn" type="button"  value="ตรวจสอบอีเมลล์"/></td>
         </tr>
 
         <tr>
@@ -122,13 +123,13 @@ height: 1px;"></hr>
         <tr>
         <td>รหัสผ่าน</td>
         <td></td>
-        <td><input type="password" name="password" id="password" /></td>
+        <td><input size="15" type="password" name="password" id="password" /></td>
         </tr>
         
         <tr>
         <td>ยืนยันรหัสผ่าน</td> 
         <td></td>
-        <td><input type="password" name="confirm_password" id="confirm_password" /></td>
+        <td><input size="15" type="password" name="confirm_password" id="confirm_password" /></td>
         </tr>
         
         <tr>
@@ -201,7 +202,7 @@ The cat was playing in the garden.
             <tr>
                 <td></td>
                 <td></td>
-            <td><input  type="submit"  value="ตกลง"/></td>
+                <td><input class="btn-info" type="submit"  value="ตกลง"/></td>
             </tr>
             
         <? echo form_close(); ?>
