@@ -42,7 +42,7 @@ class Empdao extends CI_Model{
 
             $obj = $this->makeObj($row);
         }
-        // echo var_dump($obj);
+    //var_dump($obj);
 
         return $obj;
         
@@ -53,13 +53,14 @@ class Empdao extends CI_Model{
     }
    public function update(Emp $emp){
         $data = array(
-         
+    
             'emp_name' => $emp->getName(),
              'lastname' => $emp->getLastname(),
                  'email' => $emp->getEmail(),
             'phone' => $emp->getPhone(),
              'position' => $emp->getPosition(),
-            'password'=>$emp->getPassword()
+            'password'=>$emp->getPassword(),
+            'pic_url'=>$emp->getPicurl()
            
         );
 
@@ -96,7 +97,8 @@ $this->db->where('empno', $emp->getEmpno());
                  'email' => $emp->getEmail(),
             'phone' => $emp->getPhone(),
              'position' => $emp->getPosition(),
-            'password'=>$emp->getPassword()
+            'password'=>$emp->getPassword(),
+            'pic_url'=>$emp->getPicurl()
            
         );
 
@@ -138,6 +140,7 @@ $emp->setEmpno($row->empno);
         $emp->setPosition($row->position);
         $emp->setPassword($row->password);
          $emp->setEmail($row->email);
+         $emp->setPicurl($row->pic_url);
         return  $emp;
     }
 }

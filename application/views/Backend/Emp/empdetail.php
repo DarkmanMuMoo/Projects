@@ -1,85 +1,64 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title></title>
-    </head>
-    <body>
+<? $this->load->view(lang('bakheader'));?>
+
+<div class="container" >
     
-    
-    <table align="center">
-    <tr>
-    <td>
-    <img src="..
-        /../../../asset/Sys_img/type_img/A.png" width="182" height="205">
-      </td>
-      </tr>
-    </table>
-    
-    <table align="center">
+    <div id="img" style="margin: 100 auto 5% auto; text-align: center;"  >
+        <img src="<? echo ($tmpemp->getPicurl()==''||$tmpemp->getPicurl()==null)? base_url('asset/Sys_img/emp_img').'nopic.png' :base_url('asset/Sys_img/emp_img').$tmpemp->getPicurl() ?>" width="182" height="205"/>
+    </div>
+    <div id="info" class="divcenter"  >
+        <form action="<? echo site_url('Backend/bakemp/updateemp');?>" method="post">
+            <table style="margin: 0 auto">
       
-  <tr>
-                <td></td>
-                <td>&nbsp;</td>
-              <td></td>
-                
-      </tr> 
-                <td width="174">Employee No</td>
-                <td width="35"></td>
-              <td width="319">10004</td>
+      <tr>
+                <td >Employee No</td>
+                <td ></td>
+              <td ><? echo $tmpemp->getEmpno();?></td>
                 
         </tr>
             
             <tr>
                 <td>Employee Name</td>
                 <td></td>
-              <td>ธัชสินี	กิจอุดมรัตน์</td>
+              <td><? echo $tmpemp->getName();?></td>
                 
           </tr>
             
             <tr>
                 <td>E-mail</td>
                 <td></td>
-                <td>petulant_pm@hotmail.com</td>
+                <td><? echo $tmpemp->getEmail();?></td>
           </tr>
              
                 <tr>
-                <td height="23">Phone</td>
+                <td >Phone</td>
                 <td></td>
-                <td>0976437494</td>
+                <td><? echo $tmpemp->getPhone();?></td>
           </tr>
              
                 <tr>
                 <td >Position</td>
                 <td></td>
                 <td><select name="position">
-                  <option value="A">A</option>
-                  <option value="B">B</option>
-                  <option value="C">C</option>
+                        <?php foreach ($poslist as $pos): ?>
+
+     <option value="<? echo $pos->getPosition(); ?>"  <?  echo ($tmpemp->getPosition() == $pos->getPosition())?' selected=\"selected\" ': '';?>  ><? echo $pos->getPosdescription(); ?></option>
+
+<?php endforeach; ?>
+             
+             
                 </select></td>
              </tr>
-             
-              </tr>
-             
-                <tr>
-                <td height="23"></td>
-                <td>&nbsp;</td>
-                <td></td>
-          </tr>
-           
+
            <tr>
-                <td height="23"></td>
+                <td></td>
                 <td>&nbsp;</td>
-                <td><input type="button" value="<<Back"/></td>
+                <td> <input type="submit" class="btn" value="edit" >   <a class="btn"  href="<? echo site_url('Backend/bakemp')  ?>" > Back </a></td>
           </tr>
            
   </table>
+            <input type="hidden" name="empno" value="<? echo $tmpemp->getEmpno();?>" />
+        </form>
+     </div>
+</div>
     
-    
-    
-    </body>
-</html>
+<? $this->load->view(lang('bakfooter'));?>

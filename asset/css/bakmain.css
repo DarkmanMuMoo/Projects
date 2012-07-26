@@ -5,7 +5,11 @@
     Description:
         Purpose of the stylesheet follows.
 */
-
+.divcenter{
+    
+    text-align: center;
+    margin: 0 auto;
+}
   #mainmenu{
         
         margin: 0 auto;

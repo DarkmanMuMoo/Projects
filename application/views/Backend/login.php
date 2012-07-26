@@ -1,10 +1,12 @@
 
 <html>
+    
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Backendlogin</title>
-           <? $this->load->view(lang('Bakincludeheader')) ?>
-        <style type="text/css">
+         
+        <? $this->load->view(lang('Bakincludeheader')) ?>
+            <style type="text/css">
         body{ 
           background-color: #bce8f1;
         }
@@ -14,31 +16,14 @@
             width: 50%;
             
         }
-        #login input[type=text]{
+        #login input[type=text],input[type=password]{
             
             
             height: auto;
         }
        
         
-        </style>
-        <script type="text/javascript">
-        
-     $().ready(function() {
-
-     $("#loginForm").validate({
-                errorLabelContainer: $("#con"),
-                rules: {
-                    name: "required",
-                    password: "required"
-                },messages: {
-                    name:"plese enter name",
-                    password:"password required"
-                }	
-            }	        
-     );
-     });
-</script>
+        </style> 
     </head>
     <body>
         <div class="container" align="center">
@@ -69,3 +54,24 @@
         </div>
     </body>
 </html>
+
+<script src="<? echo base_url("asset/javascript/jquery.validate.js"); ?>" >  </script>
+      <script src="<? echo base_url("asset/javascript/jquery.metadata.js"); ?>" >  </script>
+        <script type="text/javascript">
+        
+     $().ready(function() {
+
+     $("#loginForm").validate({
+                errorLabelContainer: $("#con"),
+                rules: {
+                    name: "required",
+                    password: "required"
+                },messages: {
+                    name:"plese enter name",
+                    password:"password required"
+                }	
+            }	        
+     );
+     });
+</script>
+  

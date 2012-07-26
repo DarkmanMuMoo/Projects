@@ -19,8 +19,16 @@ private $empno;
     private $phone;
     private $position;
     private $password;
-  
-    public function getPhone() {
+  private $picurl;
+  public function getPicurl() {
+      return $this->picurl;
+  }
+
+  public function setPicurl($picurl) {
+      $this->picurl = $picurl;
+  }
+
+      public function getPhone() {
         return $this->phone;
     }
     public function getPassword() {

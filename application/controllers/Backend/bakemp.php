@@ -49,11 +49,27 @@ class Bakemp extends CI_Controller{
     }
     public function viewempdetail($empno){
         
-        
+         $this->load->model('dao/positiondao');
+         $poslist=$this->positiondao->findall();
         $tmp_emp=$this->empdao->findbyid($empno);
+        $data=array();
         $data['tmpemp']=$tmp_emp;
-        
+         $data['poslist']=$poslist;
         $this->load->view(lang('empdetail'),$data);
+    }
+    
+    public function updateemp(){
+        
+        $empno=$this->input->post('empno');
+  
+         $position=$this->input->post('position');
+         
+        $emp=$this->empdao->findbyid($empno);
+        $emp->setPosition($position);
+        $result = $this->empdao->update($emp);
+       
+       
+        $this->viewempdetail($empno);
     }
 }
 
