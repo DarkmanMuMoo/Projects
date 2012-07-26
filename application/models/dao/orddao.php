@@ -122,6 +122,7 @@ if ($query->num_rows() > 0)
 
          $this->db->where($index, $row);
         }
+        $this->db->order_by('cus_name asc, lastname asc'); 
           $query = $this->db->get();
         $result = array();
     
