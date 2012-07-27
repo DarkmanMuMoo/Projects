@@ -16,14 +16,8 @@ class Testsome extends CI_Controller {
     
     public function index(){
      
-        $this->load->view('Hellopage');
-  echo ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
- $this->load->library('myencrypt');
- $str = 'darkmanmumoonaja@gmail.com';
-     $encode = $this->myencrypt->encode($str); 
-     //$decode  =  $this->myencrypt->decode($str); 
-     
-     echo anchor("/testsome/index/$encode", 'Email ได้รับการยืนยันแล้ว คลิกที่นี่เพื่อกลับไปหน้า Homepage', 'title="SignUp"');
+ var_export(true,true);
+echo var_export(false,true);
     }
 
     public function viewsession(){
@@ -58,19 +52,28 @@ force_download($name, $data);
      //echo strtotime("2012/07/02");
         
     }
+    
     public function testutil(){
         
         /*$this->load->library('thailandutil');
        $provincelist= $this->thailandutil->getAllprovinceList();
        var_dump($provincelist);*/
-$this->load->library('captchautil');
+ /*$this->load->library('captchautil');
 
-        $array=$this->captchautil->captcha();
+       $array=$this->captchautil->captcha();
         $_SESSION['word']=$array['word'];
         $image=$array['img'];
         header("Content-type:image/png");	//กำหนดชนิดของภาพตอนแสดงผลผ่าน browser
 imagepng($image); //แสดงผลภาพที่สร้าง
-imagedestroy($image);
+imagedestroy($image);*/
+        
+        $this->load->library('emailutil');
+        
+        $config=$this->emailutil->getSmtpconfig();
+        var_dump($this->emailutil);
+       // $this->emailutil->sendemail($config,$form,$to,$subject,$message);
+        
+        
         
     }
         public function  testDirectory(){

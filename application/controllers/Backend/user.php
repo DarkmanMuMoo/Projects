@@ -24,7 +24,7 @@ class User extends CI_Controller {
               $password=$this->input->post('password'); 
   
    
-       $this->form_validation->set_rules('name', 'Name', "callback_user_check[$password]");
+       $this->form_validation->set_rules('email', 'Email', "callback_user_check[$password]");
          if ($this->form_validation->run() == FALSE) {
               
              //redirect('false');
@@ -32,7 +32,7 @@ class User extends CI_Controller {
              //$this->load->view('dsf');
         }else{
        
-            $_SESSION['emp']=$this->empdao->findbyempname($this->input->post('name') );
+            $_SESSION['emp']=$this->empdao->findbyemail($this->input->post('email') );
             
              $this->load->view(lang('bakhome'));
         }
@@ -45,22 +45,22 @@ class User extends CI_Controller {
          unset($_SESSION['emp']);
            $this->load->view(lang('baklogin'));
      }
-           public function user_check($name,$password) {
+           public function user_check($email,$password) {
                
                
                
                $emp=null;
 
-         $emp = $this->empdao->findbyempname($name);
+         $emp = $this->empdao->findbyemail($email);
 
         if ( $emp==null) {
 
-            $this->form_validation->set_message('user_check', 'ไม่มีพนักงาน นี้ในระบบ');
+            $this->form_validation->set_message('user_check', 'email หรือ password ไม่ถูกต้อง');
             return FALSE;
              
         } else if($emp->getPassword()!= $password ){
         
-             $this->form_validation->set_message('user_check', 'password ไม่ถุกต้อง');
+             $this->form_validation->set_message('user_check', 'email หรือ password ไม่ถูกต้อง');
             return FALSE;
           
             }else{

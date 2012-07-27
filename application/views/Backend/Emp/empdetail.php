@@ -7,7 +7,7 @@
     </div>
     <div id="info" class="divcenter"  >
         <form action="<? echo site_url('Backend/bakemp/updateemp');?>" method="post">
-            <table style="margin: 0 auto">
+            <table class="elementcenter">
       
       <tr>
                 <td >Employee No</td>

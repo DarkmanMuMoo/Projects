@@ -191,13 +191,13 @@ public function  getpaymentlist($orderno){
         $ord->setTotalprice($totalprice);
         $ord->setOrderdate(date("Y-m-d"));
         $result = $this->orddao->insert($ord);
-        error_log($result . 'insert in ord', 0);  //debug insert
+        error_log(var_export($result,true) . 'insert in ord', 0);  //debug insert
         $orderid = $this->db->insert_id();
         foreach ($_SESSION['temp_orderlinelist'] as $orderline) {
             //$orderline
             $orderline->setOrderno($orderid);
             $result = $this->orderlinedao->insert($orderline);
-            error_log($result . 'insert in orderline', 0);
+            error_log(var_export($result,true) . 'insert in orderline', 0);
         }
 
 

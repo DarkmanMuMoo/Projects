@@ -71,7 +71,8 @@ $this->load->library('thailandutil');
              
              $this->cusdao->insert($cus);
         // echo var_dump( $this->cusdao->insert($cus));
-            $this->sendemail($cus);
+          $result=$this->sendemail($cus);
+           error_log(var_export($result,true) . 'send email register to'.$this->input->post('email'), 0);
             $this->load->view(lang('registerSuccess'));
         }
     }
@@ -141,10 +142,10 @@ $config['newline']="\r\n";
         $this->email->subject('ยืนยันการเป็นสมาชิก');
       $url = site_url("register/validate_user/$encrypted_email");
       $alink="<a href=\"$url\" >กดเพื่อยืนยันการเป็นสมาชิก</a>";
-        $message = 'validate email link ' . '<br> <p>'.$alink.'</p> \r\n';
+        $message = 'validate email link ' . '<br> <p>'.$alink.'</p> ';
         $this->email->message($message);
 
-       $this->email->send();
+    return   $this->email->send();
 
        //echo $this->email->print_debugger();
        //echo  $message;

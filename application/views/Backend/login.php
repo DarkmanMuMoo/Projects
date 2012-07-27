@@ -35,8 +35,8 @@
                           <h4>Login</h4>
     <br>
 
-    &nbsp; &nbsp; &nbsp;Name:     <input class="input-medium"  value=""type="text" id="name" name="name"/><br>
-    Password: <input  class="input-medium" type="password" value="" id="password" name="password" /><br>
+    &nbsp; &nbsp; &nbsp;Name:     <input class="input-xlarge"  value=""type="text" id="email" name="email"/><br>
+    Password: <input  class="input-xlarge" type="password" value="" id="password" name="password" /><br>
       <br>
       <p><button type="submit" class="btn btn-primary">login</button></p>
                       </fieldset>
@@ -64,10 +64,16 @@
      $("#loginForm").validate({
                 errorLabelContainer: $("#con"),
                 rules: {
-                    name: "required",
+                    email: {
+                        required: true,
+                        email: true
+                    },
                     password: "required"
                 },messages: {
-                    name:"plese enter name",
+                    email: {
+                        required: "plese enter email",
+                        email:  "plese enter valid email"
+                    },
                     password:"password required"
                 }	
             }	        

@@ -75,11 +75,11 @@ $message='';
         echo $mesg;
         
     }
-    private function upload($config){
+    private function upload($config,$name='myfile'){
         $this->load->library('upload');
                  $this->upload->initialize($config);
 $message='error';
-        if ( ! $this->upload->do_upload('myfile'))
+        if ( ! $this->upload->do_upload($name))
 		{
             $message=$this->upload->display_errors();
 			
@@ -95,6 +95,8 @@ $message='error';
         
         
     }
+    
+  
 }
 
 ?>

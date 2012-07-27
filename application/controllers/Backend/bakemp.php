@@ -47,6 +47,17 @@ class Bakemp extends CI_Controller{
             $this->load->view(lang('bakemp'),$data);
 
     }
+    
+    public function deleteemp(){
+        $empno =$this->input->post('empno');
+        
+       $result= $this->empdao->delete($empno);
+        error_log("delete emp  $empno =".var_export($result, true),0);
+          $javascript = "
+   document.location.reload();
+   ";
+        echo $javascript;
+    }
     public function viewempdetail($empno){
         
          $this->load->model('dao/positiondao');
@@ -56,8 +67,43 @@ class Bakemp extends CI_Controller{
         $data['tmpemp']=$tmp_emp;
          $data['poslist']=$poslist;
         $this->load->view(lang('empdetail'),$data);
+        
     }
     
+    
+    public function insertemp(){
+        $this->load->helper('string');
+
+        $name=$this->input->post('name');
+        $lastname=$this->input->post('lastname');
+        $email=$this->input->post('email');
+        $phone=$this->input->post('phone');
+        $password=random_string();
+        $position=$this->input->post('position');
+    $emp = new Emp();
+    $emp->setEmail($email);
+    $emp->setName($name);
+    $emp->setLastname($lastname);
+    $emp->setPhone($phone);
+    $emp->setPassword($password);
+    $emp->setPosition($position);
+    $emp->setPicurl(null);
+    
+    $insertresult=$this->empdao->insert($emp);
+    error_log('result of insert emp'.var_export($insertresult, true),0);
+    
+     $this->load->library('emailutil');
+    $config=$this->emailutil->getSmtpconfig();
+    $form= lang('adminemail');
+    $to=$email;
+    $subject='ยินดีต้อนรับ พนักงาน ใหม่';
+    $message='email use to login ='.$email;
+     $message.='<br> password is ='.$password;
+   $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
+    error_log("send email to $to result is".var_export($emailresult, true),0);
+    
+    $this->index();
+    }
     public function updateemp(){
         
         $empno=$this->input->post('empno');
@@ -71,6 +117,8 @@ class Bakemp extends CI_Controller{
        
         $this->viewempdetail($empno);
     }
+    
+    
 }
 
 ?>

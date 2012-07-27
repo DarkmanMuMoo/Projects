@@ -42,7 +42,7 @@ $lang['loginframe'] = 'OnlinePrinting/frame/loginframe';
 
 
 
-
+$lang['adminemail']='phairoj@colourharmony.co.th';
 
 
 

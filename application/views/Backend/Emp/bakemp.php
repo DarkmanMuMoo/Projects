@@ -2,14 +2,23 @@
 
 <div class="container" >
     <style>
-
+#insertemp{display: none; width: 60%;}
+#insertform{
+    
+    
+  margin-top: 5%;
+  margin-bottom: 5%;
+ 
+}
     #result th{text-align: center;}
     #result td{text-align: center;}
 </style>
 <div id="search-bar" style="margin-top: 100px;">  
-            <form id="searchform"action="<? echo site_url('orders') ?>" class="form-search" align="center"  method="post">
+            <form id="searchform"action="<? echo site_url('Backend/bakemp') ?>" class="form-search" align="center"  method="post">
                 Keyword:<input type="text"  name="keyword" id="email" class="input-small " />
-                position: <select name="status" id="status" >    <?php foreach ($positionlist as $pos): ?>
+                position: <select name="position" id="position" >  
+                    <option value="">All</option>
+  <?php foreach ($positionlist as $pos): ?>
                                 
                     <option value="<?echo $pos->getPosition();?>">  <? echo $pos->getPosdescription();  ?></option>
                               
@@ -75,7 +84,9 @@
                                 <a class="btn btn-info" href="<?echo site_url('Backend/bakemp/viewempdetail') . "/" .$order->getEmpno();   ?>"> 
                                    View
                                 </a>
-                              
+                                <button class="btn btn-danger"  onclick="Confirmdelete('<? echo $order->getEmpno(); ?>');"> 
+                                  Delete
+                                </button>
                             </td>  
                         </tr>
                     <?php endforeach; ?>
@@ -89,86 +100,51 @@
         </div>
 
 
-    <button class="btn" > insert new emp</button>
- 
-    <form id="insertform" action="" method="post">
-        
-        <table align="center">
-    <tr>
-    <td>
-        <input class="btn" type="button" value="Browse..."/>
-      </td>
-      </tr>
-    </table>
-        
-        
-       <table align="center">
-      
-  <tr>
-                <td></td>
-                <td>&nbsp;</td>
-              <td></td>
-                
-      </tr> 
-                <td width="174">Employee No</td>
-                <td width="35"></td>
-                <td><input type="text"></input></td>
-                
-        </tr>
-            
+<button onclick="showinsertform();" class="btn" > insert new emp</button>
+<div  id="insertemp" class="divcenter"  >
+    <form  id="insertform" action="<? echo site_url('Backend/bakemp/insertemp')  ?>" method="post">
+
+        <table class="elementcenter">
             <tr>
                 <td>ชื่อ</td>
-                <td></td>
-              <td><input type="text"></input></td>
+                <td>&nbsp;</td>
+              <td><input type="text"  name="name" id="name" ></input></td>
                 
           </tr>
-            
           <tr>
                 <td>นามสกุล</td>
-                <td></td>
-              <td><input type="text"></input></td>
+                <td>&nbsp;</td>
+              <td><input type="text"  name="lastname" id="lastname"  ></input></td>
                 
           </tr>
-          
-           <tr>
-                <td height="23">รหัสผ่าน</td>
-                <td></td>
-                <td><input type="text"></input</td>
-          </tr>
-          
             <tr>
                 <td>อีเมลล์</td>
-                <td></td>
-                <td><input type="text"></input</td>
+                <td>&nbsp;</td>
+                <td><input type="text"name="email" id="email"></input</td>
           </tr>
-             
-                <tr>
-                <td height="23">โทรศัพท์</td>
-                <td></td>
-                <td><input type="text"></input</td>
+ <tr>
+                <td >โทรศัพท์</td>
+                <td>&nbsp;</td>
+                <td><input type="text" name="phone" id="phone"></input</td>
           </tr>
              
                 <tr>
                 <td >ตำแหน่ง</td>
                 <td></td>
                 <td><select name="position">
-                  <option value="A">A</option>
-                  <option value="B">B</option>
-                  <option value="C">C</option>
+                        <?php foreach ($positionlist as $pos): ?>
+
+     <option value="<? echo $pos->getPosition(); ?>" ><? echo $pos->getPosdescription(); ?></option>
+
+<?php endforeach; ?>
+             
+             
                 </select></td>
              </tr>
-             
-              </tr>
-             
-                <tr>
-                <td height="23"></td>
-                <td>&nbsp;</td>
-                <td></td>
-          </tr>
-           
+
            <tr>
-                <td height="23"></td>
-                <td>&nbsp;</td>
+                <td></td>
+                <td></td>
                 <td><input class="btn-success" type="submit" value="ตกลง"/></td>
           </tr>
            
@@ -177,13 +153,65 @@
             
         </form>
         
-        
-    </div>
+         </div>
+ 
     
     
 
 </div>
 
-
-
 <? $this->load->view(lang('bakfooter'));?>
+ <script src="<? echo base_url("asset/javascript/jquery.maskedinput-1.2.1.js"); ?>" >  </script>
+<script src="<? echo base_url("asset/javascript/jquery.validate.js"); ?>" >  </script>
+      <script src="<? echo base_url("asset/javascript/jquery.metadata.js"); ?>" >  </script>
+<script>   
+     function Confirmdelete(empno)
+
+    {
+var vempno=empno;
+        if(confirm('Do you want to delete this emp')==true)
+
+        {
+
+              $.post('<? echo site_url('Backend/bakemp/deleteemp')?>',{empno:vempno}, function(data){
+                  //alert(data);
+                  eval(data);
+
+              });
+
+        }
+
+      
+
+    }
+function showinsertform (){
+    
+    
+     $("#insertemp").fadeToggle("slow", "linear");
+}
+ $().ready(function() {
+ $("#phone").mask("999-999-9999");
+     $("#insertform").validate({
+                //errorLabelContainer: $("#con"),
+                rules: {
+                     name:"required",
+                lastname:"required",
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                      phone:"required"
+                },messages: {
+                     name:"required",
+                lastname:"required",
+                    email: {
+                        required: "plese enter email",
+                        email:  "plese enter valid email"
+                    },
+                     phone:"required"
+                }	
+            }	        
+     );
+     });
+
+</script>

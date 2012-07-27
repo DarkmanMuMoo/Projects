@@ -19,8 +19,8 @@ class Empdao extends CI_Model{
         $this->load->model('obj/emp');
          
     }
-      public function findbyempname($empname){
-         $this->db->where('emp_name', $empname);
+      public function findbyemail($email){
+         $this->db->where('email', $email);
             $query = $this->db->get('employee');
          $obj = null;
 
@@ -49,7 +49,7 @@ class Empdao extends CI_Model{
     }
       public function delete($empno){
        
-        $this->db->delete('employee', array('empno' => $empno)); 
+       return $this->db->delete('employee', array('empno' => $empno)); 
     }
    public function update(Emp $emp){
         $data = array(
