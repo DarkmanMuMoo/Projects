@@ -14,3 +14,9 @@ ERROR - 2012-07-25 07:10:37 --> 404 Page Not Found --> Backend/asset
 ERROR - 2012-07-25 07:11:04 --> 404 Page Not Found --> Backend/asset
 ERROR - 2012-07-25 07:11:44 --> 404 Page Not Found --> Backend/asset
 ERROR - 2012-07-25 07:12:09 --> 404 Page Not Found --> Backend/asset
+ERROR - 2012-07-25 09:19:31 --> 404 Page Not Found --> Backend/asset
+ERROR - 2012-07-25 10:22:20 --> Severity: Notice  --> Undefined property: stdClass::$phone1 C:\wamp\www\Projects\application\models\dao\cusdao.php 157
+ERROR - 2012-07-25 10:22:20 --> Severity: Notice  --> Undefined property: stdClass::$phone1 C:\wamp\www\Projects\application\models\dao\cusdao.php 160
+ERROR - 2012-07-25 10:22:20 --> Severity: Notice  --> Undefined property: stdClass::$phone1 C:\wamp\www\Projects\application\models\dao\cusdao.php 157
+ERROR - 2012-07-25 10:22:20 --> Severity: Notice  --> Undefined property: stdClass::$phone1 C:\wamp\www\Projects\application\models\dao\cusdao.php 160
+ERROR - 2012-07-25 10:28:18 --> update result =1

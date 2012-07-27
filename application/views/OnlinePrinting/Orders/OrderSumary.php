@@ -2,4 +2,5 @@
             <p>
                 Summary 
             </p>
+            
   <? $this->load->view(lang('footer')) ?>

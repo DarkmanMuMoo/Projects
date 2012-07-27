@@ -92,7 +92,87 @@
     <button class="btn" > insert new emp</button>
  
     <form id="insertform" action="" method="post">
+        
+        <table align="center">
+    <tr>
+    <td>
+        <input class="btn" type="button" value="Browse..."/>
+      </td>
+      </tr>
+    </table>
+        
+        
+       <table align="center">
+      
+  <tr>
+                <td></td>
+                <td>&nbsp;</td>
+              <td></td>
+                
+      </tr> 
+                <td width="174">Employee No</td>
+                <td width="35"></td>
+                <td><input type="text"></input></td>
+                
+        </tr>
+            
+            <tr>
+                <td>ชื่อ</td>
+                <td></td>
+              <td><input type="text"></input></td>
+                
+          </tr>
+            
+          <tr>
+                <td>นามสกุล</td>
+                <td></td>
+              <td><input type="text"></input></td>
+                
+          </tr>
+          
+           <tr>
+                <td height="23">รหัสผ่าน</td>
+                <td></td>
+                <td><input type="text"></input</td>
+          </tr>
+          
+            <tr>
+                <td>อีเมลล์</td>
+                <td></td>
+                <td><input type="text"></input</td>
+          </tr>
+             
+                <tr>
+                <td height="23">โทรศัพท์</td>
+                <td></td>
+                <td><input type="text"></input</td>
+          </tr>
+             
+                <tr>
+                <td >ตำแหน่ง</td>
+                <td></td>
+                <td><select name="position">
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                  <option value="C">C</option>
+                </select></td>
+             </tr>
+             
+              </tr>
+             
+                <tr>
+                <td height="23"></td>
+                <td>&nbsp;</td>
+                <td></td>
+          </tr>
            
+           <tr>
+                <td height="23"></td>
+                <td>&nbsp;</td>
+                <td><input class="btn-success" type="submit" value="ตกลง"/></td>
+          </tr>
+           
+  </table>
             
             
         </form>
