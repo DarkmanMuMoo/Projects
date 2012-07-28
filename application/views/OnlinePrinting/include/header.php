@@ -141,28 +141,31 @@ and open the template in the editor.
                 <ul class="menu" >
                     <li id="Home"><a href="<?php echo site_url("home"); ?>">Home</a></li>
                     <li id="Product"><a href="<?php echo site_url("product"); ?>">Product</a></li>
+                    <?php if ($_SESSION['hasuser']): ?>
                     <li id="Orders"><a href="<?php echo site_url("orders"); ?>">Orders</a></li>
+                       <li><a href="<?php echo site_url("user"); ?>">Profile</a></li>
+                    <?php endif; ?>
                     <li id="Register" ><a href="<?php echo site_url("register"); ?>">Register</a></li>
                     <li><a href="#">Links</a></li>
 
                 </ul>
 
 
-                <div id="login" style="float: right; padding-right: 20px;" >
+                <div id="login" style="float: right; padding-right: 10px;padding-top: 5px;" >
+                      <button class="btn btn" style="font-weight:bold;float: left;margin-right: 5px;"  onclick="showcart();" id="showcart" ><i class="icon-shopping-cart"></i>  Cart  </button>
                     <?
 //check var  that hook gen
 //echo var_dump($_SESSION);
                     if (!$_SESSION['hasuser']) {
                         ?>
-                        <div class="btn-group pull-right" style="font-weight:bold; margin-top: 5px;" >
-
+                   
+                        <div class="btn-group pull-right" style="font-weight:bold;" >
                             <button class="btn btn-info" style="font-weight:bold;"   onclick="showloginframe()" ><i class="icon-user"></i>  Login  </button>
                             <button class="btn btn-info dropdown-toggle" data-toggle="dropdown" >
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li> <? echo anchor('register', 'Signup', 'title="SignUp"'); ?></li>
-                                <li class="divider"></li>
+                                
                                 <li> <a href="javascript:void(0);" id="forgetpassword"  onclick="PasswordDialog();" >forget password</a></li>
 
                             </ul>
@@ -175,16 +178,18 @@ and open the template in the editor.
                         $cus = $_SESSION['user'];
                         ?>
 
-                        <div class="btn-group pull-right" style="font-weight:bold; margin-top: 5px;" >
-                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="icon-user"></i>  <? echo $cus->getName(); ?>
+                        <div class="btn-group pull-right" style="font-weight:bold;" >
+                            
+                            <button class="btn btn-info" style="font-weight:bold;"  ><i class="icon-user"></i>  <? echo $cus->getName(); ?>  </button>
+                            <button class="btn btn-info dropdown-toggle" data-toggle="dropdown" >
                                 <span class="caret"></span>
-                            </a>
+                            </button>
                             <ul class="dropdown-menu">
-                                <li><a onclick="showcart();" id="showcart"  href="javascript:void(0);"><i class="icon-shopping-cart icon-white"></i> yourcart(<? echo (isset($_SESSION['cart'])) ? count($_SESSION['cart']) : '0' ?>)</a> </li>
-                                <li class="divider"></li>
-                                <li><a href="javascript:void(0);" onclick="logout();">Log Out</a></li>
+                                
+                               <li><a href="javascript:void(0);" onclick="logout();">Log Out</a></li>
+
                             </ul>
+                      
                         </div>
 
 <? } ?>

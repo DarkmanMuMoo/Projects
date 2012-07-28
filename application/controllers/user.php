@@ -21,7 +21,11 @@ class User extends CI_Controller{
          $this->load->library('form_validation');
     }
  
-    
+    public function index(){
+        
+        
+        $this->load->view(lang('userprofile'),$data);
+    }
     public function ajaxRetrivePassword(){
          $emailtosend=$this->input->post('emailval'); 
        $user= $this->cusdao->findbyemail($emailtosend,'T');

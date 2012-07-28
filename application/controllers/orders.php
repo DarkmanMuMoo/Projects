@@ -28,10 +28,12 @@ class Orders extends CI_Controller {
     }
 public function  getpaymentlist($orderno){
     $this->load->model('dao/paymentdao');
+$ordpaylist =$this->ordpaydao->findall();
     $paymentlist=$this->paymentdao->findbyorderno($orderno);
     $order=$this->orddao->findbyid($orderno);
     $data['paymentlist']=$paymentlist;
     $data['order']=$order;
+     $data['ordpaylist']=$ordpaylist;
     
     $this->load->view(lang('paymentlist'),$data);
 }

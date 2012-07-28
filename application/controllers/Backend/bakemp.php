@@ -70,6 +70,19 @@ class Bakemp extends CI_Controller{
         
     }
     
+    public function empprofile(){
+        $this->load->model('dao/positiondao');
+         $poslist=$this->positiondao->findall();
+         
+             $empno=$_SESSION['emp']->getEmpno();
+        $tmp_emp=$this->empdao->findbyid($empno);
+        $data=array();
+        $data['tmpemp']=$tmp_emp;
+         $data['poslist']=$poslist;
+        
+        
+             $this->load->view(lang('empprofile'),$data);
+    }
     
     public function insertemp(){
         $this->load->helper('string');

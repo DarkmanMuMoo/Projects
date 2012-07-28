@@ -75,7 +75,7 @@ class Paymentdao extends CI_Model {
      
        $payment->setPaymentdate($row->paymentdate);
 $payment->setPeriod($row->period);
-     
+     $payment->setActive($row->active);
        $payment->setOrderno($row->orderno);
         return $payment;
     }

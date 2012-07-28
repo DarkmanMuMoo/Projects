@@ -18,7 +18,7 @@ class Payment extends CI_Model {
     private $amount;
     private $paymentdate;
     private $orderno;
-    
+    private $active;
     public function getPayno() {
         return $this->payno;
     }
@@ -38,8 +38,15 @@ class Payment extends CI_Model {
     public function getAmount() {
         return $this->amount;
     }
+    public function getActive() {
+        return $this->active;
+    }
 
-    public function setAmount($amount) {
+    public function setActive($active) {
+        $this->active = $active;
+    }
+
+        public function setAmount($amount) {
         $this->amount = $amount;
     }
 
