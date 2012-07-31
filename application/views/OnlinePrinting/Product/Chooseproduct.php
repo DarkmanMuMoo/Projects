@@ -1,4 +1,21 @@
  <? $this->load->view(lang('header')) ?>
+<style>
+    .divcenter img{
+        
+        margin-bottom: 15px;
+        
+    }
+    #calsec{
+        
+        float: left ; width :50%;
+        
+    }
+    #pricesec{
+         float:right; width: 50%;
+        text-align: center;
+    }
+    
+</style>
         <script>
         	$(function() {
 		$( "#slider" ).slider({
@@ -16,12 +33,17 @@
 	</script>
         <br>
         <div id="page">
-        <div style="float: left ; width :50%;">
-        <p>    <img src="<? echo base_url($type->getPicurl()); ?>"   />  
+            <div class="divcenter" style=" margin-bottom: 25px;">
+                 
+                     <img src="<? echo base_url($type->getPicurl()); ?>"   />  
 
         <h1> <? echo $type->getDescription(); ?>  </h1>
-    </p>
+   
 
+            </div>
+            <hr/>
+            <div id="calsec">
+                <h1> เลือกคุณสมบัติ</h1>
 
         <?php
         echo form_open('product/calprice',array('target'=>'showpriceframe'));
@@ -59,12 +81,13 @@
         <? echo form_close(); ?>
   </div>
             
-                <div  style=" float:right; width: 50%;"  align="center"  >
+            <div   id="pricesec"    >
                     <iframe src="<?echo site_url('product/getshowpriceframe') ?>"  name="showpriceframe" id="showpriceframe" width="auto"
                             height="400px" style="border-style:none;" scrolling="no" >
                     
                     </iframe>
                 </div>
+             
         </div>
      
 <? $this->load->view(lang('footer')) ?>

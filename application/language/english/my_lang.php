@@ -41,6 +41,8 @@ $lang['loginframe'] = 'OnlinePrinting/frame/loginframe';
 
 
 
+
+
 $lang['userprofile'] = 'OnlinePrinting/user/userprofile';
 
 
@@ -65,7 +67,14 @@ $lang['bakfooter'] ='Backend/include/footer';
 $lang['bakorder'] ='Backend/Orders/orderpage';
 
 $lang['BakviewOrderdetail'] ='Backend/Orders/viewOrderdetail';
+
 $lang['bakemp'] ='Backend/Emp/bakemp';
 $lang['empdetail'] ='Backend/Emp/empdetail';
-$lang['empprofile']='Backend/Emp/empprofile'
+$lang['empprofile']='Backend/Emp/empprofile';
+
+
+$lang['bakwork']='Backend/Work/workpage';
+
+
+
 ?>

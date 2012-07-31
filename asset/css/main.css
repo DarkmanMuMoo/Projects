@@ -4,7 +4,22 @@ Design by Free CSS Templates
 http://www.freecsstemplates.org
 Released for free under a Creative Commons Attribution 2.5 License
 */
+.divcenter{
+    
+    text-align: center;
+   margin-left: auto;
+   margin-right: auto;
+   margin-top: 0;
+   margin-bottom: 0;
+       
+}
+.elementcenter{
+ margin-left: auto;
+   margin-right: auto;
+   margin-top: 0;
+   margin-bottom: 0;
 
+}
 body {
 	margin: 0;
 	padding: 0;
@@ -49,7 +64,7 @@ a {
 	width: 960px;
 	margin: 0 auto;
 	padding: 0;
-        background: buttonface;
+       
        
 }
 

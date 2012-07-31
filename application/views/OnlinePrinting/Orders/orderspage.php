@@ -72,7 +72,7 @@
                     Total-Price
                 </th>
                 <th>
-                    Cancle Order
+                    Cancel Order
                 </th>
                 </thead>
 
@@ -98,7 +98,7 @@
                                    View
                                 </a>
                                 <?php if ($order->getOrdstatus()=='10'||$order->getOrdstatus()=='40'): ?>
-                                <button class="btn btn-danger" onclick="Confirmdelete('<? echo $order->getOrderno();?>');" >cancle </button> 
+                                <button class="btn btn-danger" onclick="Confirmdelete('<? echo $order->getOrderno();?>');" >cancel </button> 
                                  <?php endif; ?>
                                  <?php if ($order->getOrdstatus()=='30'): ?>
                                 <a href="<? echo site_url('orders/getpaymentlist'). "/" . $order->getOrderno();    ?>" class="btn btn-warning" >Payment</a> 
