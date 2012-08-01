@@ -16,27 +16,24 @@ class Orders extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model('dao/templatedao');
-        $this->load->model('dao/paperdao');
-        $this->load->model('dao/optiondao');
         $this->load->model('dao/orderlinedao');
-        $this->load->model('dao/typedao');
         $this->load->model('obj/orderline');
         $this->load->model('dao/orddao');
-        $this->load->model('dao/ordpaydao');
-        $this->load->model('dao/ordsenddao');
     }
-public function  getpaymentlist($orderno){
-    $this->load->model('dao/paymentdao');
-$ordpaylist =$this->ordpaydao->findall();
-    $paymentlist=$this->paymentdao->findbyorderno($orderno);
-    $order=$this->orddao->findbyid($orderno);
-    $data['paymentlist']=$paymentlist;
-    $data['order']=$order;
-     $data['ordpaylist']=$ordpaylist;
-    
-    $this->load->view(lang('paymentlist'),$data);
-}
+
+    public function getpaymentlist($orderno) {
+        $this->load->model('dao/ordpaydao');
+        $this->load->model('dao/paymentdao');
+        $ordpaylist = $this->ordpaydao->findall();
+        $paymentlist = $this->paymentdao->findbyorderno($orderno);
+        $order = $this->orddao->findbyid($orderno);
+        $data['paymentlist'] = $paymentlist;
+        $data['order'] = $order;
+        $data['ordpaylist'] = $ordpaylist;
+
+        $this->load->view(lang('paymentlist'), $data);
+    }
+
     public function index() {
         if ($_SESSION['hasuser']) {
 
@@ -93,6 +90,9 @@ $ordpaylist =$this->ordpaydao->findall();
     }
 
     public function showcart() {
+        $this->load->model('dao/templatedao');
+        $this->load->model('dao/paperdao');
+        $this->load->model('dao/optiondao');
 
 
         $data = array();
@@ -121,8 +121,8 @@ $ordpaylist =$this->ordpaydao->findall();
         array_push($_SESSION['cart'], $ordline);
         unset($_SESSION['tmp_ordline']);
 
-       // redirect('home', 'refresh');
- redirect('home/opencartdialog');
+        // redirect('home', 'refresh');
+        redirect('home/opencartdialog');
     }
 
     public function removeCartItem($index) {
@@ -133,6 +133,12 @@ $ordpaylist =$this->ordpaydao->findall();
     }
 
     public function Checkout() {
+        $this->load->model('dao/templatedao');
+        $this->load->model('dao/paperdao');
+        $this->load->model('dao/optiondao');
+        $this->load->model('dao/ordpaydao');
+        $this->load->model('dao/ordsenddao');
+
 
 
         $data['user'] = $_SESSION['user'];
@@ -155,6 +161,13 @@ $ordpaylist =$this->ordpaydao->findall();
     }
 
     public function confirmorder() {
+        $this->load->model('dao/ordpaydao');
+        $this->load->model('dao/templatedao');
+        $this->load->model('dao/paperdao');
+        $this->load->model('dao/optiondao');
+        $this->load->model('dao/ordpaydao');
+        $this->load->model('dao/ordsenddao');
+        
 
         $data['address'] = $this->input->post('add');
         $ordsendmethod = $this->input->post('ordsend');
@@ -193,13 +206,13 @@ $ordpaylist =$this->ordpaydao->findall();
         $ord->setTotalprice($totalprice);
         $ord->setOrderdate(date("Y-m-d"));
         $result = $this->orddao->insert($ord);
-        error_log(var_export($result,true) . 'insert in ord', 0);  //debug insert
+        error_log(var_export($result, true) . 'insert in ord', 0);  //debug insert
         $orderid = $this->db->insert_id();
         foreach ($_SESSION['temp_orderlinelist'] as $orderline) {
             //$orderline
             $orderline->setOrderno($orderid);
             $result = $this->orderlinedao->insert($orderline);
-            error_log(var_export($result,true) . 'insert in orderline', 0);
+            error_log(var_export($result, true) . 'insert in orderline', 0);
         }
 
 
@@ -209,7 +222,10 @@ $ordpaylist =$this->ordpaydao->findall();
 
     public function viewOrderdetail($orderno) {
         $this->load->model('dao/ordstatusdao');
-    
+        $this->load->model('dao/ordpaydao');
+         $this->load->model('dao/ordsenddao');
+         
+         
         $ordstatuslist = $this->ordstatusdao->findall();
         $orderlinelist = $this->orderlinedao->findjoinbyorderno($orderno);
         $ordsendlist = $this->ordsenddao->findall();
@@ -223,55 +239,51 @@ $ordpaylist =$this->ordpaydao->findall();
         $data['orderlinelist'] = $orderlinelist;
         $this->load->view(lang('viewOrderdetail'), $data);
     }
-    
-    public function ajaxcheckuploadfile(){
-           $orderno=$this->input->post('order');
+
+    public function ajaxcheckuploadfile() {
+        $orderno = $this->input->post('order');
         $this->load->model('dao/orddao');
-         $notupload=$this->orddao->countfilenotupload($orderno);
-         if($notupload==0){
-       echo 'true';
-      }else{
-          
-          echo $notupload;
-      }
+        $notupload = $this->orddao->countfilenotupload($orderno);
+        if ($notupload == 0) {
+            echo 'true';
+        } else {
+
+            echo $notupload;
+        }
     }
 
-    
-    public  function downloadtemplate($tempeno){
-        
-        $template= $this->templatedao->findbyid($tempeno);
-          $this->load->helper('download');
-         $templatefileroot=  lang('templatefileroot');
-          $data = file_get_contents($templatefileroot.$template->getUrl()); // Read the file's contents
-$name = $template->getName().'.ai';
+    public function downloadtemplate($tempeno) {
+$this->load->model('dao/templatedao');
+        $template = $this->templatedao->findbyid($tempeno);
+        $this->load->helper('download');
+        $templatefileroot = lang('templatefileroot');
+        $data = file_get_contents($templatefileroot . $template->getUrl()); // Read the file's contents
+        $name = $template->getName() . '.ai';
 
 
-force_download($name, $data);
-        
+        force_download($name, $data);
     }
-    
-    
-    public function showuploadframe($orderlineno){
-        $data=array();
-        $data['orderlineno']=$orderlineno;
-        $this->load->view(lang('uploadframe'),$data);
-        
+
+    public function showuploadframe($orderlineno) {
+        $data = array();
+        $data['orderlineno'] = $orderlineno;
+        $this->load->view(lang('uploadframe'), $data);
     }
-    
-    public function waitforvalidate(){
-        $orderno=$this->input->post('orderno');
-     $this->changestatus('20',$orderno);
-       redirect("orders/viewOrderdetail/$orderno");
+
+    public function waitforvalidate() {
+        $orderno = $this->input->post('orderno');
+        $this->changestatus('20', $orderno);
+        redirect("orders/viewOrderdetail/$orderno");
     }
-       private function changestatus($status,$orderno){
- 
-        $order =$this->orddao->findbyid($orderno);
-        $order->setOrdstatus($status);//wait for validate
-       $result= $this->orddao->update($order);
-       log_message('error', 'update result ='.$result);
-        
+
+    private function changestatus($status, $orderno) {
+
+        $order = $this->orddao->findbyid($orderno);
+        $order->setOrdstatus($status); //wait for validate
+        $result = $this->orddao->update($order);
+        log_message('error', 'update result =' . $result);
     }
- 
+
 }
 
 ?>

@@ -15,9 +15,12 @@ class Testsome extends CI_Controller {
     
     
     public function index(){
-     
- var_export(true,true);
-echo var_export(false,true);
+    
+  $first= load_class('emailutil', 'libraries','');
+    var_dump($first);
+    var_dump($this);
+ /*var_export(true,true);
+echo var_export(false,true);*/
     }
 
     public function viewsession(){
@@ -25,6 +28,17 @@ echo var_export(false,true);
         
         
     }
+public function testtableclass(){
+    $this->load->library('tablegen');
+
+   $this->load->model('dao/paperdao');
+  
+        $ordpaylist = $this->paperdao->findall();
+
+       
+       echo $this->tablegen->genfromobjarray($ordpaylist,array('1','2','3'),array('id'=>'tt','class'=>'table table-bordered'));
+    
+}
 
       public function testdownload(){
           

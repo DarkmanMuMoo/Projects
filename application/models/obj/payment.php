@@ -19,7 +19,17 @@ class Payment extends CI_Model {
     private $paymentdate;
     private $orderno;
     private $active;
-    public function getPayno() {
+    private $picurl;
+    
+    public function getPicurl() {
+        return $this->picurl;
+    }
+
+    public function setPicurl($picurl) {
+        $this->picurl = $picurl;
+    }
+
+        public function getPayno() {
         return $this->payno;
     }
 
