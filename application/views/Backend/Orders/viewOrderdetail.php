@@ -29,29 +29,29 @@ margin-top: 100px;
 </style>
 <div id="headline" >
     <div id="order">
-            <h2>Orderno: <? echo $order->getOrderno(); ?></h2><br>
-            <?php foreach ($ordstatuslist as $pos): ?>
-                <?php if ($pos->getStatus() == $order->getOrdstatus()): ?>
-                    <? echo $pos->getDescription();  break;?>
+            <h2>Orderno: <? echo $work->getOrderno(); ?></h2><br>
+            <?php foreach ($ordstatuslist as $emp): ?>
+                <?php if ($emp->getStatus() == $work->getOrdstatus()): ?>
+                    <? echo $emp->getDescription();  break;?>
                 <?php endif; ?>
             <?php endforeach; ?><br>
-           Orderdate : <? echo $order->getOrderdate(); ?><br>
+           Orderdate : <? echo $work->getOrderdate(); ?><br>
             Paymethod : <?php foreach ($ordpaylist as $ordpay): ?>
-                <?php if ($ordpay->getPaymethod() == $order->getPaymethod()): ?>
+                <?php if ($ordpay->getPaymethod() == $work->getPaymethod()): ?>
                     <? echo $ordpay->getDescription();  break;?>
                 <?php endif; ?>
             <?php endforeach; ?><br>
         </div> <div id="address"> 
             <h2>sendto</h2>
             <address>
-                <? echo $order->getAddress(); ?></br>
-                <? echo $order->getProvince(); ?></br>
-                <? echo $order->getPostcode(); ?></br>
+                <? echo $work->getAddress(); ?></br>
+                <? echo $work->getProvince(); ?></br>
+                <? echo $work->getPostcode(); ?></br>
             </address>
             <p>
             <h4>sends method 
                 <?php foreach ($ordsendlist as $ordsend): ?>
-                <?php if ($ordsend->getSendmethod() == $order->getSendmethod()): ?>
+                <?php if ($ordsend->getSendmethod() == $work->getSendmethod()): ?>
                     <? echo $ordsend->getDescription();  break;?>
                 <?php endif; ?>
             <?php endforeach; ?><br></h4>
@@ -126,8 +126,8 @@ height: 3px; margin: 0 0;"></hr>
 
     </div>
 <div align="center" style="margin :5% auto;">  
-    <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/waitforpay').'/'.$order->getOrderno();?>">Approve</a> 
-<a class="btn btn-danger" href="<? echo site_url('Backend/bakorders/rejects').'/'.$order->getOrderno();?>">Rejects</a>
+    <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/waitforpay').'/'.$work->getOrderno();?>">Approve</a> 
+<a class="btn btn-danger" href="<? echo site_url('Backend/bakorders/rejects').'/'.$work->getOrderno();?>">Rejects</a>
 </div>
 </div>
 

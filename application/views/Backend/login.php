@@ -35,7 +35,7 @@
                           <h4>Login</h4>
     <br>
 
-    &nbsp; &nbsp; &nbsp;Name:     <input class="input-xlarge"  value=""type="text" id="email" name="email"/><br>
+    &nbsp; &nbsp; &nbsp;Email:     <input class="input-xlarge"  value=""type="text" id="email" name="email"/><br>
     Password: <input  class="input-xlarge" type="password" value="" id="password" name="password" /><br>
       <br>
       <p><button type="submit" class="btn btn-primary">login</button></p>

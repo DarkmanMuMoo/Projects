@@ -25,3 +25,26 @@
 <? $this->load->view(lang('footer')) ?>
 <?
 echo (isset($opencart)) ? $opencart : '' ?>
+
+    <script src="<? echo base_url("asset/javascript/easySlider.js"); ?>" >  </script>
+    <script>
+    
+    
+    
+         $(document).ready(function(){
+   // Your code here
+  
+         $("#slider").easySlider({
+		auto: false,
+		continuous: true,
+		numeric: true
+	});
+     
+           
+           
+           
+       
+
+ }); 
+    
+    </script>

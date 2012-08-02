@@ -39,9 +39,9 @@
                 <td >Position</td>
                 <td></td>
                 <td><select name="position">
-                        <?php foreach ($poslist as $pos): ?>
+                        <?php foreach ($poslist as $emp): ?>
 
-     <option value="<? echo $pos->getPosition(); ?>"  <?  echo ($tmpemp->getPosition() == $pos->getPosition())?' selected=\"selected\" ': '';?>  ><? echo $pos->getPosdescription(); ?></option>
+     <option value="<? echo $emp->getPosition(); ?>"  <?  echo ($tmpemp->getPosition() == $emp->getPosition())?' selected=\"selected\" ': '';?>  ><? echo $emp->getPosdescription(); ?></option>
 
 <?php endforeach; ?>
              

@@ -18,9 +18,9 @@
                 Keyword:<input type="text"  name="keyword" id="email" class="input-small " />
                 position: <select name="position" id="position" >  
                     <option value="">All</option>
-  <?php foreach ($positionlist as $pos): ?>
+  <?php foreach ($positionlist as $emp): ?>
                                 
-                    <option value="<?echo $pos->getPosition();?>">  <? echo $pos->getPosdescription();  ?></option>
+                    <option value="<?echo $emp->getPosition();?>">  <? echo $emp->getPosdescription();  ?></option>
                               
                                  <?php endforeach; ?></select>
                 
@@ -57,34 +57,34 @@
                 </thead>
 
                 <tbody>
-                    <?php foreach ($emplist as $index => $order): ?>
+                    <?php foreach ($worklist as $index => $work): ?>
                         <tr> <td  ><? echo $index + 1 ?> </td>  
                             <td  >
                                 
-                                    <? echo $order->getEmpno(); ?> 
+                                    <? echo $work->getEmpno(); ?> 
                               
                             </td> 
                             <td>
-                                 <? echo $order->getName(); ?> 
+                                 <? echo $work->getName(); ?> 
                             </td>
                                 <td>
-                                 <? echo $order->getLastname(); ?> 
+                                 <? echo $work->getLastname(); ?> 
                             </td>
-                            <td > <? echo $order->getEmail(); ?> </td>
-                             <td ><? echo $order->getPhone(); ?> </td>      
+                            <td > <? echo $work->getEmail(); ?> </td>
+                             <td ><? echo $work->getPhone(); ?> </td>      
                             <td >
-                                 <?php foreach ($positionlist as $pos): ?>
-                                <?php if ($pos->getPosition() == $order->getPosition() ): ?>
-                                <? echo $pos->getPosdescription(); break; ?>
+                                 <?php foreach ($positionlist as $emp): ?>
+                                <?php if ($emp->getPosition() == $work->getPosition() ): ?>
+                                <? echo $emp->getPosdescription(); break; ?>
                                <?php endif; ?>
                                  <?php endforeach; ?>
                             </td> 
                      
                             <td >
-                                <a class="btn btn-info" href="<?echo site_url('Backend/bakemp/viewempdetail') . "/" .$order->getEmpno();   ?>"> 
+                                <a class="btn btn-info" href="<?echo site_url('Backend/bakemp/viewempdetail') . "/" .$work->getEmpno();   ?>"> 
                                    View
                                 </a>
-                                <button class="btn btn-danger"  onclick="Confirmdelete('<? echo $order->getEmpno(); ?>');"> 
+                                <button class="btn btn-danger"  onclick="Confirmdelete('<? echo $work->getEmpno(); ?>');"> 
                                   Delete
                                 </button>
                             </td>  
@@ -132,9 +132,9 @@
                 <td >ตำแหน่ง</td>
                 <td></td>
                 <td><select name="position">
-                        <?php foreach ($positionlist as $pos): ?>
+                        <?php foreach ($positionlist as $emp): ?>
 
-     <option value="<? echo $pos->getPosition(); ?>" ><? echo $pos->getPosdescription(); ?></option>
+     <option value="<? echo $emp->getPosition(); ?>" ><? echo $emp->getPosdescription(); ?></option>
 
 <?php endforeach; ?>
              

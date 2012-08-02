@@ -91,7 +91,32 @@ $this->db->where('workno', $work->getWorkno());
 
         return $array;
     }
+    
+    
+     public function findworklist($keyword='',$condition=array()){
+         
+            if($keyword!=''){
+        $this->db->or_like('work_name', $keyword); 
+        
+        }
+         foreach ($condition as $index=>$row) {
 
+         $this->db->where($index, $row);
+        }
+        
+          $query = $this->db->get('work');
+        $result = array();
+    
+        foreach ($query->result() as $row) {
+$obj=null;
+            $obj = $this->makeObj($row);
+             array_push($result, $obj);
+        }
+        // echo var_dump($obj);
+    //var_dump($this->db->last_query());
+        return $result;
+         
+     }
       private function  makeObj($row){
         $work = new Work();
 $work->setWorkno($row->workno);

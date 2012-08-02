@@ -8,13 +8,13 @@
 </style>
 <div id="search-bar" style="margin-top: 100px;">  
             <form id="searchform"action="<? echo site_url('Backend/bakorder') ?>" class="form-search" align="center"  method="post">
-                Keyword:<input type="text"  name="keyword" id="email" class="input-small datepicker" />
+                Keyword:<input type="text"  name="keyword" id="email" class="input-small" />
                 From :<input type="text" name="fromdate" id="fromdate" class="input-small datepicker" />
                 To:<input type="text" name="todate" id="todate"  class="input-small datepicker"  /> 
                 
-                Status: <select name="status" id="status" >    <?php foreach ($ordstatuslist as $pos): ?>
+                Status: <select name="status" id="status" >    <?php foreach ($ordstatuslist as $emp): ?>
                                 
-                    <option value="<?echo $pos->getStatus();?>">  <? echo $pos->getDescription();  ?></option>
+                    <option value="<?echo $emp->getStatus();?>">  <? echo $emp->getDescription();  ?></option>
                               
                                  <?php endforeach; ?></select>
                 
@@ -51,30 +51,30 @@
                 </thead>
 
                 <tbody>
-                    <?php foreach ($orderlist as $index => $order): ?>
+                    <?php foreach ($orderlist as $index => $work): ?>
                         <tr> <td  ><? echo $index + 1 ?> </td>  
                             <td  >
                                 
-                                    <? echo $order->getOrderno(); ?> 
+                                    <? echo $work->getOrderno(); ?> 
                               
                             </td> 
                             <td>
-                                 <? echo $order->getCusname(); ?> &nbsp; <? echo $order->getLastname(); ?> 
+                                 <? echo $work->getCusname(); ?> &nbsp; <? echo $work->getLastname(); ?> 
                             </td>
                                 <td>
-                                 <? echo $order->getEmail(); ?>
+                                 <? echo $work->getEmail(); ?>
                             </td>
-                            <td > <? echo $order->getOrderdate(); ?> </td>
+                            <td > <? echo $work->getOrderdate(); ?> </td>
                             <td >
-                                 <?php foreach ($ordstatuslist as $pos): ?>
-                                <?php if ($pos->getStatus() ==$order->getOrdstatus() ): ?>
-                                <? echo $pos->getDescription(); break; ?>
+                                 <?php foreach ($ordstatuslist as $emp): ?>
+                                <?php if ($emp->getStatus() ==$work->getOrdstatus() ): ?>
+                                <? echo $emp->getDescription(); break; ?>
                                <?php endif; ?>
                                  <?php endforeach; ?>
                             </td> 
-                            <td style="text-align: right;" ><? echo $order->getTotalprice(); ?> </td>                      
+                            <td style="text-align: right;" ><? echo $work->getTotalprice(); ?> </td>                      
                             <td >
-                                <a class="btn btn-info" href="<?echo site_url('Backend/bakorders/vieworderdetail') . "/" . $order->getOrderno(); ?>"> 
+                                <a class="btn btn-info" href="<?echo site_url('Backend/bakorders/vieworderdetail') . "/" . $work->getOrderno(); ?>"> 
                                    View
                                 </a>
                               
@@ -101,3 +101,18 @@
 
 
 <? $this->load->view(lang('bakfooter'));?>
+<script>
+
+
+
+
+    $(document).ready(function(){
+        $( ".datepicker" ).datepicker({
+            buttonText: "..." ,
+            showOn: "button",
+            dateFormat: "yy-mm-dd"
+
+        });
+    });   
+
+</script>

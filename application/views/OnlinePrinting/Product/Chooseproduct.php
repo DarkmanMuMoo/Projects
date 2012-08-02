@@ -1,4 +1,5 @@
  <? $this->load->view(lang('header')) ?>
+ <link href="<? echo base_url("asset/css/smartspinner.css"); ?>" rel="stylesheet">
 <style>
     .divcenter img{
         
@@ -16,21 +17,7 @@
     }
     
 </style>
-        <script>
-        	$(function() {
-		$( "#slider" ).slider({
-			value:50,
-			min: 50,
-			max: 500,
-			step: 50,
-			slide: function( event, ui ) {
-				$( "#amount" ).val(ui.value );
-                                $( "#showamount" ).text('amount:'+ui.value);
-			}
-		});
-		$( "#amount" ).val( "$" + $( "#slider" ).slider( "value" ) );
-	});
-	</script>
+      
         <br>
         <div id="page">
             <div class="divcenter" style=" margin-bottom: 25px;">
@@ -69,14 +56,13 @@
                     <? echo $option->getDescription() ?></option>
             <?php endforeach; ?>
         </select>
-          <p>
-              <label id="showamount" for="amount"  style=" color:#f6931f; font-weight:bold;" >amount:50</label>
+              <label  >amount:</label>
             
-              <input type="hidden"  name="amount" id="amount" value="50"  />
+              <input type="text"  name="amount" class="smartspinner" id="amount" value="50"  />
 </p>
 
-<div id="slider" style="width: 300px;"></div>
-            </p>
+
+          
             <input class="btn-primary" type="submit" value="calprice" >
         <? echo form_close(); ?>
   </div>
@@ -91,3 +77,15 @@
         </div>
      
 <? $this->load->view(lang('footer')) ?>
+ <script src="<? echo base_url("asset/javascript/smartspinner.js"); ?>" >  </script>
+  <script>
+        	  $(document).ready(function(){
+                    
+                   
+                    $('#amount').spinit({
+                        min:50,max:500,stepInc:50,pageInc:50, height: 22 }); 
+                    
+                
+		
+	});
+	</script>
