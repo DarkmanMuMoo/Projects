@@ -139,10 +139,10 @@ and open the template in the editor.
                     <li id="Product"><a href="<?php echo site_url("product"); ?>">Product</a></li>
                     <?php if ($_SESSION['hasuser']): ?>
                     <li id="Orders"><a href="<?php echo site_url("orders"); ?>">Orders</a></li>
-                       <li><a href="<?php echo site_url("user"); ?>">Profile</a></li>
+                       <li id="Userprofile" ><a href="<?php echo site_url("userprofile"); ?>">Profile</a></li>
                     <?php endif; ?>
                     <li id="Register" ><a href="<?php echo site_url("register"); ?>">Register</a></li>
-                    <li><a href="#">Links</a></li>
+                    <li id="Userprofile"><a href="#">Link</a></li>
 
                 </ul>
 

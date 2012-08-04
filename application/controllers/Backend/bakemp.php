@@ -84,6 +84,15 @@ class Bakemp extends CI_Controller{
              $this->load->view(lang('empprofile'),$data);
     }
     
+    
+    public function updateprofile(){
+        
+        
+        
+        
+        
+        
+    }
     public function insertemp(){
         $this->load->helper('string');
 
