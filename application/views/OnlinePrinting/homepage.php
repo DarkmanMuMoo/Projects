@@ -10,12 +10,17 @@
         display: table;
         
     }
+    .force{
+        width: auto;
+        height: auto; 
+        overflow: hidden; 
+    }
 </style>
 
 <div id="page">
     <div  class="hero-unit">
-        <div id="slider" style="width: 696px; height: 241px; overflow: hidden;  ">
-            <ul style="width: 4176px; margin-left: 0px; ">
+        <div id="slider" >
+            <ul style=" margin-left: 0px; ">
                 <li style="float: left; "><a href="http://templatica.com/preview/27">
                         <img src="<? echo base_url("asset/Sys_img/type_img/A.png"); ?>" alt="Css Template Preview"></a></li>				
                 <li style="float: left; "><a href="http://templatica.com/preview/30"><img src="<? echo base_url("asset/Sys_img/type_img/A.png"); ?>" alt="Css Template Preview"></a></li>
@@ -82,16 +87,17 @@
     
     $(document).ready(function(){
         // Your code here
-  
+    
         $("#slider").easySlider({
             auto: false,
             continuous: true,
             numeric: true
         });
+     if($('#slider').css('width')=='0px'){
+         $('#slider').attr('style','');
+           $("#slider").addClass('force');
      
-           
-           
-           
+     }
        
 
     }); 
