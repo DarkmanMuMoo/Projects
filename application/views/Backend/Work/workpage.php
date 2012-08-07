@@ -6,9 +6,9 @@
             Keyword:<input type="text"  name="keyword" id="email" class="input-small " />
             Employee: <select name="emp" id="emp" >  
                 <option value="">All</option>
-                <?php foreach ($emplist as $emp): ?>
+                <?php foreach ($emplist as $ord): ?>
 
-                    <option value="<? echo $emp->getEmpno(); ?>">  <? echo $emp->getName(); ?>&nbsp; <? echo $emp->getLastname(); ?> </option>
+                    <option value="<? echo $ord->getEmpno(); ?>">  <? echo $ord->getName(); ?>&nbsp; <? echo $ord->getLastname(); ?> </option>
 
                 <?php endforeach; ?></select>
 
@@ -43,33 +43,33 @@
             </thead>
 
             <tbody>
-                <?php foreach ($worklist as $index => $emp): ?>
+                <?php foreach ($worklist as $index => $ord): ?>
                     <tr> <td  ><? echo $index + 1 ?> </td>  
                         <td  >
 
-                            <? echo $emp->getWorkno(); ?> 
+                            <? echo $ord->getWorkno(); ?> 
 
                         </td> 
                         <td>
-                            <? echo $emp->getWorkname(); ?> 
+                            <? echo $ord->getWorkname(); ?> 
                         </td>
                         <td>
-                            <?php foreach ($emplist as $emp): ?>
+                            <?php foreach ($emplist as $ord): ?>
 
-                                <?php if ($emp->getEmpno() == $emp->getEmpno()): ?>
-                                    <? echo $emp->getName(); ?>&nbsp; <? echo $emp->getLastname();
+                                <?php if ($ord->getEmpno() == $ord->getEmpno()): ?>
+                                    <? echo $ord->getName(); ?>&nbsp; <? echo $ord->getLastname();
                         break; ?> 
                                 <?php endif; ?>
 
     <?php endforeach; ?>
                         </td>
-                        <td > <? echo $emp->getStartdate(); ?> </td>
-                        <td ><? echo $emp->getEnddate(); ?> </td>      
+                        <td > <? echo $ord->getStartdate(); ?> </td>
+                        <td ><? echo $ord->getEnddate(); ?> </td>      
                         <td >
-                            <a class="btn btn-info" href="<? echo site_url('Backend/bakwork/viewworkdetail') . "/" . $emp->getEmpno(); ?>"> 
+                            <a class="btn btn-info" href="<? echo site_url('Backend/bakwork/viewworkdetail') . "/" . $ord->getEmpno(); ?>"> 
                                 View
                             </a>
-                            <button class="btn btn-danger"  onclick="Confirmdelete('<? echo $emp->getWorkno(); ?>');"> 
+                            <button class="btn btn-danger"  onclick="Confirmdelete('<? echo $ord->getWorkno(); ?>');"> 
                                 Delete
                             </button>
                         </td>  

@@ -12,9 +12,9 @@
                 From :<input type="text" name="fromdate" id="fromdate" class="input-small datepicker" />
                 To:<input type="text" name="todate" id="todate"  class="input-small datepicker"  /> 
                 
-                Status: <select name="status" id="status" >    <?php foreach ($ordstatuslist as $emp): ?>
+                Status: <select name="status" id="status" >    <?php foreach ($ordstatuslist as $ord): ?>
                                 
-                    <option value="<?echo $emp->getStatus();?>">  <? echo $emp->getDescription();  ?></option>
+                    <option value="<?echo $ord->getStatus();?>">  <? echo $ord->getDescription();  ?></option>
                               
                                  <?php endforeach; ?></select>
                 
@@ -51,30 +51,30 @@
                 </thead>
 
                 <tbody>
-                    <?php foreach ($orderlist as $index => $emp): ?>
+                    <?php foreach ($orderlist as $index => $ord): ?>
                         <tr> <td  ><? echo $index + 1 ?> </td>  
                             <td  >
                                 
-                                    <? echo $emp->getOrderno(); ?> 
+                                    <? echo $ord->getOrderno(); ?> 
                               
                             </td> 
                             <td>
-                                 <? echo $emp->getCusname(); ?> &nbsp; <? echo $emp->getLastname(); ?> 
+                                 <? echo $ord->getCusname(); ?> &nbsp; <? echo $ord->getLastname(); ?> 
                             </td>
                                 <td>
-                                 <? echo $emp->getEmail(); ?>
+                                 <? echo $ord->getEmail(); ?>
                             </td>
-                            <td > <? echo $emp->getOrderdate(); ?> </td>
+                            <td > <? echo $ord->getOrderdate(); ?> </td>
                             <td >
-                                 <?php foreach ($ordstatuslist as $emp): ?>
-                                <?php if ($emp->getStatus() ==$emp->getOrdstatus() ): ?>
-                                <? echo $emp->getDescription(); break; ?>
+                                 <?php foreach ($ordstatuslist as $ord): ?>
+                                <?php if ($ord->getStatus() ==$ord->getOrdstatus() ): ?>
+                                <? echo $ord->getDescription(); break; ?>
                                <?php endif; ?>
                                  <?php endforeach; ?>
                             </td> 
-                            <td style="text-align: right;" ><? echo $emp->getTotalprice(); ?> </td>                      
+                            <td style="text-align: right;" ><? echo $ord->getTotalprice(); ?> </td>                      
                             <td >
-                                <a class="btn btn-info" href="<?echo site_url('Backend/bakorders/vieworderdetail') . "/" . $emp->getOrderno(); ?>"> 
+                                <a class="btn btn-info" href="<?echo site_url('Backend/bakorders/vieworderdetail') . "/" . $ord->getOrderno(); ?>"> 
                                    View
                                 </a>
                               

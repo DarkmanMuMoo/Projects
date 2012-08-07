@@ -77,31 +77,31 @@
                 </thead>
 
                 <tbody>
-                    <?php foreach ($orderlist as $index => $emp): ?>
+                    <?php foreach ($orderlist as $index => $ord): ?>
                         <tr> <td  ><? echo $index + 1 ?> </td>  
                             <td  >
                                
-                                    <? echo $emp->getOrderno(); ?> 
+                                    <? echo $ord->getOrderno(); ?> 
                                
                             </td> 
-                            <td > <? echo $emp->getOrderdate(); ?> </td>
+                            <td > <? echo $ord->getOrderdate(); ?> </td>
                             <td >
-                                 <?php foreach ($ordstatuslist as $emp): ?>
-                                <?php if ($emp->getStatus() ==$emp->getOrdstatus() ): ?>
-                                <? echo $emp->getDescription(); break; ?>
+                                 <?php foreach ($ordstatuslist as $status): ?>
+                                <?php if ($status->getStatus() ==$ord->getOrdstatus() ): ?>
+                                <? echo $status->getDescription(); break; ?>
                                <?php endif; ?>
                                  <?php endforeach; ?>
                             </td> 
-                            <td style="text-align: right;" ><? echo $emp->getTotalprice(); ?> </td>                      
+                            <td style="text-align: right;" ><? echo $ord->getTotalprice(); ?> </td>                      
                             <td >
-                                 <a class="btn btn-info" href="<?echo site_url('orders/vieworderdetail') . "/" . $emp->getOrderno(); ?>"> 
+                                 <a class="btn btn-info" href="<?echo site_url('orders/vieworderdetail') . "/" . $ord->getOrderno(); ?>"> 
                                    View
                                 </a>
-                                <?php if ($emp->getOrdstatus()=='10'||$emp->getOrdstatus()=='40'): ?>
-                                <button class="btn btn-danger" onclick="Confirmdelete('<? echo $emp->getOrderno();?>');" >cancel </button> 
+                                <?php if ($ord->getOrdstatus()=='10'||$ord->getOrdstatus()=='40'): ?>
+                                <button class="btn btn-danger" onclick="Confirmdelete('<? echo $ord->getOrderno();?>');" >cancel </button> 
                                  <?php endif; ?>
-                                 <?php if ($emp->getOrdstatus()=='30'): ?>
-                                <a href="<? echo site_url('orders/getpaymentlist'). "/" . $emp->getOrderno();    ?>" class="btn btn-warning" >Payment</a> 
+                                 <?php if ($ord->getOrdstatus()=='30'): ?>
+                                <a href="<? echo site_url('orders/getpaymentlist'). "/" . $ord->getOrderno();    ?>" class="btn btn-warning" >Payment</a> 
                                  <?php endif; ?>
                                 
                             </td>  
@@ -123,8 +123,8 @@
 
             <ul>
                 <li><a href="JavaScript:void(0);" onclick="Searchstatus('');">all</a></li>
-                <?php foreach ($ordstatuslist as $emp): ?>
-                    <li ><a href="JavaScript:void(0);" onclick="Searchstatus('<? echo $emp->getStatus(); ?>');"><? echo $emp->getDescription() ?></a>
+                <?php foreach ($ordstatuslist as $ord): ?>
+                    <li ><a href="JavaScript:void(0);" onclick="Searchstatus('<? echo $ord->getStatus(); ?>');"><? echo $ord->getDescription() ?></a>
                     </li>
                 <?php endforeach; ?>
             </ul> 

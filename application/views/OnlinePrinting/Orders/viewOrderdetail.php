@@ -72,29 +72,29 @@ function showupload(orderlineno){
 <div id="page">
 
     <div id="head" style="clear:both;"><div id="order">
-            <h2>Orderno: <? echo $emp->getOrderno(); ?></h2><br>
-            <?php foreach ($ordstatuslist as $emp): ?>
-                <?php if ($emp->getStatus() == $emp->getOrdstatus()): ?>
-                    <? echo $emp->getDescription();  break;?>
+            <h2>Orderno: <? echo $ord->getOrderno(); ?></h2><br>
+            <?php foreach ($ordstatuslist as $ord): ?>
+                <?php if ($ord->getStatus() == $ord->getOrdstatus()): ?>
+                    <? echo $ord->getDescription();  break;?>
                 <?php endif; ?>
             <?php endforeach; ?><br>
-           Orderdate : <? echo $emp->getOrderdate(); ?><br>
+           Orderdate : <? echo $ord->getOrderdate(); ?><br>
             Paymethod : <?php foreach ($ordpaylist as $ordpay): ?>
-                <?php if ($ordpay->getPaymethod() == $emp->getPaymethod()): ?>
+                <?php if ($ordpay->getPaymethod() == $ord->getPaymethod()): ?>
                     <? echo $ordpay->getDescription();  break;?>
                 <?php endif; ?>
             <?php endforeach; ?><br>
         </div> <div id="address"> 
             <h2>sendto</h2>
             <address>
-                <? echo $emp->getAddress(); ?></br>
-                <? echo $emp->getProvince(); ?></br>
-                <? echo $emp->getPostcode(); ?></br>
+                <? echo $ord->getAddress(); ?></br>
+                <? echo $ord->getProvince(); ?></br>
+                <? echo $ord->getPostcode(); ?></br>
             </address>
             <p>
             <h4>sends method 
                 <?php foreach ($ordsendlist as $ordsend): ?>
-                <?php if ($ordsend->getSendmethod() == $emp->getSendmethod()): ?>
+                <?php if ($ordsend->getSendmethod() == $ord->getSendmethod()): ?>
                     <? echo $ordsend->getDescription();  break;?>
                 <?php endif; ?>
             <?php endforeach; ?><br></h4>
@@ -154,7 +154,7 @@ height: 3px;"></hr>
                         <td  width="30%" >
                           
                             <a href="<? echo site_url('orders/downloadtemplate').'/'.$orderline->getTempno(); ?>" class="btn btn-primary">Download</a>
-                  <?php if ($emp->getOrdstatus()=='10'||$emp->getOrdstatus()=='40'): ?>
+                  <?php if ($ord->getOrdstatus()=='10'||$ord->getOrdstatus()=='40'): ?>
                             <button onclick="showupload('<? echo $orderline->getOrdlineno(); ?>');" class="btn btn-warning">Upload</button> 
                          <?php endif; ?>
                         </td>
@@ -173,11 +173,11 @@ height: 3px;"></hr>
 
     </div>
     <div align="left"  > <span style="margin-right: 3%; margin-left: 10%"> เมื่อ upload file ครบแล้ว คลิกที่นี่เพื่อดำเนินการต่อไป------> </span>
-        <button onclick="checkuploadfile('<? echo $emp->getOrderno(); ?>');" class="btn btn-success">Approve</button> <a class="btn btn-danger" href="<?echo site_url('orders') ?>" >Back</a>    </div>
+        <button onclick="checkuploadfile('<? echo $ord->getOrderno(); ?>');" class="btn btn-success">Approve</button> <a class="btn btn-danger" href="<?echo site_url('orders') ?>" >Back</a>    </div>
 
     <form  id="changestatusform"action="<?echo site_url('orders/waitforvalidate'); ?>" >
  <input type="hidden" name="status" value="20">
-        <input type="hidden" name="orderno" value="<? echo $emp->getOrderno(); ?>">
+        <input type="hidden" name="orderno" value="<? echo $ord->getOrderno(); ?>">
     </form>
 
 </div>

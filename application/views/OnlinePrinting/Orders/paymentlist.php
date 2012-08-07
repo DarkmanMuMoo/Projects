@@ -43,9 +43,9 @@
     </div>
     <div id="paystatus"  >
 
-              Orderdate : <? echo $emp->getOrderdate(); ?><br>
+              Orderdate : <? echo $ord->getOrderdate(); ?><br>
             Paymethod : <?php foreach ($ordpaylist as $ordpay): ?>
-                <?php if ($ordpay->getPaymethod() == $emp->getPaymethod()): ?>
+                <?php if ($ordpay->getPaymethod() == $ord->getPaymethod()): ?>
                     <? echo $ordpay->getDescription();  break;?>
                 <?php endif; ?>
             <?php endforeach; ?><br>
