@@ -25,7 +25,7 @@ echo var_export(false,true);*/
 
     public function viewsession(){
         var_dump($_SESSION);
-        
+        echo APPPATH ; 
         
     }
 public function testtableclass(){

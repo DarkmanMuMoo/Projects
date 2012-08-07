@@ -112,6 +112,7 @@ force_download($name, $data);
     
         $order->setOrdstatus($status);//wait for validate
        $result= $this->orddao->update($order);
+         error_log(var_export($result, true) . 'changer status', 0);
       // log("changestatus  to  $status=".$result);
         
     }

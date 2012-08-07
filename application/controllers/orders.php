@@ -281,7 +281,7 @@ $this->load->model('dao/templatedao');
         $order = $this->orddao->findbyid($orderno);
         $order->setOrdstatus($status); //wait for validate
         $result = $this->orddao->update($order);
-        log_message('error', 'update result =' . $result);
+       error_log(var_export($result, true) . 'change status', 0);
     }
 
 }

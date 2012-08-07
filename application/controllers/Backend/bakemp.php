@@ -76,22 +76,55 @@ class Bakemp extends CI_Controller{
          
              $empno=$_SESSION['emp']->getEmpno();
         $tmp_emp=$this->empdao->findbyid($empno);
+        $picurl = ($tmp_emp->getPicurl()==null||$tmp_emp->getPicurl()=='')?'nopic.jpg':$tmp_emp->getPicurl();
         $data=array();
         $data['tmpemp']=$tmp_emp;
          $data['poslist']=$poslist;
-        
+        $data['picurl']=$picurl;
         
              $this->load->view(lang('empprofile'),$data);
     }
-    
+    public function uploadpic(){
+        $this->load->library('uploadutil'); 
+           $empno=$_SESSION['emp']->getEmpno();
+        $tmp_emp=$this->empdao->findbyid($empno);
+        $filename=$empno.'-'.$tmp_emp->getName().'-'.$tmp_emp->getLastname();
+        $config['upload_path'] = './asset/Sys_img/emp_img';
+		$config['allowed_types'] = 'jpg|png';
+		$config['max_size']	= '2048';
+                  $config['overwrite']=true;
+                $config['file_name']=$filename;
+        $upload=$this->uploadutil->upload($config,'pic');
+        
+        if($upload=='complete'){
+            
+            $data=$this->upload->data();
+           
+            $tmp_emp->setPicurl($filename.$data['file_ext']);
+            
+            $result=$this->empdao->update($tmp_emp);
+              error_log(var_export($result, true) . 'update in emp pic', 0);
+            $this->empprofile();
+        }else{
+     
+            echo  "<script>alert('$upload');<script>";
+        }
+    }
     
     public function updateprofile(){
-        
-        
-        
-        
-        
-        
+        $empno=$_SESSION['emp']->getEmpno();
+        $tmp_emp=$this->empdao->findbyid($empno);
+        $name=$this->input->post('name');
+        $lastname=$this->input->post('lastname');
+        $pasword=$this->input->post('telephone');
+         $phone=$this->input->post('password');
+        $tmp_emp->setName($name);
+        $tmp_emp->setLastname($lastname);
+         $tmp_emp->setPassword($pasword);
+        $tmp_emp->setPhone($phone);
+         $result=$this->empdao->update($tmp_emp);
+           error_log(var_export($result, true) . 'update in emp profile', 0);
+             $this->empprofile();
     }
     public function insertemp(){
         $this->load->helper('string');
@@ -135,7 +168,7 @@ class Bakemp extends CI_Controller{
         $emp=$this->empdao->findbyid($empno);
         $emp->setPosition($position);
         $result = $this->empdao->update($emp);
-       
+         error_log(var_export($result, true) . 'update emp', 0);
        
         $this->viewempdetail($empno);
     }
