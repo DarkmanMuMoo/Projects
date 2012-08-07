@@ -51,30 +51,30 @@
                 </thead>
 
                 <tbody>
-                    <?php foreach ($orderlist as $index => $work): ?>
+                    <?php foreach ($orderlist as $index => $emp): ?>
                         <tr> <td  ><? echo $index + 1 ?> </td>  
                             <td  >
                                 
-                                    <? echo $work->getOrderno(); ?> 
+                                    <? echo $emp->getOrderno(); ?> 
                               
                             </td> 
                             <td>
-                                 <? echo $work->getCusname(); ?> &nbsp; <? echo $work->getLastname(); ?> 
+                                 <? echo $emp->getCusname(); ?> &nbsp; <? echo $emp->getLastname(); ?> 
                             </td>
                                 <td>
-                                 <? echo $work->getEmail(); ?>
+                                 <? echo $emp->getEmail(); ?>
                             </td>
-                            <td > <? echo $work->getOrderdate(); ?> </td>
+                            <td > <? echo $emp->getOrderdate(); ?> </td>
                             <td >
                                  <?php foreach ($ordstatuslist as $emp): ?>
-                                <?php if ($emp->getStatus() ==$work->getOrdstatus() ): ?>
+                                <?php if ($emp->getStatus() ==$emp->getOrdstatus() ): ?>
                                 <? echo $emp->getDescription(); break; ?>
                                <?php endif; ?>
                                  <?php endforeach; ?>
                             </td> 
-                            <td style="text-align: right;" ><? echo $work->getTotalprice(); ?> </td>                      
+                            <td style="text-align: right;" ><? echo $emp->getTotalprice(); ?> </td>                      
                             <td >
-                                <a class="btn btn-info" href="<?echo site_url('Backend/bakorders/vieworderdetail') . "/" . $work->getOrderno(); ?>"> 
+                                <a class="btn btn-info" href="<?echo site_url('Backend/bakorders/vieworderdetail') . "/" . $emp->getOrderno(); ?>"> 
                                    View
                                 </a>
                               

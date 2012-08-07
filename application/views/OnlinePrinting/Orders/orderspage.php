@@ -77,31 +77,31 @@
                 </thead>
 
                 <tbody>
-                    <?php foreach ($orderlist as $index => $work): ?>
+                    <?php foreach ($orderlist as $index => $emp): ?>
                         <tr> <td  ><? echo $index + 1 ?> </td>  
                             <td  >
                                
-                                    <? echo $work->getOrderno(); ?> 
+                                    <? echo $emp->getOrderno(); ?> 
                                
                             </td> 
-                            <td > <? echo $work->getOrderdate(); ?> </td>
+                            <td > <? echo $emp->getOrderdate(); ?> </td>
                             <td >
                                  <?php foreach ($ordstatuslist as $emp): ?>
-                                <?php if ($emp->getStatus() ==$work->getOrdstatus() ): ?>
+                                <?php if ($emp->getStatus() ==$emp->getOrdstatus() ): ?>
                                 <? echo $emp->getDescription(); break; ?>
                                <?php endif; ?>
                                  <?php endforeach; ?>
                             </td> 
-                            <td style="text-align: right;" ><? echo $work->getTotalprice(); ?> </td>                      
+                            <td style="text-align: right;" ><? echo $emp->getTotalprice(); ?> </td>                      
                             <td >
-                                 <a class="btn btn-info" href="<?echo site_url('orders/vieworderdetail') . "/" . $work->getOrderno(); ?>"> 
+                                 <a class="btn btn-info" href="<?echo site_url('orders/vieworderdetail') . "/" . $emp->getOrderno(); ?>"> 
                                    View
                                 </a>
-                                <?php if ($work->getOrdstatus()=='10'||$work->getOrdstatus()=='40'): ?>
-                                <button class="btn btn-danger" onclick="Confirmdelete('<? echo $work->getOrderno();?>');" >cancel </button> 
+                                <?php if ($emp->getOrdstatus()=='10'||$emp->getOrdstatus()=='40'): ?>
+                                <button class="btn btn-danger" onclick="Confirmdelete('<? echo $emp->getOrderno();?>');" >cancel </button> 
                                  <?php endif; ?>
-                                 <?php if ($work->getOrdstatus()=='30'): ?>
-                                <a href="<? echo site_url('orders/getpaymentlist'). "/" . $work->getOrderno();    ?>" class="btn btn-warning" >Payment</a> 
+                                 <?php if ($emp->getOrdstatus()=='30'): ?>
+                                <a href="<? echo site_url('orders/getpaymentlist'). "/" . $emp->getOrderno();    ?>" class="btn btn-warning" >Payment</a> 
                                  <?php endif; ?>
                                 
                             </td>  

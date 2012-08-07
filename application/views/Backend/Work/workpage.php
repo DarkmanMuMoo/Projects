@@ -43,33 +43,33 @@
             </thead>
 
             <tbody>
-                <?php foreach ($worklist as $index => $work): ?>
+                <?php foreach ($worklist as $index => $emp): ?>
                     <tr> <td  ><? echo $index + 1 ?> </td>  
                         <td  >
 
-                            <? echo $work->getWorkno(); ?> 
+                            <? echo $emp->getWorkno(); ?> 
 
                         </td> 
                         <td>
-                            <? echo $work->getWorkname(); ?> 
+                            <? echo $emp->getWorkname(); ?> 
                         </td>
                         <td>
                             <?php foreach ($emplist as $emp): ?>
 
-                                <?php if ($emp->getEmpno() == $work->getEmpno()): ?>
+                                <?php if ($emp->getEmpno() == $emp->getEmpno()): ?>
                                     <? echo $emp->getName(); ?>&nbsp; <? echo $emp->getLastname();
                         break; ?> 
                                 <?php endif; ?>
 
     <?php endforeach; ?>
                         </td>
-                        <td > <? echo $work->getStartdate(); ?> </td>
-                        <td ><? echo $work->getEnddate(); ?> </td>      
+                        <td > <? echo $emp->getStartdate(); ?> </td>
+                        <td ><? echo $emp->getEnddate(); ?> </td>      
                         <td >
-                            <a class="btn btn-info" href="<? echo site_url('Backend/bakwork/viewworkdetail') . "/" . $work->getEmpno(); ?>"> 
+                            <a class="btn btn-info" href="<? echo site_url('Backend/bakwork/viewworkdetail') . "/" . $emp->getEmpno(); ?>"> 
                                 View
                             </a>
-                            <button class="btn btn-danger"  onclick="Confirmdelete('<? echo $work->getWorkno(); ?>');"> 
+                            <button class="btn btn-danger"  onclick="Confirmdelete('<? echo $emp->getWorkno(); ?>');"> 
                                 Delete
                             </button>
                         </td>  

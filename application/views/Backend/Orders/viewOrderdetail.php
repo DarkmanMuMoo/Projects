@@ -29,29 +29,29 @@ margin-top: 100px;
 </style>
 <div id="headline" >
     <div id="order">
-            <h2>Orderno: <? echo $work->getOrderno(); ?></h2><br>
+            <h2>Orderno: <? echo $emp->getOrderno(); ?></h2><br>
             <?php foreach ($ordstatuslist as $emp): ?>
-                <?php if ($emp->getStatus() == $work->getOrdstatus()): ?>
+                <?php if ($emp->getStatus() == $emp->getOrdstatus()): ?>
                     <? echo $emp->getDescription();  break;?>
                 <?php endif; ?>
             <?php endforeach; ?><br>
-           Orderdate : <? echo $work->getOrderdate(); ?><br>
+           Orderdate : <? echo $emp->getOrderdate(); ?><br>
             Paymethod : <?php foreach ($ordpaylist as $ordpay): ?>
-                <?php if ($ordpay->getPaymethod() == $work->getPaymethod()): ?>
+                <?php if ($ordpay->getPaymethod() == $emp->getPaymethod()): ?>
                     <? echo $ordpay->getDescription();  break;?>
                 <?php endif; ?>
             <?php endforeach; ?><br>
         </div> <div id="address"> 
             <h2>sendto</h2>
             <address>
-                <? echo $work->getAddress(); ?></br>
-                <? echo $work->getProvince(); ?></br>
-                <? echo $work->getPostcode(); ?></br>
+                <? echo $emp->getAddress(); ?></br>
+                <? echo $emp->getProvince(); ?></br>
+                <? echo $emp->getPostcode(); ?></br>
             </address>
             <p>
             <h4>sends method 
                 <?php foreach ($ordsendlist as $ordsend): ?>
-                <?php if ($ordsend->getSendmethod() == $work->getSendmethod()): ?>
+                <?php if ($ordsend->getSendmethod() == $emp->getSendmethod()): ?>
                     <? echo $ordsend->getDescription();  break;?>
                 <?php endif; ?>
             <?php endforeach; ?><br></h4>
@@ -126,8 +126,8 @@ height: 3px; margin: 0 0;"></hr>
 
     </div>
 <div align="center" style="margin :5% auto;">  
-    <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/waitforpay').'/'.$work->getOrderno();?>">Approve</a> 
-<a class="btn btn-danger" href="<? echo site_url('Backend/bakorders/rejects').'/'.$work->getOrderno();?>">Rejects</a>
+    <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/waitforpay').'/'.$emp->getOrderno();?>">Approve</a> 
+<a class="btn btn-danger" href="<? echo site_url('Backend/bakorders/rejects').'/'.$emp->getOrderno();?>">Rejects</a>
 </div>
 </div>
 

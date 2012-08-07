@@ -57,34 +57,34 @@
                 </thead>
 
                 <tbody>
-                    <?php foreach ($worklist as $index => $work): ?>
+                    <?php foreach ($emplist as $index => $emp): ?>
                         <tr> <td  ><? echo $index + 1 ?> </td>  
                             <td  >
                                 
-                                    <? echo $work->getEmpno(); ?> 
+                                    <? echo $emp->getEmpno(); ?> 
                               
                             </td> 
                             <td>
-                                 <? echo $work->getName(); ?> 
+                                 <? echo $emp->getName(); ?> 
                             </td>
                                 <td>
-                                 <? echo $work->getLastname(); ?> 
+                                 <? echo $emp->getLastname(); ?> 
                             </td>
-                            <td > <? echo $work->getEmail(); ?> </td>
-                             <td ><? echo $work->getPhone(); ?> </td>      
+                            <td > <? echo $emp->getEmail(); ?> </td>
+                             <td ><? echo $emp->getPhone(); ?> </td>      
                             <td >
-                                 <?php foreach ($positionlist as $emp): ?>
-                                <?php if ($emp->getPosition() == $work->getPosition() ): ?>
-                                <? echo $emp->getPosdescription(); break; ?>
+                                 <?php foreach ($positionlist as $pos): ?>
+                                <?php if ($emp->getPosition() == $pos->getPosition() ): ?>
+                                <? echo $pos->getPosdescription(); break; ?>
                                <?php endif; ?>
                                  <?php endforeach; ?>
                             </td> 
                      
                             <td >
-                                <a class="btn btn-info" href="<?echo site_url('Backend/bakemp/viewempdetail') . "/" .$work->getEmpno();   ?>"> 
+                                <a class="btn btn-info" href="<?echo site_url('Backend/bakemp/viewempdetail') . "/" .$emp->getEmpno();   ?>"> 
                                    View
                                 </a>
-                                <button class="btn btn-danger"  onclick="Confirmdelete('<? echo $work->getEmpno(); ?>');"> 
+                                <button class="btn btn-danger"  onclick="Confirmdelete('<? echo $emp->getEmpno(); ?>');"> 
                                   Delete
                                 </button>
                             </td>  
