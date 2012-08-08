@@ -29,29 +29,29 @@ margin-top: 100px;
 </style>
 <div id="headline" >
     <div id="order">
-            <h2>Orderno: <? echo $ord->getOrderno(); ?></h2><br>
-            <?php foreach ($ordstatuslist as $ord): ?>
-                <?php if ($ord->getStatus() == $ord->getOrdstatus()): ?>
-                    <? echo $ord->getDescription();  break;?>
+            <h2>Orderno: <? echo $order->getOrderno(); ?></h2><br>
+            <?php foreach ($ordstatuslist as $ordstatus): ?>
+                <?php if ($ordstatus->getStatus() == $order->getOrdstatus()): ?>
+                    <? echo $ordstatus->getDescription();  break;?>
                 <?php endif; ?>
             <?php endforeach; ?><br>
-           Orderdate : <? echo $ord->getOrderdate(); ?><br>
+           Orderdate : <? echo $order->getOrderdate(); ?><br>
             Paymethod : <?php foreach ($ordpaylist as $ordpay): ?>
-                <?php if ($ordpay->getPaymethod() == $ord->getPaymethod()): ?>
+                <?php if ($ordpay->getPaymethod() == $order->getPaymethod()): ?>
                     <? echo $ordpay->getDescription();  break;?>
                 <?php endif; ?>
             <?php endforeach; ?><br>
         </div> <div id="address"> 
             <h2>sendto</h2>
             <address>
-                <? echo $ord->getAddress(); ?></br>
-                <? echo $ord->getProvince(); ?></br>
-                <? echo $ord->getPostcode(); ?></br>
+                <? echo $order->getAddress(); ?></br>
+                <? echo $order->getProvince(); ?></br>
+                <? echo $order->getPostcode(); ?></br>
             </address>
             <p>
             <h4>sends method 
                 <?php foreach ($ordsendlist as $ordsend): ?>
-                <?php if ($ordsend->getSendmethod() == $ord->getSendmethod()): ?>
+                <?php if ($ordsend->getSendmethod() == $order->getSendmethod()): ?>
                     <? echo $ordsend->getDescription();  break;?>
                 <?php endif; ?>
             <?php endforeach; ?><br></h4>
@@ -126,8 +126,8 @@ height: 3px; margin: 0 0;"></hr>
 
     </div>
 <div align="center" style="margin :5% auto;">  
-    <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/waitforpay').'/'.$ord->getOrderno();?>">Approve</a> 
-<a class="btn btn-danger" href="<? echo site_url('Backend/bakorders/rejects').'/'.$ord->getOrderno();?>">Rejects</a>
+    <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/waitforpay').'/'.$order->getOrderno();?>">Approve</a> 
+<a class="btn btn-danger" href="<? echo site_url('Backend/bakorders/rejects').'/'.$order->getOrderno();?>">Rejects</a>
 </div>
 </div>
 

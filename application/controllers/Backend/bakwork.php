@@ -38,12 +38,13 @@ class Bakwork extends CI_Controller {
         $data = array();
         $data['worklist'] = $worklist;
         $data['emplist'] = $emplist;
+       
         $this->load->view(lang('bakwork'), $data);
     }
 
     public function viewworkdetail($workno) {
 
-
+$data=array();
         $this->load->view(lang('workdetail'), $data);
     }
     public function assignemptowork(){

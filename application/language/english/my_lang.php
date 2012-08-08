@@ -74,7 +74,7 @@ $lang['empprofile']='Backend/Emp/empprofile';
 
 
 $lang['bakwork']='Backend/Work/workpage';
-
+$lang['workdetail']='Backend/Work/workdetail';
 
 
 ?>

@@ -125,7 +125,7 @@ $work->setWorkno($row->workno);
       $work->setStartdate($row->startdate);
          $work->setEnddate($row->enddate);
          $work->setOrdno($row->ordno);
-         $work->setEmpno($row->empname);
+         $work->setEmpno($row->empno);
         return  $work;
     }
     

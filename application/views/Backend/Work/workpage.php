@@ -1,4 +1,10 @@
 <? $this->load->view(lang('bakheader')); ?>
+<style type="text/css">
+#font1 {
+	font-family: can_jaew;
+}
+</style>
+
 
 <div class="container" >
     <div id="search-bar" style="margin-top: 100px;">  
@@ -6,9 +12,9 @@
             Keyword:<input type="text"  name="keyword" id="email" class="input-small " />
             Employee: <select name="emp" id="emp" >  
                 <option value="">All</option>
-                <?php foreach ($emplist as $ord): ?>
+                <?php foreach ($emplist as $work): ?>
 
-                    <option value="<? echo $ord->getEmpno(); ?>">  <? echo $ord->getName(); ?>&nbsp; <? echo $ord->getLastname(); ?> </option>
+                    <option value="<? echo $work->getEmpno(); ?>">  <? echo $work->getName(); ?>&nbsp; <? echo $work->getLastname(); ?> </option>
 
                 <?php endforeach; ?></select>
 
@@ -43,33 +49,33 @@
             </thead>
 
             <tbody>
-                <?php foreach ($worklist as $index => $ord): ?>
+                <?php foreach ($worklist as $index => $work): ?>
                     <tr> <td  ><? echo $index + 1 ?> </td>  
                         <td  >
 
-                            <? echo $ord->getWorkno(); ?> 
+                            <? echo $work->getWorkno(); ?> 
 
                         </td> 
                         <td>
-                            <? echo $ord->getWorkname(); ?> 
+                            <? echo $work->getWorkname(); ?> 
                         </td>
                         <td>
-                            <?php foreach ($emplist as $ord): ?>
+                            <?php foreach ($emplist as $emp): ?>
 
-                                <?php if ($ord->getEmpno() == $ord->getEmpno()): ?>
-                                    <? echo $ord->getName(); ?>&nbsp; <? echo $ord->getLastname();
+                                <?php if ($emp->getEmpno() == $work->getEmpno()): ?>
+                                    <? echo $emp->getName(); ?>&nbsp; <? echo $emp->getLastname();
                         break; ?> 
                                 <?php endif; ?>
 
     <?php endforeach; ?>
                         </td>
-                        <td > <? echo $ord->getStartdate(); ?> </td>
-                        <td ><? echo $ord->getEnddate(); ?> </td>      
+                        <td > <? echo $work->getStartdate(); ?> </td>
+                        <td ><? echo ($work->getEnddate()==null)?'-':$work->getEnddate(); ?> </td>      
                         <td >
-                            <a class="btn btn-info" href="<? echo site_url('Backend/bakwork/viewworkdetail') . "/" . $ord->getEmpno(); ?>"> 
+                            <a class="btn btn-info" href="<? echo site_url('Backend/bakwork/viewworkdetail') . "/" . $work->getEmpno(); ?>"> 
                                 View
                             </a>
-                            <button class="btn btn-danger"  onclick="Confirmdelete('<? echo $ord->getWorkno(); ?>');"> 
+                            <button class="btn btn-danger"  onclick="Confirmdelete('<? echo $work->getWorkno(); ?>');"> 
                                 Delete
                             </button>
                         </td>  
@@ -86,9 +92,53 @@
     <div  id="insertwork" class="divcenter"  >
 
 
+<form action="" method="post">
+<table width="532" border="0" align="center">
+  <tr>
+    <td width="181" height="50">ชื่องาน</td>
+    <td width="170"><input name="workname" type="text" /></td>
+    <td width="167">&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="50">ชื่อพนักงาน</td>
+    <td><select name="empname" size="1">
+
+    </select></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="50">OrdNo</td>
+    <td><input name="ordno" type="text" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>คำอธิบาย</td>
+    <td><textarea name="description"></textarea></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td height="50"><input name="assign" type="button" class="btn" value="มอบหมาย" /></td>
+    <td>&nbsp;</td>
+  </tr>
+ 
+</table>
 
 
-    </div>
+
+
+</form>
+
+
+
+
+
+
+
+
+
+
+  </div>
 </div>
 <script>
 
