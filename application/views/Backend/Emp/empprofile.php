@@ -9,8 +9,8 @@
         width: auto;
         height: auto;
         clear: both;
-max-width: 40%;
-    
+        max-width: 40%;
+
     }
     .divcenter button{
         margin-bottom: 10px;
@@ -68,7 +68,8 @@ max-width: 40%;
                     <td width="95">ตำแหน่ง</td>
                     <td width="165">   <?php foreach ($poslist as $pos): ?>
                             <?php if ($tmpemp->getPosition() == $pos->getPosition()): ?>
-                                <? echo $pos->getPosdescription();
+                                <?
+                                echo $pos->getPosdescription();
                                 break;
                                 ?>
     <?php endif; ?>
@@ -92,7 +93,7 @@ max-width: 40%;
                 <tr>
                     <td width="95">รหัสผ่าน</td>
                     <td width="165"><input class="input-medium"  name="password" type="password"  readonly="true" value="nunan" /></td>
-                    <td width="194"> <button onclick="changepassword();">เปลี่ยนรหัสผ่าน</button></td>
+                    <td width="194"> <a  href="javascript:void(0);" class="btn" onclick="changepassword();">เปลี่ยนรหัสผ่าน</a></td>
                 </tr>
                 <tr>
                     <td width="95"></td>
@@ -104,14 +105,98 @@ max-width: 40%;
 
     </div>
 
-    <? $this->load->view(lang('bakfooter')); ?>
+<? $this->load->view(lang('bakfooter')); ?>
+    <div id="changepassword" style="display: none">
+        <form id="changepasswordform">
+            <p>
+                <label>passwordเก่า</label><input type="password" name="pold" id="pold" />
+            </p>
+            <p>
+                <label>passwordใหม่</label><input type="password" name="pnew" id="pnew" />
+            </p>
+            <p>
+                <label>passwordconfirm</label><input type="password"  name="pconnew" id="connew" />
+            </p>
+            <div id="showerror" style="text-align: center; color: red; "></div>
+        </form>
+
+
+    </div>
+    <script src="<? echo base_url("asset/javascript/jquery.validate.js"); ?>" >  </script>
+    <script src="<? echo base_url("asset/javascript/jquery.metadata.js"); ?>" >  </script>
     <script>
-    
-    function showuploadpic(){
         
-        $('#uploadpic').fadeToggle("slow", "linear");
+        function changepassword(){
+           var validate= $("#changepasswordform").validate({
+                rules: {
+                    pold:"required", 
+                    pnew:"required",
+                    pconnew:{required: true,
+                        equalTo: "#pnew"
+                    }
+                },messages:{
+                    pold:"required", 
+                    pnew:"required",
+                    pconnew:{required: "required",
+                        equalTo: "pl fill same as above"
+                    }
+                
+                
+                }
         
-    }
+            });
+                    
+                    
+            $('#changepassword').dialog(
+            {
+                autoOpen: true,
+                buttons: [
+                    {
+                        text: "change",
+                        click: function(){ 
+                            if(validate.form()){
+                               // var param = {pold:$('#pold').val()
+                                    //,pnew:$('#pold').val()
+                                    //,pconnew:$('#pconnew').val()}
+                                    
+                                   $.post("<? echo site_url('Backend/bakemp/ajaxchangepassword');?>", $("#changepasswordform").serialize(),
+                                   function(data){
+     
+                                   if(data==true){
+                              
+                                      $('#changepassword').dialog('close');
+                                   validate.resetForm();
+                                   document.getElementById('changepasswordform').reset();
+                                   }else{
+                                       $('#changepassword #showerror').html(data);
+                                       
+                                   }
+                                   });
+                                    
+                            }
+                            
+                        }
+       
+                    }
+           
+                ],
+                modal: true,
+                close: function() {
+            
+				  validate.resetForm();
+                                  document.getElementById('changepasswordform').reset();
+			},
+                title: "change password"
+                
+            
+            } );    
+                
+        }
+        function showuploadpic(){
+        
+            $('#uploadpic').fadeToggle("slow", "linear");
+        
+        }
     
     
     </script>

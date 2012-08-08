@@ -142,7 +142,7 @@ and open the template in the editor.
                        <li id="Userprofile" ><a href="<?php echo site_url("userprofile"); ?>">Profile</a></li>
                     <?php endif; ?>
                     <li id="Register" ><a href="<?php echo site_url("register"); ?>">Register</a></li>
-                    <li id="Userprofile"><a href="#">Link</a></li>
+                    <li ><a href="#">Help</a></li>
 
                 </ul>
 

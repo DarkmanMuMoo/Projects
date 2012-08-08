@@ -2,63 +2,69 @@
 <style type="text/css">
     table {
         margin:0 auto;
-
+width: 60%;
     }
-    .divcenter img{
-        margin: 20px;
-        width: auto;
-        height: auto;
-        clear: both;
-max-width: 40%;
-    
-    }
-    .divcenter button{
-        margin-bottom: 10px;
-    }
-    #updateprofileform input{
 
-
-        height: 28px;
-    }
-    #uploadpic{
-
-        display: none;
-        width: 40%;
-        margin-top: 20px;
-        margin-right: auto;
-        margin-bottom:  20px;
-        margin-left: auto;
-
+    #edit{
+        margin-top: 0;
+  margin-right: auto;
+  margin-bottom: 10px;
+  margin-left: auto;
     }
     td{
         padding: 5px;
 
     }
+    tr td:last-of-type {
+        width: 30%; 
+        text-align: center;
 
+    }
+    
+      tr td:first-of-type {
+        width: 30%; 
+    }
+    
+    tr td:not(:first-of-type):not(:last-of-type) {
+        
+         width: 30%; 
+    }
+ hr{color: orangered;
+background-color: orange;
+height: 1px;}
 </style>
 <div id="page">
-<form action="" method="post">
-<table width="562" border="0" align="center">
-  <tr>
-    <td width="111">ชื่อ-นามสกุล</td>
-    <td width="166">ปิยกานต์&nbsp;&nbsp;ภาษยะวรรณ</td>
-    <td width="271"><a href="">แก้ไข</a></td>
+      <p style ="margin-bottom: 10px;">
+    <h1><b>ประวัติ</b></h1>
+    <h4>แก้ไขได้</h4>
+    
+    
+</p>
+<hr></hr>
+<div id="edit">
+<form   id="editform" action="<?echo site_url('userprofile') ?>" method="post">
+<table  border="0" >
+ <tr>
+    <td>อีเมลล์</td>
+    <td><? echo $updateuser->getEmail();?></td>
+    <td>&nbsp;</td>
   </tr>
   <tr>
-    <td>อีเมลล์</td>
-    <td>mink@gmail.com</td>
-    <td>&nbsp;</td>
+     <td >ชื่อ-นามสกุล</td>
+    <td ><? echo $updateuser->getName();?>&nbsp;&nbsp;<? echo $updateuser->getLastname();?></td>
+    <td ><a href="">แก้ไข</a></td>
+  </tr>
+  <tr>
+    <td>โทรศัพท์มือถือ</td>
+    <td><? echo $updateuser->getMobilephone();?></td>
+    <td></td>
   </tr>
   <tr>
     <td>รหัสผ่าน</td>
     <td><input name="" type="password" value="12345678" readonly="readonly" /></td>
-    <td><a href="">แก้ไข</a></td>
+    <td><button onclick="changepassword();" >changepassword</button></td>
   </tr>
-  <tr>
-    <td>โทรศัพท์มือถือ</td>
-    <td>0867693988</td>
-    <td><a href="">แก้ไข</a></td>
-  </tr>
+ 
     <tr>
     <td><strong>ที่อยู่</strong></td>
     <td>&nbsp;</td>
@@ -66,22 +72,22 @@ max-width: 40%;
   </tr>
   <tr>
     <td></td>
-    <td> คุณยังสามารถไปที่ ตั้งค่าความเป็นส่วนตัวของคุณ หรือแก้ไขไทม์ไลน์ของคุณเพื่อควบคุมว่ </td>
+    <td> <? echo $address1['address']?></td>
     <td><a href="">แก้ไข</a></td>
   </tr>
   <tr>
     <td>จังหวัด</td>
-    <td>กรุงเทพมหานคร</td>
+    <td><? echo $address1['province']?></td>
     <td><a href="">แก้ไข</a></td>
   </tr>
   <tr>
     <td>รหัสไปรษณีย์</td>
-    <td>10210</td>
+    <td><? echo $address1['postcode']?></td>
     <td><a href="">แก้ไข</a></td>
   </tr>
   <tr>
     <td>โทรศัพท์</td>
-    <td>025894411</td>
+    <td><? echo $address1['phone1']?></td>
     <td><a href="">แก้ไข</a></td>
   </tr>
    <tr>
@@ -91,22 +97,22 @@ max-width: 40%;
   </tr>
   <tr>
     <td></td>
-    <td> คุณยังสามารถไปที่ ตั้งค่าความเป็นส่วนตัวของคุณ หรือแก้ไขไทม์ไลน์ของคุณเพื่อควบคุมว่ </td>
+    <td> <? echo $address2['address']?></td>
     <td><a href="">แก้ไข</a></td>
   </tr>
   <tr>
     <td>จังหวัด</td>
-    <td>ยะลา</td>
+    <td><? echo $address2['province'] ?></td>
     <td><a href="">แก้ไข</a></td>
   </tr>
   <tr>
     <td>รหัสไปรษณีย์</td>
-    <td>11045</td>
+    <td><? echo $address2['postcode'] ?></td>
     <td><a href="">แก้ไข</a></td>
   </tr>
   <tr>
     <td>โทรศัพท์</td>
-    <td>025910787</td>
+    <td><? echo $address2['phone'] ?></td>
     <td><a href="">แก้ไข</a></td>
   </tr>
   <tr>
@@ -122,7 +128,7 @@ max-width: 40%;
 
 </form>
 
-
+</div>
     
     
     

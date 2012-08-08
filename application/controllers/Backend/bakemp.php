@@ -159,6 +159,28 @@ class Bakemp extends CI_Controller{
     
     $this->index();
     }
+    public function ajaxchangepassword(){
+        $emp=$_SESSION['emp'];
+        $password=$emp->getPassword();
+        $oldpass=$this->input->post('pold');
+        $pnew=$this->input->post('pnew');
+       if($password==$oldpass){
+           $emp->setPassword($pnew);
+           $result=$this->empdao->update($emp);
+           /*$_SESSION['emp']=null;
+            $_SESSION['emp']=$emp;*/
+           
+       error_log(var_export($result, true) . 'change emp password', 0);
+       echo true;
+       }else{
+            
+           echo 'password  not valid';
+           
+           
+           
+       }
+        
+    }
     public function updateemp(){
         
         $empno=$this->input->post('empno');
