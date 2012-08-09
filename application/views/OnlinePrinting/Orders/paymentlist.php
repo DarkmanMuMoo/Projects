@@ -43,9 +43,9 @@
     </div>
     <div id="paystatus"  >
 
-              Orderdate : <? echo $ord->getOrderdate(); ?><br>
+              Orderdate : <? echo $order->getOrderdate(); ?><br>
             Paymethod : <?php foreach ($ordpaylist as $ordpay): ?>
-                <?php if ($ordpay->getPaymethod() == $ord->getPaymethod()): ?>
+                <?php if ($ordpay->getPaymethod() == $order->getPaymethod()): ?>
                     <? echo $ordpay->getDescription();  break;?>
                 <?php endif; ?>
             <?php endforeach; ?><br>
@@ -60,7 +60,30 @@
     <div id ="payconfirm">
         <h4>Payment confirmation</h4>
         <form id="payconfirmform" >
-            //ใส่อะไรดีช่วยกัน  think  หน่อย;
+            <table width="365" border="0">
+  <tr>
+    <td width="97" scope="row">เลขที่สลิป:</td>
+    <td width="258"><input name="slipno" type="text" /></td>
+    </tr>
+  <tr>
+    <td scope="row">วันทีี่ชำระเงิน:</td>
+    <td><input name="date" type="text" /></td>
+    </tr>
+  <tr>
+    <td scope="row">เวลา:</td>
+    <td><input type="text" />
+       </tr>
+  <tr>
+    <td scope="row">จำนวนเงิน:</td>
+    <td><input name=" " type="text" value="0.00"/>
+      บาท</td>
+    </tr>
+  <tr>
+    <th scope="row">&nbsp;</th>
+    <td>&nbsp;</td>
+    </tr>
+</table>
+
             
             
         </form>

@@ -16,9 +16,12 @@ class Testsome extends CI_Controller {
     
     public function index(){
     
-  $first= load_class('emailutil', 'libraries','');
+        $alink='mink';
+        $message = " อีเมลล์ที่ใช้เข้าสู่ระบบของคุณคือ $ <br/> validate email link " . '<br> <p>' . $alink . '</p> ';
+        echo $message; 
+  /*$first= load_class('emailutil', 'libraries','');
     var_dump($first);
-    var_dump($this);
+    var_dump($this);*/
  /*var_export(true,true);
 echo var_export(false,true);*/
     }

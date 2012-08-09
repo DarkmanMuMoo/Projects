@@ -3,17 +3,26 @@
             <p>
 
 
-            <h5>จัดส่ง</h5>
+            <h5>จัดส่ง</h5><br/>
             <div id="sendaddress" >
                 <?
                 if ($address == 'add1') {
-
-                    print_r($_SESSION['user']->getAddress1());
-                } else {
-
-                    print_r($_SESSION['user']->getAddress2());
-                }
-                ?>
+                     $addr1=$_SESSION['user']->getAddress1();  
+                    ?>
+                <address>
+                    <?echo $addr1['address'];?><br/>
+                      <?echo $addr1['province'];?>
+                        <?echo $addr1['postcode'];?><br/>
+                     </address>
+               <? } else {  $addr2=$_SESSION['user']->getAddress2();  ?>
+<address>
+                    <?echo $addr2['address'];?><br/>
+                      <?echo $addr2['province'];?>
+                        <?echo $addr2['postcode'];?><br/>
+                     </address>
+                  
+               <? }?>
+               
 
                 <input type="hidden" name="address" value="<? echo  $address?>"/>
             </div>

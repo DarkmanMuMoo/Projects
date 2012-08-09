@@ -72,12 +72,12 @@
                 password: {
                     required: "Please provide a password",
                   
-                    minlength: "Your password must be at least 5 characters long",
+                    minlength: "Your password must be at least 8 characters long",
                        maxlength:"Your password must max 15 characters long"
                 },
                 confirm_password: {
                     required: "Please provide a confirmpassword",
-                    minlength: "Your password must be at least 5 characters long",
+                    minlength: "Your password must be at least 8 characters long",
                       maxlength:"Your password must max 15 characters long",
                     equalTo: "Please enter the same password as above"
                 },
@@ -167,13 +167,13 @@ table{
         <tr>
         <td>รหัสผ่าน</td>
         <td></td>
-        <td><input size="15" type="password" name="password" id="password" /></td>
+        <td><input size="15" maxlength="15" type="password" name="password" id="password" /></td>
         </tr>
         
         <tr>
         <td>ยืนยันรหัสผ่าน</td> 
         <td></td>
-        <td><input size="15" type="password" name="confirm_password" id="confirm_password" /></td>
+        <td><input size="15" maxlength="15" type="password" name="confirm_password" id="confirm_password" /></td>
         </tr>
         
         <tr>
@@ -196,7 +196,7 @@ table{
         <tr>
             <td>รหัสไปรษณย์</td>
             <td></td>
-        <td><input type="text" name="postcode"  id="postcode"/></td>
+            <td><input type="text" name="postcode" maxlength="5" id="postcode"/></td>
         </tr>
         
         <tr>
@@ -234,7 +234,7 @@ The cat was playing in the garden.
             <tr>
             <td>รหัสไปรษณีย์</td>
             <td></td>
-            <td><input type="text" name="postcode2" id="postcode2" /></td>
+            <td><input type="text" name="postcode2" maxlength="5" id="postcode2" /></td>
             </tr>
             
             <tr>

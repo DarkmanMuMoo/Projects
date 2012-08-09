@@ -49,16 +49,16 @@ class Register extends CI_Controller {
             $cus->setName($this->input->post('name'));
             $cus->setLastname($this->input->post('lastname'));
             $cus->setPassword($this->input->post('password'));
-            $province = $this->thailandutilfindbyid($this->input->post('province'));
-            $province2 = $this->thailandutilfindbyid($this->input->post('province2'));
+            $province = $this->thailandutil->findbyid($this->input->post('province'));
+            $province2 = $this->thailandutil->findbyid($this->input->post('province2'));
             $cus->setMobilephone($this->input->post('mphone'));
             $address1 = array('address' => $this->input->post('address'),
-                'province' => $province,
+                'province' => $province->getProvincename() ,
                 'postcode' => $this->input->post('postcode'),
                 'phone1' => $this->input->post('phone1')
             );
             $address2 = array('address' => $this->input->post('address2'),
-                'province' => $province2,
+                'province' => $province2->getProvincename() ,
                 'postcode' => $this->input->post('postcode2'),
                 'phone2' => $this->input->post('phone2')
             );
@@ -129,14 +129,14 @@ class Register extends CI_Controller {
         $config['newline'] = "\r\n";
 
         $this->load->library('email', $config);
-        $this->email->from('phairoj@colourharmony.co.th', 'Name');
+        $this->email->from('phairoj@colourharmony.co.th', 'Colour Harmony');
         $this->email->to($cus->getEmail());
 
         $encrypted_email = $this->myencrypt->encode($cus->getEmail());
         $this->email->subject('ยืนยันการเป็นสมาชิก');
         $url = site_url("register/validate_user/$encrypted_email");
         $alink = "<a href=\"$url\" >กดเพื่อยืนยันการเป็นสมาชิก</a>";
-        $message = 'validate email link ' . '<br> <p>' . $alink . '</p> ';
+        $message = ' อีเมลล์ที่ใช้เข้าสู่ระบบของคุณคือ'.  $cus->getEmail().' <br/> validate email link ' . '<br> <p>' . $alink . '</p> ';
         $this->email->message($message);
 
         return $this->email->send();
