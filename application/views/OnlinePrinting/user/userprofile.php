@@ -51,12 +51,13 @@ height: 1px;}
   </tr>
   <tr>
      <td >ชื่อ-นามสกุล</td>
-    <td ><? echo $updateuser->getName();?>&nbsp;&nbsp;<? echo $updateuser->getLastname();?></td>
-    <td ><a href="">แก้ไข</a></td>
+     <td ><input type="text" value="<? echo $updateuser->getName();?>">&nbsp;&nbsp;
+         <input type="text" value="<? echo $updateuser->getLastname();?>"></td>
+    <td >></td>
   </tr>
   <tr>
     <td>โทรศัพท์มือถือ</td>
-    <td><? echo $updateuser->getMobilephone();?></td>
+    <td> <input type="text" value="<? echo $updateuser->getMobilephone();?>"></td>
     <td></td>
   </tr>
   <tr>
@@ -64,69 +65,32 @@ height: 1px;}
     <td><input name="" type="password" value="12345678" readonly="readonly" /></td>
     <td><button onclick="changepassword();" >changepassword</button></td>
   </tr>
- 
-    <tr>
-    <td><strong>ที่อยู่</strong></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td></td>
-    <td> <? echo $address1['address']?></td>
-    <td><a href="">แก้ไข</a></td>
-  </tr>
-  <tr>
-    <td>จังหวัด</td>
-    <td><? echo $address1['province']?></td>
-    <td><a href="">แก้ไข</a></td>
-  </tr>
-  <tr>
-    <td>รหัสไปรษณีย์</td>
-    <td><? echo $address1['postcode']?></td>
-    <td><a href="">แก้ไข</a></td>
-  </tr>
-  <tr>
-    <td>โทรศัพท์</td>
-    <td><? echo $address1['phone1']?></td>
-    <td><a href="">แก้ไข</a></td>
-  </tr>
-   <tr>
-    <td><strong>ที่อยู่สำรอง</strong></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td></td>
-    <td> <? echo $address2['address']?></td>
-    <td><a href="">แก้ไข</a></td>
-  </tr>
-  <tr>
-    <td>จังหวัด</td>
-    <td><? echo $address2['province'] ?></td>
-    <td><a href="">แก้ไข</a></td>
-  </tr>
-  <tr>
-    <td>รหัสไปรษณีย์</td>
-    <td><? echo $address2['postcode'] ?></td>
-    <td><a href="">แก้ไข</a></td>
-  </tr>
-  <tr>
-    <td>โทรศัพท์</td>
-    <td><? echo $address2['phone'] ?></td>
-    <td><a href="">แก้ไข</a></td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-</table>
-
-
-
-
-
+ </table>
 </form>
+    
+    
+    <div id="address1" >
+        <h6><strong>ที่อยู่</strong></h6>
+        <form action="" method="post" >
+            <textarea><? echo $address1['address']?></textarea>
+           จังหวัด <input type="text" value="<? echo $address1['province']?>">
+           รหัสไปรษณีย์ <input type="text" value="<? echo $address1['postcode']?>">
+           โทรศัพท์<input type="text" value="<? echo $address1['phone1']?>">
+        </form>
+        
+    </div>
+    <div id="address2" >
+        <h6><strong>ที่อยู่</strong></h6>
+        <form action="" method="post" >
+            <textarea><? echo $address2['address']?></textarea>
+           จังหวัด <input type="text" value="<? echo $address2['province']?>">
+           รหัสไปรษณีย์ <input type="text" value="<? echo $address2['postcode']?>">
+           โทรศัพท์<input type="text" value="<? echo $address2['phone1']?>">
+        </form>
+        
+    </div>
+   
+   
 
 </div>
     
