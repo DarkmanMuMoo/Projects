@@ -16,11 +16,16 @@ class Orders extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+
+    
         $this->load->model('dao/orderlinedao');
         $this->load->model('obj/orderline');
         $this->load->model('dao/orddao');
     }
-
+    public  function Orders(){
+        
+        echo sdfe;
+    }
     public function getpaymentlist($orderno) {
         $this->load->model('dao/ordpaydao');
         $this->load->model('dao/paymentdao');

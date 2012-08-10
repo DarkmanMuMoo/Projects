@@ -10,31 +10,87 @@
  *
  * @author Dark
  */
-class Userprofile  extends CI_Controller{
-    //put your code here
-    
-    
-    public function index(){
-        
-         $updateuser=  $_SESSION['user'];
-         $address1=$_SESSION['user']->getAddress1();
-         $address2=$_SESSION['user']->getAddress2();
-         $data=array();
-         $data['updateuser']= $updateuser;
-          $data['address1']= $address1;
-           $data['address2']= $address2;
-        $this->load->view(lang('userprofile'),$data);
+class Userprofile extends CI_Controller {
 
+    //put your code here
+
+
+ 
+
+    public function index() {
+        $this->load->library('thailandutil');
+        $updateuser = $_SESSION['user'];
+        $address1 = $_SESSION['user']->getAddress1();
+        $address2 = $_SESSION['user']->getAddress2();
+        $data = array();
+        $data['updateuser'] = $updateuser;
+        $id1 = $this->thailandutil->findbyname($address1['province']);
+        $address1['provinceid'] = ($id1 == null) ? '' : $id1->getProvinceid();
+        $id2 = $this->thailandutil->findbyname($address2['province']);
+        $address2['provinceid'] = ($id2 == null) ? '' : $id2->getProvinceid();
+        $data['address1'] = $address1;
+        $data['address2'] = $address2;
+
+        $data['provincelist'] = $this->thailandutil->getAllprovinceList();
+
+        $this->load->view(lang('userprofile'), $data);
     }
-    
-    
-    public  function updateprofile(){
-        
-        $updateuser=  $_SESSION['user'];
-        $updateaddress1=$_SESSION['user']->getAddress1();
-        $updateaddress2=$_SESSION['user']->getAddress2();
-        
+
+    public function updateinfo() {
+
+
+        $name = $this->input->post('name');
+        $lastname = $this->input->post('lastname');
+        $mphone = $this->input->post('mphone');
+        $update = false;
+        if ($name != $_SESSION['user']->getLastname()) {
+
+            $update = true;
+        }
+        if ($lastname != $_SESSION['user']->getName()) {
+
+            $update = true;
+        }
+
+        if ($mphone != $_SESSION['user']->getMobilephone()) {
+
+            $update = true;
+        }
+        if ($update) {
+            //do update
+            $_SESSION['user']->setName($name);
+            $_SESSION['user']->setLastname($lastname);
+            $_SESSION['user']->setMobilephone($mphone);
+
+            $result = $this->cusdao->update($_SESSION['user']);
+            error_log(var_export($result, true) . 'change emp password', 0);
+            if(!$result){
+               $_SESSION['user'] =  $this->cusdao->findbyemail( $_SESSION['user']->getEmail());
+                
+            }
+        }
+        $this->index();
     }
+
+    public function ajaxchangepassword() {
+        $updateuser = $_SESSION['user'];
+        $password = $updateuser->getPassword();
+        $oldpass = $this->input->post('pold');
+        $pnew = $this->input->post('pnew');
+        if ($password == $oldpass) {
+            $updateuser->setPassword($pnew);
+            $result = $this->cusdao->update($updateuser);
+            /* $_SESSION['emp']=null;
+              $_SESSION['emp']=$emp; */
+
+            error_log(var_export($result, true) . 'change emp password', 0);
+            echo true;
+        } else {
+
+            echo 'password  not valid';
+        }
+    }
+
 }
 
 ?>

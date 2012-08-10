@@ -12,18 +12,24 @@
  */
 class Testsome extends CI_Controller {
     //put your code here
-    
+ 
+
     
     public function index(){
     
-        $alink='mink';
-        $message = " อีเมลล์ที่ใช้เข้าสู่ระบบของคุณคือ $ <br/> validate email link " . '<br> <p>' . $alink . '</p> ';
-        echo $message; 
+        var_dump(get_class(get_instance()));
   /*$first= load_class('emailutil', 'libraries','');
     var_dump($first);
     var_dump($this);*/
  /*var_export(true,true);
 echo var_export(false,true);*/
+    }
+    private function test(){
+          $updateuser = $_SESSION['user'];
+         $updateuser->setName('abc');
+         var_dump($updateuser);
+          var_dump($_SESSION['user']);
+        
     }
 
     public function viewsession(){
@@ -55,6 +61,7 @@ force_download($name, $data);
 
 
       }
+    
     public function testupload(){
         
         
@@ -72,9 +79,9 @@ force_download($name, $data);
     
     public function testutil(){
         
-        /*$this->load->library('thailandutil');
-       $provincelist= $this->thailandutil->getAllprovinceList();
-       var_dump($provincelist);*/
+       $this->load->library('thailandutil');
+       $provincelist= $this->thailandutil->findbyname('นครศรีธรรมราช');
+       var_dump($provincelist);
  /*$this->load->library('captchautil');
 
        $array=$this->captchautil->captcha();
@@ -84,10 +91,10 @@ force_download($name, $data);
 imagepng($image); //แสดงผลภาพที่สร้าง
 imagedestroy($image);*/
         
-        $this->load->library('emailutil');
+      /*  $this->load->library('emailutil');
         
         $config=$this->emailutil->getSmtpconfig();
-        var_dump($this->emailutil);
+        var_dump($this->emailutil);*/
        // $this->emailutil->sendemail($config,$form,$to,$subject,$message);
         
         

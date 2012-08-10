@@ -32,6 +32,24 @@ class Thailandutil {
         return $array;
       
   }
+  
+   public function findbyname($name,$tablename='province'){
+           $CI =&get_instance(); 
+         $CI->db->where('PROVINCE_NAME', $name);
+            $query = $CI->db->get($tablename);
+        $obj = null;
+
+        foreach ($query->result() as $row) {
+
+            $obj = $this->makeObj($row);
+        }
+        // echo var_dump($obj);
+
+        return $obj;
+       
+       
+       
+   }
     public function findbyid($provinceid,$tablename='province'){
            $CI =&get_instance(); 
          $CI->db->where('PROVINCE_ID', $provinceid);
