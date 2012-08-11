@@ -109,7 +109,7 @@ height: 3px; margin: 0 0;"></hr>
                 <?php endif; ?></td>
                         <td  width="30%" >
                           
-                            <a href="<? echo site_url('Backend/bakorders/downloadtemplate').'/'.$orderline->getTempno(); ?>" class="btn btn-primary">viewFile</a>
+                            <a target="_blank" href="<? echo site_url('Backend/bakorders/downloadFile').'/'.$orderline->getOrdlineno(); ?>" class="btn btn-primary">viewFile</a>
                             </td>
                     </tr>  
 <? endforeach; ?>

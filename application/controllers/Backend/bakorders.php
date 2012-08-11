@@ -79,18 +79,38 @@ class Bakorders extends CI_Controller{
         $data['orderlinelist'] = $orderlinelist;
         $this->load->view(lang('BakviewOrderdetail'), $data);
     }
-   public  function downloadtemplate($tempeno){
-            $this->load->model('dao/templatedao');
+    
+    
+   public  function downloadFile($orderlineno){
+            $this->load->model('dao/orderlinedao');
+               $this->load->helper('download');
+        $orderline= $this->orderlinedao->findbyid($orderlineno);
+       $filepath=$orderline->getFilepath();
+        if(empty($filepath)){
             
-        $template= $this->templatedao->findbyid($tempeno);
-          $this->load->helper('download');
-         $templatefileroot=  lang('templatefileroot');
-          $data = file_get_contents($templatefileroot.$template->getUrl()); // Read the file's contents
-$name = $template->getName().'.ai';
+              $javascript="<script>alert('no File');</script>";
+             echo $javascript;
+   
+        }else{
+      
+         $uploadroot=  './uploads';
+         $path=$uploadroot.$orderline->getFilepath();
+         var_dump($path);
+         var_dump(file_exists($path));
+         if(file_exists($path)){
+          $data = file_get_contents($path); // Read the file's contents
+          $name = basename($path);
 
 
 force_download($name, $data);
-        
+          
+         }else{
+
+             $javascript="<script>alert('no File');</script>";
+             echo $javascript;
+         }
+
+        }
     }
     
     

@@ -1,6 +1,11 @@
 <? $this->load->view(lang('header')) ?>
 <br>
 <script>
+    function changecaptcha(){
+        
+        $('#captcha').attr('src', '<? echo site_url('register/getcaptcha') ?>');
+        
+    }
      function check_email (){
 
        var vemail= $.trim($("#signupForm #email").val());
@@ -244,13 +249,13 @@ The cat was playing in the garden.
         </tr>
          <tr><td></td>
              <td></td>
-                <td> <img  src="<? echo site_url('register/getcaptcha') ?>" width="150" heigth="40" /><br><br></td>
+             <td> <img id="captcha" src="<? echo site_url('register/getcaptcha') ?>" width="150" heigth="40" /><a href="javascript:void(0)"  onclick="changecaptcha();"class="btn">เปลี่ยนรูป</a><br><br></td>
                   
             </tr>
               <tr>
         <td>กรอกตัวอักษรในภาพ</td>
         <td></td>
-        <td><input type="text" name="captcha"  id="captcha"/></td>
+        <td><input type="text" name="captcha"  id="captcha"/> </td>
         </tr>
             
             <tr>

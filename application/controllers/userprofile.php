@@ -15,7 +15,7 @@ class Userprofile extends CI_Controller {
     //put your code here
 
 
- 
+
 
     public function index() {
         $this->load->library('thailandutil');
@@ -34,6 +34,31 @@ class Userprofile extends CI_Controller {
         $data['provincelist'] = $this->thailandutil->getAllprovinceList();
 
         $this->load->view(lang('userprofile'), $data);
+    }
+
+    public function updateaddress() {
+
+
+
+        $ad = $this->input->post('ad');
+        $prov = $this->input->post('prov');
+        $post = $this->input->post('post');
+        $phone = $this->input->post('phone');
+        $address = ($this->input->post('index') == '1') ? $_SESSION['user']->getAddress1() : $_SESSION['user']->getAddress2();
+
+        $update = ($ad != $address['address']) || ($prov != $address['province']) || ($ad != $address['postcode']) || ($ad != $address['phone']);
+        if ($update) {
+            $address['address'] = $ad;
+            $address['province'] = $prov;
+            $address['postcode'] = $post;
+            $address['phone'] = $phone;
+             $result = $this->cusdao->update($_SESSION['user']);
+            error_log(var_export($result, true) . 'change address', 0);
+            if (!$result) {
+                $_SESSION['user'] = $this->cusdao->findbyemail($_SESSION['user']->getEmail());
+            }
+        }
+          $this->index();
     }
 
     public function updateinfo() {
@@ -64,9 +89,8 @@ class Userprofile extends CI_Controller {
 
             $result = $this->cusdao->update($_SESSION['user']);
             error_log(var_export($result, true) . 'change emp password', 0);
-            if(!$result){
-               $_SESSION['user'] =  $this->cusdao->findbyemail( $_SESSION['user']->getEmail());
-                
+            if (!$result) {
+                $_SESSION['user'] = $this->cusdao->findbyemail($_SESSION['user']->getEmail());
             }
         }
         $this->index();

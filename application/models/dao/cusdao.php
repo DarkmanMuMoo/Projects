@@ -17,12 +17,12 @@ class Cusdao extends CI_Model {
         parent::__construct();
         $this->load->model('obj/custormer');
     }
-//หาข้อมมูลcusจากอีเมล(ที่activateแล้ว T default ,ไม่Activate F,ทั้งหมด default)
-    public function findbyemail($email,$activate='') {
 
-          if($activate!=''){
-        $this->db->where('validate', $activate);
-        
+//หาข้อมมูลcusจากอีเมล(ที่activateแล้ว T default ,ไม่Activate F,ทั้งหมด default)
+    public function findbyemail($email, $activate = '') {
+
+        if ($activate != '') {
+            $this->db->where('validate', $activate);
         }
         $query = $this->db->get_where('custormer', array('email' => $email));
 
@@ -37,37 +37,34 @@ class Cusdao extends CI_Model {
         return $cus;
     }
 
-    public function update(Custormer $cus){
-        
-         $address1 = $cus->getAddress1();
+    public function update(Custormer $cus) {
+
+        $address1 = $cus->getAddress1();
         $address2 = $cus->getAddress2();
         $data = array(
             'email' => $cus->getEmail(),
             'cus_name' => $cus->getName(),
             'lastname' => $cus->getLastname(),
-            'phone' => $cus->getPhone(),
-             'mobilephone'=>$cus->getMobilephone(),
+            'mobilephone' => $cus->getMobilephone(),
             'password' => $cus->getPassword(),
-            'phone1' => $address1['phone1'],
-            'phone2' => $address2['phone2'],
+            'phone1' => $address1['phone'],
+            'phone2' => $address2['phone'],
             'address' => $address1['address'],
             'province' => $address1['province'],
             'postcode' => $address1['postcode'],
             'address_2' => $address2['address'],
             'province_2' => $address2['province'],
             'postcode_2' => $address2['postcode']
-           
         );
-    $this->db->where('email', $cus->getEmail());
+        $this->db->where('email', $cus->getEmail());
         return $this->db->update('custormer', $data);
-        
     }
+
     //หาข้อมูลลูกค้าทุกคนที่(ที่activateแล้ว T  ,ไม่Activate F,ทั้งหมด default)
-    public function findall($activate='') {
-        
-      if($activate!=''){
-        $this->db->where('validate', $activate);
-        
+    public function findall($activate = '') {
+
+        if ($activate != '') {
+            $this->db->where('validate', $activate);
         }
         $query = $this->db->get('custormer');
 
@@ -85,10 +82,11 @@ class Cusdao extends CI_Model {
 
         return $array;
     }
+
 //บันทึกข้อมูล
     public function insert(Custormer $cus) {
-        
-        
+
+
         $address1 = $cus->getAddress1();
         $address2 = $cus->getAddress2();
         $data = array(
@@ -97,7 +95,7 @@ class Cusdao extends CI_Model {
             'lastname' => $cus->getLastname(),
             'phone1' => $address1['phone1'],
             'phone2' => $address2['phone2'],
-            'mobilephone'=>$cus->getMobilephone(),
+            'mobilephone' => $cus->getMobilephone(),
             'password' => $cus->getPassword(),
             'address' => $address1['address'],
             'province' => $address1['province'],
@@ -112,38 +110,27 @@ class Cusdao extends CI_Model {
     }
 
     //checkEmailว่ามีในฐานข้อมูลมั้ย
-    public function checkemail($email){
+    public function checkemail($email) {
         $query = $this->db->get_where('custormer', array('email' => $email));
-        $validate = true ; 
-        if($query->num_rows()>0){
-            
-            $validate = false ; 
-            
+        $validate = true;
+        if ($query->num_rows() > 0) {
+
+            $validate = false;
         }
         return $validate;
-        
     }
-    
-    
+
     //ActivateUserว่ามีในฐานข้อมูลมั้ย
-      public function validateuser($email){
-       $data = array(
-               'validate' => 'T'
-               
-            );
+    public function validateuser($email) {
+        $data = array(
+            'validate' => 'T'
+        );
 
-$this->db->where('email', $email);
+        $this->db->where('email', $email);
 
-return $this->db->update('custormer', $data); 
-          
-          
-          
+        return $this->db->update('custormer', $data);
     }
-    
-    
-    
-    
-    
+
     private function makeObj($row) {
 
         $cus = new Custormer();
@@ -152,12 +139,12 @@ return $this->db->update('custormer', $data);
         $cus->setName($row->cus_name);
         $cus->setLastname($row->lastname);
         $cus->setPassword($row->password);
-     
-        $cus->setMobilephone($row->mobilephone);
-        $cus->setAddress1(array('address' => $row->address, 'province' => $row->province, 'postcode' => $row->postcode,'phone1'=>$row->phone1));
- $cus->setValidate($row->validate);
 
-        $cus->setAddress2(array('address' => $row->address_2, 'province' => $row->province_2, 'postcode' => $row->postcode_2,'phone2'=>$row->phone1));
+        $cus->setMobilephone($row->mobilephone);
+        $cus->setAddress1(array('address' => $row->address, 'province' => $row->province, 'postcode' => $row->postcode, 'phone' => $row->phone1));
+        $cus->setValidate($row->validate);
+
+        $cus->setAddress2(array('address' => $row->address_2, 'province' => $row->province_2, 'postcode' => $row->postcode_2, 'phone' => $row->phone2));
 
         return $cus;
     }

@@ -13,12 +13,14 @@
                     <?echo $addr1['address'];?><br/>
                       <?echo $addr1['province'];?>
                         <?echo $addr1['postcode'];?><br/>
+                         <?echo $addr1['phone'];?><br/>
                      </address>
                <? } else {  $addr2=$_SESSION['user']->getAddress2();  ?>
 <address>
                     <?echo $addr2['address'];?><br/>
                       <?echo $addr2['province'];?>
                         <?echo $addr2['postcode'];?><br/>
+                         <?echo $addr2['phone'];?><br/>
                      </address>
                   
                <? }?>
