@@ -60,10 +60,24 @@ class Paymentdao extends CI_Model {
             'amount' => $payment->getAmount(),
             'paymentdate' => $payment->getPaymentdate(),
             'orderno' => $payment->getOrderno(),
+            'seqno'=>$payment->getSeqno(),
             'pic_url' => $payment->getPicurl()
         );
 
         return $this->db->insert('payment', $data);
+    }
+    public function update(Payment $payment){
+        $data = array(
+            'period' => $payment->getPeriod(),
+            'amount' => $payment->getAmount(),
+            'paymentdate' => $payment->getPaymentdate(),
+            'orderno' => $payment->getOrderno(),
+            'seqno'=>$payment->getSeqno(),
+            'active'=>$payment->getActive(),
+            'pic_url' => $payment->getPicurl()
+        );
+        $this->db->where('payno', $payment->getPayno());
+ return $this->db->update('payment', $data); 
     }
 
     private function makeObj($row) {
@@ -71,7 +85,7 @@ class Paymentdao extends CI_Model {
         $payment = new Payment();
 
         $payment->setPayno($row->payno);
-
+        $payment->setSeqno($row->seqno);
         $payment->setAmount($row->amount);
 
         $payment->setPaymentdate($row->paymentdate);
@@ -79,7 +93,7 @@ class Paymentdao extends CI_Model {
         $payment->setActive($row->active);
         $payment->setOrderno($row->orderno);
         $payment->setPicurl($row->pic_url);
-        
+
         return $payment;
     }
 

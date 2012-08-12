@@ -20,7 +20,7 @@ class Payment extends CI_Model {
     private $orderno;
     private $active;
     private $picurl;
-    
+    private $seqno;
     public function getPicurl() {
         return $this->picurl;
     }
@@ -28,8 +28,15 @@ class Payment extends CI_Model {
     public function setPicurl($picurl) {
         $this->picurl = $picurl;
     }
+    public function getSeqno() {
+        return $this->seqno;
+    }
 
-        public function getPayno() {
+    public function setSeqno($seqno) {
+        $this->seqno = $seqno;
+    }
+
+            public function getPayno() {
         return $this->payno;
     }
 

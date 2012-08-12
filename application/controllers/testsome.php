@@ -70,11 +70,18 @@ force_download($name, $data);
         
     }
     public function  testdate(){
-    $this->load->helper('date');
-     echo  date("Ymd-H:i:s");
+   // $this->load->helper('date');
+   //  echo  date("Ymd-H:i:s");
     // echo"\n";
      //echo strtotime("2012/07/02");
         
+        for($i=0 ;$i<=23; $i++){
+            
+             echo str_pad($i, 2, "0", STR_PAD_LEFT); 
+            echo'<br>';
+        }
+
+      
     }
     
     public function testutil(){

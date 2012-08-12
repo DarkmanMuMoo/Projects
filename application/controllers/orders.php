@@ -35,7 +35,18 @@ class Orders extends CI_Controller {
         $data['paymentlist'] = $paymentlist;
         $data['order'] = $order;
         $data['ordpaylist'] = $ordpaylist;
-
+ 
+        $hour=array();
+          for($i=0 ;$i<=23; $i++){
+              array_push($hour, str_pad($i, 2, "0", STR_PAD_LEFT));
+        }
+        $min=array();
+          for($i=0 ;$i<=60; $i++){
+              array_push($min, str_pad($i, 2, "0", STR_PAD_LEFT));
+        }
+        
+        $data['hour']=$hour;
+        $data['min']=$min;
         $this->load->view(lang('paymentlist'), $data);
     }
 

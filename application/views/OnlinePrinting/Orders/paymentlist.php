@@ -4,6 +4,17 @@
             
               #result th{text-align: center;}
     #result td{text-align: center;}
+    #payconfirm{ margin-top: 15px;}
+    #payconfirm form{
+     margin-left: 20px;
+margin-top: 15px;
+    }
+    #payconfirm table{
+        
+        width: 50%;
+        
+    }
+   
 </style>
 <div id="page">
     <? $countactive=0; ?>
@@ -12,7 +23,7 @@
         <thead>
         <th>No</th>
              <th>Payno</th>
-              <th>Orderno</th> 
+              <th>Seqno</th> 
               <th>Period</th>
                <th>Amount</th>
                 <th>Active</th>
@@ -22,7 +33,7 @@
             <?php if (!empty($paymentlist)): ?>
             <?php foreach ($paymentlist as $index => $payment): ?>
         <tr> <td> <? echo $index+1 ;?> </td> 
-               <td><? echo $payment->getOrderno();?> </td> 
+               <td><? echo $payment->Seqno();?> </td> 
             <td><? echo $payment->getPayno();?> </td> 
          <td><? echo $payment-> getPeriod()?> </td> 
          <td><? echo $payment->getAmount();?> </td> 
@@ -59,32 +70,47 @@
     
     <div id ="payconfirm">
         <h4>Payment confirmation</h4>
-        <form id="payconfirmform" >
-            <table width="365" border="0">
+        <form id="payform"  method="post" action="<?  echo site_url('orders/addpayment') ;?>" enctype="multipart/form-data" id="payconfirmform" >
+            <table border="0">
   <tr>
-    <td width="97" scope="row">เลขที่สลิป:</td>
-    <td width="258"><input name="slipno" type="text" /></td>
+    <td scope="row">เลขที่สลิป:</td>
+    <td ><input class="input-medium" id="slipno" name="slipno" type="text" /></td>
     </tr>
   <tr>
     <td scope="row">วันทีี่ชำระเงิน:</td>
-    <td><input name="date" type="text" /></td>
+    <td><input class="input-medium datepicker"  id="date"  name="date" type="text" /></td>
     </tr>
   <tr>
     <td scope="row">เวลา:</td>
-    <td><input type="text" />
+    <td>ชั่วโมง<select style="width:20%;" name="hour"> 
+            <?php foreach ($hour as $index => $h): ?>
+            
+            <option value="<?echo $index?>"  >    <? echo $h ?>      </option>
+             <?php endforeach; ?>
+        </select> นาที<select style="width:20%;" name="min"> 
+            <?php foreach ($min as $index => $m): ?>
+            
+            <option value="<?echo $index?>"  >    <? echo $m ?>      </option>
+             <?php endforeach; ?>
+        </select>
+    วินาที<select style="width:20%;" name="sec"> 
+            <?php foreach ($min as $index => $m): ?>
+            <option value="<?echo $index?>"  >    <? echo $m ?>      </option>
+             <?php endforeach; ?>
+        </select>
+    </td>
        </tr>
   <tr>
     <td scope="row">จำนวนเงิน:</td>
-    <td><input name=" " type="text" value="0.00"/>
+    <td><input  class="input-medium" name="amount"  id="amount" type="text" value="0.00"/>
       บาท</td>
     </tr>
   <tr>
     <th scope="row">&nbsp;</th>
-    <td>&nbsp;</td>
+    <td><input type="submit" value="แจ้งชำระเงิน"  /></td>
     </tr>
 </table>
-
-            
+            <input type="hidden" name="ordno" value="<? echo $order->getOrderno(); ?>">
             
         </form>
  
@@ -93,3 +119,48 @@
 
 
   <? $this->load->view(lang('footer')) ?>
+<script>
+   $().ready(function() {
+          $( ".datepicker" ).datepicker({
+            buttonText: "..." ,
+            showOn: "button",
+            dateFormat: "yy-mm-dd"
+
+        });
+             $("#payform").validate({
+            rules: {
+                date:"required",
+                slipno:{
+                    required: true,
+                    digits: true
+                },
+                amount:{
+                    required: true,
+                    digits: true
+                }
+              
+                      
+                        
+            },messages: {
+                date: "Please enter your date",
+                slipno: {
+                    required: "Please enter slipno",
+                   digits:"number"
+                },
+                 amount:{
+                    required: "Please enter amount",
+                   digits:"number"
+                }
+            }
+            
+            
+            
+        });
+       
+       
+       
+       
+   });
+
+
+</script>
