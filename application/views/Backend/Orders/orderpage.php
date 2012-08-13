@@ -14,7 +14,7 @@
 
             Status: <select name="status" id="status" >   
                 <option value="" >all</option>
- <?php foreach ($ordstatuslist as $ord): ?>
+                <?php foreach ($ordstatuslist as $ord): ?>
 
                     <option value="<? echo $ord->getStatus(); ?>">  <? echo $ord->getDescription(); ?></option>
 
@@ -71,16 +71,19 @@
                             <?php foreach ($ordstatuslist as $ordstatus): ?>
                                 <?php if ($ordstatus->getStatus() == $ord->getOrdstatus()): ?>
                                     <? echo $ordstatus->getDescription();
-                                    break; ?>
+                                    break;
+                                    ?>
                                 <?php endif; ?>
-                              <?php endforeach; ?>
+    <?php endforeach; ?>
                         </td> 
                         <td style="text-align: right;" ><? echo $ord->getTotalprice(); ?> </td>                      
                         <td >
                             <a class="btn btn-info" href="<? echo site_url('Backend/bakorders/vieworderdetail') . "/" . $ord->getOrderno(); ?>"> 
                                 View
                             </a>
-
+                            <?php if ($ord->getOrdstatus() >= 30): ?>
+                                <a href="<? echo site_url('Backend/bakorders/getpaymentlist') . "/" . $ord->getOrderno(); ?>" class="btn btn-warning" >Payment</a> 
+                            <?php endif; ?>
                         </td>  
                     </tr>
 <?php endforeach; ?>

@@ -100,7 +100,7 @@
                                 <?php if ($ord->getOrdstatus()=='10'||$ord->getOrdstatus()=='40'): ?>
                                 <button class="btn btn-danger" onclick="Confirmdelete('<? echo $ord->getOrderno();?>');" >cancel </button> 
                                  <?php endif; ?>
-                                 <?php if ($ord->getOrdstatus()=='30'): ?>
+                                 <?php if ($ord->getOrdstatus()>=30): ?>
                                 <a href="<? echo site_url('orders/getpaymentlist'). "/" . $ord->getOrderno();    ?>" class="btn btn-warning" >Payment</a> 
                                  <?php endif; ?>
                                 

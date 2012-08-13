@@ -14,6 +14,11 @@ margin-top: 15px;
         width: 50%;
         
     }
+    #con{
+        
+        width: 20%;
+        margin-left: 10%;
+    }
    
 </style>
 <div id="page">
@@ -41,7 +46,7 @@ margin-top: 15px;
          <td><? echo $payment->getPaymentdate();?> </td> 
       
         </tr>
-        <? if($payment->getActive()=='1'){ $countactive++;  }  ?>
+        <?  $countactive++;    ?>
             <? endforeach; ?>
         <?php else: ?>
         <tr><td colspan="7" >  <h6>ยังไม่มีรายการชำระเงิน</h6>  </td></tr>
@@ -60,14 +65,16 @@ margin-top: 15px;
                     <? echo $ordpay->getDescription();  break;?>
                 <?php endif; ?>
             <?php endforeach; ?><br>
+            <? $showform=true;  ?>
             Period: <?php if ($ordpay->getPaymethod() == '10'): ?>
-            <? echo $countactive ;?>/1 Time
+            
+            <?   $showform=($countactive>0)? false:true; echo $countactive ;?>/1 Time
       <?php else: ?>
-              <? echo $countactive ; ?>/2 Time
+              <? $showform=($countactive>1)? false:true; echo $countactive ; ?>/2 Time
             
              <?php endif; ?>
         </div>
-    
+  <?php if ($showform): ?>
     <div id ="payconfirm">
         <h4>Payment confirmation</h4>
         <form id="payform"  method="post" action="<?  echo site_url('orders/addpayment') ;?>" enctype="multipart/form-data" id="payconfirmform" >
@@ -105,6 +112,11 @@ margin-top: 15px;
     <td><input  class="input-medium" name="amount"  id="amount" type="text" value="0.00"/>
       บาท</td>
     </tr>
+     <tr>
+    <td scope="row">รูปภาพใบเสร็จ:</td>
+    <td><input  class="input-medium" name="pic"  id="pic" type="file" />
+      </td>
+    </tr>
   <tr>
     <th scope="row">&nbsp;</th>
     <td><input type="submit" value="แจ้งชำระเงิน"  /></td>
@@ -113,8 +125,9 @@ margin-top: 15px;
             <input type="hidden" name="ordno" value="<? echo $order->getOrderno(); ?>">
             
         </form>
- 
+        <div  id="con" class="alert-error" ></div>
     </div>
+      <?php endif; ?>
 </div>
 
 
@@ -127,7 +140,18 @@ margin-top: 15px;
             dateFormat: "yy-mm-dd"
 
         });
+        
+        $.validator.addMethod("checkextends", function(value) {	
+           var result=false;
+            if( value.lastIndexOf(".jpg")>=0)
+                 result=true;
+             if( value.lastIndexOf(".png")>=0)
+                 result=true;
+            return result;	
+        }, 'Picture must be jpg or png');	
              $("#payform").validate({
+                 errorLabelContainer: $("#con"),
+             
             rules: {
                 date:"required",
                 slipno:{
@@ -137,7 +161,8 @@ margin-top: 15px;
                 amount:{
                     required: true,
                     digits: true
-                }
+                },
+                pic:"checkextends"
               
                       
                         
@@ -164,3 +189,6 @@ margin-top: 15px;
 
 
 </script>
+<?  echo  $this->session->flashdata('message');
+  error_log($this->session->flashdata('message').'sdfds');
+?>

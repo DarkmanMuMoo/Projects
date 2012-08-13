@@ -17,36 +17,77 @@ class Orders extends CI_Controller {
     public function __construct() {
         parent::__construct();
 
-    
+
         $this->load->model('dao/orderlinedao');
         $this->load->model('obj/orderline');
         $this->load->model('dao/orddao');
     }
-    public  function Orders(){
+
+    public function addpayment() {
+
+        $this->load->model('dao/paymentdao');
+        $this->load->library('uploadutil');
+        $ordno = $this->input->post('ordno');
+        $slipno = $this->input->post('slipno');
+        $date = $this->input->post('date');
+        $hour = $this->input->post('hour');
+        $min = $this->input->post('min');
+        $sec = $this->input->post('sec');
+        $amount = $this->input->post('amount');
+        $time = implode(':', array($hour, $min, $sec));
+        $paymentdate = $date . ' ' . $time;
+        $insertpayment = new Payment();
+
+        $insertpayment->setAmount($amount);
+        $insertpayment->setPaymentdate($paymentdate);
+        $insertpayment->setSeqno($slipno);
+        $insertpayment->setOrderno($ordno);
         
-        echo sdfe;
+        $filename = $ordno . '_' . date("Ymd-His");
+        $insertpayment->setPicurl($filename);
+        $config['upload_path'] = './uploads/Slips';
+        $config['allowed_types'] = 'jpg|png';
+        $config['max_size'] = '2048';
+        $config['file_name'] = $filename;
+        $upload = $this->uploadutil->upload($config, 'pic');
+
+        $message = '';
+        if ($upload == 'complete') {
+            
+            $result = $this->paymentdao->insert($insertpayment);
+            error_log(var_export('addpayment' . $result, true));
+
+            $message = "<script>alert('แจ้งการชำระเงินเรียบร้อย กรุณารอตรวจสอบ ขอบคุณครับ');</script>";
+        } else {
+
+            $message = $upload;
+        }
+
+        $this->session->set_flashdata('message', $message);
+        redirect("orders/getpaymentlist/$ordno");
     }
+
     public function getpaymentlist($orderno) {
         $this->load->model('dao/ordpaydao');
         $this->load->model('dao/paymentdao');
         $ordpaylist = $this->ordpaydao->findall();
-        $paymentlist = $this->paymentdao->findbyorderno($orderno);
+        $paymentlist = $this->paymentdao->findbyorderno($orderno, '1');
         $order = $this->orddao->findbyid($orderno);
         $data['paymentlist'] = $paymentlist;
         $data['order'] = $order;
         $data['ordpaylist'] = $ordpaylist;
- 
-        $hour=array();
-          for($i=0 ;$i<=23; $i++){
-              array_push($hour, str_pad($i, 2, "0", STR_PAD_LEFT));
+
+        $hour = array();
+        for ($i = 0; $i <= 23; $i++) {
+            array_push($hour, str_pad($i, 2, "0", STR_PAD_LEFT));
         }
-        $min=array();
-          for($i=0 ;$i<=60; $i++){
-              array_push($min, str_pad($i, 2, "0", STR_PAD_LEFT));
+        $min = array();
+        for ($i = 0; $i <= 59; $i++) {
+            array_push($min, str_pad($i, 2, "0", STR_PAD_LEFT));
         }
-        
-        $data['hour']=$hour;
-        $data['min']=$min;
+
+        $data['hour'] = $hour;
+        $data['min'] = $min;
         $this->load->view(lang('paymentlist'), $data);
     }
 
@@ -183,7 +224,7 @@ class Orders extends CI_Controller {
         $this->load->model('dao/optiondao');
         $this->load->model('dao/ordpaydao');
         $this->load->model('dao/ordsenddao');
-        
+
 
         $data['address'] = $this->input->post('add');
         $ordsendmethod = $this->input->post('ordsend');
@@ -239,9 +280,9 @@ class Orders extends CI_Controller {
     public function viewOrderdetail($orderno) {
         $this->load->model('dao/ordstatusdao');
         $this->load->model('dao/ordpaydao');
-         $this->load->model('dao/ordsenddao');
-         
-         
+        $this->load->model('dao/ordsenddao');
+
+
         $ordstatuslist = $this->ordstatusdao->findall();
         $orderlinelist = $this->orderlinedao->findjoinbyorderno($orderno);
         $ordsendlist = $this->ordsenddao->findall();
@@ -269,7 +310,7 @@ class Orders extends CI_Controller {
     }
 
     public function downloadtemplate($tempeno) {
-$this->load->model('dao/templatedao');
+        $this->load->model('dao/templatedao');
         $template = $this->templatedao->findbyid($tempeno);
         $this->load->helper('download');
         $templatefileroot = lang('templatefileroot');
@@ -297,7 +338,7 @@ $this->load->model('dao/templatedao');
         $order = $this->orddao->findbyid($orderno);
         $order->setOrdstatus($status); //wait for validate
         $result = $this->orddao->update($order);
-       error_log(var_export($result, true) . 'change status', 0);
+        error_log(var_export($result, true) . 'change status', 0);
     }
 
 }

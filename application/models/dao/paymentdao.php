@@ -97,8 +97,12 @@ class Paymentdao extends CI_Model {
         return $payment;
     }
 
-    public function findbyorderno($orderno) {
+   
+    public function findbyorderno($orderno,$active) {
         $this->db->where('orderno', $orderno);
+        if($active!=null){
+        $this->db->where('active', $active);
+        }
         $query = $this->db->get('payment');
 
         $array = array();

@@ -12,9 +12,9 @@
             Keyword:<input type="text"  name="keyword" id="email" class="input-small " />
             Employee: <select name="emp" id="emp" >  
                 <option value="">All</option>
-                <?php foreach ($emplist as $work): ?>
+                <?php foreach ($emplist as $emp): ?>
 
-                    <option value="<? echo $work->getEmpno(); ?>">  <? echo $work->getName(); ?>&nbsp; <? echo $work->getLastname(); ?> </option>
+                    <option value="<? echo $emp->getEmpno(); ?>">  <? echo $emp->getName(); ?>&nbsp; <? echo $emp->getLastname(); ?> </option>
 
                 <?php endforeach; ?></select>
 
@@ -88,11 +88,10 @@
         </table>
 
     </div>
-    <button onclick="showinsertform();" class="btn" > insert new Work</button>
+ <button onclick="showinsertform();" class="btn" > insert new Work</button>
     <div  id="insertwork" class="divcenter"  >
 
-
-<form action="" method="post">
+        <form action="<? echo site_url('Backend/bakwork/creatework') ?>" method="post">
 <table width="532" border="0" align="center">
   <tr>
     <td width="181" height="50">ชื่องาน</td>
@@ -101,8 +100,12 @@
   </tr>
   <tr>
     <td height="50">ชื่อพนักงาน</td>
-    <td><select name="empname" size="1">
+    <td><select name="empno" >
+<?php foreach ($emplist as $emp): ?>
 
+                    <option value="<? echo $emp->getEmpno(); ?>">  <? echo $emp->getName(); ?>&nbsp; <? echo $emp->getLastname(); ?> </option>
+
+ <?php endforeach; ?>
     </select></td>
     <td>&nbsp;</td>
   </tr>

@@ -33,10 +33,29 @@ echo var_export(false,true);*/
     }
 
     public function viewsession(){
+        //$this->session->set_flashdata('item', 'value');
         var_dump($_SESSION);
+        echo session_save_path();
         echo APPPATH ; 
+       // echo var_export($this->session->flashdata('item'));
+      //echo var_export($this->session->flashdata('message'));
         
     }
+     public function testCIsession(){
+         
+$cus=$this->cusdao->findbyemail('darkman@hotmail.com');
+   // $this->session->set_userdata('val','b');
+  
+      
+         // echo var_export($this->session->userdata('a'), true) ;
+         var_dump($this->session->userdata('a'));
+           var_dump($this->session->userdata('b')); 
+             var_dump($this->session->userdata('c'));
+           var_dump($this->session->userdata('d'));
+           
+         //  echo var_export($this->session->userdata('a'), true) ;
+      
+     }
 public function testtableclass(){
     $this->load->library('tablegen');
 
@@ -75,13 +94,20 @@ force_download($name, $data);
     // echo"\n";
      //echo strtotime("2012/07/02");
         
-        for($i=0 ;$i<=23; $i++){
+       /* for($i=0 ;$i<=23; $i++){
             
              echo str_pad($i, 2, "0", STR_PAD_LEFT); 
             echo'<br>';
-        }
-
+        }*/
+        
+   $date = '2008-01-01';
+        $hour ='22';
+        $min = '13';
+        $sec = '05';
       
+        $time = implode(':', array($hour, $min, $sec));
+        $timestamp =$date.' '.$time;
+        echo $timestamp;
     }
     
     public function testutil(){

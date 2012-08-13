@@ -43,9 +43,16 @@ class Bakwork extends CI_Controller {
     }
 
     public function viewworkdetail($workno) {
+   $this->load->model('dao/workdao');
+   $data=array();
+   $work=$this->workdao->findworkdetail($workno);
+   $allemp=$this->empdao->findall();
+   $data['work']=$work;
+     $data['allemp']=$allemp;
 
-$data=array();
         $this->load->view(lang('workdetail'), $data);
+        
+        
     }
     public function assignemptowork(){
         
@@ -55,6 +62,7 @@ $data=array();
     }
     
     public function listprocess($workno){
+        
         
         
     }
@@ -96,6 +104,8 @@ $data=array();
         
         error_log(var_export($result, true) . 'update in work', 0);
     }
+    
+  
 
 }
 
