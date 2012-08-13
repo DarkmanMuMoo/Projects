@@ -44,12 +44,14 @@ class Bakwork extends CI_Controller {
 
     public function viewworkdetail($workno) {
    $this->load->model('dao/workdao');
+   $this->load->model('dao/processdao');
    $data=array();
-   $work=$this->workdao->findworkdetail($workno);
+   $work=$this->workdao->findbyid($workno);
    $allemp=$this->empdao->findall();
+   $processlist=$this->processdao->finbyworkno($workno);
    $data['work']=$work;
-     $data['allemp']=$allemp;
-
+  $data['allemp']=$allemp;
+  $data['processlist']=$allemp;
         $this->load->view(lang('workdetail'), $data);
         
         
@@ -93,6 +95,8 @@ class Bakwork extends CI_Controller {
         
         $result =$this->workdao->insert($insertwork);
          error_log(var_export($result, true) . 'insert in work', 0);
+         
+         $this->index();
     }
     
     public  function completework($workno){

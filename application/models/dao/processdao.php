@@ -20,14 +20,25 @@ class Processdao  extends CI_Model{
           $this->load->model('obj/process');
     }
     
+ public function findbyworkno($workno){
+       $this->db->where('workno', $workno);
+   $query = $this->db->get('process');
+
+        $array = array();
+        foreach ($query->result() as $row) {
+            $type = null;
+
+
+            $type = $this->makeObj($row);
+
+
+            array_push($array, $type);
+        }
+        // echo var_dump($array);
+
+        return $array;
     
- 
-    
-   
-    
-    
-    
-    
+}
     
     public function findbyid($processno){
          $this->db->where('processno', $processno);

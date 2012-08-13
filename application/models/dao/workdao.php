@@ -57,12 +57,7 @@ $this->db->where('workno', $work->getWorkno());
  return $this->db->update('work', $data); 
         
     }
-    public function findworkdetail($workno){
-        
-        
-        
-        
-    }
+ 
     public function findbyid($workno){
          $this->db->where('workno', $workno);
             $query = $this->db->get('work');

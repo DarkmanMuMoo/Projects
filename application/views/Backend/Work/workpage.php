@@ -121,7 +121,7 @@
   </tr>
   <tr>
     <td>&nbsp;</td>
-    <td height="50"><input name="assign" type="button" class="btn" value="มอบหมาย" /></td>
+    <td height="50"><input name="assign" type="submit" class="btn" value="มอบหมาย" /></td>
     <td>&nbsp;</td>
   </tr>
  
