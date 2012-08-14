@@ -21,7 +21,7 @@ th {
              <td width="122"><?echo $work->getWorkno();?></td>
              <td width="140" height="44"><strong>ชื่องาน</strong></td>
              <td width="18">&nbsp;</td>
-             <td width="90"><?$work->getWorkname();?></td>
+             <td width="90"><?echo $work->getWorkname();?></td>
            </tr>
            <tr>
              <td height="44"><strong>OrdNo</strong></td>
