@@ -48,7 +48,7 @@ $this->db->where('ordlineno', $ordline->getOrdlineno());
         
     }
       public function delete($orderno){
-         $this->db->delete('orderline', array('orderno' => $orderno));
+       return  $this->db->delete('orderline', array('orderno' => $orderno));
         
     }
     public function findbyorderno($orderno){

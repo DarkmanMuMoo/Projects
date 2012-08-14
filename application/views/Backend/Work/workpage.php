@@ -3,6 +3,10 @@
 #font1 {
 	font-family: can_jaew;
 }
+#insertwork{
+    
+    display: none;
+}
 </style>
 
 
@@ -72,7 +76,7 @@
                         <td > <? echo $work->getStartdate(); ?> </td>
                         <td ><? echo ($work->getEnddate()==null)?'-':$work->getEnddate(); ?> </td>      
                         <td >
-                            <a class="btn btn-info" href="<? echo site_url('Backend/bakwork/viewworkdetail') . "/" . $work->getEmpno(); ?>"> 
+                            <a class="btn btn-info" href="<? echo site_url('Backend/bakwork/viewworkdetail') . "/" . $work->getWorkno(); ?>"> 
                                 View
                             </a>
                             <button class="btn btn-danger"  onclick="Confirmdelete('<? echo $work->getWorkno(); ?>');"> 
@@ -89,13 +93,13 @@
 
     </div>
  <button onclick="showinsertform();" class="btn" > insert new Work</button>
-    <div  id="insertwork" class="divcenter"  >
+ <div  id="insertwork" class="divcenter" >
 
-        <form action="<? echo site_url('Backend/bakwork/creatework') ?>" method="post">
+        <form id="creatworkform" action="<? echo site_url('Backend/bakwork/creatework') ?>" method="post">
 <table width="532" border="0" align="center">
   <tr>
     <td width="181" height="50">ชื่องาน</td>
-    <td width="170"><input name="workname" type="text" /></td>
+    <td width="170"><input id="workname" name="workname" type="text" /></td>
     <td width="167">&nbsp;</td>
   </tr>
   <tr>
@@ -143,10 +147,49 @@
 
   </div>
 </div>
-<script>
-
-
-
-</script>
 
 <? $this->load->view(lang('bakfooter')); ?>
+
+<script src="<? echo base_url("asset/javascript/jquery.validate.js"); ?>" >  </script>
+    <script src="<? echo base_url("asset/javascript/jquery.metadata.js"); ?>" >  </script>
+    <script>
+        function showinsertform(){
+          var validate=  $("#creatworkform").validate({
+                rules: {
+                    workname:"required" 
+                  
+                },messages:{
+          workname:"required" 
+                }
+        
+            });
+            
+             $('#insertwork').fadeToggle("slow", "linear");
+            
+            
+            
+        }
+    
+    
+    function Confirmdelete(workno)
+
+    {
+
+        if(confirm('Do you want to  delete this work ')==true)
+
+        {
+
+              $.post('<? echo site_url('Backend/bakwork/deletework')?>/'+workno, function(data){
+                  //alert(data);
+                  eval(data);
+
+              });
+
+        }
+
+      
+
+    }
+
+    
+</script>

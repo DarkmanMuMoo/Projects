@@ -39,7 +39,10 @@ class Processdao  extends CI_Model{
         return $array;
     
 }
-    
+      public function delete($workno){
+       return  $this->db->delete('work', array('workno' => $workno));
+        
+    }
     public function findbyid($processno){
          $this->db->where('processno', $processno);
             $query = $this->db->get('process');
