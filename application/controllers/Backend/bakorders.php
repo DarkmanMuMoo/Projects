@@ -10,29 +10,26 @@
  *
  * @author Dark
  */
-class Bakorders extends CI_Controller{
+class Bakorders extends CI_Controller {
+
     //put your code here
-    
-     public function __construct() {
+
+    public function __construct() {
         parent::__construct();
-        
+
         $this->load->model('dao/empdao');
-        
-        
-        }
-     public function index(){
-         
-  $this->load->model('dao/ordstatusdao');
-   $this->load->model('dao/orddao');
-        
+    }
+
+    public function index() {
+
+        $this->load->model('dao/ordstatusdao');
+        $this->load->model('dao/orddao');
+
         $condition = array();
-       
-        $keyword='';
+
+        $keyword = '';
         if ($this->input->post('keyword')) {
             $keyword = $this->input->post('keyword');
-          
-               
-            
         }
         if ($this->input->post('status')) {
             $staus = $this->input->post('status');
@@ -49,23 +46,23 @@ class Bakorders extends CI_Controller{
             $condition['orderdate <='] = $this->input->post('todate');
         }
 
-      $orderlist=$this->orddao->findorderbackbyCustormer($condition,$keyword);
+        $orderlist = $this->orddao->findorderbackbyCustormer($condition, $keyword);
         $ordstatuslist = $this->ordstatusdao->findall();
         $data = array();
         $data['orderlist'] = $orderlist;
         $data['ordstatuslist'] = $ordstatuslist;
-      
-         $this->load->view(lang('bakorder'),$data);
-     }
-     
-     public function vieworderdetail($orderno) {
-         
+
+        $this->load->view(lang('bakorder'), $data);
+    }
+
+    public function vieworderdetail($orderno) {
+
         $this->load->model('dao/ordstatusdao');
         $this->load->model('dao/orderlinedao');
         $this->load->model('dao/ordsenddao');
         $this->load->model('dao/ordpaydao');
-         $this->load->model('dao/orddao');
-        
+        $this->load->model('dao/orddao');
+
         $ordstatuslist = $this->ordstatusdao->findall();
         $orderlinelist = $this->orderlinedao->findjoinbyorderno($orderno);
         $ordsendlist = $this->ordsenddao->findall();
@@ -79,63 +76,121 @@ class Bakorders extends CI_Controller{
         $data['orderlinelist'] = $orderlinelist;
         $this->load->view(lang('BakviewOrderdetail'), $data);
     }
-    
-    
-   public  function downloadFile($orderlineno){
-            $this->load->model('dao/orderlinedao');
-               $this->load->helper('download');
-        $orderline= $this->orderlinedao->findbyid($orderlineno);
-       $filepath=$orderline->getFilepath();
-        if(empty($filepath)){
-            
-              $javascript="<script>alert('no File');</script>";
-             echo $javascript;
-   
-        }else{
-      
-         $uploadroot=  './uploads';
-         $path=$uploadroot.$orderline->getFilepath();
-         var_dump($path);
-         var_dump(file_exists($path));
-         if(file_exists($path)){
-          $data = file_get_contents($path); // Read the file's contents
-          $name = basename($path);
+
+    public function downloadFile($orderlineno) {
+        $this->load->model('dao/orderlinedao');
+        $this->load->helper('download');
+        $orderline = $this->orderlinedao->findbyid($orderlineno);
+        $filepath = $orderline->getFilepath();
+        if (empty($filepath)) {
+
+            $javascript = "<script>alert('no File');</script>";
+            echo $javascript;
+        } else {
+
+            $uploadroot = './uploads';
+            $path = $uploadroot . $orderline->getFilepath();
+            var_dump($path);
+            var_dump(file_exists($path));
+            if (file_exists($path)) {
+                $data = file_get_contents($path); // Read the file's contents
+                $name = basename($path);
 
 
-force_download($name, $data);
-          
-         }else{
+                force_download($name, $data);
+            } else {
 
-             $javascript="<script>alert('no File');</script>";
-             echo $javascript;
-         }
-
+                $javascript = "<script>alert('no File');</script>";
+                echo $javascript;
+            }
         }
     }
-    
-    
-      public function waitforpay($orderno){
-      
-       $this->changestatus('30',$orderno);
-       redirect("Backend/bakorders/vieworderdetail/$orderno");
+
+    public function settoactive() {
+        $this->load->model('dao/paymentdao');
+        $payno = $this->input->post('payno');
+        $orderno = $this->input->post('orderno');
+        $paymethod = $this->input->post('paymethod');
+        $countactive = $this->input->post('countactive');
+        $countactive+=1;
+        $payment = $this->paymentdao->findbyid($payno);
+        $iscomplete = false;
+        if ($countactive <= 2) {
+            switch ($paymethod) {
+                case 10://one time
+                    $payment->setPeriod('ชำระครั้งเดียว');
+                    $iscomplete = true;
+                    break;
+                case 20://2 time
+                    $payment->setPeriod("ชำระครั้งที่$countactive");
+                    if ($countactive == 2) {
+
+                        $iscomplete = true;
+                    }
+                    break;
+            }
+            $payment->setActive('1');
+
+            $result = $this->paymentdao->update($payment);
+            error_log(var_export($result, true) . 'set active payment', 0);
+
+            
+            if($iscomplete&&$result){
+                
+                $this->onproduction($orderno);
+                $this->paymentdao->deleteinactive($orderno);
+            }
+            redirect('Backend/bakorders/getpaymentlist/' . $orderno);
+        } else {
+
+            echo 'somthing wrong!!';
+        }
     }
-      public function rejects($orderno){
-    
-      $this->changestatus('40',$orderno);
-     
-       redirect("Backend/bakorders/vieworderdetail/$orderno");
+
+    public function getpaymentlist($orderno) {
+        $this->load->model('dao/orddao');
+        $this->load->model('dao/ordpaydao');
+        $this->load->model('dao/paymentdao');
+        $ordpaylist = $this->ordpaydao->findall();
+        $paymentlist = $this->paymentdao->findbyorderno($orderno);
+        $order = $this->orddao->findbyid($orderno);
+        $data['paymentlist'] = $paymentlist;
+        $data['order'] = $order;
+        $data['ordpaylist'] = $ordpaylist;
+
+        $this->load->view(lang('bakpaymentlist'), $data);
     }
-    
-    private function changestatus($status,$orderno){
-       $this->load->model('dao/orddao');
-        $order =$this->orddao->findbyid($orderno);
-    
-        $order->setOrdstatus($status);//wait for validate
-       $result= $this->orddao->update($order);
-         error_log(var_export($result, true) . 'changer status', 0);
-      // log("changestatus  to  $status=".$result);
-        
+
+    public function onproduction($orderno) {
+
+        return $this->changestatus('50', $orderno);
     }
+
+    public function waitforpay($orderno) {
+
+        $this->changestatus('30', $orderno);
+        redirect("Backend/bakorders/vieworderdetail/$orderno");
+    }
+
+    public function rejects($orderno) {
+
+        $this->changestatus('40', $orderno);
+
+        redirect("Backend/bakorders/vieworderdetail/$orderno");
+    }
+
+    private function changestatus($status, $orderno) {
+        $this->load->model('dao/orddao');
+        $order = $this->orddao->findbyid($orderno);
+
+        $order->setOrdstatus($status); //wait for validate
+        $result = $this->orddao->update($order);
+
+        error_log(var_export($result, true) . 'changer status' . $status, 0);
+        return $result;
+        // log("changestatus  to  $status=".$result);
+    }
+
 }
 
 ?>

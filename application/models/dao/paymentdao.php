@@ -66,6 +66,13 @@ class Paymentdao extends CI_Model {
 
         return $this->db->insert('payment', $data);
     }
+    
+    public function deleteinactive($orderno){
+        $this->db->where('orderno', $orderno);
+         $this->db->where('active', '0');
+        return$this->db->delete('payment'); 
+        
+    }
     public function update(Payment $payment){
         $data = array(
             'period' => $payment->getPeriod(),
@@ -98,7 +105,7 @@ class Paymentdao extends CI_Model {
     }
 
    
-    public function findbyorderno($orderno,$active) {
+    public function findbyorderno($orderno,$active=null) {
         $this->db->where('orderno', $orderno);
         if($active!=null){
         $this->db->where('active', $active);

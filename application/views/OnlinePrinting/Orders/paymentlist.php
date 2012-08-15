@@ -1,7 +1,7 @@
   <? $this->load->view(lang('header')) ?>
           <style> 
               #paystasut{clear: both; margin :10 auto ; padding: 5 5;}
-            
+
               #result th{text-align: center;}
     #result td{text-align: center;}
     #payconfirm{ margin-top: 15px;}
@@ -38,8 +38,8 @@ margin-top: 15px;
             <?php if (!empty($paymentlist)): ?>
             <?php foreach ($paymentlist as $index => $payment): ?>
         <tr> <td> <? echo $index+1 ;?> </td> 
-               <td><? echo $payment->Seqno();?> </td> 
-            <td><? echo $payment->getPayno();?> </td> 
+               <td><? echo $payment->getPayno();?> </td> 
+            <td><? echo $payment->getSeqno();?> </td> 
          <td><? echo $payment-> getPeriod()?> </td> 
          <td><? echo $payment->getAmount();?> </td> 
           <td><? echo $payment->getActive();?> </td> 
