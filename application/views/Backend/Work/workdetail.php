@@ -38,9 +38,12 @@ th {
              <td><?echo $work->getStartdate();?></td>
              <td height="44"><strong>วันสิ้นสุดการทำงาน</strong></td>
              <td>&nbsp;</td>
-             <td><?php if ($work->getEnddate() == null): ?>
-             
-                 <a class="btn" href="<? echo site_url('Backend/bakwork/completework/'.$work->getOrdno())?>" >End this work</a>     
+             <td><?php if ($_SESSION['emp']->getPosition() == 'Boss' ): ?>
+             <?php if ($work->getEnddate() == null): ?>
+                 <a class="btn" href="<? echo site_url('Backend/bakwork/completework/'.$work->getOrdno())?>" >End this work</a> 
+                  <?php else: ?>
+                 ยังไม่เสร็จ
+                 <?php endif; ?>
              <?php else: ?>
                  
                  <? echo $work->getEnddate() ; ?>
@@ -67,24 +70,20 @@ th {
      
      <form action="" method="post">
      <table >
+         <thead>
+    <th width="72" scope="col" >สถานะงาน</th>
+    <th width="127" scope="col">วันทีแก้ไข</th>
+    <th width="101" scope="col">ผู้แก้ไข</th>
+     </thead>
+     <tbody>
+  <?php foreach ($processlist as $process): ?>
   <tr>
-    <th width="72" scope="col" >รหัสงาน</th>
-    <th width="127" scope="col">ชื่องาน</th>
-    <th width="101" scope="col">วันเริ่มทำงาน</th>
-    <th width="107" scope="col">วันสิ้นสุดงาน</th>
-    <th width="94" scope="col">ผู้รับผิดชอบ</th>
-    <th width="131" scope="col">รายละเอียด</th>
-    <th width="78" scope="col">สถานะงาน</th>
+    <td><? echo $process->getProdescription();  ?></td>
+    <td><? echo $process->getDate();  ?></td>
+    <td><? echo $process->getName();  ?>&nbsp;<? echo $process->getLastname();  ?></td>
   </tr>
-  <tr>
-    <td>001</td>
-    <td>ปฏิทิน</td>
-    <td>21/03/2555</td>
-    <td>25/03/2533</td>
-    <td>คิดตตี้</td>
-    <td>สีชมพู</td>
-    <td>&nbsp;</td>
-  </tr>
+  <?php endforeach; ?>
+  </tbody>
 </table>
 
      

@@ -68,7 +68,7 @@ class Bakwork extends CI_Controller {
         $data = array();
         $work = $this->workdao->findworkdetail($workno);
         $allemp = $this->empdao->findbymultifield(array('position' => 'des'));
-        $processlist = $this->processdao->findbyworkno($workno);
+        $processlist = $this->processdao->findprocesslist($workno);
         $data['work'] = $work;
         $data['allemp'] = $allemp;
         $data['processlist'] = $processlist;

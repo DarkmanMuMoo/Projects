@@ -2,7 +2,12 @@
 
 <div class="container" >
     <style>
-
+.table th, .table td {
+padding: 5px;
+line-height: 18px;
+vertical-align: middle;
+border-top: 1px solid #DDD;
+}
         #result th{text-align: center;}
         #result td{text-align: center;}
     </style>
@@ -81,7 +86,7 @@
                             <a class="btn btn-info" href="<? echo site_url('Backend/bakorders/vieworderdetail') . "/" . $ord->getOrderno(); ?>"> 
                                 View
                             </a>
-                            <?php if ($ord->getOrdstatus() >= 30): ?>
+                            <?php if ($ord->getOrdstatus() >= 40): ?>
                                 <a href="<? echo site_url('Backend/bakorders/getpaymentlist') . "/" . $ord->getOrderno(); ?>" class="btn btn-warning" >Payment</a> 
                             <?php endif; ?>
                         </td>  

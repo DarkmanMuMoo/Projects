@@ -125,10 +125,22 @@ height: 3px; margin: 0 0;"></hr>
         </table>
 
     </div>
+ <?php if ($order->getOrdstatus()<40):?>
 <div align="center" style="margin :5% auto;">  
     <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/waitforpay').'/'.$order->getOrderno();?>">Approve</a> 
 <a class="btn btn-danger" href="<? echo site_url('Backend/bakorders/rejects').'/'.$order->getOrderno();?>">Rejects</a>
 </div>
+<?php endif; ?>
+ <?php if ($order->getOrdstatus()==50):?>
+<div align="center" style="margin :5% auto;">  
+    <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/ontransfer').'/'.$order->getOrderno();?>">set to on trasfer</a> 
+</div>
+<?php endif; ?>
+<?php if ($order->getOrdstatus()==60):?>
+<div align="center" style="margin :5% auto;">  
+    <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/complete').'/'.$order->getOrderno();?>">set to Complete</a> 
+</div>
+<?php endif; ?>
 </div>
 
 

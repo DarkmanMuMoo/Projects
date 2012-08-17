@@ -1,4 +1,5 @@
 <? $this->load->view(lang('header')) ?>
+
 <script>
     function Searchstatus (ordstatus){
     
@@ -97,7 +98,7 @@
                                  <a class="btn btn-info" href="<?echo site_url('orders/vieworderdetail') . "/" . $ord->getOrderno(); ?>"> 
                                    View
                                 </a>
-                                <?php if ($ord->getOrdstatus()=='10'||$ord->getOrdstatus()=='40'): ?>
+                                <?php if ($ord->getOrdstatus()<=20): ?>
                                 <button class="btn btn-danger" onclick="Confirmdelete('<? echo $ord->getOrderno();?>');" >cancel </button> 
                                  <?php endif; ?>
                                  <?php if ($ord->getOrdstatus()>=30): ?>
@@ -119,9 +120,10 @@
     </div >
     <div id="sidebar">
         <h2>Order Summary</h2>
-        <div style="margin: o auto; padding-left: 10%; padding-top: 5%" >
+     
 
-            <ul>
+          <ul class="nav nav-tabs nav-stacked">
+      
                 <li><a href="JavaScript:void(0);" onclick="Searchstatus('');">all</a></li>
                 <?php foreach ($ordstatuslist as $ord): ?>
                     <li ><a href="JavaScript:void(0);" onclick="Searchstatus('<? echo $ord->getStatus(); ?>');"><? echo $ord->getDescription() ?></a>
@@ -129,7 +131,7 @@
                 <?php endforeach; ?>
             </ul> 
 
-        </div>
+       
     </div>
 
 </div>

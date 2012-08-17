@@ -259,7 +259,7 @@ class Orders extends CI_Controller {
         $ord->setEmail($user->getEmail());
         $ord->setPaymethod($ordpay);
         $ord->setSendmethod($ordsend);
-        $ord->setOrdstatus('10');
+        $ord->setOrdstatus('20');
         $ord->setTotalprice($totalprice);
         $ord->setOrderdate(date("Y-m-d"));
         $result = $this->orddao->insert($ord);
@@ -329,7 +329,7 @@ class Orders extends CI_Controller {
 
     public function waitforvalidate() {
         $orderno = $this->input->post('orderno');
-        $this->changestatus('20', $orderno);
+        $this->changestatus('30', $orderno);
         redirect("orders/viewOrderdetail/$orderno");
     }
 

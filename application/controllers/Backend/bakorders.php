@@ -168,17 +168,32 @@ class Bakorders extends CI_Controller {
 
     public function waitforpay($orderno) {
 
-        $this->changestatus('30', $orderno);
+        $this->changestatus('40', $orderno);
         redirect("Backend/bakorders/vieworderdetail/$orderno");
     }
 
     public function rejects($orderno) {
 
-        $this->changestatus('40', $orderno);
+        $this->changestatus('10', $orderno);
 
         redirect("Backend/bakorders/vieworderdetail/$orderno");
     }
 
+    public function ontransfer($orderno){
+        
+        $this->changestatus('60', $orderno);
+
+        redirect("Backend/bakorders/vieworderdetail/$orderno");
+        
+    }
+    
+     public function complete($orderno){
+        $this->changestatus('70', $orderno);
+
+        redirect("Backend/bakorders/vieworderdetail/$orderno");
+        
+        
+    }
     private function changestatus($status, $orderno) {
         $this->load->model('dao/orddao');
         $order = $this->orddao->findbyid($orderno);
