@@ -42,7 +42,7 @@ class Orders extends CI_Controller {
         $insertpayment->setPaymentdate($paymentdate);
         $insertpayment->setSeqno($slipno);
         $insertpayment->setOrderno($ordno);
-        
+
         $filename = $ordno . '_' . date("Ymd-His");
         $insertpayment->setPicurl($filename);
         $config['upload_path'] = './uploads/Slips';
@@ -53,7 +53,7 @@ class Orders extends CI_Controller {
 
         $message = '';
         if ($upload == 'complete') {
-            
+
             $result = $this->paymentdao->insert($insertpayment);
             error_log(var_export('addpayment' . $result, true));
 
@@ -328,8 +328,26 @@ class Orders extends CI_Controller {
     }
 
     public function waitforvalidate() {
+        $this->load->library('smsutil');
+        $this->load->library('emailutil');
         $orderno = $this->input->post('orderno');
         $this->changestatus('30', $orderno);
+
+
+//sent mail here;
+        $config = $this->emailutil->getSmtpconfig();
+        $form = lang('adminemail');
+        $to = $email;
+        $subject = 'ยินดีต้อนรับ พนักงาน ใหม่';
+        $message = 'email use to login =' . $email;
+        $message.='<br> password is =' . $password;
+
+        // $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
+        //error_log("send email to $to result is".var_export($emailresult, true),0);
+      
+      //sent sms here
+        //$result = $this->smsutil->sentsms('0849731746','finaltest');
+
         redirect("orders/viewOrderdetail/$orderno");
     }
 
@@ -338,6 +356,8 @@ class Orders extends CI_Controller {
         $order = $this->orddao->findbyid($orderno);
         $order->setOrdstatus($status); //wait for validate
         $result = $this->orddao->update($order);
+
+
         error_log(var_export($result, true) . 'change status', 0);
     }
 

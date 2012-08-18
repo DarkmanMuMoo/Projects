@@ -134,9 +134,9 @@ class Bakorders extends CI_Controller {
             $result = $this->paymentdao->update($payment);
             error_log(var_export($result, true) . 'set active payment', 0);
 
-            
-            if($iscomplete&&$result){
-                
+
+            if ($iscomplete && $result) {
+
                 $this->onproduction($orderno);
                 $this->paymentdao->deleteinactive($orderno);
             }
@@ -162,38 +162,101 @@ class Bakorders extends CI_Controller {
     }
 
     public function onproduction($orderno) {
+        $this->load->library('smsutil');
+        $this->load->library('emailutil');
+        $result = $this->changestatus('50', $orderno);
+        $config = $this->emailutil->getSmtpconfig();
+        $form = lang('adminemail');
+        $to = $email;
+        $subject = 'ยินดีต้อนรับ พนักงาน ใหม่';
+        $message = 'email use to login =' . $email;
+        $message.='<br> password is =' . $password;
 
-        return $this->changestatus('50', $orderno);
+        // $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
+        //error_log("send email to $to result is".var_export($emailresult, true),0);
+        //sent sms here
+        //$result = $this->smsutil->sentsms('0849731746','finaltest');
+
+        return $result;
     }
 
     public function waitforpay($orderno) {
-
+        $this->load->library('smsutil');
+        $this->load->library('emailutil');
         $this->changestatus('40', $orderno);
+
+        //sent mail here;
+        $config = $this->emailutil->getSmtpconfig();
+        $form = lang('adminemail');
+        $to = $email;
+        $subject = 'ยินดีต้อนรับ พนักงาน ใหม่';
+        $message = 'email use to login =' . $email;
+        $message.='<br> password is =' . $password;
+
+        // $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
+        //error_log("send email to $to result is".var_export($emailresult, true),0);
+        //sent sms here
+        //$result = $this->smsutil->sentsms('0849731746','finaltest');
         redirect("Backend/bakorders/vieworderdetail/$orderno");
     }
 
     public function rejects($orderno) {
-
+        $this->load->library('smsutil');
+        $this->load->library('emailutil');
         $this->changestatus('10', $orderno);
+//sent mail here;
+        $config = $this->emailutil->getSmtpconfig();
+        $form = lang('adminemail');
+        $to = $email;
+        $subject = 'ยินดีต้อนรับ พนักงาน ใหม่';
+        $message = 'email use to login =' . $email;
+        $message.='<br> password is =' . $password;
 
+        // $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
+        //error_log("send email to $to result is".var_export($emailresult, true),0);
+        //sent sms here
+        //$result = $this->smsutil->sentsms('0849731746','finaltest');
         redirect("Backend/bakorders/vieworderdetail/$orderno");
     }
 
-    public function ontransfer($orderno){
-        
+    public function ontransfer($orderno) {
+        $this->load->library('smsutil');
+        $this->load->library('emailutil');
         $this->changestatus('60', $orderno);
+//sent mail here;
+        $config = $this->emailutil->getSmtpconfig();
+        $form = lang('adminemail');
+        $to = $email;
+        $subject = 'ยินดีต้อนรับ พนักงาน ใหม่';
+        $message = 'email use to login =' . $email;
+        $message.='<br> password is =' . $password;
 
+        // $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
+        //error_log("send email to $to result is".var_export($emailresult, true),0);
+        //sent sms here
+        //$result = $this->smsutil->sentsms('0849731746','finaltest');
         redirect("Backend/bakorders/vieworderdetail/$orderno");
-        
     }
-    
-     public function complete($orderno){
+
+    public function complete($orderno) {
+        $this->load->library('smsutil');
+        $this->load->library('emailutil');
         $this->changestatus('70', $orderno);
+//sent mail here;
+        $config = $this->emailutil->getSmtpconfig();
+        $form = lang('adminemail');
+        $to = $email;
+        $subject = 'ยินดีต้อนรับ พนักงาน ใหม่';
+        $message = 'email use to login =' . $email;
+        $message.='<br> password is =' . $password;
 
+        // $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
+        //error_log("send email to $to result is".var_export($emailresult, true),0);
+        //sent sms here
+        //$result = $this->smsutil->sentsms('0849731746','finaltest');
         redirect("Backend/bakorders/vieworderdetail/$orderno");
-        
-        
     }
+
     private function changestatus($status, $orderno) {
         $this->load->model('dao/orddao');
         $order = $this->orddao->findbyid($orderno);
