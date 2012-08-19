@@ -10,29 +10,37 @@
  *
  * @author Dark
  */
-class Ordsend  extends CI_Model {
+class Ordsend extends CI_Model {
+
     //put your code here
-    
-   private $sendmethod;
-   private $description;
-   
 
-   public function getSendmethod() {
-       return $this->sendmethod;
-   }
+    private $sendmethod;
+    private $description;
+    private $sendprice;
 
-   public function setSendmethod($sendmethod) {
-       $this->sendmethod = $sendmethod;
-   }
+    public function getSendmethod() {
+        return $this->sendmethod;
+    }
 
-   public function getDescription() {
-       return $this->description;
-   }
+    public function getSendprice() {
+        return $this->sendprice;
+    }
 
-   public function setDescription($description) {
-       $this->description = $description;
-   }
+    public function setSendprice($sendprice) {
+        $this->sendprice = $sendprice;
+    }
 
+    public function setSendmethod($sendmethod) {
+        $this->sendmethod = $sendmethod;
+    }
+
+    public function getDescription() {
+        return $this->description;
+    }
+
+    public function setDescription($description) {
+        $this->description = $description;
+    }
 
 }
 

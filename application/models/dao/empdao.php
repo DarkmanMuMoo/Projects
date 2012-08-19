@@ -33,7 +33,19 @@ class Empdao extends CI_Model {
 
         return $obj;
     }
+public function findEmpOfWork($workno){
 
+    $sql='select * from work  w join work_emp we on w.workno=we.workno join employee e on we.empno=e.empno where we.empno=?';
+    $query = $this->db->query($sql, array($workno));
+        $array = array();
+        foreach ($query->result() as $row) {
+          $obj=null;
+          $obj=$this->makeObj($row);
+          array_push($array, $obj);
+        }
+        
+        return $array;
+}
     public function findbyid($empno) {
         $this->db->where('empno', $empno);
         $query = $this->db->get('employee');

@@ -30,7 +30,7 @@ and open the template in the editor.
             );
                     
                    
-                document.getElementById('cartdialog').src = '<? echo site_url("orders/showcart"); ?>'; 
+                document.getElementById('cartdialog').src = '<? echo site_url("home/showcart"); ?>'; 
                     
          
           

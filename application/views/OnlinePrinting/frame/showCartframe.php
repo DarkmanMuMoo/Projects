@@ -13,9 +13,13 @@ if(data=='false'){
     alert('please login or Register to create order');
     parent.showloginframe();
 }else{
-   
+    if(parseInt($('#Ncart').val())>0){
             document.getElementById('checkout').click();
-    
+    }else{
+        
+         alert('ไม่มีสินค้าในตระกร้า');
+        
+    }
 }
 });
         
@@ -75,7 +79,7 @@ if(data=='false'){
                             <? echo $cart->getPrice();   $totalprice=$totalprice+$cart->getPrice(); ?>
                       </td>
                       <td>
-                          <a href="<? echo site_url('orders/removeCartItem').'/'.$index;  ?> ">remove </a>
+                          <a href="<? echo site_url('home/removeCartItem').'/'.$index;  ?> ">remove </a>
                       </td>
                       
                      
@@ -95,7 +99,7 @@ if(data=='false'){
     <a  id="checkout" target="_parent" href="<? echo site_url('orders/Checkout')?>">
                         </a>
                 </div>
-                  
+                <input id="Ncart"  type="hidden" value="<? echo  $Ncart?>" >
                 
   </div>
       

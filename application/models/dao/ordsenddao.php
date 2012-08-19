@@ -59,8 +59,8 @@ class Ordsenddao extends CI_Model {
 
         $data = array(
             'sendmethod' =>$ordsend->getSendmethod(),
-            'send_description' =>$ordsend->getDescription()
-          
+            'send_description' =>$ordsend->getDescription(),
+          'send_price'=>$ordsend->getSendprice()
         );
 
         return $this->db->insert('ordsend', $data);
@@ -73,7 +73,7 @@ class Ordsenddao extends CI_Model {
 
         $ordsend->setSendmethod($row->sendmethod);
         $ordsend->setDescription($row->send_description);
-      
+      $ordsend->setSendprice($row->send_price);
 
         return $ordsend;
     }

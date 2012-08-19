@@ -146,49 +146,6 @@ class Orders extends CI_Controller {
         echo $javascript;
     }
 
-    public function showcart() {
-        $this->load->model('dao/templatedao');
-        $this->load->model('dao/paperdao');
-        $this->load->model('dao/optiondao');
-
-
-        $data = array();
-        if (!isset($_SESSION['cart'])) {
-            $_SESSION['cart'] = array();
-        } else {
-
-            $data['templatelist'] = $this->templatedao->findall();
-            $data['paperlist'] = $this->paperdao->findall();
-            $data['optionlist'] = $this->optiondao->findall();
-        }
-
-        $this->load->view(lang('showcartframe'), $data);
-    }
-
-    public function addtocart() {
-
-        // session_start();
-        //log_message('error', 'Some variable Some construct');
-
-        $ordline = $_SESSION['tmp_ordline'];
-        // echo var_dump($ordline);
-        if (!isset($_SESSION['cart'])) {
-            $_SESSION['cart'] = array();
-        }
-        array_push($_SESSION['cart'], $ordline);
-        unset($_SESSION['tmp_ordline']);
-
-        // redirect('home', 'refresh');
-        redirect('home/opencartdialog');
-    }
-
-    public function removeCartItem($index) {
-
-
-        unset($_SESSION['cart'][$index]);
-        $this->showcart();
-    }
-
     public function Checkout() {
         $this->load->model('dao/templatedao');
         $this->load->model('dao/paperdao');
@@ -237,6 +194,7 @@ class Orders extends CI_Controller {
         // echo $ordsendmethod;
         $data['ordpay'] = $this->ordpaydao->findbyid($ordpaymethod);
         $data['ordsend'] = $this->ordsenddao->findbyid($ordsendmethod);
+        var_dump($data['ordsend']);
 
         $this->load->view(lang('confirmorder'), $data);
     }
