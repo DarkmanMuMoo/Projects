@@ -12,21 +12,23 @@ th {
       <hr align="center" size="3" color="#C3C3C3">  </div>
     <div  style="margin: 0 auto;">  
      <form action="" method="post">
-       <table width="469" border="0">
+       <table width="666" border="0">
        <tr>
-         <td height="44"><table width="604" border="0">
+         <td width="660" height="44"><table width="695" border="0">
            <tr>
-             <td width="139" height="30"><strong>รหัสงาน</strong></td>
-             <td width="24">&nbsp;</td>
-             <td width="122"><?echo $work->getWorkno();?></td>
-             <td width="140" height="44"><strong>ชื่องาน</strong></td>
-             <td width="18">&nbsp;</td>
-             <td width="90"><?echo $work->getWorkname();?></td>
+             <td width="122" height="30"><strong>รหัสงาน</strong></td>
+             <td width="10">&nbsp;</td>
+             <td width="161"><?echo $work->getWorkno();?></td>
+             <td width="5">&nbsp;</td>
+             <td width="171" height="44"><strong>ชื่องาน</strong></td>
+             <td width="11">&nbsp;</td>
+             <td width="194"><?echo $work->getWorkname();?></td>
            </tr>
            <tr>
              <td height="44"><strong>OrdNo</strong></td>
              <td>&nbsp;</td>
              <td><a href="<?echo site_url('Backend/bakorders/vieworderdetail/'.$work->getOrdno()); ?>" ><? echo $work->getOrdno() ?></a></td>
+             <td width="5">&nbsp;</td>
              <td height="44"><strong>ผู้รับผิดชอบ</strong></td>
              <td>&nbsp;</td>
              <td><?echo $work->getName();?>&nbsp;<?echo $work->getLastname();?></td>
@@ -36,6 +38,7 @@ th {
              <td height="44"><strong>วันเริ่มทำงาน</strong></td>
              <td>&nbsp;</td>
              <td><?echo $work->getStartdate();?></td>
+             <td width="5">&nbsp;</td>
              <td height="44"><strong>วันสิ้นสุดการทำงาน</strong></td>
              <td>&nbsp;</td>
              <td><?php if ($_SESSION['emp']->getPosition() == 'Boss' ): ?>
@@ -52,9 +55,9 @@ th {
              </td>
            </tr>
             <tr>
-             <td height="44"><strong>รายละเอียดงาน</strong></td>
+             <td height="79"><strong>รายละเอียด</strong></td>
              <td>&nbsp;</td>
-             <td width="50" height="100">
+             <td width="161" height="79">
                  <textarea>
 
 <?echo $work->getWorkDescription()?>
@@ -88,10 +91,48 @@ th {
 
      
      </form>
+     
+     
         
         
   </div>
     
+    <div>
+    <form action="" method="post">
+    
+    <table width="322" border="0">
+  <tr>
+    <td width="129" height="22">&nbsp;</td>
+    <td width="107">&nbsp;</td>
+    <td width="72"><i class="icon-edit">&nbsp;&nbsp;&nbsp;&nbsp;แก้ไข</i></td>
+  </tr>
+  <tr>
+    <td>สถานะงาน</td>
+    <td><textarea name="status" cols="" rows=""></textarea></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><input type="submit" name="button" id="button" value="ตกลง" class="btn" /></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+
+    
+    
+    
+    </form>
+    </div>
 
 </div>
 

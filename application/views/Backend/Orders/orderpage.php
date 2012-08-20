@@ -11,7 +11,11 @@ border-top: 1px solid #DDD;
         #result th{text-align: center;}
         #result td{text-align: center;}
     </style>
-    <div id="search-bar" style="margin-top: 100px;">  
+   <div style="margin-top: 100px; margin-left: auto; margin-right: auto; margin-bottom: 20px;"> 
+        <h2>รายการสั่งซื้อ</h2>
+      <hr align="center" size="3" color="#C3C3C3">  </div>    
+
+    <div id="search-bar" >  
         <form id="searchform"action="<? echo site_url('Backend/bakorders') ?>" class="form-search" align="center"  method="post">
             Keyword:<input type="text"  name="keyword" id="email" class="input-small" />
             From :<input type="text" name="fromdate" id="fromdate" class="input-small datepicker" />
@@ -32,25 +36,25 @@ border-top: 1px solid #DDD;
         <table class="table table-bordered" >
             <thead>
             <th>
-                Number
+                ลำดับ
             </th>
             <th>
-                Orderno 
+                รหัสสั่งซื้อ 
             </th>
             <th>
-                Custormer
+                ชื่อลูกค้า
             </th>
             <th>
-                Email
+                อีเมลล์
             </th>
             <th>
-                Date
+                วันที่
             </th>
             <th>
-                Status
+                สถานะ
             </th>
             <th>
-                Total-Price
+                ราคารวม
             </th>
             <th>
 

@@ -1,8 +1,15 @@
 <? $this->load->view(lang('bakheader'));?>
 
 <div class="container" >
+
+
+   <div style="margin-top: 100px; margin-left: auto; margin-right: auto; margin-bottom: 20px;"> 
+        <h2>ประวัติพนักงาน</h2>
+      <hr align="center" size="3" color="#C3C3C3">  </div>
+
+
     
-    <div id="img" style="margin: 100 auto 5% auto; text-align: center;"  >
+    <div id="img" style="margin: 0 auto 5% auto; text-align: center;"  >
         <img src="<? echo ($tmpemp->getPicurl()==''||$tmpemp->getPicurl()==null)? base_url('asset/Sys_img/emp_img').'nopic.png' :base_url('asset/Sys_img/emp_img').$tmpemp->getPicurl() ?>" width="182" height="205"/>
     </div>
     <div id="info" class="divcenter"  >

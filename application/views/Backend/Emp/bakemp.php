@@ -13,7 +13,13 @@
     #result th{text-align: center;}
     #result td{text-align: center;}
 </style>
-<div id="search-bar" style="margin-top: 100px;">  
+
+   <div style="margin-top: 100px; margin-left: auto; margin-right: auto; margin-bottom: 20px;"> 
+        <h2>รายชื่อพนักงาน</h2>
+      <hr align="center" size="3" color="#C3C3C3">  </div>
+
+
+<div id="search-bar" >  
             <form id="searchform"action="<? echo site_url('Backend/bakemp') ?>" class="form-search" align="center"  method="post">
                 Keyword:<input type="text"  name="keyword" id="email" class="input-small " />
                 position: <select name="position" id="position" >  
@@ -120,12 +126,12 @@
             <tr>
                 <td>อีเมลล์</td>
                 <td>&nbsp;</td>
-                <td><input type="text"name="email" id="email"></input</td>
+                <td><input type="text"name="email" id="email"></input></td>
           </tr>
  <tr>
                 <td >โทรศัพท์</td>
                 <td>&nbsp;</td>
-                <td><input type="text" name="phone" id="phone"></input</td>
+                <td><input type="text" name="phone" id="phone"></input></td>
           </tr>
              
                 <tr>

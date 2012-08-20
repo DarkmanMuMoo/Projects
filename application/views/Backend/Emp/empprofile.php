@@ -42,7 +42,10 @@
 
 <div class="container"  >
 
+
     <div align="center" style="margin-top:100px">  
+    
+    
 
         <div class="divcenter" > 
             <img src="<? echo base_url('asset/Sys_img/emp_img/' . $picurl) ?>"  />

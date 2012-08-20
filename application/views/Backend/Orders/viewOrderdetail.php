@@ -27,6 +27,12 @@ margin-top: 100px;
 
     }
 </style>
+
+ <div style="margin-top: 100px; margin-left: auto; margin-right: auto; margin-bottom: 20px;"> 
+        <h1>ใบสั่งสินค้า</h1>
+       </div>
+
+
 <div id="headline" >
     <div id="order">
             <h2>Orderno: <? echo $order->getOrderno(); ?></h2><br>
@@ -60,9 +66,9 @@ margin-top: 100px;
         </div>
      </div>
   <div id="orderline" align="center" style="clear: both; margin: 0 auto;">
-        <hr style="color: orange;
-background-color: orange;
-height: 3px; margin: 0 0;"></hr>
+       
+    
+      <hr align="center" size="3" color="#C3C3C3">  
         <p>
         <h2>Orderline</h2>
     </p>

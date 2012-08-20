@@ -10,8 +10,16 @@
 </style>
 
 
+
+
+
+
 <div class="container" >
-    <div id="search-bar" style="margin-top: 100px;">  
+   <div style="margin-top: 100px; margin-left: auto; margin-right: auto; margin-bottom: 20px;"> 
+        <h2>งานทั้งหมด</h2>
+      <hr align="center" size="3" color="#C3C3C3">  </div>
+
+    <div id="search-bar" >  
         <form id="searchform"action="<? echo site_url('Backend/bakwork') ?>" class="form-search" align="center"  method="post">
             Keyword:<input type="text"  name="keyword" id="email" class="input-small " />
             Employee: <select name="emp" id="emp" >  
