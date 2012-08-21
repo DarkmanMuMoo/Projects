@@ -1,8 +1,6 @@
 <? $this->load->view(lang('bakheader')); ?>
 <style type="text/css">
-#font1 {
-	font-family: can_jaew;
-}
+
 #insertwork{
     
     display: none;

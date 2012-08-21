@@ -72,7 +72,7 @@ $lang['bakemp'] ='Backend/Emp/bakemp';
 $lang['empdetail'] ='Backend/Emp/empdetail';
 $lang['empprofile']='Backend/Emp/empprofile';
 
-
+$lang['bakempwork']='Backend/Work/empworkpage';
 $lang['bakwork']='Backend/Work/workpage';
 $lang['workdetail']='Backend/Work/workdetail';
 

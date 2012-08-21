@@ -54,6 +54,11 @@ class Workdao extends CI_Model {
         return $this->db->update('work', $data);
     }
 
+    public function findsharedwork($keyword,$condition){
+        
+        
+        
+    }
     public function findworkdetail($workno) {
         $sql = "select * from work w join employee emp  on w.empno=emp.empno where w.workno=?";
         $query = $this->db->query($sql, array($workno));

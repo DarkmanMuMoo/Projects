@@ -41,7 +41,51 @@ class Bakwork extends CI_Controller {
 
         $this->load->view(lang('bakwork'), $data);
     }
-
+    
+    public function empworkpage(){
+    $this->load->model('dao/workdao');
+    
+        $condition = array();
+        $keyword = '';
+        if ($this->input->post('keyword')) {
+            $keyword = $this->input->post('keyword');
+        }
+    $allworklist=array();
+    switch($this->input->post('status')){
+    case 0:{
+         $ownworklist = $this->workdao->findworklist($keyword, $condition);
+        break;
+    }
+    case 1:{
+         $ownworklist = $this->workdao->findworklist($keyword, $condition);
+        break;
+    }
+    case 2:{
+         $ownworklist = $this->workdao->findworklist($keyword, $condition);
+        break;
+    }
+    
+    }
+     $ownworklist = $this->workdao->findworklist($keyword, $condition);
+     
+      
+     $this->load->view(lang('bakempwork'), $data);
+}
+public function addprocess(){
+    
+    $this->load->model('dao/processdao');
+    $workno=$this->input->post('workno');
+    $description=$this->input->post('description');
+    $process=new Process();
+    $process->setEmpno($_SESSION['emp']->getEmpno());
+    $process->setProdescription($description);
+    $process->setWorkno($workno);
+    
+    $result=$this->processdao->insert($process);
+    error_log('isert process '.  var_export($result, true));
+    
+    $this->index();
+}
     public function deletework($workno){
         
          $this->load->model('dao/workdao');

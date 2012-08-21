@@ -70,8 +70,6 @@ th {
        </tr>
        </table>
      </form>
-     
-     <form action="" method="post">
      <table >
          <thead>
     <th width="72" scope="col" >สถานะงาน</th>
@@ -89,16 +87,12 @@ th {
   </tbody>
 </table>
 
-     
-     </form>
-     
-     
-        
+       
         
   </div>
     
     <div>
-    <form action="" method="post">
+        <form action="<?echo site_url('work/addprocess'); ?>" method="post">
     
     <table width="322" border="0">
   <tr>
@@ -108,7 +102,7 @@ th {
   </tr>
   <tr>
     <td>สถานะงาน</td>
-    <td><textarea name="status" cols="" rows=""></textarea></td>
+    <td><textarea name="description" cols="" rows=""></textarea></td>
     <td>&nbsp;</td>
   </tr>
   <tr>
@@ -116,21 +110,11 @@ th {
     <td><input type="submit" name="button" id="button" value="ตกลง" class="btn" /></td>
     <td>&nbsp;</td>
   </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
+  <input type="hidden" name="workno" value="<?echo $work->getWorkno();?>"  />
 </table>
 
     
-    
-    
+
     </form>
     </div>
 
