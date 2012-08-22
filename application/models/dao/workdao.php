@@ -54,21 +54,42 @@ class Workdao extends CI_Model {
         return $this->db->update('work', $data);
     }
 
-    public function findsharedwork($keyword,$condition){
+    public function findsharedwork($keyword, $condition) {
+        $this->db->select('*');
+        $this->db->from('work');
+        $this->db->join('work_emp', 'work.empno = work_emp.empno');
+        $this->db->like('work_name', $keyword);
         
+        foreach ($condition as $key => $value) {
+            
+            $this->db->where($key, $value); 
+        }
+        $query = $this->db->get();
         
-        
+         $array = array();
+        foreach ($query->result() as $row) {
+            $type = null;
+
+
+            $type = $this->makeObj($row);
+
+
+            array_push($array, $type);
+        }
+        //echo var_dump($array);
+
+        return $array;
     }
+
     public function findworkdetail($workno) {
         $sql = "select * from work w join employee emp  on w.empno=emp.empno where w.workno=?";
         $query = $this->db->query($sql, array($workno));
-        $obj=null;
+        $obj = null;
         foreach ($query->result() as $row) {
-          
-          $obj=$this->makeObjextends($row);
-           
+
+            $obj = $this->makeObjextends($row);
         }
-        
+
         return $obj;
     }
 
@@ -80,7 +101,6 @@ class Workdao extends CI_Model {
         foreach ($query->result() as $row) {
 
             $obj = $this->makeObj($row);
-            
         }
         // echo var_dump($obj);
 

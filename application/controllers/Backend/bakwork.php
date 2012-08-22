@@ -30,7 +30,7 @@ class Bakwork extends CI_Controller {
         if ($this->input->post('emp')) {
             $position = $this->input->post('emp');
 
-            $condition['emp'] = $position;
+            $condition['empno'] = $position;
         }
 
         $worklist = $this->workdao->findworklist($keyword, $condition);
@@ -50,10 +50,13 @@ class Bakwork extends CI_Controller {
         if ($this->input->post('keyword')) {
             $keyword = $this->input->post('keyword');
         }
-    $allworklist=array();
+    $allworklist;
+ 
+    
     switch($this->input->post('status')){
     case 0:{
          $ownworklist = $this->workdao->findworklist($keyword, $condition);
+         $coworklist=$this->workdao->findsharedwork($keyword, $condition);
         break;
     }
     case 1:{
