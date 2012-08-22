@@ -50,27 +50,29 @@ class Bakwork extends CI_Controller {
         if ($this->input->post('keyword')) {
             $keyword = $this->input->post('keyword');
         }
-    $allworklist;
- 
+    $allworklist=array();;
+ $condition['empno']=$_SESSION['emp']->getEmpno();
     
     switch($this->input->post('status')){
     case 0:{
-         $ownworklist = $this->workdao->findworklist($keyword, $condition);
-         $coworklist=$this->workdao->findsharedwork($keyword, $condition);
+         $allworklist = $this->workdao->findsharedwork($keyword, $condition);
+      
         break;
     }
     case 1:{
-         $ownworklist = $this->workdao->findworklist($keyword, $condition);
+         $condition['work_empno is null']=null;
+         $allworklist = $this->workdao->findsharedwork($keyword, $condition);
         break;
     }
     case 2:{
-         $ownworklist = $this->workdao->findworklist($keyword, $condition);
+         $condition['work_empno is not null']=null;
+         $allworklist = $this->workdao->findsharedwork($keyword, $condition);
         break;
     }
     
     }
-     $ownworklist = $this->workdao->findworklist($keyword, $condition);
-     
+    
+     $data['allworklist']=$allworklist;
       
      $this->load->view(lang('bakempwork'), $data);
 }

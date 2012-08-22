@@ -54,20 +54,32 @@ class Workdao extends CI_Model {
         return $this->db->update('work', $data);
     }
 
-    public function findsharedwork($keyword, $condition) {
-        $this->db->select('*');
-        $this->db->from('work');
-        $this->db->join('work_emp', 'work.empno = work_emp.empno');
-        $this->db->like('work_name', $keyword);
-        
-        foreach ($condition as $key => $value) {
-            
-            $this->db->where($key, $value); 
+    public function findsharedwork($keyword, $empno ,$con) {
+        $sql='select work.workno as workno, work_name,work_description, startdate, enddate, ordno, work.empno as empno from';
+        $sql.=' work left join work_emp on work.empno = work_emp.empno';
+        $sql.=' where work.empno ='.$empno;
+       echo $sql;
+        if ($keyword != '') {
+           $sql.=' and work_name like %'.$keyword.'%';
         }
-        $query = $this->db->get();
-        
-         $array = array();
+      switch($con){
+ 
+    case 1:{
+        $sql.=' and work_empno is null';
+        break;
+    }
+    case 2:{
+        $sql.=' and work_empno is  not null';
+        break;
+    }
+    
+    }
+        $query = $this->db->query($sql);
+
+        $array = array();
         foreach ($query->result() as $row) {
+
+
             $type = null;
 
 
@@ -75,6 +87,9 @@ class Workdao extends CI_Model {
 
 
             array_push($array, $type);
+
+
+        
         }
         //echo var_dump($array);
 

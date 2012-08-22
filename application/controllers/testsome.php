@@ -152,11 +152,11 @@ class Testsome extends CI_Controller {
     }
 
     public function testDB() {
-        $this->load->model('dao/orddao');
+        $this->load->model('dao/workdao');
 
-        $ordlist = $this->orddao->countfilenotupload(1);
+        $worklist = $this->workdao->findsharedwork('', 3,0);
 
-        var_dump($ordlist);
+        var_dump($worklist);
         // echo $paper;
         //echo $template;
     }
