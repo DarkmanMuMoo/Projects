@@ -36,7 +36,7 @@ public function userexist($varname){
 $check = $this->checkvarinsession('user');
 $_SESSION[$varname[0]] = $check;
 $controllername = get_class(get_instance());
-error_log($controllername);
+
 
 if(!$check){
   

@@ -34,6 +34,12 @@ class Workdao extends CI_Model {
 
         return $this->db->insert('work', $data);
     }
+    public function addcoemp($workno,$empno){
+         $data = array(
+            'workno'=>$workno,
+        'empno'=>$empno);
+         return $this->db->insert('work_emp', $data);
+    }
 
     public function delete($workno) {
 
@@ -58,18 +64,18 @@ class Workdao extends CI_Model {
         $sql='select work.workno as workno, work_name,work_description, startdate, enddate, ordno, work.empno as empno from';
         $sql.=' work left join work_emp on work.empno = work_emp.empno';
         $sql.=' where work.empno ='.$empno;
-       echo $sql;
+      // echo $sql;
         if ($keyword != '') {
-           $sql.=' and work_name like %'.$keyword.'%';
+           $sql.=' and work_name like \'%'.$keyword.'%\'';
         }
       switch($con){
  
     case 1:{
-        $sql.=' and work_empno is null';
+        $sql.=' and work_empno is  null';
         break;
     }
     case 2:{
-        $sql.=' and work_empno is  not null';
+        $sql.=' and work_empno is not null';
         break;
     }
     

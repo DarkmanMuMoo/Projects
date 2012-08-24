@@ -39,7 +39,7 @@
                   <ul id="menu"class="nav nav-pills">
                     <li id="Home"  ><a href="<? echo site_url('Backend/home');  ?>">mainmenu</a></li>
            <li id="Bakemp"  ><a href="<? echo site_url('Backend/bakemp/empprofile');  ?>">Employee</a></li>         
-  <li  id="Bakwork"  ><a href="<? echo site_url('Backend/bakwork/empwork');  ?>">Work</a></li>
+  <li  id="Bakwork"  ><a href="<? echo site_url('Backend/bakwork/empworkpage');  ?>">Work</a></li>
 
            </ul>
                 

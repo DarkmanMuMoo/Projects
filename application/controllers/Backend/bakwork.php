@@ -41,76 +41,89 @@ class Bakwork extends CI_Controller {
 
         $this->load->view(lang('bakwork'), $data);
     }
-    
-    public function empworkpage(){
-    $this->load->model('dao/workdao');
-    
-        $condition = array();
+
+    public function empworkpage() {
+        $this->load->model('dao/workdao');
+
+
         $keyword = '';
         if ($this->input->post('keyword')) {
             $keyword = $this->input->post('keyword');
         }
-    $allworklist=array();;
- $condition['empno']=$_SESSION['emp']->getEmpno();
-    
-    switch($this->input->post('status')){
-    case 0:{
-         $allworklist = $this->workdao->findsharedwork($keyword, $condition);
-      
-        break;
+        $allworklist = array();
+        ;
+        $empno = $_SESSION['emp']->getEmpno();
+
+        switch ($this->input->post('status')) {
+            case 0: {
+                    $allworklist = $this->workdao->findsharedwork($keyword, $empno, 0);
+
+                    break;
+                }
+            case 1: {
+
+                    $allworklist = $this->workdao->findsharedwork($keyword, $empno, 1);
+                    break;
+                }
+            case 2: {
+
+                    $allworklist = $this->workdao->findsharedwork($keyword, $empno, 2);
+                    break;
+                }
+        }
+
+        $data['worklist'] = $allworklist;
+
+        $this->load->view(lang('bakempwork'), $data);
     }
-    case 1:{
-         $condition['work_empno is null']=null;
-         $allworklist = $this->workdao->findsharedwork($keyword, $condition);
-        break;
+
+    public function addprocess() {
+
+        $this->load->model('dao/processdao');
+        $workno = $this->input->post('workno');
+        $description = $this->input->post('description');
+        $process = new Process();
+        $process->setEmpno($_SESSION['emp']->getEmpno());
+        $process->setDate(date("Y-m-d"));
+        $process->setProdescription($description);
+        $process->setWorkno($workno);
+
+        $result = $this->processdao->insert($process);
+        error_log('isert process ' . var_export($result, true));
+
+        $this->viewworkdetail($workno);
     }
-    case 2:{
-         $condition['work_empno is not null']=null;
-         $allworklist = $this->workdao->findsharedwork($keyword, $condition);
-        break;
+
+    public function deletework($workno) {
+
+        $this->load->model('dao/workdao');
+        $this->load->model('dao/processdao');
+        $processresult = $this->processdao->delete($workno);
+        $workresult = $this->workdao->delete($workno);
+        error_log('delete process of workno' . var_export($processresult, true));
+        error_log('delete work of workno' . var_export($workresult, true));
+        $message = '';
+        if ($processresult && $workresult) {
+            $message = 'alert(\'delete complete\'); document.location.reload();';
+        } else {
+
+
+            $message = 'alert(\'somthing wrong *-* contact admin\');';
+        }
+        echo $message;
     }
-    
-    }
-    
-     $data['allworklist']=$allworklist;
-      
-     $this->load->view(lang('bakempwork'), $data);
-}
-public function addprocess(){
-    
-    $this->load->model('dao/processdao');
-    $workno=$this->input->post('workno');
-    $description=$this->input->post('description');
-    $process=new Process();
-    $process->setEmpno($_SESSION['emp']->getEmpno());
-    $process->setProdescription($description);
-    $process->setWorkno($workno);
-    
-    $result=$this->processdao->insert($process);
-    error_log('isert process '.  var_export($result, true));
-    
-    $this->index();
-}
-    public function deletework($workno){
-        
+
+    public function addcoemp() {
          $this->load->model('dao/workdao');
-         $this->load->model('dao/processdao');
-         $processresult=$this->processdao->delete($workno);
-         $workresult=$this->workdao->delete($workno);
-         error_log('delete process of workno'.  var_export($processresult, true));
-         error_log('delete work of workno'.  var_export($workresult, true));
-         $message='';
-         if($processresult&&$workresult){
-             $message='alert(\'delete complete\'); document.location.reload();';
-             
-         }else{
-             
-             
-              $message='alert(\'somthing wrong *-* contact admin\');';
-         }
-         echo $message;
-         
+        $workno = $this->input->post('workno');
+        $empno = $this->input->post('empno');
+        
+        $result = $this->workdao->addcoemp($workno, $empno);
+        error_log(var_export($result, true) . 'insert in work_emp', 0);
+        
+        $this->viewworkdetail($workno);
     }
+
     public function viewworkdetail($workno) {
         $this->load->model('dao/workdao');
         $this->load->model('dao/processdao');
@@ -118,10 +131,12 @@ public function addprocess(){
         $work = $this->workdao->findworkdetail($workno);
         $allemp = $this->empdao->findbymultifield(array('position' => 'des'));
         $processlist = $this->processdao->findprocesslist($workno);
+        $coemplist = $this->empdao->findcoemp($workno);
+        $data['coemplist'] = $coemplist;
         $data['work'] = $work;
         $data['allemp'] = $allemp;
         $data['processlist'] = $processlist;
-  
+
         $this->load->view(lang('workdetail'), $data);
     }
 
@@ -163,7 +178,7 @@ public function addprocess(){
         $result = $this->workdao->update($endwork);
 
         error_log(var_export($result, true) . 'update in work', 0);
-        
+
         $this->viewworkdetail($workno);
     }
 

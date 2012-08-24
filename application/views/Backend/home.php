@@ -15,7 +15,7 @@
         <ul>
             <li>
     <a href="<?echo site_url('Backend/bakemp/empprofile') ?>" class="btn"><span>Profile</span></a></li>
-   <li><a class="btn" href="<?echo site_url('Backend/bakwork/getwork') ?>"><span>My Work </span></a></li>
+   <li><a class="btn" href="<?echo site_url('Backend/bakwork/empworkpage') ?>"><span>My Work </span></a></li>
 
         </ul>
         <?php endif; ?>

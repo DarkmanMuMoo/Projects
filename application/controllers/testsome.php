@@ -154,7 +154,7 @@ class Testsome extends CI_Controller {
     public function testDB() {
         $this->load->model('dao/workdao');
 
-        $worklist = $this->workdao->findsharedwork('', 3,0);
+        $worklist = $this->workdao->findsharedwork('',3,0);
 
         var_dump($worklist);
         // echo $paper;
