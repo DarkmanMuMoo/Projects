@@ -7,13 +7,32 @@
         
     }
     #calsec{
-        
-        float: left ; width :50%;
+        float: left;
+margin-left: 15%;
+width: 40%;
+padding-top: 6.5px;
+       
         
     }
+    #calsec h1{
+font-size: 30px;
+line-height: 36px;
+margin: 0;
+font-family: inherit;
+font-weight: bold;
+color: inherit;
+text-rendering: optimizelegibility;
+        
+        
+    }
+    #calsec form{
+        
+        margin-top: 10px;
+        padding:8px;
+    }
     #pricesec{
-         float:right; width: 50%;
-        text-align: center;
+         float:left; width: 40%;
+       
 	    }
 	
     

@@ -209,4 +209,4 @@ and open the template in the editor.
                     <input type="text"  class="input-xlarge" style="height: 28px;" name="email" id="email"  />
                 </p>
             </div>
-            <br>
+         

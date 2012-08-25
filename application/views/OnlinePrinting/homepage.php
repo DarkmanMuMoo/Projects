@@ -18,7 +18,7 @@
 </style>
 
 <div id="page">
-    <div  class="hero-unit">
+    <div  class="hero-unit" style="margin-top: 20px;">
         <div id="slider" >
             <ul style=" margin-left: 0px; ">
                 <li style="float: left; "><a href="http://templatica.com/preview/27">

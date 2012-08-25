@@ -110,10 +110,12 @@ class Orders extends CI_Controller {
         $email = $user->getEmail();
         $condition = array();
         $condition['email'] = $email;
+        $hilight='0';
         if ($this->input->post('status')) {
             $staus = $this->input->post('status');
             if ($staus != '') {
                 $condition['ord_status'] = $staus;
+                $hilight=$staus;
             }
         }
         if ($this->input->post('fromdate')) {
@@ -131,7 +133,7 @@ class Orders extends CI_Controller {
         $data = array();
         $data['orderlist'] = $orderlist;
         $data['ordstatuslist'] = $ordstatuslist;
-
+        $data['hilight']=$hilight;
         $this->load->view(lang('orderpage'), $data);
     }
 

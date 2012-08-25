@@ -2,7 +2,7 @@
 
 <script>
     function Searchstatus (ordstatus){
-    
+     
         $('#status').attr('value',ordstatus);
         $('#fromdate').attr('value','');
         $('#todate').attr('value','');
@@ -34,13 +34,23 @@
             dateFormat: "yy-mm-dd"
 
         });
+           $('#<? echo $hilight; ?>').addClass('hilight');
+        
     });      
       
 </script>
 <style>
-
+    .hilight{
+        
+        background-color: #faa732;
+    }
     #result th{text-align: center;}
     #result td{text-align: center;}
+    #statuslist> li > a:hover{
+text-decoration: none;
+background-color: #faa732;
+        
+    }
 </style>
 <div id="page">
     <div id ="content">
@@ -122,11 +132,11 @@
         <h2>Order Summary</h2>
      
 
-          <ul class="nav nav-tabs nav-stacked">
+        <ul id="statuslist"class="nav nav-tabs nav-stacked">
       
-                <li><a href="JavaScript:void(0);" onclick="Searchstatus('');">all</a></li>
+            <li><a id="0" href="JavaScript:void(0);" onclick="Searchstatus('');">all</a></li>
                 <?php foreach ($ordstatuslist as $ord): ?>
-                    <li ><a href="JavaScript:void(0);" onclick="Searchstatus('<? echo $ord->getStatus(); ?>');"><? echo $ord->getDescription() ?></a>
+                <li ><a id="<? echo $ord->getStatus(); ?>" href="JavaScript:void(0);" onclick="Searchstatus('<? echo $ord->getStatus(); ?>');"><? echo $ord->getDescription() ?></a>
                     </li>
                 <?php endforeach; ?>
             </ul> 
