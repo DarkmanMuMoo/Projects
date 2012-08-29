@@ -31,16 +31,15 @@ text-rendering: optimizelegibility;
         padding:8px;
     }
     #pricesec{
-<<<<<<< HEAD
+
          float:left; width: 40%;
        
 	    }
 	
-=======
-         float:right; width: 50%;
-        text-align: center;
-    }
->>>>>>> Revert "รูปโปรดัก"
+
+         
+    
+
     
 </style>
       
