@@ -1,10 +1,23 @@
 <? $this->load->view(lang('bakheader'));?>
+<style type="text/css">
+
+	hr{ text-align:center;
+color:#09F;
+border-color:#09F;
+size:3;
+}
+h1{ font-weight:bolder;
+}
+
+</style>
+
+
 
 <div class="container" >
 
 
    <div style="margin-top: 100px; margin-left: auto; margin-right: auto; margin-bottom: 20px;"> 
-        <h2>ประวัติพนักงาน</h2>
+        <h1>ประวัติพนักงาน</h1>
       <hr align="center" size="3" color="#C3C3C3">  </div>
 
 

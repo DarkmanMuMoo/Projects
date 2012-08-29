@@ -12,11 +12,25 @@
 }
     #result th{text-align: center;}
     #result td{text-align: center;}
+	
+hr{ text-align:center;
+color:#09F;
+border-color:#09F;
+size:3;
+}
+h1{ font-weight:bolder;
+}
+
+.bottom{border:dashed;
+border-width:thin;
+}
+
+
 </style>
 
    <div style="margin-top: 100px; margin-left: auto; margin-right: auto; margin-bottom: 20px;"> 
-        <h2>รายชื่อพนักงาน</h2>
-      <hr align="center" size="3" color="#C3C3C3">  </div>
+        <h1>รายชื่อพนักงาน</h1>
+      <hr />  </div>
 
 
 <div id="search-bar" >  
@@ -102,7 +116,7 @@
 
             </table>
 
-    <hr/>
+    <hr class="bottom"></hr>
         </div>
 
 
