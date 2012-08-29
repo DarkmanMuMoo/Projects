@@ -22,7 +22,7 @@ h1{ font-weight:bolder;
         <h1>งานทั้งหมด</h1>
       <hr > </hr> 
       </div>
-         </div>
+        
          
         
 

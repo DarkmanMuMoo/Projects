@@ -167,10 +167,12 @@ class Bakorders extends CI_Controller {
         $result = $this->changestatus('50', $orderno);
         $config = $this->emailutil->getSmtpconfig();
         $form = lang('adminemail');
+
        // $to = $email;
-        $subject = 'ยินดีต้อนรับ พนักงาน ใหม่';
-        $message = 'email use to login =' . $email;
-        $message.='<br> password is =' . $password;
+        $subject = 'Colour Harmony: สถานะกำลังปฏิบัติงาน';
+        $message = 'งานของท่านอยู่ในระหว่างการพิมพ์ เมื่องานของท่านสำเร็จแล้วเราจะแจ้งให้ทราบภายหลังค่ะ' . $email;
+        
+
 
         // $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
         //error_log("send email to $to result is".var_export($emailresult, true),0);
@@ -188,10 +190,12 @@ class Bakorders extends CI_Controller {
         //sent mail here;
         $config = $this->emailutil->getSmtpconfig();
         $form = lang('adminemail');
-       // $to = $email;
-        $subject = 'ยินดีต้อนรับ พนักงาน ใหม่';
-        $message = 'email use to login =' . $email;
-        $message.='<br> password is =' . $password;
+
+      //  $to = $email;
+        $subject = 'Colour Harmony: สถานะรอชำระเงิน';
+        $message = 'งานของท่านถูกต้องค่ะ กรุณาโอนเงินเพื่อการทำงานต่อไปค่ะ' ;
+       
+
 
         // $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
         //error_log("send email to $to result is".var_export($emailresult, true),0);
@@ -207,10 +211,12 @@ class Bakorders extends CI_Controller {
 //sent mail here;
         $config = $this->emailutil->getSmtpconfig();
         $form = lang('adminemail');
+
        // $to = $email;
-        $subject = 'ยินดีต้อนรับ พนักงาน ใหม่';
-        $message = 'email use to login =' . $email;
-        $message.='<br> password is =' . $password;
+        $subject = 'Colour Harmony: สถานะปฏิเสธ';
+        $message = 'งานของท่านไม่ถูกต้อง กรุณาอัพโหลดงานใหม่ค่ะ' ;
+        
+
 
         // $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
         //error_log("send email to $to result is".var_export($emailresult, true),0);
@@ -226,10 +232,12 @@ class Bakorders extends CI_Controller {
 //sent mail here;
         $config = $this->emailutil->getSmtpconfig();
         $form = lang('adminemail');
-        //$to = $email;
-        $subject = 'ยินดีต้อนรับ พนักงาน ใหม่';
-        $message = 'email use to login =' . $email;
-        $message.='<br> password is =' . $password;
+
+      //  $to = $email;
+        $subject = 'Colour Harmony: สถานะสำเร็จ';
+        $message = 'งานของท่านเสร็จเรียบร้อยแล้วค่ะ' ;
+       
+
 
         // $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
         //error_log("send email to $to result is".var_export($emailresult, true),0);
@@ -245,10 +253,11 @@ class Bakorders extends CI_Controller {
 //sent mail here;
         $config = $this->emailutil->getSmtpconfig();
         $form = lang('adminemail');
+
        // $to = $email;
-        $subject = 'ยินดีต้อนรับ พนักงาน ใหม่';
-        $message = 'email use to login =' . $email;
-        $message.='<br> password is =' . $password;
+        $subject = 'Colour Harmony: สถานะcomplete';
+        $message = 'Order Complete' ;
+       
 
         // $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
         //error_log("send email to $to result is".var_export($emailresult, true),0);
