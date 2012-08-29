@@ -42,6 +42,7 @@
 
         display: table;
         width: 100%;
+		text-align:center;
     }
     .leftadd{
 
@@ -80,10 +81,16 @@
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td >ชื่อ-นามสกุล</td>
+                <td >ชื่อ</td>
                 <td colspan="2" style="text-align: left"><input  class="input-medium"name="name" type="text" value="<? echo $updateuser->getName(); ?>">&nbsp;&nbsp;
-                    <input class="input-medium" name="lastname" type="text" value="<? echo $updateuser->getLastname(); ?>"></td>
+                    </td>
+                    
              
+            </tr>
+            <tr>
+            <td>นามสกุล</td>
+            <td colspan="2" style="text-align: left"><input class="input-medium" name="lastname" type="text" value="<? echo $updateuser->getLastname(); ?>"></td>
+            
             </tr>
             <tr>
                 <td>โทรศัพท์มือถือ</td>
@@ -101,17 +108,17 @@
         </table>
     </form>
 
-
-    <div id="address1" >
-        <p>
+<p>
         <h5><strong>ที่อยู่</strong></h5>
         </P>
-        <form action="<? echo site_url('userprofile/updateaddress') ?>" method="post" >
-             <div class="leftadd">
+    <div id="address1" >
+        
+        <form id="edit" action="<? echo site_url('userprofile/updateaddress') ?>" method="post" >
+             
             <textarea name="ad" rows="5" cols="30"><? echo $address1['address'] ?></textarea>
              </div>
-             <div class="rightadd"> 
-          จังหวัด  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<select name="prov" >
+          <div id="address1" >    
+          จังหวัด  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<select  name="prov" >
               <?php foreach ($provincelist as $province): ?>
                 <option value="<? echo $province->getProvinceid(); ?>"    <? echo ( $address1['provinceid'] ==$province->getProvinceid())? 'selected=\'selected\'':'';  ?>><? echo $province->getProvincename(); ?></option>
                 <? endforeach; ?>
@@ -120,32 +127,37 @@
           </select><br/>
           รหัสไปรษณีย์  <input  name="post"type="text" value="<? echo $address1['postcode'] ?>"><br/>
            โทรศัพท์  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  name="phone"type="text" value="<? echo $address1['phone'] ?>">
-             </div>
-            <input name="index" value="1" type="hidden"/>
+           <br />
+           <input name="index" value="1" type="hidden"/>
         <input class="btn-info" type="submit" value="edit">
+             </div>
+            
+        
         </form> 
+        
     </div>
     <div id="address2" >
         <p>
             &nbsp;  &nbsp;  &nbsp; <h5><strong>ที่อยู่</strong></h5>
         </p>
-        <form action="<? echo site_url('userprofile/updateaddress') ?>" method="post" >
-            <div class="leftadd">
+        <form id="edit" action="<? echo site_url('userprofile/updateaddress') ?>" method="post" >
+            
 
                 <textarea  name="ad" rows="5" cols="50" ><? echo $address2['address'] ?></textarea>
-            </div>
-            <div class="rightadd"> 
-                จังหวัด &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name="prov"> <?php foreach ($provincelist as $province): ?>
+                <br />
+      จังหวัด &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <select name="prov"> <?php foreach ($provincelist as $province): ?>
                 <option value="<? echo $province->getProvinceid(); ?>"  <? echo ( $address2['provinceid'] ==$province->getProvinceid())? 'selected=\'selected\'':'';  ?>><? echo $province->getProvincename(); ?></option>
                 <? endforeach; ?></select><br/>
-              รหัสไปรษณีย์  <input name="post" type="text" value="<? echo $address2['postcode'] ?>"><br/>
+                รหัสไปรษณีย์  
+                <input name="post" type="text" value="<? echo $address2['postcode'] ?>"><br/>
                 โทรศัพท์   &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <input name="phone" type="text" value="<? echo $address2['phone'] ?>">
-            </div>
+            <br />
             <input name="index" value="2" type="hidden"/>
             <input  class="btn-info"type="submit" value="edit">
         </form>
-        
-
+        </div>
+</table>
     </div>
 
 
