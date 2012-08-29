@@ -10,10 +10,18 @@ border-top: 1px solid #DDD;
 }
         #result th{text-align: center;}
         #result td{text-align: center;}
+
+hr{ text-align:center;
+color:#09F;
+border-color:#09F;
+size:3;
+}
+h1{ font-weight:bolder;
+}
     </style>
    <div style="margin-top: 100px; margin-left: auto; margin-right: auto; margin-bottom: 20px;"> 
-        <h2>รายการสั่งซื้อ</h2>
-      <hr align="center" size="3" color="#C3C3C3">  </div>    
+        <h1>รายการสั่งซื้อ</h1>
+      <hr />  </div>    
 
     <div id="search-bar" >  
         <form id="searchform"action="<? echo site_url('Backend/bakorders') ?>" class="form-search" align="center"  method="post">

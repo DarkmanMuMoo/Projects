@@ -23,13 +23,26 @@
     #orderline td{text-align: center;}
     #headline{
         clear: both;
-margin-top: 100px;
+
 
     }
+	
+	hr{ text-align:center;
+color:#09F;
+border-color:#09F;
+size:3;
+}
+h1{ font-weight:bolder;
+}
+
+.bottom{border:dashed;
+border-width:thin;
+}
 </style>
 
  <div style="margin-top: 100px; margin-left: auto; margin-right: auto; margin-bottom: 20px;"> 
         <h1>ใบสั่งสินค้า</h1>
+        <hr />
        </div>
 
 
@@ -68,7 +81,7 @@ margin-top: 100px;
   <div id="orderline" align="center" style="clear: both; margin: 0 auto;">
        
     
-      <hr align="center" size="3" color="#C3C3C3">  
+      <hr class="bottom"></hr>  
         <p>
         <h2>Orderline</h2>
     </p>
