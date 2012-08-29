@@ -5,17 +5,27 @@
     
     display: none;
 }
+hr{ text-align:center;
+color:#09F;
+border-color:#09F;
+size:3;
+}
+h1{ font-weight:bolder;
+}
 </style>
 
 
 
-
-
-
 <div class="container" >
-   <div style="margin-top: 100px; margin-left: auto; margin-right: auto; margin-bottom: 20px;"> 
-        <h2>งานทั้งหมด</h2>
-      <hr align="center" size="3" color="#C3C3C3">  </div>
+
+<div style="margin-top: 100px; margin-left: auto; margin-right: auto; margin-bottom: 20px;"> 
+        <h1>งานทั้งหมด</h1>
+      <hr > </hr> 
+      </div>
+         </div>
+         
+        
+
 
     <div id="search-bar" >  
         <form id="searchform"action="<? echo site_url('Backend/bakwork') ?>" class="form-search" align="center"  method="post">
