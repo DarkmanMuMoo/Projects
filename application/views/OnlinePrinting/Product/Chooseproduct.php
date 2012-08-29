@@ -31,40 +31,22 @@ text-rendering: optimizelegibility;
         padding:8px;
     }
     #pricesec{
+<<<<<<< HEAD
          float:left; width: 40%;
        
 	    }
 	
+=======
+         float:right; width: 50%;
+        text-align: center;
+    }
+>>>>>>> Revert "รูปโปรดัก"
     
 </style>
- <style>
-    hr{color: orangeRed;
-background-color: orange;
-height: 1px;
-
-}
-table{
-   
-    width: 100%;
-   
-}
-
-</style>
-    
+      
         <br>
         <div id="page">
             <div class="divcenter" style=" margin-bottom: 25px;">
-     
-          <div style="text-align:left">
-    <p style ="margin-bottom: 10px;">
-    <h1><b>การ์ดเชิญ</b></h1>
-    <h4></h4>
-    
-    
-</p>
-</div>
-<hr></hr> 
-                 
                  
                      <img src="<? echo base_url($type->getPicurl()); ?>"   />  
 
@@ -72,9 +54,7 @@ table{
    
 
             </div>
-            
-            <hr style="border-style:dashed"/>
-
+            <hr/>
             <div id="calsec">
                 <h1> เลือกคุณสมบัติ</h1>
 
