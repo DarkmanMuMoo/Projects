@@ -184,7 +184,7 @@ table{
         <tr>
            <td style ="vertical-align: text-top;">ที่อยู่</td>
            <td></td>
-           <td><textarea rows="10" cols="30" name="address" id="address">The cat was playing in the garden.
+           <td><textarea rows="10" cols="30" name="address" id="address">
             </textarea></td>
         </tr>
         
@@ -222,7 +222,6 @@ table{
             <td style ="vertical-align: text-top;">ที่อยู่</td> 
             <td></td>
             <td><textarea rows="10" cols="30" name="address2" id="address2"  >
-The cat was playing in the garden.
             </textarea></td>
         </tr>
             
