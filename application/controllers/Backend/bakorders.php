@@ -188,7 +188,7 @@ class Bakorders extends CI_Controller {
         //sent mail here;
         $config = $this->emailutil->getSmtpconfig();
         $form = lang('adminemail');
-        $to = $email;
+      //  $to = $email;
         $subject = 'Colour Harmony: สถานะรอชำระเงิน';
         $message = 'งานของท่านถูกต้องค่ะ กรุณาโอนเงินเพื่อการทำงานต่อไปค่ะ' ;
        
