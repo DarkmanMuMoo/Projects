@@ -167,7 +167,7 @@ class Bakorders extends CI_Controller {
         $result = $this->changestatus('50', $orderno);
         $config = $this->emailutil->getSmtpconfig();
         $form = lang('adminemail');
-        $to = $email;
+       // $to = $email;
         $subject = 'ยินดีต้อนรับ พนักงาน ใหม่';
         $message = 'email use to login =' . $email;
         $message.='<br> password is =' . $password;
@@ -188,7 +188,7 @@ class Bakorders extends CI_Controller {
         //sent mail here;
         $config = $this->emailutil->getSmtpconfig();
         $form = lang('adminemail');
-        $to = $email;
+       // $to = $email;
         $subject = 'ยินดีต้อนรับ พนักงาน ใหม่';
         $message = 'email use to login =' . $email;
         $message.='<br> password is =' . $password;
@@ -207,7 +207,7 @@ class Bakorders extends CI_Controller {
 //sent mail here;
         $config = $this->emailutil->getSmtpconfig();
         $form = lang('adminemail');
-        $to = $email;
+       // $to = $email;
         $subject = 'ยินดีต้อนรับ พนักงาน ใหม่';
         $message = 'email use to login =' . $email;
         $message.='<br> password is =' . $password;
@@ -226,7 +226,7 @@ class Bakorders extends CI_Controller {
 //sent mail here;
         $config = $this->emailutil->getSmtpconfig();
         $form = lang('adminemail');
-        $to = $email;
+        //$to = $email;
         $subject = 'ยินดีต้อนรับ พนักงาน ใหม่';
         $message = 'email use to login =' . $email;
         $message.='<br> password is =' . $password;
@@ -245,7 +245,7 @@ class Bakorders extends CI_Controller {
 //sent mail here;
         $config = $this->emailutil->getSmtpconfig();
         $form = lang('adminemail');
-        $to = $email;
+       // $to = $email;
         $subject = 'ยินดีต้อนรับ พนักงาน ใหม่';
         $message = 'email use to login =' . $email;
         $message.='<br> password is =' . $password;

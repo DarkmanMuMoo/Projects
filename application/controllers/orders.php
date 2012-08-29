@@ -297,7 +297,7 @@ class Orders extends CI_Controller {
 //sent mail here;
         $config = $this->emailutil->getSmtpconfig();
         $form = lang('adminemail');
-        $to = $email;
+        //$to = $email;
         $subject = 'ยินดีต้อนรับ พนักงาน ใหม่';
         $message = 'email use to login =' . $email;
         $message.='<br> password is =' . $password;
