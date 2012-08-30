@@ -32,7 +32,7 @@
         // validate the comment form when it is submitted
         $("#mphone").mask("999-999-9999");
         $("#phone1").mask("99-999-9999");
-           $("#phone2").mask("99-999-9999");
+        $("#phone2").mask("99-999-9999");
         // validate signup form on keyup and submit
         $("#signupForm").validate({
             rules: {
@@ -89,11 +89,11 @@
                 email: "Please enter a valid email address Example: someone@example.com",
                 postcode2:{
                     required: "required",
-                    digits:"digit"
+                    digits:"Please enter digit only"
                 },
                 postcode:{
                     required: "required",
-                    digits:"digit"
+                    digits:"Please enter digit only"
                 },
                 address:"required",
                 address2:"required",
@@ -127,7 +127,10 @@ table{
     width: 100%;
    
 }
-
+#alert p{
+    
+    font-size: 18px;
+}
 </style>
 <div style="margin: 0 auto ; width: 80%;" > 
     <p style ="margin-bottom: 10px;">
@@ -147,32 +150,32 @@ table{
         <tr>
             <td>อีเมลล์ </td>
             <td></td>
-            <td><input type="text" name="email" id="email"  />
+            <td><input type="text" name="email" id="email" value="<?echo $this->input->post('email')?>"  />
                 <input class="btn" type="button" onclick="check_email();"  value="ตรวจสอบอีเมลล์"/></td>
         </tr>
 
         <tr>
             <td>ชื่อ</td>
             <td></td>
-            <td><input type="text" name="name" id="name" /></td>
+            <td><input type="text" name="name" id="name" value="<?echo $this->input->post('name')?>" /></td>
         </tr>
         
         <tr>
         <td>นามสกุล</td>
         <td></td>
-        <td><input type="text" name="lastname" id="lastname" /></td>
+        <td><input type="text" name="lastname" id="lastname"  value="<?echo $this->input->post('lastname')?>"/></td>
         </tr>
         
         <tr>
         <td>โทรศัพท์มือถือ</td>
         <td></td>
-        <td><input type="text" name="mphone"  id="mphone"/></td>
+        <td><input type="text" name="mphone"  value="<?echo $this->input->post('mphone')?>" id="mphone"/></td>
         </tr>
         
         <tr>
         <td>รหัสผ่าน</td>
         <td></td>
-        <td><input size="15" maxlength="15" type="password" name="password" id="password" /></td>
+        <td><input size="15" maxlength="15"  value="" type="password" name="password" id="password" /></td>
         </tr>
         
         <tr>
@@ -185,6 +188,8 @@ table{
            <td style ="vertical-align: text-top;">ที่อยู่</td>
            <td></td>
            <td><textarea rows="10" cols="30" name="address" id="address">
+
+<?echo $this->input->post('address')?>
             </textarea></td>
         </tr>
         
@@ -193,7 +198,7 @@ table{
             <td></td>
             <td><select name="province" id="province">
                      <?php foreach ($provincelist as $province): ?>
-                <option value="<? echo $province->getProvinceid(); ?>"><? echo $province->getProvincename(); ?></option>
+                <option <? echo ($province->getProvinceid()==$this->input->post('province'))? 'selected="selected"':'' ?> value="<? echo $province->getProvinceid(); ?>"><? echo $province->getProvincename(); ?></option>
                 <? endforeach; ?>
             </select></td>
         </tr>
@@ -201,13 +206,13 @@ table{
         <tr>
             <td>รหัสไปรษณย์</td>
             <td></td>
-            <td><input type="text" name="postcode" maxlength="5" id="postcode"/></td>
+            <td><input type="text" name="postcode" maxlength="5"  value="<?echo $this->input->post('postcode')?>"id="postcode"/></td>
         </tr>
         
         <tr>
         <td>โทรศัพท์</td>
         <td></td>
-        <td><input type="text" name="phone1"  id="phone1"/></td>
+        <td><input type="text" name="phone1" value="<?echo $this->input->post('phone1')?>"  id="phone1"/></td>
         </tr>
         
         <tr>
@@ -222,6 +227,7 @@ table{
             <td style ="vertical-align: text-top;">ที่อยู่</td> 
             <td></td>
             <td><textarea rows="10" cols="30" name="address2" id="address2"  >
+<?echo $this->input->post('address2')?>
             </textarea></td>
         </tr>
             
@@ -230,7 +236,8 @@ table{
             <td></td>
             <td><select name="province2" id="province2">
                      <?php foreach ($provincelist as $province): ?>
-                <option value="<? echo $province->getProvinceid(); ?>"><? echo $province->getProvincename(); ?></option>
+                <option <? echo ($province->getProvinceid()==$this->input->post('province2'))? 'selected="selected"':'' ?>
+                    value="<? echo $province->getProvinceid(); ?>"><? echo $province->getProvincename(); ?></option>
                 <? endforeach; ?>
             </select></td>
             </tr>
@@ -238,13 +245,13 @@ table{
             <tr>
             <td>รหัสไปรษณีย์</td>
             <td></td>
-            <td><input type="text" name="postcode2" maxlength="5" id="postcode2" /></td>
+            <td><input type="text" name="postcode2" maxlength="5" id="postcode2" value="<?echo $this->input->post('postcode2')?>" /></td>
             </tr>
             
             <tr>
         <td>โทรศัพท์</td>
         <td></td>
-        <td><input type="text" name="phone2"  id="phone2"/></td>
+        <td><input type="text" name="phone2"  id="phone2" value="<?echo $this->input->post('phone2')?>"/></td>
         </tr>
          <tr><td></td>
              <td></td>
@@ -265,11 +272,14 @@ table{
               </tbody>
         <? echo form_close(); ?>
     </table>
-    <p>
+<div  id="alert"class="alert alert-error alert-block" style=" margin: 0 auto; width: 50%" > 
 
+    <h4>ข้อผิดพลาด!</h4>
+    
         <?php echo validation_errors(); ?>
 
-    </p>
+
+</div>
 </div>
 
 

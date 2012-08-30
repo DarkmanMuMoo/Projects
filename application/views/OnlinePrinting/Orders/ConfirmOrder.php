@@ -1,6 +1,11 @@
 <? $this->load->view(lang('header')) ?>
+<style>
+    form{
+        padding: 20px;
+    }
+</style>
 <? echo form_open('orders/ordersummary') ?>
-<p>
+
 
 
 <h5>จัดส่ง</h5><br/>

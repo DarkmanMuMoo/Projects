@@ -18,19 +18,33 @@ class Testsome extends CI_Controller {
 
     public function index() {
 
-        var_dump(get_class(get_instance()));
+        var_dump($this->input->post());
         /* $first= load_class('emailutil', 'libraries','');
           var_dump($first);
           var_dump($this); */
         /* var_export(true,true);
           echo var_export(false,true); */
     }
-
+public function iscachning(){
+    
+    $this->load->driver('cache',array('adapter' => 'file'));
+     echo  var_dump($this->cache->cache_info(),true);
+   echo  'apc : '.var_export($this->cache->apc->is_supported(),true).'<br>';
+   echo 'file : '. var_export($this->cache->file->is_supported(),true).'<br>';
+   echo  'memcached : '.var_export($this->cache->memcached->is_supported(),true).'<br>';
+   echo 'add';
+  // $this->cache->file->save('A', 'test', 45);
+    $foo = $this->cache->file->get('A');
+     echo $foo;
+   
+}
     private function test() {
         $updateuser = $_SESSION['user'];
         $updateuser->setName('abc');
         var_dump($updateuser);
         var_dump($_SESSION['user']);
+        
+    
     }
 
     public function viewsession() {

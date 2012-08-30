@@ -27,15 +27,20 @@
     });
 
 </script>
-
-<? echo form_open('orders/confirmorder') ?><style type="text/css">
+<style>
     #mainaddress address {
         font-weight: lighter;
         line-height: 20px;
     }
+    form{
+        padding: 20px;
+    }
 </style>
-<p>
-<div id="selectadd">
+<? echo form_open('orders/confirmorder') ?>
+
+
+<div id="selectadd" >
+
     <input type="radio" id="add1" name="add" value="add1" checked="checked" /><label for="add1">main</label>
     <input type="radio" id="add2" name="add" value="add2"  /><label for="add2">sub</label>
 </div>
