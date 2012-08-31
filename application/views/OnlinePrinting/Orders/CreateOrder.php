@@ -34,18 +34,20 @@
     }
     form{
         padding: 20px;
+        width: 80%;
+        margin: 0 auto;
     }
 </style>
+<div id="page">
 <? echo form_open('orders/confirmorder') ?>
 
-
+<h5>จัดส่ง</h5> <br/>
 <div id="selectadd" >
 
     <input type="radio" id="add1" name="add" value="add1" checked="checked" /><label for="add1">main</label>
     <input type="radio" id="add2" name="add" value="add2"  /><label for="add2">sub</label>
 </div>
-<br/>
-<h5>จัดส่ง</h5> <br/>
+<br/><h5>จัดส่ง</h5> <br/>
 <div id="mainaddress" >
     <? $addr1 = $_SESSION['user']->getAddress1(); ?>
     <address>
@@ -137,7 +139,7 @@
 
 
 </table>
-<div style="float: right" >
+<div style="float: right; margin-right: 30%" >
     <strong>ราคารวม :<? echo $totalprice ?> บาท</strong>
 </div>
 
@@ -156,10 +158,10 @@
         <?php endforeach; ?>
     </select>
 </p>
-<button type="submit" class="btn btn-primary">Create Order</button>
+<div style="text-align: center;"> <button type="submit" class="btn btn-primary">Create Order</button> </div>
 <? echo form_close(); ?>
 
-
+</div>
 
 
 <? $this->load->view(lang('footer')) ?>

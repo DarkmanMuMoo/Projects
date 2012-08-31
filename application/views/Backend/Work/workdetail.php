@@ -7,14 +7,17 @@
         text-align: center;
         vertical-align: middle;
     }
-	
-	hr{ text-align:center;
-color:#09F;
-border-color:#09F;
-size:3;
-}
-h1{ font-weight:bolder;
-}
+
+    hr{ text-align:center;
+        color:#09F;
+        border-color:#09F;
+        size:3;
+    }
+    h1{ font-weight:bolder;
+    }
+    i{
+        margin-top: 2px;
+    }
 </style>
 
 
@@ -60,8 +63,8 @@ h1{ font-weight:bolder;
                                         ยังไม่เสร็จ
                                     <?php endif; ?>
                                 <?php else: ?>
-                                  
-                                    <? echo ($work->getEnddate()==null)?'ยังไม่เสร็จ':$work->getEnddate(); ?>
+
+                                    <? echo ($work->getEnddate() == null) ? 'ยังไม่เสร็จ' : $work->getEnddate(); ?>
                                 <?php endif; ?>
 
                             </td>
@@ -79,32 +82,33 @@ h1{ font-weight:bolder;
                             <td>&nbsp;</td>
                             <td height="44"><strong>พนักงานที่มีส่วนร่วม</strong></td>
                             <td>&nbsp;</td>
-                            <td >  <ul>
-                                <? $chkemp = array(); ?>
-                                <?php foreach ($coemplist as $emp): ?>
+                            <td >  <ul style="list-style:none;">
+                                    <? $chkemp = array(); ?>
+                                    <?php foreach ($coemplist as $emp): ?>
 
-                            <li> <? echo $emp->getName(); ?>&nbsp;<? echo $emp->getLastname(); ?>   </li>
-                            <? array_push($chkemp, $emp->getEmpno()); ?>
-                        <?php endforeach; ?>
+                                    <li>   <? echo $emp->getName(); ?>&nbsp;<? echo $emp->getLastname(); ?>
+                                        <a href="<?echo site_url('Backend/bakwork/removeCoemp/'.$emp->getEmpno().'/'.$work->getWorkno()); ?>"> <i class="icon-remove"></i></a>  </li>
+                                        <? array_push($chkemp, $emp->getEmpno()); ?>
+                                    <?php endforeach; ?>
 
-                        </ul>
+                                </ul>
 
 
-                </td>
+                            </td>
+                        </tr>
+                        <?php if ($_SESSION['emp']->getPosition() == 'Boss' || $_SESSION['emp']->getEmpno() == $work->getEmpno()): ?>
+                            <tr><td colspan="6">  </td> <td>
+                                    <select  id="empno">  <?php foreach ($allemp as $emp): ?> 
+                                            <?php if ($emp->getEmpno() != $_SESSION['emp']->getEmpno() && !in_array($emp->getEmpno(), $chkemp, true)): ?>
+                                        <option value="<? echo $emp->getEmpno(); ?>" > <a><? echo $emp->getName(); ?>&nbsp;<? echo $emp->getLastname(); ?></a></option>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <button class="btn" onclick="addcoemp();" >เพิ่มพนักงาน</button>
+                                </td>  </tr>
+                        <?php endif; ?>
+                    </table>         
             </tr>
-            <?php if ($_SESSION['emp']->getPosition() == 'Boss' || $_SESSION['emp']->getEmpno() == $work->getEmpno()): ?>
-                <tr><td colspan="6">  </td> <td>
-                        <select  id="empno">  <?php foreach ($allemp as $emp): ?> 
-                                <?php if ($emp->getEmpno() != $_SESSION['emp']->getEmpno() && !in_array($emp->getEmpno(), $chkemp, true)): ?>
-                                    <option value="<? echo $emp->getEmpno(); ?>" > <? echo $emp->getName(); ?>&nbsp;<? echo $emp->getLastname(); ?></option>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        </select>
-                        <button class="btn" onclick="addcoemp();" >เพิ่มพนักงาน</button>
-                    </td>  </tr>
-            <?php endif; ?>
-        </table>         
-        </tr>
         </table>
 
 

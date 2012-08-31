@@ -48,7 +48,7 @@
     
 
         <div class="divcenter" > 
-            <img src="<? echo base_url('asset/Sys_img/emp_img/' . $picurl) ?>"  />
+            <img src="<? echo base_url('asset/Sys_img/emp_img/' . $picurl) ?>" width="200" height="200" />
             <br><button  class="btn"   onclick="showuploadpic();"><i class="icon-camera"></i>เปลี่ยนรูปประจำตัว</button>
             <form  class="well" action="<? echo site_url('Backend/bakemp/uploadpic'); ?>" method="post" enctype="multipart/form-data" id="uploadpic" >
                 <input type="file" name="pic" />

@@ -83,7 +83,7 @@ background-color: #faa732;
                     Total-Price
                 </th>
                 <th>
-                    Cancel Order
+                    Management
                 </th>
                 </thead>
 

@@ -1,9 +1,12 @@
 <? $this->load->view(lang('header')) ?>
 <style>
     form{
-        padding: 20px;
+     padding: 20px;
+        width: 80%;
+        margin: 0 auto;
     }
 </style>
+<div id="page">  
 <? echo form_open('orders/ordersummary') ?>
 
 
@@ -127,10 +130,11 @@
 
 
 </p>
-<p>
-    <button  onclick="history.back();" class="btn btn-primary">Back</button> 
-    <button type="submit" class="btn btn-primary">Confirm</button>
-</p>
-<? echo form_close(); ?>
 
+<div style="text-align: center;">
+    <a href="javascript:void(0);" onclick="history.back()" class="btn btn-primary">Back</a> 
+    <button type="submit" class="btn btn-primary">Confirm</button>
+</div>
+<? echo form_close(); ?>
+ </div>
 <? $this->load->view(lang('footer')) ?>

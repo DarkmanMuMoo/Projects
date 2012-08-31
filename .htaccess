@@ -1,0 +1,25 @@
+<IfModule mod_rewrite.c>
+    Options +FollowSymLinks
+    RewriteEngine On
+    RewriteBase /Projects
+ 
+    # Removes access to the system folder by users
+    RewriteCond %{REQUEST_URI} ^system.*
+    RewriteRule ^(.*)$ /index.php/$1 [L]
+ 
+    # Checks to see if the user is attempting to access a valid file
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php/$1 [L]
+ 
+	# Add a extension to URL
+	# RewriteCond %{REQUEST_FILENAME} !-f
+	# RewriteCond %{REQUEST_FILENAME} !-d
+	# RewriteRule ^(.*)$ $1.php [L,QSA]
+	# http://domain/about -> http://domain/about.php
+ 
+	# Force "www." in the domain name.
+	# RewriteCond %{HTTP_HOST} !^www.mydomain.com$
+	# RewriteRule ^(.*)$ http://www.mydomain.com/$1 [R=301]
+ 
+</IfModule>

@@ -42,6 +42,14 @@ class Bakwork extends CI_Controller {
         $this->load->view(lang('bakwork'), $data);
     }
 
+    public function removeCoemp($empno, $workno) {
+        $this->db->where('empno', $empno);
+        $this->db->where('workno', $workno);
+        $result = $this->db->delete('work_emp');
+         error_log('removecowork ' . var_export($result, true));
+        $this->viewworkdetail($workno);
+    }
+
     public function empworkpage() {
         $this->load->model('dao/workdao');
 
@@ -114,13 +122,13 @@ class Bakwork extends CI_Controller {
     }
 
     public function addcoemp() {
-         $this->load->model('dao/workdao');
+        $this->load->model('dao/workdao');
         $workno = $this->input->post('workno');
         $empno = $this->input->post('empno');
-        
+
         $result = $this->workdao->addcoemp($workno, $empno);
         error_log(var_export($result, true) . 'insert in work_emp', 0);
-        
+
         $this->viewworkdetail($workno);
     }
 

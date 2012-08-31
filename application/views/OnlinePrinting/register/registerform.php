@@ -118,10 +118,7 @@
 background-color: orange;
 height: 1px;}
     input.error { border: 1px dotted red; }
-    label.error {
-color: red;
-font-style: italic;
-}
+
 table{
    
     width: 100%;
@@ -187,7 +184,7 @@ table{
         <tr>
            <td style ="vertical-align: text-top;">ที่อยู่</td>
            <td></td>
-           <td><textarea rows="10" cols="30" name="address" id="address">
+           <td><textarea rows="5" cols="15" name="address" id="address">
 
 <?echo $this->input->post('address')?>
             </textarea></td>
@@ -226,7 +223,7 @@ table{
         <tr>
             <td style ="vertical-align: text-top;">ที่อยู่</td> 
             <td></td>
-            <td><textarea rows="10" cols="30" name="address2" id="address2"  >
+            <td><textarea rows="5" cols="15" name="address2" id="address2"  >
 <?echo $this->input->post('address2')?>
             </textarea></td>
         </tr>
@@ -272,9 +269,9 @@ table{
               </tbody>
         <? echo form_close(); ?>
     </table>
-<div  id="alert"class="alert alert-error alert-block" style=" margin: 0 auto; width: 50%" > 
-
-    <h4>ข้อผิดพลาด!</h4>
+<div  id="alert" <? echo (validation_errors()==null)?'': 'class="alert alert-error alert-block"'; ?> style=" margin: 0 auto; width: 50%" > 
+<? echo (validation_errors()==null)?'': '<h4>ข้อผิดพลาด!</h4>'; ?>
+    
     
         <?php echo validation_errors(); ?>
 

@@ -159,9 +159,10 @@ class Orders extends CI_Controller {
 
         $data['user'] = $_SESSION['user'];
 
-        if (!isset($_SESSION['temp_orderlinelist'])) {
+        if (!empty($_SESSION['cart'])) {
             $_SESSION['temp_orderlinelist'] = array_values($_SESSION['cart']);
         }
+        
         $_SESSION['cart'] = array();
         $data['templatelist'] = $this->templatedao->findall();
         $data['paperlist'] = $this->paperdao->findall();

@@ -23,7 +23,7 @@ h1{ font-weight:bolder;
 
     
     <div id="img" style="margin: 0 auto 5% auto; text-align: center;"  >
-        <img src="<? echo ($tmpemp->getPicurl()==''||$tmpemp->getPicurl()==null)? base_url('asset/Sys_img/emp_img').'nopic.png' :base_url('asset/Sys_img/emp_img').$tmpemp->getPicurl() ?>" width="182" height="205"/>
+        <img src="<? echo ($tmpemp->getPicurl()==''||$tmpemp->getPicurl()==null)? base_url('asset/Sys_img/emp_img').'/nopic.jpg' :base_url('asset/Sys_img/emp_img').$tmpemp->getPicurl() ?>"  width="200" height="200"/>
     </div>
     <div id="info" class="divcenter"  >
         <form action="<? echo site_url('Backend/bakemp/updateemp');?>" method="post">
