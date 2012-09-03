@@ -168,8 +168,8 @@ class Bakorders extends CI_Controller {
         $form = lang('adminemail');
 
        // $to = $email;
-        $subject = 'Colour Harmony: สถานะกำลังปฏิบัติงาน';
-        $message = 'งานของท่านอยู่ในระหว่างการพิมพ์ เมื่องานของท่านสำเร็จแล้วเราจะแจ้งให้ทราบภายหลังค่ะ' . $email;
+        //$subject = 'Colour Harmony: สถานะกำลังปฏิบัติงาน';
+       // $message = 'งานของท่านอยู่ในระหว่างการพิมพ์ เมื่องานของท่านสำเร็จแล้วเราจะแจ้งให้ทราบภายหลังค่ะ' . $email;
         
 
 
