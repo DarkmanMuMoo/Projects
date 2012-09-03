@@ -133,8 +133,9 @@ class Bakorders extends CI_Controller {
 
             $result = $this->paymentdao->update($payment);
             error_log(var_export($result, true) . 'set active payment', 0);
-
+if($countactive!=2){
              $this->onproduction($orderno);
+}
             if ($iscomplete && $result) {
 
                 $this->paymentdao->deleteinactive($orderno);
