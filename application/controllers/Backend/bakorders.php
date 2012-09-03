@@ -112,7 +112,9 @@ class Bakorders extends CI_Controller {
         $orderno = $this->input->post('orderno');
         $paymethod = $this->input->post('paymethod');
         $countactive = $this->input->post('countactive');
+    
         $countactive+=1;
+     
         $payment = $this->paymentdao->findbyid($payno);
         $iscomplete = false;
         if ($countactive <= 2) {

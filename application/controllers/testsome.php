@@ -18,7 +18,9 @@ class Testsome extends CI_Controller {
 
     public function index() {
 
-        var_dump($this->input->post());
+       $count = '1';
+       $count +=1;
+       echo $count;
         /* $first= load_class('emailutil', 'libraries','');
           var_dump($first);
           var_dump($this); */

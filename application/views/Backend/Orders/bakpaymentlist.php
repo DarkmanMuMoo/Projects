@@ -94,8 +94,8 @@ margin-top: 15px;
 <form id="settoactive" action="<?echo site_url('Backend/bakorders/settoactive');?>"  method="post">
     <input  type="hidden" name="orderno" value="<? echo $order->getOrderno();?>"/>
      <input type="hidden"  name="payno" value=""/>
-     <input  type="hidden"name="paymethod" value="<? echo $order->getPaymethod();?>" >
-     <input type="hidden" name="countactive" value="<? echo $countactive;?>"
+     <input  type="hidden"name="paymethod" value="<? echo $order->getPaymethod();?>" /> 
+     <input type="hidden" name="countactive" value="<? echo $countactive;?>"/>
 </form>
     
     </div>
