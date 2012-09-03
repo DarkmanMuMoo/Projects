@@ -61,8 +61,11 @@ class Uploader extends CI_Controller {
         $config['file_name'] = $filename;
 
         $mesg = $this->upload($config);
+      
+        
         if ($mesg == 'complete') {
-             $orderline->setFilepath($filename . ".pdf");
+              $extension=$this->upload->data();
+             $orderline->setFilepath("/".$filename.$extension['file_ext'] );
            $result= $this->orderlinedao->update($orderline);
               error_log(var_export('update filepath' . $result, true));
             

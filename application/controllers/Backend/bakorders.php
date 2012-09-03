@@ -134,10 +134,9 @@ class Bakorders extends CI_Controller {
             $result = $this->paymentdao->update($payment);
             error_log(var_export($result, true) . 'set active payment', 0);
 
-
+             $this->onproduction($orderno);
             if ($iscomplete && $result) {
 
-                $this->onproduction($orderno);
                 $this->paymentdao->deleteinactive($orderno);
             }
             redirect('Backend/bakorders/getpaymentlist/' . $orderno);
