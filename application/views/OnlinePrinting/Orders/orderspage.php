@@ -129,7 +129,7 @@ background-color: #faa732;
 
     </div >
     <div id="sidebar">
-        <h2>Order Summary</h2>
+        <h2>My Order</h2>
      
 
         <ul id="statuslist"class="nav nav-tabs nav-stacked">

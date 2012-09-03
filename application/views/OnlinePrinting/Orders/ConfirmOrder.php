@@ -5,11 +5,20 @@
         width: 80%;
         margin: 0 auto;
     }
+	hr{color: orangeRed;
+       background-color: orange;
+       height: 1px;
+
+    }
 </style>
 <div id="page">  
 <? echo form_open('orders/ordersummary') ?>
 
-
+ <p style ="margin-bottom: 10px;">
+  <h1><b>Confirm Order</b></h1>
+    <h4>คอนเฟิมออร์เดอร์</h4>
+</p>
+<hr></hr>
 
 <h5>จัดส่ง</h5><br/>
 <div id="sendaddress" >

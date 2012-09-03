@@ -37,8 +37,19 @@
         width: 80%;
         margin: 0 auto;
     }
+	hr{color: orangeRed;
+       background-color: orange;
+       height: 1px;
+
+    }
 </style>
 <div id="page">
+<p style ="margin-bottom: 10px;">
+    <h1><b>Create Order</b></h1>
+    <h4>สร้างออร์เดอร์</h4>
+</p>
+<hr></hr>
+
 <? echo form_open('orders/confirmorder') ?>
 
 <h5>จัดส่ง</h5> <br/>
