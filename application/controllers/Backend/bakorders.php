@@ -90,8 +90,8 @@ class Bakorders extends CI_Controller {
 
             $uploadroot = './uploads';
             $path = $uploadroot . $orderline->getFilepath();
-            var_dump($path);
-            var_dump(file_exists($path));
+           // var_dump($path);
+            //var_dump(file_exists($path));
             if (file_exists($path)) {
                 $data = file_get_contents($path); // Read the file's contents
                 $name = basename($path);
