@@ -32,7 +32,7 @@ function checkuploadfile(orderno){
     var url='<? echo site_url('orders/ajaxcheckuploadfile')?>';
     $.post(url, {order: orderno}, function(data) { 
                                 
-                                    if(data=='true'){
+                                    if(data==='true'){
                                         $('#changestatusform').submit();
 
                                     }else{
@@ -179,7 +179,7 @@ height: 3px;"></hr>
     <?php endif; ?>
 
     <form  method="post" id="changestatusform"action="<?echo site_url('orders/waitforvalidate'); ?>" >
- <input type="hidden" name="status" value="20">
+        <input type="hidden" name="status" value="20">
         <input type="hidden" name="orderno" value="<? echo $order->getOrderno(); ?>">
     </form>
 

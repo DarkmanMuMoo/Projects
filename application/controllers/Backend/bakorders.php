@@ -90,7 +90,7 @@ class Bakorders extends CI_Controller {
 
             $uploadroot = './uploads';
             $path = $uploadroot . $orderline->getFilepath();
-           // var_dump($path);
+            // var_dump($path);
             //var_dump(file_exists($path));
             if (file_exists($path)) {
                 $data = file_get_contents($path); // Read the file's contents
@@ -112,9 +112,9 @@ class Bakorders extends CI_Controller {
         $orderno = $this->input->post('orderno');
         $paymethod = $this->input->post('paymethod');
         $countactive = $this->input->post('countactive');
-    
+
         $countactive+=1;
-     
+
         $payment = $this->paymentdao->findbyid($payno);
         $iscomplete = false;
         if ($countactive <= 2) {
@@ -135,9 +135,9 @@ class Bakorders extends CI_Controller {
 
             $result = $this->paymentdao->update($payment);
             error_log(var_export($result, true) . 'set active payment', 0);
-if($countactive!=2){
-             $this->onproduction($orderno);
-}
+            if ($countactive != 2) {
+                $this->onproduction($orderno);
+            }
             if ($iscomplete && $result) {
 
                 $this->paymentdao->deleteinactive($orderno);
@@ -164,18 +164,17 @@ if($countactive!=2){
     }
 
     public function onproduction($orderno) {
+        $this->load->model('dao/orddao');
         $this->load->library('smsutil');
         $this->load->library('emailutil');
         $result = $this->changestatus('50', $orderno);
         $config = $this->emailutil->getSmtpconfig();
         $form = lang('adminemail');
 
-       // $to = $email;
+        $ord = $this->orddao->findbyid($orderno);
+        $to = $ord->getEmail();
         //$subject = 'Colour Harmony: สถานะกำลังปฏิบัติงาน';
-       // $message = 'งานของท่านอยู่ในระหว่างการพิมพ์ เมื่องานของท่านสำเร็จแล้วเราจะแจ้งให้ทราบภายหลังค่ะ' . $email;
-        
-
-
+        // $message = 'งานของท่านอยู่ในระหว่างการพิมพ์ เมื่องานของท่านสำเร็จแล้วเราจะแจ้งให้ทราบภายหลังค่ะ' . $email;
         // $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
         //error_log("send email to $to result is".var_export($emailresult, true),0);
         //sent sms here
@@ -185,18 +184,22 @@ if($countactive!=2){
     }
 
     public function waitforpay($orderno) {
+        $this->load->model('dao/orddao');
+
         $this->load->library('smsutil');
         $this->load->library('emailutil');
         $this->changestatus('40', $orderno);
 
+
         //sent mail here;
         $config = $this->emailutil->getSmtpconfig();
-        $form = lang('adminemail');
 
-      //  $to = $email;
+        $form = lang('adminemail');
+        $ord = $this->orddao->findbyid($orderno);
+        $to = $ord->getEmail();
         $subject = 'Colour Harmony: สถานะรอชำระเงิน';
-        $message = 'งานของท่านถูกต้องค่ะ กรุณาโอนเงินเพื่อการทำงานต่อไปค่ะ' ;
-       
+        $message = 'งานของท่านถูกต้องค่ะ กรุณาโอนเงินเพื่อการทำงานต่อไปค่ะ';
+
 
 
         // $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
@@ -206,18 +209,23 @@ if($countactive!=2){
         redirect("Backend/bakorders/vieworderdetail/$orderno");
     }
 
-    public function rejects($orderno) {
+    public function rejects() {
+        $orderno = $this->input->post('orderno');
         $this->load->library('smsutil');
         $this->load->library('emailutil');
+        $orderno = $this->input->post('orderno');
+        $msg= $this->input->post('msg');
         $this->changestatus('10', $orderno);
 //sent mail here;
         $config = $this->emailutil->getSmtpconfig();
         $form = lang('adminemail');
 
-       // $to = $email;
+        // $to = $email;
         $subject = 'Colour Harmony: สถานะปฏิเสธ';
-        $message = 'งานของท่านไม่ถูกต้อง กรุณาอัพโหลดงานใหม่ค่ะ' ;
-        
+        $message = 'งานของท่านไม่ถูกต้อง กรุณาอัพโหลดงานใหม่ค่ะ ';
+        $message .= '<p>';
+        $message .= $msg;
+        $message .= '</p>';
 
 
         // $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
@@ -228,17 +236,19 @@ if($countactive!=2){
     }
 
     public function ontransfer($orderno) {
+        $this->load->model('dao/orddao');
         $this->load->library('smsutil');
         $this->load->library('emailutil');
         $this->changestatus('60', $orderno);
 //sent mail here;
         $config = $this->emailutil->getSmtpconfig();
         $form = lang('adminemail');
-
-      //  $to = $email;
+        $ord = $this->orddao->findbyid($orderno);
+        $to = $ord->getEmail();
+        //  $to = $email;
         $subject = 'Colour Harmony: สถานะสำเร็จ';
-        $message = 'งานของท่านเสร็จเรียบร้อยแล้วค่ะ' ;
-       
+        $message = 'งานของท่านเสร็จเรียบร้อยแล้วค่ะ';
+
 
 
         // $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
@@ -249,6 +259,7 @@ if($countactive!=2){
     }
 
     public function complete($orderno) {
+        $this->load->model('dao/orddao');
         $this->load->library('smsutil');
         $this->load->library('emailutil');
         $this->changestatus('70', $orderno);
@@ -256,10 +267,11 @@ if($countactive!=2){
         $config = $this->emailutil->getSmtpconfig();
         $form = lang('adminemail');
 
-       // $to = $email;
+        $ord = $this->orddao->findbyid($orderno);
+        $to = $ord->getEmail();
         $subject = 'Colour Harmony: สถานะcomplete';
-        $message = 'Order Complete' ;
-       
+        $message = 'Order Complete';
+
 
         // $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
         //error_log("send email to $to result is".var_export($emailresult, true),0);

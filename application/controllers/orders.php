@@ -299,7 +299,7 @@ class Orders extends CI_Controller {
         $config = $this->emailutil->getSmtpconfig();
         $form = lang('adminemail');
 
-        //$to = $email;
+        $to = $_SESSION['user']->getEmail();
         $subject = 'Colour Harmony: สถานะตรวจสอบงาน';
         $message = 'ท่านได้อัพโหลดงานเรียบร้อยแล้ว งานของท่านอยู่ในระหว่างการตรวจสอบความถูกต้องค่ะ' ;
       
