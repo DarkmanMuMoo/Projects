@@ -50,7 +50,7 @@ class Uploader extends CI_Controller {
 
         $config = array();
         $config['upload_path'] = './uploads';
-        $config['allowed_types'] = 'pdf';
+        $config['allowed_types'] = 'pdf|ai';
         $config['max_size'] = '51200';
 
         $filepath = $orderline->getFilepath();
