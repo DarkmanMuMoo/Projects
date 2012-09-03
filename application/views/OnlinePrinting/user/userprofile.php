@@ -37,12 +37,13 @@
 
         padding: 5px;
         margin-bottom: 10px;
+        margin-left: 20%;
     }
     #address1,#address2 form{
 
         display: table;
         width: 100%;
-		text-align:center;
+		
     }
     .leftadd{
 
@@ -115,9 +116,8 @@
         
         <form id="edit" action="<? echo site_url('userprofile/updateaddress') ?>" method="post" >
              
-            <textarea name="ad" rows="5" cols="30"><? echo $address1['address'] ?></textarea>
-             </div>
-          <div id="address1" >    
+         ที่อยู่   <textarea name="ad" rows="5" cols="30"><? echo $address1['address'] ?></textarea><br/>
+           
           จังหวัด  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<select  name="prov" >
               <?php foreach ($provincelist as $province): ?>
                 <option value="<? echo $province->getProvinceid(); ?>"    <? echo ( $address1['provinceid'] ==$province->getProvinceid())? 'selected=\'selected\'':'';  ?>><? echo $province->getProvincename(); ?></option>
@@ -136,10 +136,11 @@
         </form> 
         
     </div>
-    <div id="address2" >
-        <p>
+    <p>
             &nbsp;  &nbsp;  &nbsp; <h5><strong>ที่อยู่</strong></h5>
         </p>
+    <div id="address2" >
+    
         <form id="edit" action="<? echo site_url('userprofile/updateaddress') ?>" method="post" >
             
 

@@ -135,7 +135,9 @@ and open the template in the editor.
                     <li id="Orders"><a href="<?php echo site_url("orders"); ?>">Orders</a></li>
                        <li id="Userprofile" ><a href="<?php echo site_url("userprofile"); ?>">Profile</a></li>
                     <?php endif; ?>
+                         <?php if (!$_SESSION['hasuser']): ?>
                     <li id="Register" ><a href="<?php echo site_url("register"); ?>">Register</a></li>
+                       <?php endif; ?>
                     <li ><a href="#">Help</a></li>
 
                 </ul>

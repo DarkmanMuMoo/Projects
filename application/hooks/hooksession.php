@@ -43,7 +43,13 @@ if(!$check){
 if($controllername=='Userprofile'||$controllername=='Orders'){
 redirect('home');
 }
+}else{
+    if($controllername=='Register'){
+        redirect('home');
+    }
 }
+
+
 }
 private function checkvarinsession($varname) {
 $checker = false;
