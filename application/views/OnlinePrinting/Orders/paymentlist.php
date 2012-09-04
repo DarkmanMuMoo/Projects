@@ -100,11 +100,11 @@ margin-top: 15px;
             <option value="<?echo $index?>"  >    <? echo $m ?>      </option>
              <?php endforeach; ?>
         </select>
-    วินาที<select style="width:20%;" name="sec"> 
+   <!-- วินาที<select style="width:20%;" name="sec"> 
             <?php foreach ($min as $index => $m): ?>
             <option value="<?echo $index?>"  >    <? echo $m ?>      </option>
              <?php endforeach; ?>
-        </select>
+        </select>-->
     </td>
        </tr>
   <tr>
@@ -154,10 +154,7 @@ margin-top: 15px;
              
             rules: {
                 date:"required",
-                slipno:{
-                    required: true,
-                    digits: true
-                },
+                slipno:"required",
                 amount:{
                     required: true,
                     digits: true
@@ -169,8 +166,8 @@ margin-top: 15px;
             },messages: {
                 date: "Please enter your date",
                 slipno: {
-                    required: "Please enter slipno",
-                   digits:"number"
+                    required: "Please enter slipno"
+
                 },
                  amount:{
                     required: "Please enter amount",

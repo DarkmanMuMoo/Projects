@@ -242,25 +242,26 @@ public function iscachning(){
 
     public function testpagination() {
 
-        $stb = $this->load->database('stb', true);
+        $this->load->model('dao/pricedao');
 
 
         $this->load->library('pagination');
 
         $config['base_url'] = site_url("testsome/testpagination");
-        $config['total_rows'] = $this->db->count_all("country");
-        echo $config['total_rows'];
-        $config['per_page'] = 30;
+        $config['total_rows'] = $this->db->count_all("price");
+        echo $config['total_rows']."<br>";
+        $config['per_page'] = 10;
         $startrow = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
-        $stb->limit($config['per_page'], $startrow);
+        $this->db->limit($config['per_page'], $startrow);
 
         $this->pagination->initialize($config);
-        $query = $stb->get("Country");
+        
+     $pricelist =$this->pricedao->findall();
 
-        foreach ($query->result() as $row) {
+        foreach ($pricelist as $price) {
 
-            echo $row->country_code . "<br>";
+            echo $price->getPriceno(). "<br>";
         }
         echo $this->pagination->create_links();
     }

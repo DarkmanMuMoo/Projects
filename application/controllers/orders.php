@@ -32,7 +32,7 @@ class Orders extends CI_Controller {
         $date = $this->input->post('date');
         $hour = $this->input->post('hour');
         $min = $this->input->post('min');
-        $sec = $this->input->post('sec');
+        $sec = '00';
         $amount = $this->input->post('amount');
         $time = implode(':', array($hour, $min, $sec));
         $paymentdate = $date . ' ' . $time;
@@ -104,7 +104,7 @@ class Orders extends CI_Controller {
     }
 
     public function orderpage() {
-
+        $this->load->library('pagination');
         $this->load->model('dao/ordstatusdao');
         $user = $_SESSION['user'];
         $email = $user->getEmail();
@@ -127,7 +127,11 @@ class Orders extends CI_Controller {
             $condition['orderdate <='] = $this->input->post('todate');
         }
 
-
+        $config['per_page'] = 5;
+        $startrow = ($this->input->post()) ? $this->input->post('startrow') : 0;
+        $config['total_rows'] = $this->gettotalpage($condition);
+        $this->pagination->initialize($config);
+        $this->db->limit($config['per_page'], $startrow);
         $orderlist = $this->orddao->findbymultifield($condition);
         $ordstatuslist = $this->ordstatusdao->findall();
         $data = array();
@@ -136,7 +140,15 @@ class Orders extends CI_Controller {
         $data['hilight']=$hilight;
         $this->load->view(lang('orderpage'), $data);
     }
+  private function gettotalpage($condition = array()) {
+      
+        foreach ($condition as $index=>$row) {
 
+         $this->db->where($index, $row);
+        }
+        
+         return $this->db->count_all_results('ord');
+  }
     public function cancleorder($orderno) {
 
         $this->orderlinedao->delete($orderno);
@@ -311,7 +323,8 @@ class Orders extends CI_Controller {
       //sent sms here
         //$result = $this->smsutil->sentsms('0849731746','finaltest');
 
-        redirect("orders/viewOrderdetail/$orderno");
+       // redirect("orders/viewOrderdetail/$orderno");
+        redirect("orders");
     }
 
     private function changestatus($status, $orderno) {

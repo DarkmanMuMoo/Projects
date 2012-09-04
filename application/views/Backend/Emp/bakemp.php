@@ -40,10 +40,10 @@ border-width:thin;
                     <option value="">All</option>
   <?php foreach ($positionlist as $ord): ?>
                                 
-                    <option value="<?echo $ord->getPosition();?>">  <? echo $ord->getPosdescription();  ?></option>
+                    <option  <? echo ($this->input->post('position')==$ord->getPosition())? 'selected=selected': '';?> value="<?echo $ord->getPosition();?>">  <? echo $ord->getPosdescription();  ?></option>
                               
                                  <?php endforeach; ?></select>
-                
+                <input type="hidden" name="startrow" value="0"/>
                 <button type="submit" class="btn">Search</button>
             </form>
  </div>
@@ -115,7 +115,8 @@ border-width:thin;
                 </tbody>
 
             </table>
-
+     
+        <? echo $this->pagination->create_onclick_links(); ?>
     <hr class="bottom"></hr>
         </div>
 
@@ -185,6 +186,14 @@ border-width:thin;
 <script src="<? echo base_url("asset/javascript/jquery.validate.js"); ?>" >  </script>
       <script src="<? echo base_url("asset/javascript/jquery.metadata.js"); ?>" >  </script>
 <script>   
+    
+    
+    function pag(i){
+        $('#searchform input[name=startrow]').val(i);
+   
+        $('#searchform').submit();
+        
+    }
      function Confirmdelete(empno)
 
     {

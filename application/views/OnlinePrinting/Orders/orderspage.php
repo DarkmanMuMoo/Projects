@@ -1,6 +1,12 @@
 <? $this->load->view(lang('header')) ?>
 
 <script>
+    function pag(i){
+        $('#searchform input[name=startrow]').val(i);
+   
+        $('#searchform').submit();
+        
+    }
     function Searchstatus (ordstatus){
      
         $('#status').attr('value',ordstatus);
@@ -57,9 +63,10 @@ background-color: #faa732;
         <div id="search-bar">  
             <form id="searchform"action="<? echo site_url('orders') ?>" class="form-search" align="center"  method="post">
 
-                From :<input type="text" name="fromdate" id="fromdate" class="input-small datepicker" >
-                To:<input type="text" name="todate" id="todate"  class="input-small datepicker"   >
-                <input type="hidden" name="status" id="status"    >
+                From :<input type="text" name="fromdate" value="<?echo $this->input->post('fromdate');?>" id="fromdate" class="input-small datepicker" />
+                To:<input type="text" name="todate" value="<?echo $this->input->post('todate');?>" id="todate"  class="input-small datepicker"   />
+                <input type="hidden" name="status" id="status"  />  
+                <input type="hidden" name="startrow" value="0"/>
                 <button type="submit" class="btn">Search</button>
             </form>
         </div>
@@ -124,7 +131,7 @@ background-color: #faa732;
 
             </table>
 
-
+<? echo $this->pagination->create_onclick_links(); ?>
         </div>
 
     </div >

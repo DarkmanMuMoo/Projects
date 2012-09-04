@@ -21,7 +21,7 @@ class Bakorders extends CI_Controller {
     }
 
     public function index() {
-
+        $this->load->library('pagination');
         $this->load->model('dao/ordstatusdao');
         $this->load->model('dao/orddao');
 
@@ -46,6 +46,13 @@ class Bakorders extends CI_Controller {
             $condition['orderdate <='] = $this->input->post('todate');
         }
 
+        $config['per_page'] = 5;
+        $startrow = ($this->input->post()) ? $this->input->post('startrow') : 0;
+        $config['total_rows'] = $this->gettotalpage($condition, $keyword);
+        $this->pagination->initialize($config);
+        $this->db->limit($config['per_page'], $startrow);
+
+
         $orderlist = $this->orddao->findorderbackbyCustormer($condition, $keyword);
         $ordstatuslist = $this->ordstatusdao->findall();
         $data = array();
@@ -53,6 +60,25 @@ class Bakorders extends CI_Controller {
         $data['ordstatuslist'] = $ordstatuslist;
 
         $this->load->view(lang('bakorder'), $data);
+    }
+
+    private function gettotalpage($condition = array(), $keyword = '') {
+
+        
+        $this->db->join('custormer', 'custormer.email = ord.email');
+        if ($keyword != '') {
+            $this->db->or_like('ord.email', $keyword);
+            $this->db->or_like('cus_name', $keyword);
+            $this->db->or_like('lastname', $keyword);
+        }
+        foreach ($condition as $index => $row) {
+
+            $this->db->where($index, $row);
+        }
+
+
+        return $this->db->count_all_results('ord');
+        ;
     }
 
     public function vieworderdetail($orderno) {
@@ -214,7 +240,7 @@ class Bakorders extends CI_Controller {
         $this->load->library('smsutil');
         $this->load->library('emailutil');
         $orderno = $this->input->post('orderno');
-        $msg= $this->input->post('msg');
+        $msg = $this->input->post('msg');
         $this->changestatus('10', $orderno);
 //sent mail here;
         $config = $this->emailutil->getSmtpconfig();

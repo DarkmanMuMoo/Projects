@@ -25,18 +25,18 @@ h1{ font-weight:bolder;
 
     <div id="search-bar" >  
         <form id="searchform"action="<? echo site_url('Backend/bakorders') ?>" class="form-search" align="center"  method="post">
-            Keyword:<input type="text"  name="keyword" id="email" class="input-small" />
-            From :<input type="text" name="fromdate" id="fromdate" class="input-small datepicker" />
-            To:<input type="text" name="todate" id="todate"  class="input-small datepicker"  /> 
+            Keyword:<input type="text"  name="keyword" id="email" class="input-small"  value="<?echo $this->input->post('keyword');?>"/>
+            From :<input type="text" name="fromdate" id="fromdate" class="input-small datepicker"  value="<? echo $this->input->post('fromdate');?>"/>
+            To:<input type="text" name="todate" id="todate"  class="input-small datepicker"  value="<? echo $this->input->post('todate');?>" /> 
 
             Status: <select name="status" id="status" >   
                 <option value="" >all</option>
                 <?php foreach ($ordstatuslist as $ord): ?>
 
-                    <option value="<? echo $ord->getStatus(); ?>">  <? echo $ord->getDescription(); ?></option>
+                    <option  <? echo ($this->input->post('status')==$ord->getStatus())? 'selected=selected': '';?> value="<? echo $ord->getStatus(); ?>">  <? echo $ord->getDescription(); ?></option>
 
                 <?php endforeach; ?></select>
-
+ <input type="hidden" name="startrow" value="0"/>
             <button type="submit" class="btn">Search</button>
         </form>
     </div>
@@ -109,7 +109,7 @@ h1{ font-weight:bolder;
             </tbody>
 
         </table>
-
+  <? echo $this->pagination->create_onclick_links(); ?>
 
     </div>
 </div>
@@ -125,9 +125,12 @@ h1{ font-weight:bolder;
 
 <? $this->load->view(lang('bakfooter')); ?>
 <script>
-
-
-
+ function pag(i){
+        $('#searchform input[name=startrow]').val(i);
+   
+        $('#searchform').submit();
+        
+    }
 
     $(document).ready(function(){
         $( ".datepicker" ).datepicker({

@@ -143,7 +143,7 @@ $obj=null;
          $this->db->where($index, $row);
         }
        
-            $query = $this->db->get('ord');
+        $query = $this->db->get('ord');
         $condition = array();
     
         foreach ($query->result() as $row) {

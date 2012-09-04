@@ -4,6 +4,7 @@
 
         float:left;
         width: 50%;
+       
     }
     #address{
         float:right;
@@ -72,14 +73,14 @@ function showupload(orderlineno){
 <div id="page">
 
     <div id="head" style="clear:both;"><div id="order">
-            <h2>Orderno: <? echo $order->getOrderno(); ?></h2><br>
+            <h2>Orderno: <? echo $order->getOrderno(); ?></h2> <h3>Orderstatus :
             <?php foreach ($ordstatuslist as $ordstatus): ?>
                 <?php if ($ordstatus->getStatus() == $order->getOrdstatus()): ?>
-                    <? echo $ordstatus->getDescription();  break;?>
+             <? echo $ordstatus->getDescription(); ?> </h3> <? break;?>
                 <?php endif; ?>
-            <?php endforeach; ?><br>
-           Orderdate : <? echo $order->getOrderdate(); ?><br>
-            Paymethod : <?php foreach ($ordpaylist as $ordpay): ?>
+            <?php endforeach; ?>
+            <strong>  Orderdate :</strong>  <? echo $order->getOrderdate(); ?><br>
+            <strong> Paymethod :</strong> <?php foreach ($ordpaylist as $ordpay): ?>
                 <?php if ($ordpay->getPaymethod() == $order->getPaymethod()): ?>
                     <? echo $ordpay->getDescription();  break;?>
                 <?php endif; ?>
