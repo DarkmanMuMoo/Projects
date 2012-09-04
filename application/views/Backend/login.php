@@ -54,9 +54,9 @@
         </div>
     </body>
 </html>
-
+<script src="<? echo base_url("asset/javascript/jquery.js"); ?>" >  </script>
 <script src="<? echo base_url("asset/javascript/jquery.validate.js"); ?>" >  </script>
-      <script src="<? echo base_url("asset/javascript/jquery.metadata.js"); ?>" >  </script>
+  <script src="<? echo base_url("asset/javascript/jquery.metadata.js"); ?>" >  </script>
         <script type="text/javascript">
         
      $().ready(function() {
