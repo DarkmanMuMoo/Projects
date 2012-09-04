@@ -21,6 +21,7 @@ class Bakwork extends CI_Controller {
     }
 
     public function index() {
+        $this->load->library('pagination');
         $this->load->model('dao/workdao');
         $condition = array();
         $keyword = '';
@@ -28,17 +29,25 @@ class Bakwork extends CI_Controller {
             $keyword = $this->input->post('keyword');
         }
         if ($this->input->post('emp')) {
-            $position = $this->input->post('emp');
+            $empno = $this->input->post('emp');
 
-            $condition['empno'] = $position;
+            $condition['empno'] = $empno;
+        }else{
+            
+            $empno=0;
         }
 
-        $worklist = $this->workdao->findworklist($keyword, $condition);
+        $config['per_page'] = 5;
+        $startrow = ($this->input->post()) ? $this->input->post('startrow') : 0;
+        $config['total_rows'] = $this->gettotalpage($empno, $this->input->post('status'),$keyword);
+        $this->pagination->initialize($config);
+        $this->db->limit($config['per_page'], $startrow);
+        $worklist = $this->workdao->findsharedwork($keyword, $empno, $this->input->post('status'));
         $emplist = $this->empdao->findbymultifield(array('position' => 'des'));
         $data = array();
         $data['worklist'] = $worklist;
         $data['emplist'] = $emplist;
-
+echo  $this->input->post('emp');
         $this->load->view(lang('bakwork'), $data);
     }
 
@@ -51,6 +60,7 @@ class Bakwork extends CI_Controller {
     }
 
     public function empworkpage() {
+        $this->load->library('pagination');
         $this->load->model('dao/workdao');
 
 
@@ -58,32 +68,47 @@ class Bakwork extends CI_Controller {
         if ($this->input->post('keyword')) {
             $keyword = $this->input->post('keyword');
         }
-        $allworklist = array();
-        ;
+      
         $empno = $_SESSION['emp']->getEmpno();
-
-        switch ($this->input->post('status')) {
-            case 0: {
-                    $allworklist = $this->workdao->findsharedwork($keyword, $empno, 0);
-
-                    break;
-                }
-            case 1: {
-
-                    $allworklist = $this->workdao->findsharedwork($keyword, $empno, 1);
-                    break;
-                }
-            case 2: {
-
-                    $allworklist = $this->workdao->findsharedwork($keyword, $empno, 2);
-                    break;
-                }
-        }
+        $config['per_page'] = 5;
+        $startrow = ($this->input->post()) ? $this->input->post('startrow') : 0;
+        $config['total_rows'] = $this->gettotalpage($empno, $this->input->post('status'),$keyword);
+        $this->pagination->initialize($config);
+        
+        $this->db->limit($config['per_page'], $startrow);
+         $allworklist = $this->workdao->findsharedwork($keyword, $empno, $this->input->post('status'));
 
         $data['worklist'] = $allworklist;
 
         $this->load->view(lang('bakempwork'), $data);
     }
+      private function gettotalpage($empno, $status, $keyword = '') {
+        $this->db->from('work');
+        $this->db->join('work_emp', 'work.empno = work_emp.empno', 'left');
+         if($empno>0){
+        $this->db->where('work.empno', $empno); 
+         }
+      // echo $sql;
+        if ($keyword != '') {
+         
+           $this->db->like('work_name', $keyword); 
+        }
+      switch($status){
+ 
+    case 1:{
+          $this->db->where('work_empno is',' null',false); 
+        break;
+    }
+    case 2:{
+     $this->db->where('work_empno is not',' null',false); 
+        break;
+    }
+    
+    }
+          return $this->db->count_all_results();
+          
+          
+      }
 
     public function addprocess() {
 

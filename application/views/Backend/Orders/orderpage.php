@@ -33,7 +33,7 @@ h1{ font-weight:bolder;
                 <option value="" >all</option>
                 <?php foreach ($ordstatuslist as $ord): ?>
 
-                    <option  <? echo ($this->input->post('status')==$ord->getStatus())? 'selected=selected': '';?> value="<? echo $ord->getStatus(); ?>">  <? echo $ord->getDescription(); ?></option>
+                    <option  <? echo ($this->input->post('status')==$ord->getStatus())? 'selected="selected"': '';?> value="<? echo $ord->getStatus(); ?>">  <? echo $ord->getDescription(); ?></option>
 
                 <?php endforeach; ?></select>
  <input type="hidden" name="startrow" value="0"/>

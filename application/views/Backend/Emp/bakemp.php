@@ -40,7 +40,7 @@ border-width:thin;
                     <option value="">All</option>
   <?php foreach ($positionlist as $ord): ?>
                                 
-                    <option  <? echo ($this->input->post('position')==$ord->getPosition())? 'selected=selected': '';?> value="<?echo $ord->getPosition();?>">  <? echo $ord->getPosdescription();  ?></option>
+                    <option  <? echo ($this->input->post('position')==$ord->getPosition())? 'selected="selected"': '';?> value="<?echo $ord->getPosition();?>">  <? echo $ord->getPosdescription();  ?></option>
                               
                                  <?php endforeach; ?></select>
                 <input type="hidden" name="startrow" value="0"/>

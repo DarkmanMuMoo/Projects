@@ -7,14 +7,14 @@
 
     <div id="search-bar" >  
         <form id="searchform"action="<? echo site_url('Backend/bakwork/empworkpage') ?>" class="form-search" align="center"  method="post">
-            Keyword:<input type="text"  name="keyword" id="email" class="input-small " />
+            Keyword:<input type="text" value="<? echo $this->input->post('keyword');?>" name="keyword" id="email" class="input-small " />
             status: <select name="status" id="emp" >  
-                <option value="0">All</option>
-                <option value="1">งานที่รับผิดชอบ</option>
-                <option value="2">งานทที่มีส่วนร่วม
+                <option <?  echo($this->input->post('status')==0)?'selected="selected"':''; ?> value="0">All</option>
+                <option  <?  echo($this->input->post('status')==1)?'selected="selected"':''; ?>   value="1">งานที่รับผิดชอบ</option>
+                <option  <?  echo($this->input->post('status')==2)?'selected="selected"':''; ?> value="2">งานทที่มีส่วนร่วม
                 </option>
             </select>
-
+            <input type="hidden" name="startrow" value="0"/>
             <button type="submit" class="btn">Search</button>
         </form>
     </div>
@@ -69,21 +69,17 @@
 
             </tbody>
         </table>
-
+  <? echo $this->pagination->create_onclick_links(); ?>
     </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     <? $this->load->view(lang('bakfooter')); ?>
+    <script>
+     function pag(i){
+        $('#searchform input[name=startrow]').val(i);
+   
+        $('#searchform').submit();
+        
+    }
+
+    </script>

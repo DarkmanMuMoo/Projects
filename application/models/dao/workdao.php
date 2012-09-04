@@ -59,28 +59,31 @@ class Workdao extends CI_Model {
         $this->db->where('workno', $work->getWorkno());
         return $this->db->update('work', $data);
     }
-
-    public function findsharedwork($keyword, $empno ,$con) {
-        $sql='select work.workno as workno, work_name,work_description, startdate, enddate, ordno, work.empno as empno from';
-        $sql.=' work left join work_emp on work.empno = work_emp.empno';
-        $sql.=' where work.empno ='.$empno;
+ public function findsharedwork($keyword, $empno ,$con) {
+        $this->db->select(' work.workno as workno, work_name,work_description, startdate, enddate, ordno, work.empno as empno');
+        $this->db->from('work');
+        $this->db->join('work_emp', 'work.empno = work_emp.empno', 'left');
+        if($empno>0){
+        $this->db->where('work.empno', $empno); 
+        }
       // echo $sql;
         if ($keyword != '') {
-           $sql.=' and work_name like \'%'.$keyword.'%\'';
+         
+           $this->db->like('work_name', $keyword); 
         }
       switch($con){
  
     case 1:{
-        $sql.=' and work_empno is  null';
+          $this->db->where('work_empno is',' null',false); 
         break;
     }
     case 2:{
-        $sql.=' and work_empno is not null';
+     $this->db->where('work_empno is not',' null',false); 
         break;
     }
     
     }
-        $query = $this->db->query($sql);
+        $query = $this->db->get();
 
         $array = array();
         foreach ($query->result() as $row) {
@@ -101,6 +104,7 @@ class Workdao extends CI_Model {
 
         return $array;
     }
+   
 
     public function findworkdetail($workno) {
         $sql = "select * from work w join employee emp  on w.empno=emp.empno where w.workno=?";

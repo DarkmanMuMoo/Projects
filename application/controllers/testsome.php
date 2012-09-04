@@ -168,11 +168,20 @@ public function iscachning(){
     }
 
     public function testDB() {
-        $this->load->model('dao/workdao');
+       /* $this->load->model('dao/workdao');
 
         $worklist = $this->workdao->findsharedwork('',3,0);
 
-        var_dump($worklist);
+        var_dump($worklist);*/
+        
+      
+        $this->db->from('work');
+        $this->db->join('work_emp', 'work.empno = work_emp.empno', 'left');
+        $this->db->where('work.empno', 8); 
+        //$this->db->where('work_empno is not',' null',false); 
+         $query = $this->db->count_all_results();
+         echo  $query;
+        echo $this->db->last_query();
         // echo $paper;
         //echo $template;
     }

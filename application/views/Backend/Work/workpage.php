@@ -1,43 +1,49 @@
 <? $this->load->view(lang('bakheader')); ?>
 <style type="text/css">
 
-#insertwork{
-    
-    display: none;
-}
-hr{ text-align:center;
-color:#09F;
-border-color:#09F;
-size:3;
-}
-h1{ font-weight:bolder;
-}
+    #insertwork{
+
+        display: none;
+    }
+    hr{ text-align:center;
+        color:#09F;
+        border-color:#09F;
+        size:3;
+    }
+    h1{ font-weight:bolder;
+    }
 </style>
 
 
 
 <div class="container" >
 
-<div style="margin-top: 100px; margin-left: auto; margin-right: auto; margin-bottom: 20px;"> 
+    <div style="margin-top: 100px; margin-left: auto; margin-right: auto; margin-bottom: 20px;"> 
         <h1>งานทั้งหมด</h1>
-      <hr > </hr> 
-      </div>
-        
-         
-        
+        <hr > </hr> 
+    </div>
+
+
+
 
 
     <div id="search-bar" >  
         <form id="searchform"action="<? echo site_url('Backend/bakwork') ?>" class="form-search" align="center"  method="post">
-            Keyword:<input type="text"  name="keyword" id="email" class="input-small " />
+            Keyword:<input type="text"  value="<? echo $this->input->post('keyword');?>" name="keyword" id="email" class="input-small " />
             Employee: <select name="emp" id="emp" >  
-                <option value="">All</option>
+                <option value="0">All</option>
                 <?php foreach ($emplist as $emp): ?>
 
-                    <option value="<? echo $emp->getEmpno(); ?>">  <? echo $emp->getName(); ?>&nbsp; <? echo $emp->getLastname(); ?> </option>
+                    <option  <? echo($this->input->post('emp')==$emp->getEmpno())?'selected="selected"':''; ?> value="<? echo $emp->getEmpno(); ?>">  <? echo $emp->getName(); ?>&nbsp; <? echo $emp->getLastname(); ?> </option>
 
                 <?php endforeach; ?></select>
-
+             status: <select name="status" id="emp" >  
+                <option <?  echo($this->input->post('status')==0)?'selected="selected"':''; ?> value="0">All</option>
+                <option  <?  echo($this->input->post('status')==1)?'selected="selected"':''; ?>   value="1">งานที่รับผิดชอบ</option>
+                <option  <?  echo($this->input->post('status')==2)?'selected="selected"':''; ?> value="2">งานทที่มีส่วนร่วม
+                </option>
+            </select>
+            <input type="hidden" name="startrow" value="0"/>
             <button type="submit" class="btn">Search</button>
         </form>
     </div>
@@ -48,10 +54,10 @@ h1{ font-weight:bolder;
                 Number
             </th>
             <th>
-                Workname
+                Workno 
             </th>
             <th>
-                Workno 
+                Workname
             </th>
             <th>
                 Employee
@@ -84,13 +90,14 @@ h1{ font-weight:bolder;
 
                                 <?php if ($emp->getEmpno() == $work->getEmpno()): ?>
                                     <? echo $emp->getName(); ?>&nbsp; <? echo $emp->getLastname();
-                        break; ?> 
+                        break;
+                                    ?> 
                                 <?php endif; ?>
 
     <?php endforeach; ?>
                         </td>
                         <td > <? echo $work->getStartdate(); ?> </td>
-                        <td ><? echo ($work->getEnddate()==null)?'-':$work->getEnddate(); ?> </td>      
+                        <td ><? echo ($work->getEnddate() == null) ? '-' : $work->getEnddate(); ?> </td>      
                         <td >
                             <a class="btn btn-info" href="<? echo site_url('Backend/bakwork/viewworkdetail') . "/" . $work->getWorkno(); ?>"> 
                                 View
@@ -106,53 +113,51 @@ h1{ font-weight:bolder;
 
             </tbody>
         </table>
-
+ <? echo $this->pagination->create_onclick_links(); ?>
     </div>
- <button onclick="showinsertform();" class="btn" > insert new Work</button>
- <div  id="insertwork" class="divcenter" >
+    <button onclick="showinsertform();" class="btn" > insert new Work</button>
+    <div  id="insertwork" class="divcenter" >
 
         <form id="creatworkform" action="<? echo site_url('Backend/bakwork/creatework') ?>" method="post">
-<table width="532" border="0" align="center">
-  <tr>
-    <td width="181" height="50">ชื่องาน</td>
-    <td width="170"><input id="workname" name="workname" type="text" /></td>
-    <td width="167">&nbsp;</td>
-  </tr>
-  <tr>
-    <td height="50">ชื่อพนักงาน</td>
-    <td><select name="empno" >
+            <table width="532" border="0" align="center">
+                <tr>
+                    <td width="181" height="50">ชื่องาน</td>
+                    <td width="170"><input id="workname" name="workname" type="text" /></td>
+                    <td width="167">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="50">ชื่อพนักงาน</td>
+                    <td><select name="empno" >
 <?php foreach ($emplist as $emp): ?>
 
-                    <option value="<? echo $emp->getEmpno(); ?>">  <? echo $emp->getName(); ?>&nbsp; <? echo $emp->getLastname(); ?> </option>
+                                <option value="<? echo $emp->getEmpno(); ?>">  <? echo $emp->getName(); ?>&nbsp; <? echo $emp->getLastname(); ?> </option>
 
- <?php endforeach; ?>
-    </select></td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td height="50">OrdNo</td>
-    <td><input name="ordno" type="text" /></td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td>คำอธิบาย</td>
-    <td><textarea name="description"></textarea></td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td height="50"><input name="assign" type="submit" class="btn" value="มอบหมาย" /></td>
-    <td>&nbsp;</td>
-  </tr>
- 
-</table>
+<?php endforeach; ?>
+                        </select></td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td height="50">OrdNo</td>
+                    <td><input name="ordno" type="text" /></td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>คำอธิบาย</td>
+                    <td><textarea name="description"></textarea></td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td height="50"><input name="assign" type="submit" class="btn" value="มอบหมาย" /></td>
+                    <td>&nbsp;</td>
+                </tr>
 
-
+            </table>
 
 
-</form>
 
 
+        </form>
 
 
 
@@ -161,30 +166,40 @@ h1{ font-weight:bolder;
 
 
 
-  </div>
+
+
+    </div>
 </div>
 
 <? $this->load->view(lang('bakfooter')); ?>
 
 <script src="<? echo base_url("asset/javascript/jquery.validate.js"); ?>" >  </script>
-    <script src="<? echo base_url("asset/javascript/jquery.metadata.js"); ?>" >  </script>
-    <script>
-        function showinsertform(){
-          var validate=  $("#creatworkform").validate({
-                rules: {
-                    workname:"required" 
-                  
-                },messages:{
-          workname:"required" 
-                }
+<script src="<? echo base_url("asset/javascript/jquery.metadata.js"); ?>" >  </script>
+<script>  
+     function pag(i){
+        $('#searchform input[name=startrow]').val(i);
+   
+        $('#searchform').submit();
         
-            });
+    }
+
+   
+    function showinsertform(){
+        var validate=  $("#creatworkform").validate({
+            rules: {
+                workname:"required" 
+                  
+            },messages:{
+                workname:"required" 
+            }
+        
+        });
             
-             $('#insertwork').fadeToggle("slow", "linear");
+        $('#insertwork').fadeToggle("slow", "linear");
             
             
             
-        }
+    }
     
     
     function Confirmdelete(workno)
@@ -195,11 +210,11 @@ h1{ font-weight:bolder;
 
         {
 
-              $.post('<? echo site_url('Backend/bakwork/deletework')?>/'+workno, function(data){
-                  //alert(data);
-                  eval(data);
+            $.post('<? echo site_url('Backend/bakwork/deletework') ?>/'+workno, function(data){
+                //alert(data);
+                eval(data);
 
-              });
+            });
 
         }
 
