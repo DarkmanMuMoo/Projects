@@ -58,9 +58,9 @@
                             <td>&nbsp;</td>
                             <td><?php if ($_SESSION['emp']->getPosition() == 'Boss'): ?>
                                     <?php if ($work->getEnddate() == null): ?>
-                                        <a class="btn" href="<? echo site_url('Backend/bakwork/completework/' . $work->getOrdno()) ?>" >End this work</a> 
+                                        <a class="btn" href="<? echo site_url('Backend/bakwork/completework/' . $work->getWorkno()) ?>" >End this work</a> 
                                     <?php else: ?>
-                                        ยังไม่เสร็จ
+                                       เสร็จ
                                     <?php endif; ?>
                                 <?php else: ?>
 

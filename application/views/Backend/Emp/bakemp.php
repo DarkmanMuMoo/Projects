@@ -75,10 +75,10 @@ border-width:thin;
                    management
                 </th>
                 </thead>
-
+   <? $page=($this->input->post('startrow'))?$this->input->post('startrow'):0; ?>
                 <tbody>
                     <?php foreach ($emplist as $index => $ord): ?>
-                        <tr> <td  ><? echo $index + 1 ?> </td>  
+                        <tr> <td  ><? echo $index + 1+$page ?> </td>  
                             <td  >
                                 
                                     <? echo $ord->getEmpno(); ?> 

@@ -29,7 +29,7 @@
 
     <div id="search-bar" >  
         <form id="searchform"action="<? echo site_url('Backend/bakwork') ?>" class="form-search" align="center"  method="post">
-            Keyword:<input type="text"  value="<? echo $this->input->post('keyword');?>" name="keyword" id="email" class="input-small " />
+            Workname:<input type="text"  value="<? echo $this->input->post('keyword');?>" name="keyword" id="email" class="input-small " />
             Employee: <select name="emp" id="emp" >  
                 <option value="0">All</option>
                 <?php foreach ($emplist as $emp): ?>
@@ -75,8 +75,9 @@
             </thead>
 
             <tbody>
+                   <? $page=($this->input->post('startrow'))?$this->input->post('startrow'):0; ?>
                 <?php foreach ($worklist as $index => $work): ?>
-                    <tr> <td  ><? echo $index + 1 ?> </td>  
+                    <tr> <td  ><? echo $index+1+$page ?> </td>  
                         <td  >
 
                             <? echo $work->getWorkno(); ?> 

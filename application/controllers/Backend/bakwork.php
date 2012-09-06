@@ -37,7 +37,7 @@ class Bakwork extends CI_Controller {
             $empno=0;
         }
 
-        $config['per_page'] = 5;
+        $config['per_page'] = 10;
         $startrow = ($this->input->post()) ? $this->input->post('startrow') : 0;
         $config['total_rows'] = $this->gettotalpage($empno, $this->input->post('status'),$keyword);
         $this->pagination->initialize($config);
@@ -70,7 +70,7 @@ echo  $this->input->post('emp');
         }
       
         $empno = $_SESSION['emp']->getEmpno();
-        $config['per_page'] = 5;
+        $config['per_page'] = 10;
         $startrow = ($this->input->post()) ? $this->input->post('startrow') : 0;
         $config['total_rows'] = $this->gettotalpage($empno, $this->input->post('status'),$keyword);
         $this->pagination->initialize($config);
@@ -171,6 +171,7 @@ echo  $this->input->post('emp');
         $data['processlist'] = $processlist;
 
         $this->load->view(lang('workdetail'), $data);
+        
     }
 
     public function creatework() {

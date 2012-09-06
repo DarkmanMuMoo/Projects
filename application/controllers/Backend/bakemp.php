@@ -36,7 +36,7 @@ class Bakemp extends CI_Controller {
         }
 
 
-        $config['per_page'] = 5;
+        $config['per_page'] = 10;
         $startrow = ($this->input->post()) ? $this->input->post('startrow') : 0;
 
         if ($keyword != '') {

@@ -70,8 +70,9 @@ h1{ font-weight:bolder;
             </thead>
 
             <tbody>
+                <? $page=($this->input->post('startrow'))?$this->input->post('startrow'):0; ?>
                 <?php foreach ($orderlist as $index => $ord): ?>
-                    <tr> <td  ><? echo $index + 1 ?> </td>  
+                    <tr> <td  ><? echo $index + 1+$page ?> </td>  
                         <td  >
 
                             <? echo $ord->getOrderno(); ?> 

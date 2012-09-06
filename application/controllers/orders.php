@@ -127,7 +127,7 @@ class Orders extends CI_Controller {
             $condition['orderdate <='] = $this->input->post('todate');
         }
 
-        $config['per_page'] = 5;
+        $config['per_page'] = 10;
         $startrow = ($this->input->post()) ? $this->input->post('startrow') : 0;
         $config['total_rows'] = $this->gettotalpage($condition);
         $this->pagination->initialize($config);
