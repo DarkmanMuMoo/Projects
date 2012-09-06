@@ -27,6 +27,8 @@ class Testsome extends CI_Controller {
         /* var_export(true,true);
           echo var_export(false,true); */
     }
+    
+ 
 public function iscachning(){
     
     $this->load->driver('cache',array('adapter' => 'file'));

@@ -18,7 +18,7 @@
                       <tr><td><strong> template  </strong></td><td>  <?echo (isset($template))? $template:'-' ?> </td></tr>
                        <tr><td><strong> จำนวน  </strong></td><td> <?echo (isset($qty))? $qty:'-' ?>  </td></tr>
                         <tr><td><strong> option </strong></td><td> <?echo (isset($option))? $option:'-' ?>  </td></tr>
-                         <tr><td><strong> ราคารวม </strong></td><td>  <?echo (isset($price))? $price:'-' ?>  </td></tr>
+                         <tr><td><strong> ราคารวม </strong></td><td>  <?echo (isset($price))?  number_format( $price, 2, '.', ',').' บาท':'-' ?>  </td></tr>
                 </table>
                 
                 <div  align="center" >   <a class="btn btn-success"  href="<?echo site_url('home/addtocart') ?>"

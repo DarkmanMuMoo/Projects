@@ -125,7 +125,7 @@
         
               
           </select><br/>
-          รหัสไปรษณีย์  <input  maxlength="10" name="post"type="text" value="<? echo $address1['postcode'] ?>"><br/>
+          รหัสไปรษณีย์  <input  maxlength="5" name="post"type="text" value="<? echo $address1['postcode'] ?>"><br/>
            โทรศัพท์  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  name="phone"type="text" value="<? echo $address1['phone'] ?>">
            <br />
            <input name="index" value="1" type="hidden"/>
@@ -151,7 +151,7 @@
                 <option value="<? echo $province->getProvinceid(); ?>"  <? echo ( $address2['provinceid'] ==$province->getProvinceid())? 'selected=\'selected\'':'';  ?>><? echo $province->getProvincename(); ?></option>
                 <? endforeach; ?></select><br/>
                 รหัสไปรษณีย์  
-                <input maxlength="15" name="post" type="text" value="<? echo $address2['postcode'] ?>"><br/>
+                <input maxlength="5" name="post" type="text" value="<? echo $address2['postcode'] ?>"><br/>
                 โทรศัพท์   &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <input name="phone" type="text" value="<? echo $address2['phone'] ?>">
             <br />
             <input name="index" value="2" type="hidden"/>

@@ -62,27 +62,38 @@ class Workdao extends CI_Model {
  public function findsharedwork($keyword, $empno ,$con) {
         $this->db->select(' work.workno as workno, work_name,work_description, startdate, enddate, ordno, work.empno as empno');
         $this->db->from('work');
-        $this->db->join('work_emp', 'work.empno = work_emp.empno', 'left');
-        if($empno>0){
-        $this->db->where('work.empno', $empno); 
-        }
+        $this->db->join('work_emp', 'work.workno = work_emp.workno', 'left');
+     
       // echo $sql;
         if ($keyword != '') {
          
            $this->db->like('work_name', $keyword); 
         }
+          if($empno!=0){
       switch($con){
  
     case 1:{
-          $this->db->where('work_empno is',' null',false); 
+
+          
+        $this->db->where('work.empno', intval($empno)); 
+       
         break;
     }
     case 2:{
-     $this->db->where('work_empno is not',' null',false); 
+   
+      
+        $this->db->where('work_emp.empno', intval($empno)); 
+      
         break;
+    }
+    case 0:{
+         $this->db->where('work.empno', intval($empno));
+        $this->db->or_where('work_emp.empno', intval($empno)); 
+        
     }
     
     }
+          }
         $query = $this->db->get();
 
         $array = array();

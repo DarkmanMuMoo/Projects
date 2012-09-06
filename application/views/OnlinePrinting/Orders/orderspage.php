@@ -97,23 +97,23 @@ background-color: #faa732;
                 <tbody>
                     <? $page=($this->input->post('startrow'))?$this->input->post('startrow'):0; ?>
                     <?php foreach ($orderlist as $index => $ord): ?>
-                        <tr> <td  ><? echo $index + 1+$page ?> </td>  
-                            <td  >
+                    <tr> <td style="width: 45px;" ><? echo $index + 1+$page ?> </td>  
+                            <td style="width: 47px;" >
                                
                                     <? echo $ord->getOrderno(); ?> 
                                
                             </td> 
                             <td > <? echo $ord->getOrderdate(); ?> </td>
-                            <td >
+                            <td style="width: 80px;" >
                                  <?php foreach ($ordstatuslist as $status): ?>
                                 <?php if ($status->getStatus() ==$ord->getOrdstatus() ): ?>
                                 <? echo $status->getDescription(); break; ?>
                                <?php endif; ?>
                                  <?php endforeach; ?>
                             </td> 
-                            <td style="text-align: right;" ><? echo $ord->getTotalprice(); ?> </td>                      
-                            <td >
-                                 <a class="btn btn-info" href="<?echo site_url('orders/vieworderdetail') . "/" . $ord->getOrderno(); ?>"> 
+                            <td style="text-align: right;" ><? echo number_format($ord->getTotalprice(), 2, '.', ','); ?>  &nbsp; บาท </td>                      
+                            <td style="width: 150px;" >
+                                 <a class="btn btn-info" href="<?echo site_url('orders/vieworderdetail') . "/" . $ord->getOrderno();  ?>"> 
                                    View
                                 </a>
                                 <?php if ($ord->getOrdstatus()<=20): ?>

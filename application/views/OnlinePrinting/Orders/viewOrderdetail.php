@@ -144,8 +144,8 @@ height: 3px;"></hr>
                             <? echo $orderline->getQty(); ?>
                         </td>
                         <td width="10%" style="text-align: right;"  >
-                            <? echo $orderline->getPrice();
-                            $totalprice+=$orderline->getPrice(); ?>
+                            <? echo number_format($orderline->getPrice(), 2, '.', ','); 
+                            $totalprice+=$orderline->getPrice(); ?> &nbsp บาท
                         </td>
                         <td width="10%"  >  <?php if (($orderline->getFilepath() == '') || ($orderline->getFilepath() == null)):?>
                         <?  echo '<h6 style="color:red" >notupload</h6>' ?>

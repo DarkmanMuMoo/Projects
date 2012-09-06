@@ -82,9 +82,9 @@
         echo form_open("user/performlogin", array('class' => 'well', 'id' => 'loginForm'));
         ?>
     <strong>Email </strong>
-    <input type="text"  class="input-xlarge" style="height: 28px;" name="email" id="email"  value="<? echo (isset($email))? $email:''; ?>" /><br/>
+    <input value="" type="text"  class="input-xlarge" style="height: 28px;" name="email" id="email"  value="<? echo (isset($email))? $email:''; ?>" /><br/>
          <strong  >Password </strong>
-         <input class="input-xlarge" style="height: 28px;" type="password" name="password" id="password" /><br/>
+         <input value="" class="input-xlarge" style="height: 28px;" type="password" name="password" id="password" /><br/>
     <!--remember me<input type="checkbox" name="remember" value="remember" /> I have a bike<br />-->
 
        <input  class="btn btn-primary" type="submit"  value="submit"/>

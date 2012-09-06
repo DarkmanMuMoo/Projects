@@ -99,9 +99,9 @@
                     <? echo $cart->getQty(); ?>
                 </td>
                 <td>
-    <? echo $cart->getPrice();
-    $totalprice = $totalprice + $cart->getPrice();
-    ?>
+    <? echo  number_format( $cart->getPrice(), 2, '.', ',');
+    $totalprice = $totalprice + $cart->getPrice(); 
+    ?>&nbsp; บาท
                 </td>
               <!--  <td>
                     <a href="<? echo site_url('orders/removeCartItem') . '/' . $index; ?> ">remove </a>

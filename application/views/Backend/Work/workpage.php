@@ -12,6 +12,16 @@
     }
     h1{ font-weight:bolder;
     }
+    
+    .hidestatus{
+        
+        display: none;
+    }
+     .showstatus{
+        
+        display: inline;
+    }
+    
 </style>
 
 
@@ -37,12 +47,12 @@
                     <option  <? echo($this->input->post('emp')==$emp->getEmpno())?'selected="selected"':''; ?> value="<? echo $emp->getEmpno(); ?>">  <? echo $emp->getName(); ?>&nbsp; <? echo $emp->getLastname(); ?> </option>
 
                 <?php endforeach; ?></select>
-             status: <select name="status" id="emp" >  
+            <div id="status"  class="hidestatus">status: <select name="status" id="emp" >  
                 <option <?  echo($this->input->post('status')==0)?'selected="selected"':''; ?> value="0">All</option>
                 <option  <?  echo($this->input->post('status')==1)?'selected="selected"':''; ?>   value="1">งานที่รับผิดชอบ</option>
                 <option  <?  echo($this->input->post('status')==2)?'selected="selected"':''; ?> value="2">งานทที่มีส่วนร่วม
                 </option>
-            </select>
+            </select></div>
             <input type="hidden" name="startrow" value="0"/>
             <button type="submit" class="btn">Search</button>
         </form>
@@ -177,6 +187,25 @@
 <script src="<? echo base_url("asset/javascript/jquery.validate.js"); ?>" >  </script>
 <script src="<? echo base_url("asset/javascript/jquery.metadata.js"); ?>" >  </script>
 <script>  
+    
+     $().ready(function() {
+         
+        $('#searchform select[name=emp]').change(function(){
+            
+       if( $(this).val()!='0'){
+           
+           
+           $('#status').addClass( 'showstatus' );
+          
+       }else{
+           
+            $('#status').addClass( 'hidestatus' );
+            $('#status').removeClass( 'showstatus' );
+       }
+            
+        }) ;
+         
+     });
      function pag(i){
         $('#searchform input[name=startrow]').val(i);
    

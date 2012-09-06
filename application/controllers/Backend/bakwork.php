@@ -43,11 +43,12 @@ class Bakwork extends CI_Controller {
         $this->pagination->initialize($config);
         $this->db->limit($config['per_page'], $startrow);
         $worklist = $this->workdao->findsharedwork($keyword, $empno, $this->input->post('status'));
+      //  echo $this->db->last_query();
         $emplist = $this->empdao->findbymultifield(array('position' => 'des'));
         $data = array();
         $data['worklist'] = $worklist;
         $data['emplist'] = $emplist;
-echo  $this->input->post('emp');
+
         $this->load->view(lang('bakwork'), $data);
     }
 
@@ -85,23 +86,36 @@ echo  $this->input->post('emp');
       private function gettotalpage($empno, $status, $keyword = '') {
         $this->db->from('work');
         $this->db->join('work_emp', 'work.empno = work_emp.empno', 'left');
-         if($empno>0){
-        $this->db->where('work.empno', $empno); 
-         }
+       
       // echo $sql;
         if ($keyword != '') {
          
            $this->db->like('work_name', $keyword); 
         }
+        
+        if($empno!=0){
       switch($status){
  
-    case 1:{
-          $this->db->where('work_empno is',' null',false); 
+   case 1:{
+
+          
+        $this->db->where('work.empno', intval($empno)); 
+       
         break;
     }
     case 2:{
-     $this->db->where('work_empno is not',' null',false); 
+   
+      
+        $this->db->where('work_emp.empno', intval($empno)); 
+      
         break;
+    }
+    case 3:{
+         $this->db->where('work.empno', intval($empno));
+        $this->db->or_where('work_emp.empno', intval($empno)); 
+        
+    }
+    
     }
     
     }

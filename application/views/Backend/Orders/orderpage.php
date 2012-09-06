@@ -7,9 +7,11 @@ padding: 5px;
 line-height: 18px;
 vertical-align: middle;
 border-top: 1px solid #DDD;
+
 }
-        #result th{text-align: center;}
-        #result td{text-align: center;}
+        #result th{text-align: center;
+        font-size: 12px;}
+        #result td{text-align: center;font-size: 15px;}
 
 hr{ text-align:center;
 color:#09F;
@@ -73,7 +75,7 @@ h1{ font-weight:bolder;
                 <? $page=($this->input->post('startrow'))?$this->input->post('startrow'):0; ?>
                 <?php foreach ($orderlist as $index => $ord): ?>
                     <tr> <td  ><? echo $index + 1+$page ?> </td>  
-                        <td  >
+                        <td style="width:52px;" >
 
                             <? echo $ord->getOrderno(); ?> 
 
@@ -94,7 +96,7 @@ h1{ font-weight:bolder;
                                 <?php endif; ?>
     <?php endforeach; ?>
                         </td> 
-                        <td style="text-align: right;" ><? echo $ord->getTotalprice(); ?> </td>                      
+                        <td style="text-align: right;" ><? echo number_format($ord->getTotalprice(), 2, '.', ','); ?>&nbsp;บาท</td>                      
                         <td >
                             <a class="btn btn-info" href="<? echo site_url('Backend/bakorders/vieworderdetail') . "/" . $ord->getOrderno(); ?>"> 
                                 View

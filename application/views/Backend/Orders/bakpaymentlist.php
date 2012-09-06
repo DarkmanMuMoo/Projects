@@ -51,7 +51,7 @@ margin-top: 15px;
                <td><? echo $payment->getPayno();?> </td> 
             <td><? echo $payment->getSeqno();?> </td> 
          <td><? echo $payment-> getPeriod()?> </td> 
-         <td><? echo $payment->getAmount();?> </td> 
+         <td><? echo number_format( $payment->getAmount(), 2, '.', ',');?>  &nbsp; บาท</td> 
           <td><? echo $payment->getPaymentdate();?></td> 
          <td><?php if ($payment->getActive() == '1'): ?>
              <span class="label label-success">Active</span>

@@ -42,7 +42,7 @@ class User extends CI_Controller {
      
      public function performlogout(){
          
-         unset($_SESSION['emp']);
+        session_destroy();
            $this->load->view(lang('baklogin'));
      }
            public function user_check($email,$password) {
