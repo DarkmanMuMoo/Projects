@@ -32,7 +32,7 @@ class Userprofile extends CI_Controller {
         $data['address2'] = $address2;
 
         $data['provincelist'] = $this->thailandutil->getAllprovinceList();
-
+   
         $this->load->view(lang('userprofile'), $data);
     }
 

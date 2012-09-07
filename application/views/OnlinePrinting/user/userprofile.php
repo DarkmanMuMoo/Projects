@@ -95,7 +95,7 @@
             </tr>
             <tr>
                 <td>โทรศัพท์มือถือ</td>
-                <td> <input maxlength="10" name="mphone"type="text" value="<? echo $updateuser->getMobilephone(); ?>"></td>
+                <td> <input maxlength="10"  id="mphone" name="mphone"type="text" value="<? echo $updateuser->getMobilephone(); ?>"></td>
                 <td></td>
             </tr>
             <tr>
@@ -126,7 +126,7 @@
               
           </select><br/>
           รหัสไปรษณีย์  <input  maxlength="5" name="post"type="text" value="<? echo $address1['postcode'] ?>"><br/>
-           โทรศัพท์  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  name="phone"type="text" value="<? echo $address1['phone'] ?>">
+          โทรศัพท์  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="phone1" name="phone"type="text" value="<? echo $address1['phone'] ?>">
            <br />
            <input name="index" value="1" type="hidden"/>
         <input class="btn-info" type="submit" value="edit">
@@ -152,7 +152,7 @@
                 <? endforeach; ?></select><br/>
                 รหัสไปรษณีย์  
                 <input maxlength="5" name="post" type="text" value="<? echo $address2['postcode'] ?>"><br/>
-                โทรศัพท์   &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <input name="phone" type="text" value="<? echo $address2['phone'] ?>">
+                โทรศัพท์   &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <input id="phone2" name="phone" type="text" value="<? echo $address2['phone'] ?>">
             <br />
             <input name="index" value="2" type="hidden"/>
             <input  class="btn-info"type="submit" value="edit">
@@ -191,7 +191,11 @@
     <script src="<? echo base_url("asset/javascript/jquery.validate.js"); ?>" >  </script>
     <script src="<? echo base_url("asset/javascript/jquery.metadata.js"); ?>" >  </script>
     <script>
-        
+         $().ready(function() {
+      $("#mphone").mask("999-999-9999");
+     $("#phone1").mask("99-999-9999");
+       $("#phone2").mask("99-999-9999");
+         });
         function changepassword(){
            var validate= $("#changepasswordform").validate({
                 rules: {
