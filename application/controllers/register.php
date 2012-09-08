@@ -40,27 +40,7 @@ class Register extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
 
             $provincelist = $this->thailandutil->getAllprovinceList();
-            $data = array();
-         /*  if($this->input->post()){
-            $data['email']=$this->input->post('email');
-            $data['name']=$this->input->post('name');
-            $data['lastname']=$this->input->post('lastname');
-            $data['province']=$this->input->post('province');
-            $data['province2']=$this->input->post('province2');
-            $data['mphone']=$this->input->post('mphone');
-          
-            $data['address1'] = array('address' => $this->input->post('address'),
-                'province' => $province->getProvincename() ,
-                'postcode' => $this->input->post('postcode'),
-                'phone' => $this->input->post('phone1')
-            );
-              $data['address2'] = array('address' => $this->input->post('address2'),
-                'province' => $province2->getProvincename() ,
-                'postcode' => $this->input->post('postcode2'),
-                'phone' => $this->input->post('phone2')
-            );
-            }*/
-            
+            $data = array();   
             $data['provincelist'] = $provincelist;
             $this->load->view(lang('registerform'), $data);
             
