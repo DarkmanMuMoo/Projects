@@ -22,7 +22,7 @@ and open the template in the editor.
                 $('#showcartdialog').dialog({ 
                     autoOpen: true,
                     modal: true,
-                    width:900,
+                    width:'auto',
                     title: "Your Cart"
 
                 }
@@ -39,9 +39,9 @@ and open the template in the editor.
                 $('#showloginframe').dialog({ 
                     autoOpen: true,
                     modal: true,
-                    width:450,
-                    height:400,
-                    title: "login"
+                    width:'auto',
+                    height:'auto',
+                    title: "Login"
 
                 }
             
@@ -111,6 +111,10 @@ and open the template in the editor.
                 
                 
             }
+            function closelogin(){
+                
+                 $('#showloginframe').dialog("close");    
+            }
            $(document).ready(function(){
    // Your code here
   // alert('<?echo get_class(get_instance())?>');
@@ -144,7 +148,11 @@ and open the template in the editor.
 
 
                 <div id="login" style="float: right; padding-right: 10px;padding-top: 5px;" >
-                      <button class="btn btn" style="font-weight:bold;float: left;margin-right: 5px;"  onclick="showcart();" id="showcart" ><i class="icon-shopping-cart"></i>  Cart  </button>
+                      <button class="btn btn" style="font-weight:bold;float: left;margin-right: 5px;"  onclick="showcart();" id="showcart" ><i class="icon-shopping-cart"></i>  
+                          
+                          Cart&nbsp;<? echo (isset($_SESSION['cart']))?'('.count($_SESSION['cart']).')':'(0)'; ?>
+                      
+                      </button>
                     <?
 //check var  that hook gen
 //echo var_dump($_SESSION);
@@ -196,8 +204,8 @@ and open the template in the editor.
 
             </div>
             <div id="showcartdialog"  style="display: none;">
-                <iframe src="" name="cartdialog" id="cartdialog" width="700px"
-                        height="500px" style="border-style:none;" scrolling="no" >
+                <iframe src="" name="cartdialog" id="cartdialog" width="500px"
+                        height="400px" style="border-style:none;" scrolling="no" >
 
 
                 </iframe>

@@ -27,11 +27,11 @@ if(data=='false'){
     }
         
     </script>
-        <div align="center">
-        <p> <h1> your Cart</h1></p>
+    <div align="center"  >
+            <p> <h1> your Cart</h1></p>
                 <p>  
            <?  $totalprice=0; ?>
-                <table class="table table-bordered" id="Ccolum" style="width:auto">
+                <table class="table table-bordered" id="Ccolum" style="width:auto; margin-top: 30px;">
                     <thead> <tr> 
                         
                       
@@ -44,6 +44,7 @@ if(data=='false'){
 
                         </tr> </thead>
                     <tbody>
+                          <?php if (!empty($_SESSION['cart'] )): ?>
                     <?php foreach ($_SESSION['cart'] as $index=>$cart): ?>
                     <tr>
                         
@@ -85,17 +86,20 @@ if(data=='false'){
                      
                     </tr>
                     <? endforeach;?>
-
+    <?php else: ?>
+                    <tr><td colspan="6" style="text-align: center;" >  <h6>ไม่มีสินค้าในตระกร้า</h6>  </td></tr>
+        
+        
+        <?php endif; ?>
                     </tbody>
                     
                 
                 </table>
-                <div style="float: left" >
-                     <strong>ราคารวม :<? echo $totalprice?> บาท</strong>
-                </div>
-<div style="float: right" >
-    
-    <button class="btn btn-success"  onclick="checkuser();"   > <i class="icon-shopping-cart icon-white"></i> CreatOrder </button>
+               
+<div style="float: right; margin-top: 15px;" >
+    <strong>ราคารวม :0 บาท</strong><p>
+        <button class="btn btn-success"  onclick="checkuser();"  style="margin-top: 15px;" > <i class="icon-shopping-cart icon-white"></i> CreatOrder </button>
+    </p>
     <a  id="checkout" target="_parent" href="<? echo site_url('orders/Checkout')?>">
                         </a>
                 </div>
