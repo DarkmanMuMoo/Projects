@@ -56,8 +56,8 @@ class Paperdao extends CI_Model   {
         $data = array(
             'paperno' => $paper->getPaperno(),
             'paper_name' => $paper->getName(),
-             'gram' => $paper->getGrame()
-           
+             'gram' => $paper->getGrame(),
+           'priceperkilo'=>$paper->getPriceperkilo()
         );
 
         return $this->db->insert('paper', $data);
@@ -91,6 +91,8 @@ $obj = null;
         $paper->setName($row->paper_name);
      
        $paper->setGrame($row->gram);
+       
+       $paper->setPriceperkilo($row->priceperkilo);
 
         return $paper;
     }

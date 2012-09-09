@@ -7,11 +7,19 @@ class Paper  extends CI_Model {
     private $paperno;
     private $name;
     private $grame;
+    private $priceperkilo;
     public function getPaperno() {
         return $this->paperno;  
     }
+    public function getPriceperkilo() {
+        return $this->priceperkilo;
+    }
 
-    public function setPapaerno($papaerno) {
+    public function setPriceperkilo($priceperkilo) {
+        $this->priceperkilo = $priceperkilo;
+    }
+
+        public function setPapaerno($papaerno) {
         $this->paperno = $papaerno;
     }
 

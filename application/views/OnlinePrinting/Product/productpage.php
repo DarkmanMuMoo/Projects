@@ -17,6 +17,7 @@
         float: left;
         margin-left: 3px;
         margin-bottom: 5px;
+        height: auto;
     }
     .caseproduct{
         margin: 0 auto; width: 100%;display: table;  

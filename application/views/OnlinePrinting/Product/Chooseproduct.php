@@ -35,7 +35,13 @@ text-rendering: optimizelegibility;
          float:left; width: 40%;
        
 	    }
-	
+            .description{
+ text-align: left;
+text-indent: 30px;
+font-size: 16px;
+                
+                
+            }
 
          
     
@@ -45,11 +51,11 @@ text-rendering: optimizelegibility;
       
         <br>
         <div id="page">
-            <div class="divcenter" style=" margin-bottom: 25px;">
+            <div class="divcenter" style=" width:70%; margin-bottom: 25px;">
                  
                      <img src="<? echo base_url($type->getPicurl()); ?>"   />  
-
-        <h1> <? echo $type->getDescription(); ?>  </h1>
+                     <h1><? echo $type->getType(); ?> </h1>
+                     <p class="description"> <? echo $type->getDescription(); ?>  </p>
    
 
             </div>
@@ -87,7 +93,7 @@ text-rendering: optimizelegibility;
 </p>
 
 
-          
+<input name="type" value="<? echo $type->getType();?>" type="hidden"/>
             <input class="btn-primary" type="submit" value="calprice" >
         <? echo form_close(); ?>
   </div>

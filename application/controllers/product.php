@@ -16,7 +16,7 @@ class Product extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-     
+
         $this->load->model('obj/orderline');
     }
 
@@ -41,35 +41,90 @@ class Product extends CI_Controller {
         $this->load->view(lang('chooseproduct'), $data);
     }
 
-    public function calprice() {
-        $this->load->model('dao/pricedao');
-        $this->load->model('dao/optiondao');
+    private function __calprice(Template
+    $temp, Paper $paper, $amount) {
+        
+        $printprice = (900 * $paper->getGrame() * $paper->getPriceperkilo()) / (3100 * 500);
+ 
+        $printprice = ceil($printprice);
+           error_log("printprice".$printprice);
+        $papern = (($amount *( $temp->getY()/$temp->getX())) + (200*$temp->getY())) / $temp->getZ();
+        $papern = ceil($papern);
+           error_log("papern".$papern);
+        $price=$papern*$printprice;
+        
+         if($temp->getTypeno()==8){
+            $price+=300;    //ห่วงกระดูกงู ขาปติทิน
+        }
+        if($temp->getTypeno()==10){
+            $price+=1500;    //ไดคัท ทำเล่ม
+        }
 
+        if($temp->getPlatesize()=='L'){
+      
+        if($temp->getTypeno()==8){
+            
+            $price+=4000*4;    //เพจ 4 ชุด
+        }else{
+            $price +=4000;//ค่าเพลท  พิม ใหญ่
+        }
+        }else{
+            $price +=3500;  //ค่าเพลท พิม  เล็ก
+            
+        }
+        
+        $price+=1000;
+        
+         
+        
+      
+        
+        return $price;
+    }
+
+    public function calprice() {
+        //  $this->load->model('dao/pricedao');
+        $this->load->model('dao/optiondao');
+        $this->load->model('dao/templatedao');
+        $this->load->model('dao/paperdao');
 
         // session_start();
         $_SESSION['tmp_ordline'] = new Orderline();
         $tempno = $this->input->post('template');
         $paperno = $this->input->post('paper');
         $optionno = $this->input->post('option');
+        $type = $this->input->post('type');
         $qty = $this->input->post('amount');
         $_SESSION['tmp_ordline']->setTempno($tempno);
         $_SESSION['tmp_ordline']->setPaperno($paperno);
         $_SESSION['tmp_ordline']->setOptionno($optionno);
         $_SESSION['tmp_ordline']->setQty($qty);
 
+        $template =$this->templatedao->findbyid($tempno);
+        $paper=$this->paperdao->findbyid($paperno);
+        
+      
+        $price=$this->__calprice($template, $paper, $qty);
+           $option = $this->optiondao->findbyid($optionno);
+           
+           if($option->getOptionno()>0){
+               
+               $price+=($qty*$option->getPrice());
+           }
+        $price=  round($price*1.2);//กำไร
+        //
+        //   old version
+        //  $priceextends = $this->pricedao->findPriceExtendsby(intval($paperno), intval($tempno), intval($qty));
 
-        //   need to fix later
-        $priceextends = $this->pricedao->findPriceExtendsby(intval($paperno), intval($tempno), intval($qty));
-
-        if ($priceextends != null) {
-            $data['paper'] = $priceextends->getPapername() . ' ' . $priceextends->getGrame() . 'g';
-            $data['template'] = $priceextends->getTmpname() . ' ' . $priceextends->getSize();
-            $data['qty'] = $priceextends->getQty();
-            $data['type'] = $priceextends->getType();
-            $data['price'] = $priceextends->getPrice();
-            $_SESSION['tmp_ordline']->setPrice($priceextends->getPrice());
-        }
-        $option = $this->optiondao->findbyid($optionno);
+      //  if ($priceextends != null) {
+            $data['paper'] = $paper->getName() . ' ' . $paper->getGrame() . 'g';
+            $data['template'] = $template->getName() . ' ' . $template->getSize();
+            $data['qty'] = $qty;
+            $data['type'] = $type;
+            $data['price'] = $price;
+            $_SESSION['tmp_ordline']->setPrice($price);
+     //   }
+      
         $data['option'] = $option->getDescription();
 //need to fix later
         $this->load->view(lang('showpriceframe'), $data);
