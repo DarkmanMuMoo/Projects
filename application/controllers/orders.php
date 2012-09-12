@@ -317,11 +317,14 @@ class Orders extends CI_Controller {
       
 
 
-        // $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
-        //error_log("send email to $to result is".var_export($emailresult, true),0);
+      $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
+      error_log("send email to $to result is".var_export($emailresult, true),0);
       
       //sent sms here
-        //$result = $this->smsutil->sentsms('0849731746','finaltest');
+      $phone= $_SESSION['user']->getMobilephone();
+        $phone = explode('-', $phone);
+      $phone =  implode('', $phone);
+        $result = $this->smsutil->sentsms($phone,'Colour Harmony: สถานะตรวจสอบงาน');
 
        // redirect("orders/viewOrderdetail/$orderno");
         redirect("orders");

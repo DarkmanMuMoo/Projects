@@ -18,9 +18,10 @@ class Testsome extends CI_Controller {
 
     public function index() {
 
-       $count = '1';
-       $count +=1;
-       echo $count;
+       $count = '084-973-2746';
+       $count = explode('-', $count);
+      $count =  implode('', $count);
+      echo $count;
         /* $first= load_class('emailutil', 'libraries','');
           var_dump($first);
           var_dump($this); */
