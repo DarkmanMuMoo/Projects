@@ -54,6 +54,7 @@ class Bakorders extends CI_Controller {
 
 
         $orderlist = $this->orddao->findorderbackbyCustormer($condition, $keyword);
+       // echo $this->db->last_query();
         $ordstatuslist = $this->ordstatusdao->findall();
         $data = array();
         $data['orderlist'] = $orderlist;
@@ -67,9 +68,9 @@ class Bakorders extends CI_Controller {
         
         $this->db->join('custormer', 'custormer.email = ord.email');
         if ($keyword != '') {
-            $this->db->or_like('ord.email', $keyword);
-            $this->db->or_like('cus_name', $keyword);
-            $this->db->or_like('lastname', $keyword);
+            
+            $where = "(`ord`.`email` LIKE '%$keyword%' OR `cus_name` LIKE '%$keyword%' OR `lastname` LIKE '%$keyword%' )";
+              $this->db->where($where);
         }
         foreach ($condition as $index => $row) {
 
