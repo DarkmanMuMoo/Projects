@@ -128,7 +128,7 @@ public function iscachning(){
     public function testutil() {
 
         $this->load->library('smsutil');
-        $result = $this->smsutil->sentsms('0849731746','finaltest');
+        $result = $this->smsutil->sentsms('0867693988','finaltest');
         var_dump($result);
         echo $this->smsutil->getDebumsg();
         /* $this->load->library('captchautil');

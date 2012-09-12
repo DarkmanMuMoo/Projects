@@ -28,7 +28,7 @@ class smsutil {
        // $this->CI = &get_instance();
         $this->url = "http://www.thaibulksms.com/sms_api.php";
         $this->username = '0804402390';
-        $this->password = '6256';
+        $this->password = '670256';
         $this->debumsg = '';
         $this->sender = 'SMS';
     }
@@ -48,6 +48,7 @@ class smsutil {
         $SMStype = 'standard';
         $data_string = "username=$username&password=$password&msisdn=$msisdn&message=$message";
         $data_string.="&sender=$sender&ScheduledDelivery=$ScheduledDelivery&force=$SMStype";
+   
         $agent = "Mozilla/5.0 (Windows; U; Windows NT 5.0; en-US; rv:1.4) Gecko/20030624 Netscape/7.1 (ax)";
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
