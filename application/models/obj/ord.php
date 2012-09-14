@@ -23,8 +23,45 @@ class Ord extends CI_Model {
     private $address;
     private $province;
     private $postcode;
-private $orderdate;
-public function getOrderdate() {
+    private $orderdate;
+    private $expectedshipdate;
+    private $recievedate;
+    private $cusremark;
+    private $sellerremark;
+    
+    public function getExpectedshipdate() {
+        return $this->expectedshipdate;
+    }
+
+    public function setExpectedshipdate($expectedshipdate) {
+        $this->expectedshipdate = $expectedshipdate;
+    }
+
+    public function getRecievedate() {
+        return $this->recievedate;
+    }
+
+    public function setRecievedate($recievedate) {
+        $this->recievedate = $recievedate;
+    }
+
+    public function getCusremark() {
+        return $this->cusremark;
+    }
+
+    public function setCusremark($cusremark) {
+        $this->cusremark = $cusremark;
+    }
+
+    public function getSellerremark() {
+        return $this->sellerremark;
+    }
+
+    public function setSellerremark($sellerremark) {
+        $this->sellerremark = $sellerremark;
+    }
+
+    public function getOrderdate() {
     return $this->orderdate;
 }
 

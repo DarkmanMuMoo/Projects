@@ -64,7 +64,7 @@ h1{ font-weight:bolder;
                 สถานะ
             </th>
             <th>
-                ราคารวม
+                ราคารวม(บาท)
             </th>
             <th>
 
@@ -96,7 +96,7 @@ h1{ font-weight:bolder;
                                 <?php endif; ?>
     <?php endforeach; ?>
                         </td> 
-                        <td style="text-align: right;" ><? echo number_format($ord->getTotalprice(), 2, '.', ','); ?>&nbsp;บาท</td>                      
+                        <td style="text-align: right;" ><? echo number_format($ord->getTotalprice(), 2, '.', ','); ?></td>                      
                         <td >
                             <a class="btn btn-info" href="<? echo site_url('Backend/bakorders/vieworderdetail') . "/" . $ord->getOrderno(); ?>"> 
                                 View

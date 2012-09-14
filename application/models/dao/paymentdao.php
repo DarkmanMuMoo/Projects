@@ -31,6 +31,24 @@ class Paymentdao extends CI_Model {
 
         return $obj;
     }
+   public function findbymultifield($condition) {
+        foreach ($condition as $index => $row) {
+
+            $this->db->where($index, $row);
+        }
+
+        $query = $this->db->get('ord');
+        $condition = array();
+
+        foreach ($query->result() as $row) {
+            $obj = null;
+            $obj = $this->makeObj($row);
+            array_push($condition, $obj);
+        }
+        // echo var_dump($obj);
+        // var_dump($this->db->last_query());
+        return $condition;
+    }
 
     public function findall() {
 

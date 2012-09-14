@@ -54,7 +54,7 @@ class Bakorders extends CI_Controller {
 
 
         $orderlist = $this->orddao->findorderbackbyCustormer($condition, $keyword);
-       // echo $this->db->last_query();
+        // echo $this->db->last_query();
         $ordstatuslist = $this->ordstatusdao->findall();
         $data = array();
         $data['orderlist'] = $orderlist;
@@ -65,12 +65,12 @@ class Bakorders extends CI_Controller {
 
     private function gettotalpage($condition = array(), $keyword = '') {
 
-        
+
         $this->db->join('custormer', 'custormer.email = ord.email');
         if ($keyword != '') {
-            
+
             $where = "(`ord`.`email` LIKE '%$keyword%' OR `cus_name` LIKE '%$keyword%' OR `lastname` LIKE '%$keyword%' )";
-              $this->db->where($where);
+            $this->db->where($where);
         }
         foreach ($condition as $index => $row) {
 
@@ -166,8 +166,17 @@ class Bakorders extends CI_Controller {
                 $this->onproduction($orderno);
             }
             if ($iscomplete && $result) {
-
+                $con['orderno']=$orderno;
+                $con['active']='0';
+                $paylist=$this->paymentdao->findbymultifield($con);
+                
+                foreach ($paylist as  $pay) {
+                    
+                    
+                    unlink('./uploads/Slips/'.$pay->getPicurl());
+                }
                 $this->paymentdao->deleteinactive($orderno);
+                
             }
             redirect('Backend/bakorders/getpaymentlist/' . $orderno);
         } else {
@@ -200,12 +209,18 @@ class Bakorders extends CI_Controller {
 
         $ord = $this->orddao->findbyid($orderno);
         $to = $ord->getEmail();
-        //$subject = 'Colour Harmony: สถานะกำลังปฏิบัติงาน';
-        // $message = 'งานของท่านอยู่ในระหว่างการพิมพ์ เมื่องานของท่านสำเร็จแล้วเราจะแจ้งให้ทราบภายหลังค่ะ' . $email;
+       $subject = 'Colour Harmony: สถานะกำลังปฏิบัติงาน';
+       $message = 'งานของท่านอยู่ในระหว่างการพิมพ์ เมื่องานของท่านสำเร็จแล้วเราจะแจ้งให้ทราบภายหลังค่ะ' ;
+       
+       $cus = $this->cusdao->findbyEmail($ord->getEmail());
+        $phone = $cus->getMobilephone();
+        $phone = explode('-', $phone);
+        $phone = implode('', $phone);
+        $messagephone=$subject."\n".$message;
         // $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
         //error_log("send email to $to result is".var_export($emailresult, true),0);
         //sent sms here
-        //$result = $this->smsutil->sentsms('0849731746','finaltest');
+        //$result = $this->smsutil->sentsms($phone,$messagephone);
 
         return $result;
     }
@@ -232,7 +247,11 @@ class Bakorders extends CI_Controller {
         // $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
         //error_log("send email to $to result is".var_export($emailresult, true),0);
         //sent sms here
-        //$result = $this->smsutil->sentsms('0849731746','finaltest');
+        $cus = $this->cusdao->findbyEmail($ord->getEmail());
+        $phone = $cus->getMobilephone();
+        $phone = explode('-', $phone);
+        $phone = implode('', $phone);
+        //$result = $this->smsutil->sentsms($phone,'finaltest');
         redirect("Backend/bakorders/vieworderdetail/$orderno");
     }
 
@@ -253,12 +272,19 @@ class Bakorders extends CI_Controller {
         $message .= '<p>';
         $message .= $msg;
         $message .= '</p>';
+        
+        $ord = $this->orddao->findbyid($orderno);
+        $cus = $this->cusdao->findbyEmail($ord->getEmail());
+        $phone = $cus->getMobilephone();
+        $phone = explode('-', $phone);
+        $phone = implode('', $phone);
 
-
+        $messagephone="งานของท่านไม่ถูกต้อง กรุณาอัพโหลดงานใหม่ค่ะ \n";
+        $messagephone.=$msg;
         // $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
         //error_log("send email to $to result is".var_export($emailresult, true),0);
         //sent sms here
-        //$result = $this->smsutil->sentsms('0849731746','finaltest');
+        //$result = $this->smsutil->sentsms($phone,$messagephone);
         redirect("Backend/bakorders/vieworderdetail/$orderno");
     }
 
@@ -276,12 +302,19 @@ class Bakorders extends CI_Controller {
         $subject = 'Colour Harmony: สถานะสำเร็จ';
         $message = 'งานของท่านเสร็จเรียบร้อยแล้วค่ะ';
 
+      
+        $cus = $this->cusdao->findbyEmail($ord->getEmail());
+        $phone = $cus->getMobilephone();
+        $phone = explode('-', $phone);
+        $phone = implode('', $phone);
 
+        $messagephone="Colour Harmony: สถานะสำเร็จ \n";
+        $messagephone.= $message; 
 
         // $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
         //error_log("send email to $to result is".var_export($emailresult, true),0);
         //sent sms here
-        //$result = $this->smsutil->sentsms('0849731746','finaltest');
+        //$result = $this->smsutil->sentsms($phone,$messagephone);
         redirect("Backend/bakorders/vieworderdetail/$orderno");
     }
 
@@ -298,7 +331,13 @@ class Bakorders extends CI_Controller {
         $to = $ord->getEmail();
         $subject = 'Colour Harmony: สถานะcomplete';
         $message = 'Order Complete';
+        $cus = $this->cusdao->findbyEmail($ord->getEmail());
+        $phone = $cus->getMobilephone();
+        $phone = explode('-', $phone);
+        $phone = implode('', $phone);
 
+        $messagephone="Colour Harmony: สถานะcomplete \n";
+        $messagephone.= $message; 
 
         // $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
         //error_log("send email to $to result is".var_export($emailresult, true),0);

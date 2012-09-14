@@ -52,16 +52,16 @@ if(data=='false'){
                             
                             
                             <?php if ($orderline->getTempno() == $cart->getTempno()): ?>
-                            <strong> <? echo $orderline->getName();?> &nbsp; <? echo $orderline->getTypeno();?>&nbsp;
+                             <? echo $orderline->getName();?> &nbsp; <? echo $orderline->getTypeno();?>&nbsp;
                             <? echo $orderline->getSize();?>
-                            </strong>
+                           
                             <?php endif; ?>
                              <?endforeach;?>
                         </td>
                    
                          <td>   <?php foreach ($paperlist as  $paper): ?>
                               <?php if ($paper->getPaperno() == $cart->getPaperno()): ?>
-                            <strong> <? echo $paper->getName();?> &nbsp; <? echo $paper->getGrame();?></strong>
+                            <? echo $paper->getName();?> &nbsp; <? echo $paper->getGrame();?>
                             <?php endif; ?>
                        
                              <? endforeach;?>
@@ -69,7 +69,7 @@ if(data=='false'){
                          <td>   <?php foreach ($optionlist as $option): ?>
                             
                            <?php if ($option->getOptionno() == $cart->getOptionno()): ?>
-                            <strong> <? echo $option->getDescription();?> </strong>
+                            <? echo $option->getDescription();?> 
                             <?php endif; ?>
                              <? endforeach;?>
                         </td>
@@ -77,7 +77,7 @@ if(data=='false'){
                             <? echo $cart->getQty();?>
                       </td>
                           <td>
-                            <? echo $cart->getPrice();   $totalprice=$totalprice+$cart->getPrice(); ?>
+                            <?    echo number_format( $cart->getPrice(), 2, '.', ',');   $totalprice=$totalprice+$cart->getPrice(); ?>บาท
                       </td>
                       <td>
                           <a href="<? echo site_url('home/removeCartItem').'/'.$index;  ?> ">remove </a>
@@ -97,7 +97,7 @@ if(data=='false'){
                 </table>
                
 <div style="float: right; margin-top: 15px;" >
-    <strong>ราคารวม :0 บาท</strong><p>
+    <strong>ราคารวม :<?  echo number_format( $totalprice, 2, '.', ',') ?>บาท</strong><p>
         <button class="btn btn-success"  onclick="checkuser();"  style="margin-top: 15px;" > <i class="icon-shopping-cart icon-white"></i> CreatOrder </button>
     </p>
     <a  id="checkout" target="_parent" href="<? echo site_url('orders/Checkout')?>">

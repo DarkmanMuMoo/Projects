@@ -23,6 +23,15 @@ class Orders extends CI_Controller {
         $this->load->model('dao/orddao');
     }
 
+    public function paymentimg($payno) {
+
+        $this->load->helper('html');
+        $this->load->model('dao/paymentdao');
+        $payment = $this->paymentdao->findbyid($payno);
+
+        echo img('uploads/Slips/' . $payment->getPicurl());
+    }
+
     public function addpayment() {
 
         $this->load->model('dao/paymentdao');
@@ -44,7 +53,7 @@ class Orders extends CI_Controller {
         $insertpayment->setOrderno($ordno);
 
         $filename = $ordno . '_' . date("Ymd-His");
-        $insertpayment->setPicurl($filename);
+
         $config['upload_path'] = './uploads/Slips';
         $config['allowed_types'] = 'jpg|png';
         $config['max_size'] = '2048';
@@ -53,7 +62,8 @@ class Orders extends CI_Controller {
 
         $message = '';
         if ($upload == 'complete') {
-
+            $data = $this->upload->data();
+            $insertpayment->setPicurl($filename . $data['file_ext']);
             $result = $this->paymentdao->insert($insertpayment);
             error_log(var_export('addpayment' . $result, true));
 
@@ -110,12 +120,12 @@ class Orders extends CI_Controller {
         $email = $user->getEmail();
         $condition = array();
         $condition['email'] = $email;
-        $hilight='0';
+        $hilight = '0';
         if ($this->input->post('status')) {
             $staus = $this->input->post('status');
             if ($staus != '') {
                 $condition['ord_status'] = $staus;
-                $hilight=$staus;
+                $hilight = $staus;
             }
         }
         if ($this->input->post('fromdate')) {
@@ -137,18 +147,20 @@ class Orders extends CI_Controller {
         $data = array();
         $data['orderlist'] = $orderlist;
         $data['ordstatuslist'] = $ordstatuslist;
-        $data['hilight']=$hilight;
+        $data['hilight'] = $hilight;
         $this->load->view(lang('orderpage'), $data);
     }
-  private function gettotalpage($condition = array()) {
-      
-        foreach ($condition as $index=>$row) {
 
-         $this->db->where($index, $row);
+    private function gettotalpage($condition = array()) {
+
+        foreach ($condition as $index => $row) {
+
+            $this->db->where($index, $row);
         }
-        
-         return $this->db->count_all_results('ord');
-  }
+
+        return $this->db->count_all_results('ord');
+    }
+
     public function cancleorder($orderno) {
 
         $this->orderlinedao->delete($orderno);
@@ -174,7 +186,7 @@ class Orders extends CI_Controller {
         if (!empty($_SESSION['cart'])) {
             $_SESSION['temp_orderlinelist'] = array_values($_SESSION['cart']);
         }
-        
+
         $_SESSION['cart'] = array();
         $data['templatelist'] = $this->templatedao->findall();
         $data['paperlist'] = $this->paperdao->findall();
@@ -209,7 +221,7 @@ class Orders extends CI_Controller {
         // echo $ordsendmethod;
         $data['ordpay'] = $this->ordpaydao->findbyid($ordpaymethod);
         $data['ordsend'] = $this->ordsenddao->findbyid($ordsendmethod);
-       // var_dump($data['ordsend']);
+        // var_dump($data['ordsend']);
 
         $this->load->view(lang('confirmorder'), $data);
     }
@@ -310,23 +322,18 @@ class Orders extends CI_Controller {
 //sent mail here;
         $config = $this->emailutil->getSmtpconfig();
         $form = lang('adminemail');
-
         $to = $_SESSION['user']->getEmail();
         $subject = 'Colour Harmony: สถานะตรวจสอบงาน';
-        $message = 'ท่านได้อัพโหลดงานเรียบร้อยแล้ว งานของท่านอยู่ในระหว่างการตรวจสอบความถูกต้องค่ะ' ;
-      
+        $message = 'ท่านได้อัพโหลดงานเรียบร้อยแล้ว งานของท่านอยู่ในระหว่างการตรวจสอบความถูกต้องค่ะ';
 
-
-      $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
-      error_log("send email to $to result is".var_export($emailresult, true),0);
-      
-      //sent sms here
-      $phone= $_SESSION['user']->getMobilephone();
+        //    $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
+        //     error_log("send email to $to result is".var_export($emailresult, true),0);
+        //sent sms here
+        $phone = $_SESSION['user']->getMobilephone();
         $phone = explode('-', $phone);
-      $phone =  implode('', $phone);
-        $result = $this->smsutil->sentsms($phone,'Colour Harmony: สถานะตรวจสอบงาน');
-
-       // redirect("orders/viewOrderdetail/$orderno");
+        $phone = implode('', $phone);
+        //    $result = $this->smsutil->sentsms($phone,'Colour Harmony: สถานะตรวจสอบงาน');
+        // redirect("orders/viewOrderdetail/$orderno");
         redirect("orders");
     }
 

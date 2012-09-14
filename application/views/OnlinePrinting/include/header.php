@@ -204,7 +204,7 @@ and open the template in the editor.
 
             </div>
             <div id="showcartdialog"  style="display: none;">
-                <iframe src="" name="cartdialog" id="cartdialog" width="500px"
+                <iframe src="" name="cartdialog" id="cartdialog" width="600px"
                         height="400px" style="border-style:none;" scrolling="no" >
 
 

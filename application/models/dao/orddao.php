@@ -29,7 +29,11 @@ class Orddao extends CI_Model {
             'total_price' => $ord->getTotalprice(),
             'address' => $ord->getAddress(),
             'province' => $ord->getProvince(),
-            'postcode' => $ord->getPostcode()
+            'postcode' => $ord->getPostcode(),
+            'expected_ship_date' => $ord->getExpectedshipdate(),
+            'received_date' => $ord->getRecievedate(),
+            'cus_remark' => $ord->getCusremark(),
+            'seller_remark' => $ord->getSellerremark(),
         );
 
         $this->db->where('orderno', $ord->getOrderno());
@@ -118,7 +122,7 @@ class Orddao extends CI_Model {
 
             $this->db->where($index, $row);
         }
-        $this->db->order_by('cus_name asc, lastname asc');
+        $this->db->order_by('orderdate,cus_name, lastname');
         $query = $this->db->get();
         $result = array();
 
@@ -184,7 +188,11 @@ class Orddao extends CI_Model {
             'total_price' => $ord->getTotalprice(),
             'address' => $ord->getAddress(),
             'province' => $ord->getProvince(),
-            'postcode' => $ord->getPostcode()
+            'postcode' => $ord->getPostcode(),
+            'expected_ship_date' => $ord->getExpectedshipdate(),
+            'received_date' => $ord->getRecievedate(),
+            'cus_remark' => $ord->getCusremark(),
+            'seller_remark' => $ord->getSellerremark(),
         );
 
         return $this->db->insert('ord', $data);
@@ -204,6 +212,10 @@ class Orddao extends CI_Model {
         $ord->setProvince($row->province);
         $ord->setPostcode($row->postcode);
         $ord->setOrderdate($row->orderdate);
+        $ord->setExpectedshipdate($row->expected_ship_date);
+        $ord->setRecievedate($row->received_date);
+        $ord->setCusremark($row->cus_remark);
+        $ord->setSellerremark($row->seller_remark);
         return $ord;
     }
 
