@@ -168,7 +168,14 @@
                 <? echo $ordpay->getDescription() ?></option>
         <?php endforeach; ?>
     </select>
+    
 </p>
+
+<label> ข้อความถึงโรงพิมพ์: </label>
+<textarea name="cusremark">
+
+
+</textarea>
 <div style="text-align: center;"> <button type="submit" class="btn btn-primary">Create Order</button> </div>
 <? echo form_close(); ?>
 

@@ -43,7 +43,8 @@
                     <td><? echo number_format($payment->getAmount(), 2, '.', ','); ?> &nbsp; บาท</td> 
                     <td><? echo $payment->getActive(); ?> </td> 
                     <td><? echo $payment->getPaymentdate(); ?> </td> 
-                    <td>  <a target="_blank" href="<?echo site_url('orders/paymentimg/'.$payment->getPayno()) ?>" class="btn" >ใบเสร็จ</a>   </td>
+                    <td>  <a target="_blank" href="<?echo site_url('orders/paymentimg/'.$payment->getPayno()) ?>" class="btn" >
+                            <i class="icon-picture"></i>ใบเสร็จ</a>   </td>
                     </tr>
                     <? $countactive++; ?>
                 <? endforeach; ?>

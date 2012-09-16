@@ -113,6 +113,33 @@ class Orders extends CI_Controller {
         }
     }
 
+    public function reorder($orderno) {
+
+        $this->load->model('dao/templatedao');
+        $this->load->model('dao/paperdao');
+        $this->load->model('dao/optiondao');
+        $this->load->model('dao/ordpaydao');
+        $this->load->model('dao/ordsenddao');
+
+
+
+        $data['user'] = $_SESSION['user'];
+
+        $_SESSION['temp_orderlinelist'] = $this->orderlinedao->findbyorderno($orderno);
+
+        $data['templatelist'] = $this->templatedao->findall();
+        $data['paperlist'] = $this->paperdao->findall();
+        $data['optionlist'] = $this->optiondao->findall();
+
+
+        $data['ordpaylist'] = $this->ordpaydao->findall();
+        $data['ordsendlist'] = $this->ordsenddao->findall();
+
+
+
+        $this->load->view(lang('createorder'), $data);
+    }
+
     public function orderpage() {
         $this->load->library('pagination');
         $this->load->model('dao/ordstatusdao');
@@ -213,12 +240,13 @@ class Orders extends CI_Controller {
         $data['address'] = $this->input->post('add');
         $ordsendmethod = $this->input->post('ordsend');
         $ordpaymethod = $this->input->post('ordpay');
-
+        $cusremark = $this->input->post('cusremark');
         $data['templatelist'] = $this->templatedao->findall();
         $data['paperlist'] = $this->paperdao->findall();
         $data['optionlist'] = $this->optiondao->findall();
 
         // echo $ordsendmethod;
+        $data['cusremark'] = $cusremark;
         $data['ordpay'] = $this->ordpaydao->findbyid($ordpaymethod);
         $data['ordsend'] = $this->ordsenddao->findbyid($ordsendmethod);
         // var_dump($data['ordsend']);
@@ -235,7 +263,7 @@ class Orders extends CI_Controller {
         $ordpay = $this->input->post('ordpay');
         $totalprice = $this->input->post('totalprice');
         $user = $_SESSION['user'];
-
+        $cusremark = $this->input->post('cusremark');
 
         $ord = new Ord();
         $ord->setAddress($address['address']);
@@ -247,6 +275,7 @@ class Orders extends CI_Controller {
         $ord->setOrdstatus('20');
         $ord->setTotalprice($totalprice);
         $ord->setOrderdate(date("Y-m-d"));
+        $ord->setCusremark($cusremark);
         $result = $this->orddao->insert($ord);
         error_log(var_export($result, true) . 'insert in ord', 0);  //debug insert
         $orderid = $this->db->insert_id();
