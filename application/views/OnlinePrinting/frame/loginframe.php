@@ -11,7 +11,7 @@
             // validate the comment form when it is submitted
                   
             // validate signup form on keyup and submit
-           
+         
           
             $("#loginForm").validate({
                 errorLabelContainer: $("#con"),
@@ -41,7 +41,9 @@
                 }	
             }	
         );
+       
         });
+              
     </script>
     <style>
         
@@ -80,7 +82,7 @@ font-style: italic;
         </div>
    
     </div>
-    
+
     
    
 </div>
