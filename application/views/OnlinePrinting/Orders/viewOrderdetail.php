@@ -11,10 +11,7 @@
         width: 50%; 
 
     }
-    #address address{
-
-        margin-left: 20%;
-    }
+   
 
  #orderline th{text-align: center;}
     #orderline td{text-align: center;}
@@ -88,9 +85,9 @@ function showupload(orderlineno){
         </div> <div id="address"> 
             <h2>sendto</h2>
             <address>
-                <? echo $order->getAddress(); ?></br>
-                <? echo $order->getProvince(); ?></br>
-                <? echo $order->getPostcode(); ?></br>
+            ที่อยู่ :    <? echo $order->getAddress(); ?></br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <? echo $order->getProvince(); ?></br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <? echo $order->getPostcode(); ?></br>
             </address>
             <p>
             <h4>sends method 
