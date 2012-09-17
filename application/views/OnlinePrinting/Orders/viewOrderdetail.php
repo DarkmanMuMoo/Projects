@@ -1,4 +1,4 @@
-8t<? $this->load->view(lang('header')) ?>
+<? $this->load->view(lang('header')) ?>
 <style>
     #order{
 
@@ -173,6 +173,38 @@ height: 3px;"></hr>
         </table>
 
     </div>
+    
+    <form action="" method="post">
+    <div style="clear:both; display:table; width:100%;">
+<table style="float:left; width:50%;">
+<tr>
+<td>ความคิดเห็นลูกค้า</td>
+
+<td><textarea name="custment" cols="" rows=""></textarea></td>
+</tr>
+
+<tr>
+<td></td>
+<td><input name="" type="submit" value="ตกลง" /> </td>
+</tr>
+
+</table>
+
+<div style="float:left ; width:50%;" >
+ข้อความจากโรงพิมพ์
+<p>
+
+</p>
+</div>
+
+
+</div>
+</form>
+
+    
+    
+    
+    
     <?php if ($ordstatus->getStatus() <= 20): ?>
     <div align="left"  > <span style="margin-right: 3%; margin-left: 10%"> เมื่อ upload file ครบแล้ว คลิกที่นี่เพื่อดำเนินการต่อไป------> </span>
         <button onclick="checkuploadfile('<? echo $order->getOrderno(); ?>');" class="btn btn-success">Approve</button> <a class="btn btn-danger" href="<?echo site_url('orders') ?>" >Back</a>    

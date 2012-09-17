@@ -171,7 +171,7 @@
     
 </p>
 
-<label> ข้อความถึงโรงพิมพ์: </label>
+<label> ความคิดเห็นลูกค้า: </label>
 <textarea name="cusremark">
 
 

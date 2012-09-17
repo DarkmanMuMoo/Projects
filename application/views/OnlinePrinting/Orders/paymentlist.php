@@ -19,9 +19,21 @@
         width: 20%;
         margin-left: 10%;
     }
+	 hr{color: orangeRed;
+       background-color: orange;
+       height: 1px;
+
+    }
 
 </style>
 <div id="page">
+
+
+<p style ="margin-bottom: 10px;">
+    <h1><b>Payment</b></h1>
+    <h4>แจ้งการชำระสินค้า</h4>
+</p>
+<hr></hr>
     <? $countactive = 0; ?>
     <div id="result" align="center">
         <table class="table table-bordered">

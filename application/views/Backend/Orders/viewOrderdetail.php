@@ -141,11 +141,36 @@
 
 
 
-
-
-
-
         </table>
+        
+    <form action="" method="post">
+    <div style="clear:both; display:table; width:100%;">
+
+
+<div style="float:left ; text-align:left; width:50%; font-size:16px" >
+ความคิดเห็นของลูกค้า
+<p>
+
+</p>
+</div>
+
+<table style="float:left; width:50%;">
+<tr>
+<td>ข้อความส่งถึงลูกค้า</td>
+
+<td><textarea name="custment" cols="" rows=""></textarea></td>
+</tr>
+
+<tr>
+<td></td>
+<td><input name="" type="submit" value="ตกลง" /> </td>
+</tr>
+
+</table>
+
+</div>
+</form>
+
 
     </div>
 <?php if ($order->getOrdstatus() < 40): ?>
