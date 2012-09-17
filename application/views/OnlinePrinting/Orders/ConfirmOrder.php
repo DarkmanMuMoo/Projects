@@ -126,7 +126,7 @@
     <label>จัดส่ง: </label> 
 
     <strong><? echo $ordsend->getDescription(); ?>   </strong>
-    <input name="ordsend"  type="hidden" value="<? echo $cusremark ?>"
+    <input name="ordsend"  type="hidden" value="<? echo $ordsend->getSendmethod(); ?>"
 
 </p>
 
@@ -143,7 +143,7 @@
 <p>  
 
 </p>
-<input name="cusremark"  type="hidden" value="<? echo $ordpay->getPaymethod(); ?>" >
+<input name="cusremark"  type="hidden" value="<? echo $cusremark ?>" >
 <div style="text-align: center;">
     <a href="javascript:void(0);" onclick="history.back()" class="btn btn-primary">Back</a> 
     <button type="submit" class="btn btn-primary">Confirm</button>
