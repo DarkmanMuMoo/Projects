@@ -43,6 +43,7 @@ $lang['loginframe'] = 'OnlinePrinting/frame/loginframe';
 
 
 
+
 $lang['userprofile'] = 'OnlinePrinting/user/userprofile';
 
 
@@ -76,5 +77,5 @@ $lang['bakempwork']='Backend/Work/empworkpage';
 $lang['bakwork']='Backend/Work/workpage';
 $lang['workdetail']='Backend/Work/workdetail';
 
-
+$lang['costpage']='Backend/Cost/costpage';
 ?>

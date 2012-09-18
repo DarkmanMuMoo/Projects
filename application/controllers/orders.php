@@ -23,6 +23,17 @@ class Orders extends CI_Controller {
         $this->load->model('dao/orddao');
     }
 
+    public function cus_comment() {
+        $orderno = $this->input->post('orderno');
+        $comment = $this->input->post('comment');
+
+        $order = $this->orddao->findbyid($orderno);
+        $order->setCusremark($comment);
+        $result = $this->orddao->update($order);
+
+        redirect("orders/viewOrderdetail/$orderno");
+    }
+
     public function paymentimg($payno) {
 
         $this->load->helper('html');
@@ -30,6 +41,7 @@ class Orders extends CI_Controller {
         $payment = $this->paymentdao->findbyid($payno);
 
         echo img('uploads/Slips/' . $payment->getPicurl());
+        redirect("orders/getpaymentlist/$ordno");
     }
 
     public function addpayment() {
@@ -309,6 +321,13 @@ class Orders extends CI_Controller {
         $data['ordstatuslist'] = $ordstatuslist;
         $data['orderlinelist'] = $orderlinelist;
         $this->load->view(lang('viewOrderdetail'), $data);
+    }
+
+    public function ajaxordersendprice() {
+        $this->load->model('dao/ordsenddao');
+        $id = $this->input->post('id');
+        $price = $this->ordsenddao->findbyid($id);
+        echo number_format($price->getSendprice(), 2, '.', ',');
     }
 
     public function ajaxcheckuploadfile() {

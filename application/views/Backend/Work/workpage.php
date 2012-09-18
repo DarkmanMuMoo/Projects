@@ -131,6 +131,11 @@
 
         <form id="creatworkform" action="<? echo site_url('Backend/bakwork/creatework') ?>" method="post">
             <table width="532" border="0" align="center">
+                   <tr>
+                    <td height="50">OrdNo</td>
+                    <td><input name="ordno" type="text"  value="<?echo $this->session->flashdata('orderno'); ?>"/></td>
+                    <td>&nbsp;</td>
+                </tr>
                 <tr>
                     <td width="181" height="50">ชื่องาน</td>
                     <td width="170"><input id="workname" name="workname" type="text" /></td>
@@ -147,11 +152,7 @@
                         </select></td>
                     <td>&nbsp;</td>
                 </tr>
-                <tr>
-                    <td height="50">OrdNo</td>
-                    <td><input name="ordno" type="text" /></td>
-                    <td>&nbsp;</td>
-                </tr>
+             
                 <tr>
                     <td>คำอธิบาย</td>
                     <td><textarea name="description"></textarea></td>
@@ -254,3 +255,10 @@
 
     
 </script>
+<?php if ($this->session->flashdata('orderno')): ?>
+<script>
+
+showinsertform();
+
+</script>
+<?php endif; ?>

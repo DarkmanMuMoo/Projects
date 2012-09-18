@@ -97,9 +97,6 @@
             <th>
                 Number
             </th>
-            <th>
-                Orderlineno
-            </th>
             <th>template</th>
             <th>กระดาษ</th>
             <th>option</th>
@@ -114,8 +111,8 @@
 <?php foreach ($orderlinelist as $index => $orderline): ?>   
                     <tr>
                         <td width="5%" ><? echo $index + 1; ?>   </td>
-                        <td width="5%"  ><? echo $orderline->getOrdlineno(); ?>   </td>
-                        <td width="15%" ><? echo $orderline->getTmpname(); ?> &nbsp; 
+                      
+                        <td width="25%" ><? echo $orderline->getTmpname(); ?> &nbsp; 
     <? echo $orderline->getTmpsize(); ?> &nbsp;
 
                         </td>
@@ -147,14 +144,14 @@
 
         </table>
         
-    <form action="" method="post">
+    <form action="<? echo site_url('Backend/bakorders/seller_comment'); ?>" method="post">
     <div style="clear:both; display:table; width:100%;">
 
 
 <div style="float:left ; text-align:left; width:50%; font-size:16px" >
 ความคิดเห็นของลูกค้า
 <p>
-
+<? echo $order->getCusremark(); ?>
 </p>
 </div>
 
@@ -162,17 +159,20 @@
 <tr>
 <td>ข้อความส่งถึงลูกค้า</td>
 
-<td><textarea name="custment" cols="" rows=""></textarea></td>
+<td><textarea name="comment" cols="" rows="">
+<? echo $order->getSellerremark(); ?>
+    </textarea></td>
 </tr>
 
 <tr>
 <td></td>
-<td><input name="" type="submit" value="ตกลง" /> </td>
+<td><input class="btn" type="submit" value="ตกลง" /> </td>
 </tr>
 
 </table>
 
 </div>
+   <input type="hidden" name="orderno" value="<? echo $order->getOrderno(); ?>">
 </form>
 
 

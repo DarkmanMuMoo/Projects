@@ -116,9 +116,9 @@
 
 </table>
 <div style="float: right" >
-    <strong>ราคาสินค้า :<? echo $totalprice ?> บาท</strong><br>
-    <strong>ค่าจัดส่ง :<? echo $ordsend->getSendprice(); ?> บาท</strong><br>
-    <strong>ราคารวม :<? echo $totalprice + $ordsend->getSendprice(); ?> บาท</strong><br>
+    <strong>ราคาสินค้า :<? echo number_format($totalprice, 2, '.', ',') ;?> บาท</strong><br>
+    <strong>ค่าจัดส่ง :<? echo  number_format($ordsend->getSendprice(), 2, '.', ','); ?> บาท</strong><br>
+    <strong>ราคารวม :<? echo number_format($totalprice + $ordsend->getSendprice() , 2, '.', ','); ?> บาท</strong><br>
     <input type="hidden" name="totalprice" value="<? echo $totalprice + $ordsend->getSendprice(); ?>">
 </div>
 

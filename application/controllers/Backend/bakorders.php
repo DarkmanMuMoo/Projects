@@ -19,7 +19,16 @@ class Bakorders extends CI_Controller {
 
         $this->load->model('dao/empdao');
     }
+ public function seller_comment() {
+        $orderno = $this->input->post('orderno');
+        $comment = $this->input->post('comment');
 
+        $order = $this->orddao->findbyid($orderno);
+        $order->setSellerremark($comment);
+        $result = $this->orddao->update($order);
+     
+         redirect("Backend/bakorders/vieworderdetail/$orderno");
+    }
     public function index() {
         $this->load->library('pagination');
         $this->load->model('dao/ordstatusdao');
@@ -292,7 +301,8 @@ class Bakorders extends CI_Controller {
         $this->load->model('dao/orddao');
         $this->load->library('smsutil');
         $this->load->library('emailutil');
-        $this->changestatus('60', $orderno);
+      
+        $this->changestatus('60', $orderno, date("Y-m-d"));
 //sent mail here;
         $config = $this->emailutil->getSmtpconfig();
         $form = lang('adminemail');
@@ -317,12 +327,13 @@ class Bakorders extends CI_Controller {
         //$result = $this->smsutil->sentsms($phone,$messagephone);
         redirect("Backend/bakorders/vieworderdetail/$orderno");
     }
+    
 
     public function complete($orderno) {
         $this->load->model('dao/orddao');
         $this->load->library('smsutil');
         $this->load->library('emailutil');
-        $this->changestatus('70', $orderno);
+        $this->changestatus('70', $orderno,date("Y-m-d"));
 //sent mail here;
         $config = $this->emailutil->getSmtpconfig();
         $form = lang('adminemail');
@@ -346,11 +357,23 @@ class Bakorders extends CI_Controller {
         redirect("Backend/bakorders/vieworderdetail/$orderno");
     }
 
-    private function changestatus($status, $orderno) {
+    private function changestatus($status, $orderno,$date=null) {
         $this->load->model('dao/orddao');
         $order = $this->orddao->findbyid($orderno);
 
         $order->setOrdstatus($status); //wait for validate
+        if($date!=null){
+            
+            if($status==60||$status==55){
+                
+               $order->setExpectedshipdate($date);
+            }else{
+                
+                 $order->setRecievedate($date);
+            }
+            
+            
+        }
         $result = $this->orddao->update($order);
 
         error_log(var_export($result, true) . 'changer status' . $status, 0);

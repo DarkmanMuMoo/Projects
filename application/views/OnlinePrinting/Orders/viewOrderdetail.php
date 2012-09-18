@@ -171,29 +171,36 @@ height: 3px;"></hr>
 
     </div>
     
-    <form action="" method="post">
+    <form action="<? echo site_url('orders/cus_comment') ?>" method="post">
     <div style="clear:both; display:table; width:100%;">
 <table style="float:left; width:50%;">
 <tr>
 <td>ความคิดเห็นลูกค้า</td>
 
-<td><textarea name="custment" cols="" rows=""></textarea></td>
+<td><textarea name="comment" cols="" rows="">
+<? echo $order->getCusremark(); ?>
+
+
+    </textarea>
+
+</td>
 </tr>
 
 <tr>
 <td></td>
-<td><input name="" type="submit" value="ตกลง" /> </td>
+<td><input class="btn" name="" type="submit" value="ตกลง" /> </td>
 </tr>
 
 </table>
 
 <div style="float:left ; width:50%;" >
 ข้อความจากโรงพิมพ์
-<p>
 
+<p>
+<? echo $order->getSellerremark(); ?>
 </p>
 </div>
-
+ <input type="hidden" name="orderno" value="<? echo $order->getOrderno(); ?>">
 
 </div>
 </form>

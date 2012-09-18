@@ -2,43 +2,43 @@
 
 <div class="container" >
     <style>
-.table th, .table td {
-padding: 5px;
-line-height: 18px;
-vertical-align: middle;
-border-top: 1px solid #DDD;
+        .table th, .table td {
+            padding: 5px;
+            line-height: 18px;
+            vertical-align: middle;
+            border-top: 1px solid #DDD;
 
-}
+        }
         #result th{text-align: center;
-        font-size: 12px;}
+                   font-size: 12px;}
         #result td{text-align: center;font-size: 15px;}
 
-hr{ text-align:center;
-color:#09F;
-border-color:#09F;
-size:3;
-}
-h1{ font-weight:bolder;
-}
+        hr{ text-align:center;
+            color:#09F;
+            border-color:#09F;
+            size:3;
+        }
+        h1{ font-weight:bolder;
+        }
     </style>
-   <div style="margin-top: 100px; margin-left: auto; margin-right: auto; margin-bottom: 20px;"> 
+    <div style="margin-top: 100px; margin-left: auto; margin-right: auto; margin-bottom: 20px;"> 
         <h1>รายการสั่งซื้อ</h1>
-      <hr />  </div>    
+        <hr />  </div>    
 
     <div id="search-bar" >  
         <form id="searchform"action="<? echo site_url('Backend/bakorders') ?>" class="form-search" align="center"  method="post">
-            Keyword:<input type="text"  name="keyword" id="email" class="input-small"  value="<?echo $this->input->post('keyword');?>"/>
-            From :<input type="text" name="fromdate" id="fromdate" class="input-small datepicker"  value="<? echo $this->input->post('fromdate');?>"/>
-            To:<input type="text" name="todate" id="todate"  class="input-small datepicker"  value="<? echo $this->input->post('todate');?>" /> 
+            Keyword:<input type="text"  name="keyword" id="email" class="input-small"  value="<? echo $this->input->post('keyword'); ?>"/>
+            From :<input type="text" name="fromdate" id="fromdate" class="input-small datepicker"  value="<? echo $this->input->post('fromdate'); ?>"/>
+            To:<input type="text" name="todate" id="todate"  class="input-small datepicker"  value="<? echo $this->input->post('todate'); ?>" /> 
 
             Status: <select name="status" id="status" >   
                 <option value="" >all</option>
                 <?php foreach ($ordstatuslist as $ord): ?>
 
-                    <option  <? echo ($this->input->post('status')==$ord->getStatus())? 'selected="selected"': '';?> value="<? echo $ord->getStatus(); ?>">  <? echo $ord->getDescription(); ?></option>
+                    <option  <? echo ($this->input->post('status') == $ord->getStatus()) ? 'selected="selected"' : ''; ?> value="<? echo $ord->getStatus(); ?>">  <? echo $ord->getDescription(); ?></option>
 
                 <?php endforeach; ?></select>
- <input type="hidden" name="startrow" value="0"/>
+            <input type="hidden" name="startrow" value="0"/>
             <button type="submit" class="btn">Search</button>
         </form>
     </div>
@@ -72,9 +72,9 @@ h1{ font-weight:bolder;
             </thead>
 
             <tbody>
-                <? $page=($this->input->post('startrow'))?$this->input->post('startrow'):0; ?>
+                <? $page = ($this->input->post('startrow')) ? $this->input->post('startrow') : 0; ?>
                 <?php foreach ($orderlist as $index => $ord): ?>
-                    <tr> <td  ><? echo $index + 1+$page ?> </td>  
+                    <tr> <td  ><? echo $index + 1 + $page ?> </td>  
                         <td style="width:52px;" >
 
                             <? echo $ord->getOrderno(); ?> 
@@ -90,29 +90,46 @@ h1{ font-weight:bolder;
                         <td >
                             <?php foreach ($ordstatuslist as $ordstatus): ?>
                                 <?php if ($ordstatus->getStatus() == $ord->getOrdstatus()): ?>
-                                    <? echo $ordstatus->getDescription();
+                                    <?
+                                    echo $ordstatus->getDescription();
                                     break;
                                     ?>
                                 <?php endif; ?>
-    <?php endforeach; ?>
+                            <?php endforeach; ?>
                         </td> 
                         <td style="text-align: right;" ><? echo number_format($ord->getTotalprice(), 2, '.', ','); ?></td>                      
                         <td >
-                            <a class="btn btn-info" href="<? echo site_url('Backend/bakorders/vieworderdetail') . "/" . $ord->getOrderno(); ?>"> 
-                                View
-                            </a>
-                            <?php if ($ord->getOrdstatus() >= 40): ?>
-                                <a href="<? echo site_url('Backend/bakorders/getpaymentlist') . "/" . $ord->getOrderno(); ?>" class="btn btn-warning" >Payment</a> 
-                            <?php endif; ?>
+
+                            <div class="btn-group">
+                                <a class="btn btn-info" href="<? echo site_url('Backend/bakorders/vieworderdetail') . "/" . $ord->getOrderno(); ?>"> 
+                                    View
+                                </a>
+                                <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" style="height: 18px;">
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a  href="<? echo site_url('Backend/bakorders/vieworderdetail') . "/" . $ord->getOrderno(); ?>"> 
+                                            View
+                                        </a></li>
+                                    <?php if ($ord->getOrdstatus() >= 40): ?>
+                                        <li>  <a href="<? echo site_url('Backend/bakorders/getpaymentlist') . "/" . $ord->getOrderno(); ?>"  >Payment</a> </li>
+                                    <?php endif; ?>
+                                         <li><a  href="<? echo site_url('Backend/bakwork/chooseorder') . "/" . $ord->getOrderno(); ?>"> 
+                                          create work from this order
+                                        </a></li>   
+                                        
+                                </ul>
+                            </div>
+
                         </td>  
                     </tr>
-<?php endforeach; ?>
+                <?php endforeach; ?>
 
 
             </tbody>
 
         </table>
-  <? echo $this->pagination->create_onclick_links(); ?>
+        <? echo $this->pagination->create_onclick_links(); ?>
 
     </div>
 </div>
@@ -121,14 +138,10 @@ h1{ font-weight:bolder;
 
 
 
-
-
-
-
-
 <? $this->load->view(lang('bakfooter')); ?>
+   <script src="<? echo base_url("asset/javascript/bootstrap-dropdown.js"); ?>" >  </script>
 <script>
- function pag(i){
+    function pag(i){
         $('#searchform input[name=startrow]').val(i);
    
         $('#searchform').submit();

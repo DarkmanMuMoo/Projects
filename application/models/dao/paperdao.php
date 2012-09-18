@@ -38,13 +38,13 @@ class Paperdao extends CI_Model   {
 
         $array = array();
         foreach ($query->result() as $row) {
-            $type = null;
+            $obj = null;
 
 
-            $type = $this->makeObj($row);
+            $obj = $this->makeObj($row);
 
 
-            array_push($array, $type);
+            array_push($array[], $obj);
         }
         // echo var_dump($array);
 

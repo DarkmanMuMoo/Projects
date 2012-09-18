@@ -59,7 +59,13 @@ class Bakwork extends CI_Controller {
          error_log('removecowork ' . var_export($result, true));
         $this->viewworkdetail($workno);
     }
-
+public function chooseorder($orderno){
+    
+    $this->session->set_flashdata('orderno', $orderno);
+    
+    redirect('Backend/bakwork');
+    
+}
     public function empworkpage() {
         $this->load->library('pagination');
         $this->load->model('dao/workdao');
