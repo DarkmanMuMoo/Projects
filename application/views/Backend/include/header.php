@@ -27,7 +27,7 @@
              <?php if ($_SESSION['emp']->getPosition() == 'Boss'): ?>   
            
                 <ul id="menu"class="nav nav-pills">
-                    <li id="Home"  ><a href="<? echo site_url('Backend/home');  ?>">mainmenu</a></li>
+                    <li id="Home"  ><a href="<? echo site_url('Backend/home');  ?>">Mainmenu</a></li>
                     <li id="BakOrders" >
     <a href="<? echo site_url('Backend/bakorders');  ?>">Order</a>
   </li>
