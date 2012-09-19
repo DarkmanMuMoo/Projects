@@ -35,8 +35,8 @@ class BakCost extends CI_Controller {
     }
 public function templatedetail($templateno){
     
-    
-     $this->load->view(lang('costpage'), $data);
+    $data=array();
+     $this->load->view(lang('baktemplatedetail'), $data);
 }
     public function template() {
         $this->load->model('dao/typedao');

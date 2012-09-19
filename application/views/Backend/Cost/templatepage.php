@@ -72,7 +72,7 @@
                         <td > <? echo $template->getPlatesize(); ?> </td>
                            
                         <td >
-                            <a class="btn btn-info" href="<? echo site_url('Backend/bakCost/baktemplatedetail') . "/" . $template->getTempno(); ?>"> 
+                            <a class="btn btn-info" href="<? echo site_url('Backend/bakCost/templatedetail') . "/" . $template->getTempno(); ?>"> 
                                 View
                             </a>
                            
