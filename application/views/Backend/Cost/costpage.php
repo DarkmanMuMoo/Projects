@@ -3,8 +3,8 @@
 <div class="container" >
     <div id='mainmenu' >
         <ul>
-            <a href="">Template </a></ul>
-            <ul>
+            <a class="btn" href="<? echo site_url('Backend/bakCost/template') ?>">Template </a></ul>
+          
           </ul> 
         
     </div>

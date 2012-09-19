@@ -33,6 +33,7 @@
   </li>
   <li  id="Bakwork"  ><a href="<? echo site_url('Backend/bakwork');  ?>">Work</a></li>
   <li id="Bakemp"  ><a href="<? echo site_url('Backend/bakemp');  ?>">Employee</a></li>
+  <li id="BakCost"  ><a href="<? echo site_url('Backend/bakCost');  ?>">Cost</a></li>
            </ul>
                   <?php else: ?>
                 

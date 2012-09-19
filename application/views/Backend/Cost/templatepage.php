@@ -30,6 +30,9 @@
                 Size
             </th>
             <th>
+                Type
+            </th>
+            <th>
                 Platesize
             </th>
 
@@ -40,40 +43,38 @@
 
             <tbody>
                 <? $page = ($this->input->post('startrow')) ? $this->input->post('startrow') : 0; ?>
-                <?php foreach ($worklist as $index => $work): ?>
+                <?php foreach ($templatelist as $index => $template): ?>
                     <tr> <td  ><? echo $index + 1 + $page ?> </td>  
                         <td  >
 
-                            <? echo $work->getWorkno(); ?> 
+                            <? echo $template->getName(); ?> 
 
                         </td> 
                         <td>
-                            <? echo $work->getWorkname(); ?> 
+                            <? echo $template->getSize(); ?> 
                         </td>
                         <td>
-                            <?php foreach ($emplist as $emp): ?>
+                            <?php foreach ($typelist as $type): ?>
 
-                                <?php if ($emp->getEmpno() == $work->getEmpno()): ?>
-                                    <? echo $emp->getName(); ?>&nbsp; <?
-                        echo $emp->getLastname();
+                                <?php if ($type->getTypeno() == $template->getTypeno()): ?>
+                                  <?
+                        echo $type->getType();
                         break;
                                     ?> 
                                 <?php endif; ?>
 
-    <?php endforeach; ?>
+                            <?php endforeach; ?>
                         </td>
-                        <td > <? echo $work->getStartdate(); ?> </td>
-                        <td ><? echo ($work->getEnddate() == null) ? '-' : $work->getEnddate(); ?> </td>      
+                        <td > <? echo $template->getPlatesize(); ?> </td>
+                           
                         <td >
-                            <a class="btn btn-info" href="<? echo site_url('Backend/bakwork/viewworkdetail') . "/" . $work->getWorkno(); ?>"> 
+                            <a class="btn btn-info" href="<? echo site_url('Backend/bakCost/baktemplatedetail') . "/" . $template->getTempno(); ?>"> 
                                 View
                             </a>
-                            <button class="btn btn-danger"  onclick="Confirmdelete('<? echo $work->getWorkno(); ?>');"> 
-                                Delete
-                            </button>
+                           
                         </td>  
                     </tr>
-<?php endforeach; ?>
+                <?php endforeach; ?>
 
             </tbody>
         </table>
@@ -83,7 +84,7 @@
         </div>
 
 
-<? $this->load->view(lang('bakfooter')); ?>
+        <? $this->load->view(lang('bakfooter')); ?>
         <script>
 
 

@@ -16,23 +16,28 @@ class BakCost extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+          $this->load->model('obj/emp');
     }
 
     public function index() {
-        $this->load->model('paperdao');
-        $this->load->model('ordsenddao');
-        $this->load->model('optiondao');
+        $this->load->model('dao/paperdao');
+        $this->load->model('dao/ordsenddao');
+        $this->load->model('dao/optiondao');
 
 
         $data['paperlist'] = $this->paperdao->findall();
         $data['ordsendlist'] = $this->ordsenddao->findall();
         $data['optionlist'] = $this->optiondao->findall();
         $_SESSION['paperlist'] = $data['paperlist'];
-        $_SESSION['ordsendlist'] = $data['ordsend'];
+        $_SESSION['ordsendlist'] = $data['ordsendlist'];
         $_SESSION['optionlist'] = $data['optionlist'];
         $this->load->view(lang('costpage'), $data);
     }
-
+public function templatedetail($templateno){
+    
+    
+     $this->load->view(lang('costpage'), $data);
+}
     public function template() {
         $this->load->model('typedao');
         $this->load->model('templatedao');

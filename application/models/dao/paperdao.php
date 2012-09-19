@@ -44,7 +44,7 @@ class Paperdao extends CI_Model   {
             $obj = $this->makeObj($row);
 
 
-            array_push($array[], $obj);
+            array_push($array, $obj);
         }
         // echo var_dump($array);
 
