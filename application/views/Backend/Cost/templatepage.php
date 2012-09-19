@@ -1,6 +1,10 @@
 <? $this->load->view(lang('bakheader')); ?>
 
 <div class="container" >
+      <div style="margin-top: 100px; margin-left: auto; margin-right: auto; margin-bottom: 20px;"> 
+        <h1>Template</h1>
+        <hr > </hr> 
+    </div>
     <div id="search-bar" >  
         <form id="searchform"action="<? echo site_url('Backend/bakCost/template') ?>" class="form-search" align="center"  method="post">
             Tempname:<input type="text"  value="<? echo $this->input->post('keyword'); ?>" name="keyword" id="email" class="input-small " />
@@ -8,7 +12,7 @@
                 <option value="0">All</option>
                 <?php foreach ($typelist as $type): ?>
 
-                    <option  <? echo($this->input->post('type') == $type->getTypeno()) ? 'selected="selected"' : ''; ?> value="<? echo $type->getTypeno(); ?>">  <? echo $emp->getType(); ?> </option>
+                    <option  <? echo($this->input->post('type') == $type->getTypeno()) ? 'selected="selected"' : ''; ?> value="<? echo $type->getTypeno(); ?>">  <? echo $type->getType(); ?> </option>
 
                 <?php endforeach; ?>
             </select>

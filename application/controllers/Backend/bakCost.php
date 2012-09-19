@@ -39,8 +39,8 @@ public function templatedetail($templateno){
      $this->load->view(lang('costpage'), $data);
 }
     public function template() {
-        $this->load->model('typedao');
-        $this->load->model('templatedao');
+        $this->load->model('dao/typedao');
+        $this->load->model('dao/templatedao');
         $this->load->library('pagination');
         $type = $this->input->post('type');
         $condition = array();
@@ -52,22 +52,22 @@ public function templatedetail($templateno){
         if ($this->input->post('type')) {
             $type = $this->input->post('type');
 
-            $condition['type'] = $type;
+            $condition['type_no'] = $type;
         }
         $config['per_page'] = 10;
         $startrow = ($this->input->post()) ? $this->input->post('startrow') : 0;
-        $config['total_rows'] = $this->gettotalpage($condition, $keyword);
+        $config['total_rows'] = $this->gettotalpage($keyword, $condition);
         $this->pagination->initialize($config);
         $this->db->limit($config['per_page'], $startrow);
         $data['templatelist'] = $this->templatedao->findtemplatelist($keyword, $condition);
         $data['typelist'] = $this->typedao->findall();
-        $this->load->view(lang('costpage'), $data);
+        $this->load->view(lang('baktemplate'), $data);
     }
 
     private function gettotalpage($keyword = '', $condition = array()) {
 
         if ($keyword != '') {
-            $where = "(temp_name LIKE '%$keyword%' )";
+            $where = "(tmp_name LIKE '%$keyword%' )";
             $this->db->where($where);
         }
         foreach ($condition as $index => $row) {
@@ -78,7 +78,7 @@ public function templatedetail($templateno){
     }
 
     public function updateordsend() {
-        $this->load->model('ordsenddao');
+        $this->load->model('dao/ordsenddao');
         $ordsendlist = $this->input->post();
         $oldoption = $_SESSION['ordsendlist'];
         foreach ($ordsendlist as $key => $value) {
@@ -94,7 +94,7 @@ public function templatedetail($templateno){
     }
 
     public function updateoption() {
-        $this->load->model('optiondao');
+        $this->load->model('dao/optiondao');
         $updatelist = $this->input->post();
         $oldoption = $_SESSION['optionlist'];
         foreach ($updatelist as $key => $value) {
@@ -110,7 +110,7 @@ public function templatedetail($templateno){
     }
 
     public function updatepaper() {
-        $this->load->model('paperdao');
+        $this->load->model('dao/paperdao');
         $updatelist = $this->input->post();
         $oldpaperlist = $_SESSION['paperlist'];
         foreach ($updatelist as $key => $value) {
