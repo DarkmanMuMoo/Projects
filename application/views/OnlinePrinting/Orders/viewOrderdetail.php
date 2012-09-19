@@ -15,6 +15,14 @@
 
  #orderline th{text-align: center;}
     #orderline td{text-align: center;}
+    
+    .red{
+        color:#F00;
+    }
+	
+	.blue{
+	color:#09C;	
+	}
 </style>
 
    
@@ -73,7 +81,7 @@ function showupload(orderlineno){
             <h2>Orderno: <? echo $order->getOrderno(); ?></h2> <h3>Orderstatus :
             <?php foreach ($ordstatuslist as $ordstatus): ?>
                 <?php if ($ordstatus->getStatus() == $order->getOrdstatus()): ?>
-             <? echo $ordstatus->getDescription(); ?> </h3> <? break;?>
+                <span <? echo ($order->getOrdstatus()==10)? 'class="red"' : 'class="blue"'; ?> > <? echo $ordstatus->getDescription(); ?> </span></h3> <? break;?>
                 <?php endif; ?>
             <?php endforeach; ?>
             <strong>  Orderdate :</strong>  <? echo $order->getOrderdate(); ?><br>
