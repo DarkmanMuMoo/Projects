@@ -41,7 +41,7 @@ class Orders extends CI_Controller {
         $payment = $this->paymentdao->findbyid($payno);
 
         echo img('uploads/Slips/' . $payment->getPicurl());
-        redirect("orders/getpaymentlist/$ordno");
+       // redirect("orders/getpaymentlist/$ordno");
     }
 
     public function addpayment() {
