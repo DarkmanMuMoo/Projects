@@ -4,23 +4,34 @@
 #table{
 	border-color:#CCC;
 	border:thin;
-	align}
+	}
+        #listmenu li{
+            
+            float: left;
+        }
+        #listmenu{
+            
+            
+            margin: 0 auto;
+        }
 </style>
 
 <div class="container" >
 
-</div>
+
     <div id='mainmenu' >
         <ul>
-            <a class="btn" href="<? echo site_url('Backend/bakCost/template') ?>"><span>Template</span> </a></ul>
+            <li> <a class="btn" href="<? echo site_url('Backend/bakCost/template') ?>"><span>Template</span> </a>
+            </li>
           
-          </ul> 
-         <input type="radio" id="paper" name="upd" value="upd"  /><label for="upd">กระดาษ</label>
+        </ul>
+        <ul id="listmenu">
+<li><input type="radio" id="paper" name="adress" value="upd"  /><label for="upd">กระดาษ</label></li>
  
-<input type="radio" id="send" name="send" value="send"  /><label for="send">การจัดส่ง</label>
+ <li><input type="radio" id="send" name="adress" value="send"  /><label for="send">การจัดส่ง</label></li>
  
- <input type="radio" id="option" name="option" value="option"  /><label for="option">ตัวเลือกพิเศษ</label>
- 
+ <li><input type="radio" id="option" name="adress" value="option"  /><label for="option">ตัวเลือกพิเศษ</label></li>
+ </ul> 
 
 
 <div>
@@ -77,5 +88,5 @@
     </div>
 
 </div>
-
+</div>
 <? $this->load->view(lang('bakfooter'));?>

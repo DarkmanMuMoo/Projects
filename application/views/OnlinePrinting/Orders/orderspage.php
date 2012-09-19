@@ -22,11 +22,11 @@
 
         {
 
-              $.post('<? echo site_url('orders/cancleorder')?>/'+orderno, function(data){
-                  //alert(data);
-                  eval(data);
+            $.post('<? echo site_url('orders/cancleorder') ?>/'+orderno, function(data){
+                //alert(data);
+                eval(data);
 
-              });
+            });
 
         }
 
@@ -40,31 +40,35 @@
             dateFormat: "yy-mm-dd"
 
         });
-           $('#<? echo $hilight; ?>').addClass('hilight');
+        $('#<? echo $hilight; ?>').addClass('hilight');
         
     });      
       
 </script>
 <style>
     .hilight{
-        
+
         background-color: #faa732;
     }
     #result th{text-align: center;}
     #result td{text-align: center;}
     #statuslist> li > a:hover{
-text-decoration: none;
-background-color: #faa732;
-        
+        text-decoration: none;
+        background-color: #faa732;
+
     }
+      .dropdown-menu a{
+            
+            text-align: left;
+        }
 </style>
 <div id="page">
     <div id ="content">
         <div id="search-bar">  
             <form id="searchform"action="<? echo site_url('orders') ?>" class="form-search" align="center"  method="post">
 
-                From :<input type="text" name="fromdate" value="<?echo $this->input->post('fromdate');?>" id="fromdate" class="input-small datepicker" />
-                To:<input type="text" name="todate" value="<?echo $this->input->post('todate');?>" id="todate"  class="input-small datepicker"   />
+                From :<input type="text" name="fromdate" value="<? echo $this->input->post('fromdate'); ?>" id="fromdate" class="input-small datepicker" />
+                To:<input type="text" name="todate" value="<? echo $this->input->post('todate'); ?>" id="todate"  class="input-small datepicker"   />
                 <input type="hidden" name="status" id="status"  />  
                 <input type="hidden" name="startrow" value="0"/>
                 <button type="submit" class="btn">Search</button>
@@ -79,7 +83,7 @@ background-color: #faa732;
                 <th>
                     Orderno 
                 </th>
- 
+
                 <th>
                     Date
                 </th>
@@ -95,37 +99,52 @@ background-color: #faa732;
                 </thead>
 
                 <tbody>
-                    <? $page=($this->input->post('startrow'))?$this->input->post('startrow'):0; ?>
+                    <? $page = ($this->input->post('startrow')) ? $this->input->post('startrow') : 0; ?>
                     <?php foreach ($orderlist as $index => $ord): ?>
-                    <tr> <td style="width: 45px;" ><? echo $index + 1+$page ?> </td>  
+                        <tr> <td style="width: 45px;" ><? echo $index + 1 + $page ?> </td>  
                             <td style="width: 47px;" >
-                               
-                                    <? echo $ord->getOrderno(); ?> 
-                               
+
+                                <? echo $ord->getOrderno(); ?> 
+
                             </td> 
                             <td > <? echo $ord->getOrderdate(); ?> </td>
                             <td style="width: 80px;" >
-                                 <?php foreach ($ordstatuslist as $status): ?>
-                                <?php if ($status->getStatus() ==$ord->getOrdstatus() ): ?>
-                                <? echo $status->getDescription(); break; ?>
-                               <?php endif; ?>
-                                 <?php endforeach; ?>
+                                <?php foreach ($ordstatuslist as $status): ?>
+                                    <?php if ($status->getStatus() == $ord->getOrdstatus()): ?>
+                                        <?
+                                        echo $status->getDescription();
+                                        break;
+                                        ?>
+                                    <?php endif; ?>
+    <?php endforeach; ?>
                             </td> 
                             <td style="text-align: right;" ><? echo number_format($ord->getTotalprice(), 2, '.', ','); ?>  &nbsp; บาท </td>                      
                             <td style="width: 150px;" >
-                                 <a class="btn btn-info" href="<?echo site_url('orders/vieworderdetail') . "/" . $ord->getOrderno();  ?>"> 
-                                   View
-                                </a>
-                                <?php if ($ord->getOrdstatus()<=20): ?>
-                                <button class="btn btn-danger" onclick="Confirmdelete('<? echo $ord->getOrderno();?>');" >cancel </button> 
-                                 <?php endif; ?>
-                                 <?php if ($ord->getOrdstatus()>30): ?>
-                                <a href="<? echo site_url('orders/getpaymentlist'). "/" . $ord->getOrderno();    ?>" class="btn btn-warning" >Payment</a> 
-                                 <?php endif; ?>
-                                
+                                <div class="btn-group">
+                                    <a class="btn btn-info" href="<? echo site_url('orders/viewOrderdetail') . "/" . $ord->getOrderno(); ?>"> 
+                                        View
+                                    </a>
+                                    <a class="btn btn-info dropdown-toggle" data-toggle="dropdown" style="height: 18px;">
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a  href="<? echo site_url('orders/viewOrderdetail') . "/" . $ord->getOrderno(); ?>"> 
+                                                View
+                                            </a></li>
+                                        <?php if ($ord->getOrdstatus() <= 20): ?>
+                                            <li>   <button class="btn btn-danger" onclick="Confirmdelete('<? echo $ord->getOrderno(); ?>');" >cancel </button>  </li>
+                                        <?php endif; ?>
+                                        <?php if ($ord->getOrdstatus() > 30): ?>
+                                            <li> <a href="<? echo site_url('orders/getpaymentlist') . "/" . $ord->getOrderno(); ?>" >Payment</a> </li>   
+    <?php endif; ?>
+
+                                    </ul>
+                                </div>
+
+
                             </td>  
                         </tr>
-                    <?php endforeach; ?>
+<?php endforeach; ?>
 
 
                 </tbody>
@@ -138,21 +157,20 @@ background-color: #faa732;
     </div >
     <div id="sidebar">
         <h2>My Order</h2>
-     
+
 
         <ul id="statuslist"class="nav nav-tabs nav-stacked">
-      
-            <li><a id="0" href="JavaScript:void(0);" onclick="Searchstatus('');">all</a></li>
-                <?php foreach ($ordstatuslist as $ord): ?>
-                <li ><a id="<? echo $ord->getStatus(); ?>" href="JavaScript:void(0);" onclick="Searchstatus('<? echo $ord->getStatus(); ?>');"><? echo $ord->getDescription() ?></a>
-                    </li>
-                <?php endforeach; ?>
-            </ul> 
 
-       
+            <li><a id="0" href="JavaScript:void(0);" onclick="Searchstatus('');">all</a></li>
+<?php foreach ($ordstatuslist as $ord): ?>
+                <li ><a id="<? echo $ord->getStatus(); ?>" href="JavaScript:void(0);" onclick="Searchstatus('<? echo $ord->getStatus(); ?>');"><? echo $ord->getDescription() ?></a>
+                </li>
+<?php endforeach; ?>
+        </ul> 
+
+
     </div>
 
 </div>
-
 
 <? $this->load->view(lang('footer')) ?>

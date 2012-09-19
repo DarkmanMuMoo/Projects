@@ -20,6 +20,10 @@
         }
         h1{ font-weight:bolder;
         }
+        .dropdown-menu a{
+            
+            text-align: left;
+        }
     </style>
     <div style="margin-top: 100px; margin-left: auto; margin-right: auto; margin-bottom: 20px;"> 
         <h1>รายการสั่งซื้อ</h1>

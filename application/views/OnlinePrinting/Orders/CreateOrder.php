@@ -26,7 +26,7 @@ var sid =document.getElementById('ordsend').options[document.getElementById('ord
                 $('#subaddress').css({"display":"none"});
         
             
-            }else{
+            }else if (id=='add2'){
                 $("#mainaddress").css({"display":"none"});
                 $('#subaddress').css({"display":"inline"});
             
@@ -80,7 +80,15 @@ var sid =document.getElementById('ordsend').options[document.getElementById('ord
         <? echo $addr1['phone']; ?><br/>
     </address>
 
-
+</div>
+<div id="otheraddress" >
+    <? $addr1 = $_SESSION['user']->getAddress1(); ?>
+    <address>
+        <? echo $addr1['address']; ?><br/>
+        <? echo $addr1['province']; ?>
+        <? echo $addr1['postcode']; ?><br/>
+        <? echo $addr1['phone']; ?><br/>
+    </address>
 
 </div>
 
