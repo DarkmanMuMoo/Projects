@@ -66,8 +66,9 @@ var sid =document.getElementById('ordsend').options[document.getElementById('ord
 <h5>จัดส่ง</h5> <br/>
 <div id="selectadd" >
 
-    <input type="radio" id="add1" name="add" value="add1" checked="checked" /><label for="add1">main</label>
-    <input type="radio" id="add2" name="add" value="add2"  /><label for="add2">sub</label>
+    <input type="radio" id="add1" name="add" value="add1" checked="checked" /><label for="add1">ที่อยหลัก</label>
+    <input type="radio" id="add2" name="add" value="add2"  /><label for="add2">ที่อยู่รอง</label>
+    <input type="radio" id="add3" name="add" value="add2"  /><label for="add3">ที่อยู่อื่น</label>
 </div>
 <br/><h5>จัดส่ง</h5> <br/>
 <div id="mainaddress" >
