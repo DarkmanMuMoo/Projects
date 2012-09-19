@@ -78,7 +78,7 @@ function showupload(orderlineno){
 <div id="page">
 
     <div id="head" style="clear:both;"><div id="order">
-            <h2>Orderno: <? echo $order->getOrderno(); ?></h2> <h3>Orderstatus :
+            <h2>Orderno <? echo $order->getOrderno(); ?></h2> <h3>Orderstatus :
             <?php foreach ($ordstatuslist as $ordstatus): ?>
                 <?php if ($ordstatus->getStatus() == $order->getOrdstatus()): ?>
                 <span <? echo ($order->getOrdstatus()==10)? 'class="red"' : 'class="blue"'; ?> > <? echo $ordstatus->getDescription(); ?> </span></h3> <? break;?>
@@ -90,6 +90,9 @@ function showupload(orderlineno){
                     <? echo $ordpay->getDescription();  break;?>
                 <?php endif; ?>
             <?php endforeach; ?><br>
+            <strong> วันที่เสร็จสิ้น: <?  echo ($order->getExpectedshipdate()==null)?$order->getExpectedshipdate():'-';?></strong><br />
+           <strong>วันส่งสินค้า: <?  echo ($order->getRecievedate()==null)?$order->getRecievedate():'-';?></strong>
+           
         </div> <div id="address"> 
             <h2>sendto</h2>
             <address>
@@ -98,12 +101,12 @@ function showupload(orderlineno){
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <? echo $order->getPostcode(); ?></br>
             </address>
             <p>
-            <h4>sends method 
+            <strong>sends method : </strong>
                 <?php foreach ($ordsendlist as $ordsend): ?>
                 <?php if ($ordsend->getSendmethod() == $order->getSendmethod()): ?>
                     <? echo $ordsend->getDescription();  break;?>
                 <?php endif; ?>
-            <?php endforeach; ?><br></h4>
+            <?php endforeach; ?><br>
         </p>
 
         </div>
