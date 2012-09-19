@@ -30,7 +30,46 @@ class BakCost extends CI_Controller {
         $_SESSION['paperlist'] = $data['paperlist'];
         $_SESSION['ordsendlist'] = $data['ordsend'];
         $_SESSION['optionlist'] = $data['optionlist'];
-        $this->load->view(lang('costpage'));
+        $this->load->view(lang('costpage'), $data);
+    }
+
+    public function template() {
+        $this->load->model('typedao');
+        $this->load->model('templatedao');
+        $this->load->library('pagination');
+        $type = $this->input->post('type');
+        $condition = array();
+
+        $keyword = '';
+        if ($this->input->post('keyword')) {
+            $keyword = $this->input->post('keyword');
+        }
+        if ($this->input->post('type')) {
+            $type = $this->input->post('type');
+
+            $condition['type'] = $type;
+        }
+        $config['per_page'] = 10;
+        $startrow = ($this->input->post()) ? $this->input->post('startrow') : 0;
+        $config['total_rows'] = $this->gettotalpage($condition, $keyword);
+        $this->pagination->initialize($config);
+        $this->db->limit($config['per_page'], $startrow);
+        $data['templatelist'] = $this->templatedao->findtemplatelist($keyword, $condition);
+        $data['typelist'] = $this->typedao->findall();
+        $this->load->view(lang('costpage'), $data);
+    }
+
+    private function gettotalpage($keyword = '', $condition = array()) {
+
+        if ($keyword != '') {
+            $where = "(temp_name LIKE '%$keyword%' )";
+            $this->db->where($where);
+        }
+        foreach ($condition as $index => $row) {
+
+            $this->db->where($index, $row);
+        }
+        return $this->db->count_all_results('template');
     }
 
     public function updateordsend() {
@@ -48,7 +87,8 @@ class BakCost extends CI_Controller {
         }
         redirect('Backend/bakCost');
     }
-     public function updateoption() {
+
+    public function updateoption() {
         $this->load->model('optiondao');
         $updatelist = $this->input->post();
         $oldoption = $_SESSION['optionlist'];

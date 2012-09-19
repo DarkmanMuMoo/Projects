@@ -33,19 +33,21 @@ class Empdao extends CI_Model {
 
         return $obj;
     }
-public function findEmpOfWork($workno){
 
-    $sql='select * from work  w join work_emp we on w.workno=we.workno join employee e on we.empno=e.empno where we.empno=?';
-    $query = $this->db->query($sql, array($workno));
+    public function findEmpOfWork($workno) {
+
+        $sql = 'select * from work  w join work_emp we on w.workno=we.workno join employee e on we.empno=e.empno where we.empno=?';
+        $query = $this->db->query($sql, array($workno));
         $array = array();
         foreach ($query->result() as $row) {
-          $obj=null;
-          $obj=$this->makeObj($row);
-          array_push($array, $obj);
+            $obj = null;
+            $obj = $this->makeObj($row);
+            array_push($array, $obj);
         }
-        
+
         return $array;
-}
+    }
+
     public function findbyid($empno) {
         $this->db->where('empno', $empno);
         $query = $this->db->get('employee');
@@ -59,18 +61,20 @@ public function findEmpOfWork($workno){
 
         return $obj;
     }
- public function findcoemp($workno){
-     $sql='select * from employee emp join work_emp we on emp.empno=we.empno where we.workno=?';
-     $query = $this->db->query($sql, array($workno));
+
+    public function findcoemp($workno) {
+        $sql = 'select * from employee emp join work_emp we on emp.empno=we.empno where we.workno=?';
+        $query = $this->db->query($sql, array($workno));
         $array = array();
         foreach ($query->result() as $row) {
-          $obj=null;
-          $obj=$this->makeObj($row);
-          array_push($array, $obj);
+            $obj = null;
+            $obj = $this->makeObj($row);
+            array_push($array, $obj);
         }
-        
+
         return $array;
- }
+    }
+
     public function findbymultifield($condition) {
         foreach ($condition as $index => $row) {
 
@@ -150,9 +154,9 @@ public function findEmpOfWork($workno){
     public function findemplist($keyword = '', $condition = array()) {
 
         if ($keyword != '') {
-            $this->db->or_like('emp_name', $keyword);
-            $this->db->or_like('lastname', $keyword);
-            $this->db->or_like('email', $keyword);
+
+            $where = "(`email` LIKE '%$keyword%' OR `lastname` LIKE '%$keyword%' OR `emp_name` LIKE '%$keyword%' )";
+            $this->db->where($where);
         }
         foreach ($condition as $index => $row) {
 

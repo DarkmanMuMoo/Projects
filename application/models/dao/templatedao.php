@@ -31,7 +31,33 @@ class Templatedao extends CI_Model {
 
         return $obj;
     }
+public function findtemplatelist($keyword = '', $condition = array()){
+  
+        $this->db->select('*');
+        $this->db->from('template');
 
+        if ($keyword != '') {
+            $where = "(temp_name LIKE '%$keyword%' )";
+            $this->db->where($where);
+        }
+        foreach ($condition as $index => $row) {
+
+            $this->db->where($index, $row);
+        }
+          $query = $this->db->get();
+        $result = array();
+
+        foreach ($query->result() as $row) {
+            $obj = null;
+            $obj = $this->makeObj($row);
+            array_push($result, $obj);
+        }
+        // echo var_dump($obj);
+        //var_dump($this->db->last_query());
+        return $result;
+    
+    
+}
     public function getType(Template $template) {
         $this->load->model('dao/typedao');
         return $this->typedao->findbyid($template->getTypeno());
