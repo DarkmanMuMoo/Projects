@@ -80,5 +80,5 @@ $lang['workdetail']='Backend/Work/workdetail';
 $lang['costpage']='Backend/Cost/costpage';
 $lang['baktemplate']='Backend/Cost/templatepage';
 $lang['baktemplatedetail']='Backend/Cost/templatedetail';
-
+$lang['bakuploadframe']='Backend/frame/uploadtemplateframe';
 ?>

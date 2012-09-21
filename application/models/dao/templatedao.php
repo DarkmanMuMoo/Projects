@@ -31,8 +31,9 @@ class Templatedao extends CI_Model {
 
         return $obj;
     }
-public function findtemplatelist($keyword = '', $condition = array()){
-  
+
+    public function findtemplatelist($keyword = '', $condition = array()) {
+
         $this->db->select('*');
         $this->db->from('template');
 
@@ -44,7 +45,7 @@ public function findtemplatelist($keyword = '', $condition = array()){
 
             $this->db->where($index, $row);
         }
-          $query = $this->db->get();
+        $query = $this->db->get();
         $result = array();
 
         foreach ($query->result() as $row) {
@@ -55,9 +56,8 @@ public function findtemplatelist($keyword = '', $condition = array()){
         // echo var_dump($obj);
         //var_dump($this->db->last_query());
         return $result;
-    
-    
-}
+    }
+
     public function getType(Template $template) {
         $this->load->model('dao/typedao');
         return $this->typedao->findbyid($template->getTypeno());
@@ -110,13 +110,28 @@ public function findtemplatelist($keyword = '', $condition = array()){
             'size' => $template->getSize(),
             'url' => $template->getUrl(),
             'tmp_name' => $template->getName(),
-            'X'=>$template->getX(),
+            'X' => $template->getX(),
             'Y' => $template->getY(),
             'Z' => $template->getZ(),
-            'platesize'=>$template->getPlatesize()
+            'platesize' => $template->getPlatesize()
         );
 
         return $this->db->insert('template', $data);
+    }
+
+    public function update(Template $template) {
+        $data = array(
+            'size' => $template->getSize(),
+            'url' => $template->getUrl(),
+            'tmp_name' => $template->getName(),
+            'X' => $template->getX(),
+            'Y' => $template->getY(),
+            'Z' => $template->getZ(),
+            'platesize' => $template->getPlatesize()
+        );
+
+        $this->db->where('tempno', $template->getTempno());
+        return $this->db->update('template', $data);
     }
 
     private function makeObj($row) {

@@ -22,6 +22,8 @@ class Optiondao  extends CI_Model{
         $this->load->model('obj/option');
         
     }
+    
+    
     public function gettypeOf(Option $option){
          $this->load->model('dao/typedao');
          
@@ -105,7 +107,16 @@ $obj = null;
         return $this->db->insert('ordoption', $data);
     }
 
-    
+      public function update(Option $option) {
+        $data = array(
+              'option_description' => $option->getDescription(),
+             'option_price' => $option->getPrice()
+        );
+
+        $this->db->where('optionno', $option->getOptionno());
+        return $this->db->update('ordoption', $data);
+    }
+
     
      public function makeObj($row) {
 

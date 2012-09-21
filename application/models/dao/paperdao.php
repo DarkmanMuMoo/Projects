@@ -62,6 +62,16 @@ class Paperdao extends CI_Model   {
 
         return $this->db->insert('paper', $data);
     }
+     public function update(Paper $paper) {
+        $data = array(
+              'paper_name' => $paper->getName(),
+             'gram' => $paper->getGrame(),
+           'priceperkilo'=>$paper->getPriceperkilo()
+        );
+
+        $this->db->where('paperno', $paper->getPaperno());
+        return $this->db->update('paper', $data);
+    }
      public function findbytypeno($typeno){
          
      $sql ='select * from paper_type pt join  paper p on pt.paperno=p.paperno   where pt.type_no = ?';

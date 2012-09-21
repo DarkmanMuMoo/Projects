@@ -65,7 +65,16 @@ class Ordsenddao extends CI_Model {
 
         return $this->db->insert('ordsend', $data);
     }
+ public function update(Ordsend $ordsend) {
+        $data = array(
+           
+            'send_description' =>$ordsend->getDescription(),
+          'send_price'=>$ordsend->getSendprice()
+        );
 
+        $this->db->where('sendmethod', $ordsend->getSendmethod());
+        return $this->db->update('ordsend', $data);
+    }
 
      public function makeObj($row) {
 

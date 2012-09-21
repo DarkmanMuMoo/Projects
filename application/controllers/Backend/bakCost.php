@@ -16,13 +16,14 @@ class BakCost extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-          $this->load->model('obj/emp');
-    }
-
-    public function index() {
+        $this->load->model('obj/emp');
         $this->load->model('dao/paperdao');
         $this->load->model('dao/ordsenddao');
         $this->load->model('dao/optiondao');
+    }
+
+    public function index() {
+
 
 
         $data['paperlist'] = $this->paperdao->findall();
@@ -33,11 +34,69 @@ class BakCost extends CI_Controller {
         $_SESSION['optionlist'] = $data['optionlist'];
         $this->load->view(lang('costpage'), $data);
     }
-public function templatedetail($templateno){
-    
-    $data=array();
-     $this->load->view(lang('baktemplatedetail'), $data);
-}
+
+    public function templatedetail($templateno) {
+        $this->load->model('dao/templatedao');
+        $template = $this->templatedao->findbyid($templateno);
+
+        $data = array();
+        $data['template'] = $template;
+        $this->load->view(lang('baktemplatedetail'), $data);
+    }
+
+    public function showuploadframe($templateno) {
+
+
+        $data['templateno'] = $templateno;
+
+        $this->load->view(lang('bakuploadframe'), $data);
+    }
+
+    public function updatetemplate() {
+        $this->load->model('dao/templatedao');
+        $tempno = $this->input->post('templateno');
+        $template = $this->templatedao->findbyid($tempno);
+
+        $template->setX($this->input->post('x'));
+        $template->setZ($this->input->post('z'));
+        $template->setY($this->input->post('y'));
+        $template->setPlatesize($this->input->post('platesize'));
+
+        $result = $this->templatedao->update($template);
+        error_log(var_export($result, true) . 'update in template', 0);
+        redirect('Backend/bakCost/templatedetail/' . $tempno);
+    }
+
+    public function updatetemplatefile() {
+        $this->load->model('dao/templatedao');
+        $this->load->library('uploadutil');
+        $tempno = $this->input->post('templateno');
+        $template = $this->templatedao->findbyid($tempno);
+
+        $config = array();
+
+        $filename = 'temp-' . $tempno;
+
+        $config['upload_path'] = './asset/templatefile/';
+        $config['allowed_types'] = 'pdf|ai';
+        $config['max_size'] = '51200';
+        $config['overwrite'] = true;
+        $config['file_name'] = $filename;
+        $upload = $this->uploadutil->upload($config, 'myfile');
+        if ($upload == 'complete') {
+
+            $data = $this->upload->data();
+
+            $template->setUrl($filename . $data['file_ext']);
+
+            $result = $this->templatedao->update($template);
+            error_log(var_export($result, true) . 'update in template', 0);
+        } else {
+
+            echo "$upload";
+        }
+    }
+
     public function template() {
         $this->load->model('dao/typedao');
         $this->load->model('dao/templatedao');
@@ -78,39 +137,44 @@ public function templatedetail($templateno){
     }
 
     public function updateordsend() {
-        $this->load->model('dao/ordsenddao');
+
         $ordsendlist = $this->input->post();
-        $oldoption = $_SESSION['ordsendlist'];
+        $oldordsend = $_SESSION['ordsendlist'];
         foreach ($ordsendlist as $key => $value) {
 
 
-            $updateordsend = $oldoption[$key];
+            $updateordsend = $oldordsend[$key];
             if ($value != $updateordsend->getSendprice()) {
-                $updatepaper->setSendprice($value);
-                $this->ordsenddao->update($updatepaper);
+                $updateordsend->setSendprice($value);
+                $this->ordsenddao->update($updateordsend);
             }
         }
+        $this->session->set_flashdata('ck', 'send');
         redirect('Backend/bakCost');
     }
 
     public function updateoption() {
-        $this->load->model('dao/optiondao');
+
         $updatelist = $this->input->post();
         $oldoption = $_SESSION['optionlist'];
+
         foreach ($updatelist as $key => $value) {
 
 
             $updateoption = $oldoption[$key];
+
             if ($value != $updateoption->getPrice()) {
-                $updatepaper->setPrice($value);
-                $this->optiondao->update($updatepaper);
+
+                $updateoption->setPrice($value);
+                $this->optiondao->update($updateoption);
             }
         }
+        $this->session->set_flashdata('ck', 'option');
         redirect('Backend/bakCost');
     }
 
     public function updatepaper() {
-        $this->load->model('dao/paperdao');
+
         $updatelist = $this->input->post();
         $oldpaperlist = $_SESSION['paperlist'];
         foreach ($updatelist as $key => $value) {
@@ -122,6 +186,7 @@ public function templatedetail($templateno){
                 $this->paperdao->update($updatepaper);
             }
         }
+        $this->session->set_flashdata('ck', 'paper');
         redirect('Backend/bakCost');
     }
 
