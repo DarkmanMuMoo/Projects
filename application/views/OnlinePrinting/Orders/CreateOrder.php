@@ -1,12 +1,12 @@
 <? $this->load->view(lang('header')) ?>
 <script>
-        var totalprice;
+    var totalprice;
     $(function() {
         $( "#selectadd" ).buttonset();
         $('#ordsend').change(function(){
             
-var sid =document.getElementById('ordsend').options[document.getElementById('ordsend').selectedIndex].value;
-            $.post('<?echo site_url('orders/ajaxordersendprice') ;?>', {id:sid}, function(data){
+            var sid =document.getElementById('ordsend').options[document.getElementById('ordsend').selectedIndex].value;
+            $.post('<? echo site_url('orders/ajaxordersendprice'); ?>', {id:sid}, function(data){
                 
                 $('#adprice').html(data);
                 
@@ -15,23 +15,10 @@ var sid =document.getElementById('ordsend').options[document.getElementById('ord
             
         });
         $('#selectadd input').click(function(){
-               
-                    
-                    
-            var id = this.id;
-        
-            if(id=='add1'){
-            
-                $("#mainaddress").css({"display":"inline"});
-                $('#subaddress').css({"display":"none"});
-        
-            
-            }else if (id=='add2'){
-                $("#mainaddress").css({"display":"none"});
-                $('#subaddress').css({"display":"inline"});
-            
-            
-            }
+
+            var value = $(this).attr('value');
+            $('.tabadd').hide();
+            $('#'+value).fadeToggle()
         });
         
         
@@ -66,12 +53,12 @@ var sid =document.getElementById('ordsend').options[document.getElementById('ord
 <h5>จัดส่ง</h5> <br/>
 <div id="selectadd" >
 
-    <input type="radio" id="add1" name="add" value="add1" checked="checked" /><label for="add1">ที่อยหลัก</label>
-    <input type="radio" id="add2" name="add" value="add2"  /><label for="add2">ที่อยู่รอง</label>
-    <input type="radio" id="add3" name="add" value="add2"  /><label for="add3">ที่อยู่อื่น</label>
+    <input type="radio" id="add1" name="add" value="tabadd1" checked="checked" /><label for="add1">ที่อยหลัก</label>
+    <input type="radio" id="add2" name="add" value="tabadd2"  /><label for="add2">ที่อยู่รอง</label>
+    <input type="radio" id="add3" name="add" value="tabadd3"  /><label for="add3">ที่อยู่อื่น</label>
 </div>
 <br/><h5>จัดส่ง</h5> <br/>
-<div id="mainaddress" >
+<div class="tabadd"id="tabadd1" >
     <? $addr1 = $_SESSION['user']->getAddress1(); ?>
     <address>
         <? echo $addr1['address']; ?><br/>
@@ -81,18 +68,21 @@ var sid =document.getElementById('ordsend').options[document.getElementById('ord
     </address>
 
 </div>
-<div id="otheraddress" >
-    <? $addr1 = $_SESSION['user']->getAddress1(); ?>
-    <address>
-        <? echo $addr1['address']; ?><br/>
-        <? echo $addr1['province']; ?>
-        <? echo $addr1['postcode']; ?><br/>
-        <? echo $addr1['phone']; ?><br/>
-    </address>
+<div  class="tabadd" id="tabadd3" style="display: none;" >
 
+  
+       ที่อยู่ <textarea name="address" id="address" > </textarea><br/>
+      จังหวัด <select name="province" id="province">
+            <?php foreach ($provincelist as $province): ?>
+                <option  value="<? echo $province->getProvinceid(); ?>"><? echo $province->getProvincename(); ?></option>
+            <? endforeach; ?>
+        </select></br>
+       รหัสไปรษณีย์ <input type="text"id="postcode" name="postcode" maxlength="5" value=""/><br/>
+      โทรศัพท์ <input type="text" name="phone" value=""  id="phone"/><br/>
+ 
 </div>
 
-<div id="subaddress" style="display: none;">
+<div  class="tabadd" id="tabadd2" style="display: none;">
     <? $addr2 = $_SESSION['user']->getAddress2(); ?>
     <address>
 
@@ -128,7 +118,8 @@ var sid =document.getElementById('ordsend').options[document.getElementById('ord
 
                         <?php if ($orderline->getTempno() == $cart->getTempno()): ?>
                             <strong> <? echo $orderline->getName(); ?> &nbsp; <? echo $orderline->getTypeno(); ?>&nbsp;
-                                <? echo $orderline->getSize();
+                                <?
+                                echo $orderline->getSize();
                                 break;
                                 ?>
                             </strong>
@@ -138,9 +129,10 @@ var sid =document.getElementById('ordsend').options[document.getElementById('ord
 
                 <td>   <?php foreach ($paperlist as $paper): ?>
                             <?php if ($paper->getPaperno() == $cart->getPaperno()): ?>
-                            <strong> <? echo $paper->getName(); ?> &nbsp; <? echo $paper->getGrame();
+                            <strong> <? echo $paper->getName(); ?> &nbsp; <?
+                    echo $paper->getGrame();
                     break;
-                                ?></strong>
+                    ?></strong>
                         <?php endif; ?>
 
     <? endforeach; ?>
@@ -148,9 +140,10 @@ var sid =document.getElementById('ordsend').options[document.getElementById('ord
                 <td>   <?php foreach ($optionlist as $option): ?>
 
                             <?php if ($option->getOptionno() == $cart->getOptionno()): ?>
-                            <strong> <? echo $option->getDescription();
+                            <strong> <?
+                    echo $option->getDescription();
                     break;
-                                ?> </strong>
+                    ?> </strong>
                         <?php endif; ?>
                     <? endforeach; ?>
                 </td>
@@ -158,7 +151,8 @@ var sid =document.getElementById('ordsend').options[document.getElementById('ord
                     <? echo $cart->getQty(); ?>
                 </td>
                 <td>
-    <? echo number_format($cart->getPrice(), 2, '.', ',');
+    <?
+    echo number_format($cart->getPrice(), 2, '.', ',');
     $totalprice = $totalprice + $cart->getPrice();
     ?>&nbsp; บาท
                 </td>
@@ -173,9 +167,9 @@ var sid =document.getElementById('ordsend').options[document.getElementById('ord
     </tbody>
 </table>
 <div style="float: right; margin-right: 30%" >
-    <strong>ราคาสินค้า :<? echo number_format( $totalprice ,2,'.',',');?> บาท</strong><br>
+    <strong>ราคาสินค้า :<? echo number_format($totalprice, 2, '.', ','); ?> บาท</strong><br>
     <strong>ค่าจัดส่ง :<span  id="adprice">-</span> บาท</strong><br>
-    <strong>ราคารวม :<span  id="sumprice"><? echo number_format( $totalprice ,2,'.',','); ?></span> บาท</strong>
+    <strong>ราคารวม :<span  id="sumprice"><? echo number_format($totalprice, 2, '.', ','); ?></span> บาท</strong>
 </div>
 
 <p>
@@ -207,4 +201,4 @@ var sid =document.getElementById('ordsend').options[document.getElementById('ord
 
 
 <? $this->load->view(lang('footer')) ?>
-<script>  totalprice=<? echo $totalprice;?>;  </script>
+<script>  totalprice=<? echo $totalprice; ?>;  </script>

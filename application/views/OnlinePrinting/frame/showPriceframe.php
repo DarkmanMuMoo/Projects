@@ -20,9 +20,11 @@
                         <tr><td><strong> option </strong></td><td> <?echo (isset($option))? $option:'-' ?>  </td></tr>
                          <tr><td><strong> ราคารวม </strong></td><td>  <?echo (isset($price))?  number_format( $price, 2, '.', ',').' บาท':'-' ?>  </td></tr>
                 </table>
+                <?php if (isset($price)): ?>
                 
                 <div  align="center" >   <a class="btn btn-success"  href="<?echo site_url('home/addtocart') ?>"
                                             target="_parent" >
                         <i class="icon-shopping-cart icon-white"></i>Add to cart</a>   </div>
                
                 </p>
+                <?php endif; ?>

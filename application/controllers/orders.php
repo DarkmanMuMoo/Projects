@@ -41,7 +41,7 @@ class Orders extends CI_Controller {
         $payment = $this->paymentdao->findbyid($payno);
 
         echo img('uploads/Slips/' . $payment->getPicurl());
-       // redirect("orders/getpaymentlist/$ordno");
+        // redirect("orders/getpaymentlist/$ordno");
     }
 
     public function addpayment() {
@@ -217,7 +217,7 @@ class Orders extends CI_Controller {
         $this->load->model('dao/optiondao');
         $this->load->model('dao/ordpaydao');
         $this->load->model('dao/ordsenddao');
-
+        $this->load->library('thailandutil');
 
 
         $data['user'] = $_SESSION['user'];
@@ -227,6 +227,9 @@ class Orders extends CI_Controller {
         }
 
         $_SESSION['cart'] = array();
+        $provincelist = $this->thailandutil->getAllprovinceList();
+
+        $data['provincelist'] = $provincelist;
         $data['templatelist'] = $this->templatedao->findall();
         $data['paperlist'] = $this->paperdao->findall();
         $data['optionlist'] = $this->optiondao->findall();
@@ -247,9 +250,23 @@ class Orders extends CI_Controller {
         $this->load->model('dao/optiondao');
         $this->load->model('dao/ordpaydao');
         $this->load->model('dao/ordsenddao');
+        $this->load->library('thailandutil');
 
-
+        if ($this->input->post('add') == 'tabadd3') {
+            $_SESSION['newadd'] = array();
+            $_SESSION['newadd']['address'] = $this->input->post('address');
+          
+            $_SESSION['newadd']['province'] =$this->thailandutil->findbyid($this->input->post('province'))->getProvincename();
+            $_SESSION['newadd']['postcode'] = $this->input->post('postcode');
+           
+            $_SESSION['newadd']['phone'] = $this->input->post('phone');
+           
+        }
         $data['address'] = $this->input->post('add');
+        ;
+
+
+
         $ordsendmethod = $this->input->post('ordsend');
         $ordpaymethod = $this->input->post('ordpay');
         $cusremark = $this->input->post('cusremark');
@@ -270,7 +287,11 @@ class Orders extends CI_Controller {
 
 
     public function ordersummary() {
-        $address = ($this->input->post('address') == 'add1') ? $_SESSION['user']->getAddress1() : $_SESSION['user']->getAddress2();
+        if($this->input->post('address') == 'tabadd3'){
+            $address=$_SESSION['newadd'];
+        }else{
+        $address = ($this->input->post('address') == 'tabadd1') ? $_SESSION['user']->getAddress1() : $_SESSION['user']->getAddress2();
+        }
         $ordsend = $this->input->post('ordsend');
         $ordpay = $this->input->post('ordpay');
         $totalprice = $this->input->post('totalprice');

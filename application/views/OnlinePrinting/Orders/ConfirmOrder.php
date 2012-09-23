@@ -23,7 +23,7 @@
 <h5>จัดส่ง</h5><br/>
 <div id="sendaddress" >
     <?
-    if ($address == 'add1') {
+    if ($address == 'tabadd1') {
         $addr1 = $_SESSION['user']->getAddress1();
         ?>
         <address>
@@ -32,7 +32,7 @@
             <? echo $addr1['postcode']; ?><br/>
             <? echo $addr1['phone']; ?><br/>
         </address>
-    <? } else {
+    <? } else   if ($address == 'tabadd2') {
         $addr2 = $_SESSION['user']->getAddress2(); ?>
         <address>
             <? echo $addr2['address']; ?><br/>
@@ -41,9 +41,17 @@
     <? echo $addr2['phone']; ?><br/>
         </address>
 
-<? } ?>
+<? } else{ $addr3 = $_SESSION['newadd']; ?>
 
-
+        <address>
+            <? echo $addr3['address']; ?><br/>
+            <? echo $addr3['province']; ?>
+            <? echo $addr3['postcode']; ?><br/>
+    <? echo $addr3['phone']; ?><br/>
+        </address>
+    
+    
+<?}?>
     <input type="hidden" name="address" value="<? echo $address ?>"/>
 </div>
 
