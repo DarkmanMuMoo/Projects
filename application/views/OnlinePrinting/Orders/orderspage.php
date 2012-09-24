@@ -78,23 +78,23 @@
             <table class="table table-bordered" >
                 <thead>
                 <th>
-                    Number
+                    #
                 </th>
                 <th>
-                    Orderno 
+                    หมายเลขสั่งซื้อ 
                 </th>
 
                 <th>
-                    Date
+                    วันที่
                 </th>
                 <th>
-                    Status
+                    สถานะ
                 </th>
                 <th>
-                    Total-Price
+                    ราคารวม
                 </th>
                 <th>
-                    Management
+                    
                 </th>
                 </thead>
 
@@ -102,7 +102,7 @@
                     <? $page = ($this->input->post('startrow')) ? $this->input->post('startrow') : 0; ?>
                     <?php foreach ($orderlist as $index => $ord): ?>
                         <tr> <td style="width: 45px;" ><? echo $index + 1 + $page ?> </td>  
-                            <td style="width: 47px;" >
+                            <td style="width: 100px;" >
 
                                 <? echo $ord->getOrderno(); ?> 
 
@@ -119,7 +119,7 @@
     <?php endforeach; ?>
                             </td> 
                             <td style="text-align: right;" ><? echo number_format($ord->getTotalprice(), 2, '.', ','); ?>  &nbsp; บาท </td>                      
-                            <td style="width: 150px;" >
+                            <td style="width: 100px;" >
                                 <div class="btn-group">
                                     <a class="btn btn-info" href="<? echo site_url('orders/viewOrderdetail') . "/" . $ord->getOrderno(); ?>"> 
                                         View
@@ -156,12 +156,12 @@
 
     </div >
     <div id="sidebar">
-        <h2>My Order</h2>
+        <h2>รายการสั่งซื้อ</h2>
 
 
         <ul id="statuslist"class="nav nav-tabs nav-stacked">
 
-            <li><a id="0" href="JavaScript:void(0);" onclick="Searchstatus('');">all</a></li>
+            <li><a id="0" href="JavaScript:void(0);" onclick="Searchstatus('');">ทั้งหมด</a></li>
 <?php foreach ($ordstatuslist as $ord): ?>
                 <li ><a id="<? echo $ord->getStatus(); ?>" href="JavaScript:void(0);" onclick="Searchstatus('<? echo $ord->getStatus(); ?>');"><? echo $ord->getDescription() ?></a>
                 </li>

@@ -78,14 +78,14 @@ function showupload(orderlineno){
 <div id="page">
 
     <div id="head" style="clear:both;"><div id="order">
-            <h2>Orderno <? echo $order->getOrderno(); ?></h2> <h3>Orderstatus :
+            <h2>เลขใบสั่งซื้อ <? echo $order->getOrderno(); ?></h2> <h3>สถานะ :
             <?php foreach ($ordstatuslist as $ordstatus): ?>
                 <?php if ($ordstatus->getStatus() == $order->getOrdstatus()): ?>
                 <span <? echo ($order->getOrdstatus()==10)? 'class="red"' : 'class="blue"'; ?> > <? echo $ordstatus->getDescription(); ?> </span></h3> <? break;?>
                 <?php endif; ?>
             <?php endforeach; ?>
-            <strong>  Orderdate :</strong>  <? echo $order->getOrderdate(); ?><br>
-            <strong> Paymethod :</strong> <?php foreach ($ordpaylist as $ordpay): ?>
+            <strong>  วันที่ :</strong>  <? echo $order->getOrderdate(); ?><br>
+            <strong> การจัดส่ง :</strong> <?php foreach ($ordpaylist as $ordpay): ?>
                 <?php if ($ordpay->getPaymethod() == $order->getPaymethod()): ?>
                     <? echo $ordpay->getDescription();  break;?>
                 <?php endif; ?>
@@ -94,14 +94,14 @@ function showupload(orderlineno){
            <strong>วันส่งสินค้า: <?  echo ($order->getRecievedate()==null)?$order->getRecievedate():'-';?></strong>
            
         </div> <div id="address"> 
-            <h2>sendto</h2>
+            <h2>ที่อยู่จัดส่ง</h2>
             <address>
             ที่อยู่ :    <? echo $order->getAddress(); ?></br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <? echo $order->getProvince(); ?></br>
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <? echo $order->getPostcode(); ?></br>
             </address>
             <p>
-            <strong>sends method : </strong>
+            <strong>การจัดส่ง : </strong>
                 <?php foreach ($ordsendlist as $ordsend): ?>
                 <?php if ($ordsend->getSendmethod() == $order->getSendmethod()): ?>
                     <? echo $ordsend->getDescription();  break;?>
@@ -117,23 +117,21 @@ function showupload(orderlineno){
 background-color: orange;
 height: 3px;"></hr>
         <p>
-        <h2>Orderline</h2>
+        <h2>รายการสินค้า</h2>
     </p>
         <table class="table table-bordered" >
             <thead>
             <th>
-                Number
+                #
             </th>
-            <th>
-                Orderlineno
-            </th>
-            <th>template</th>
+           
+            <th>เทมเพลต</th>
             <th>กระดาษ</th>
-            <th>option</th>
+            <th>ตัวเลือกพิเศษ</th>
             <th>จำนวน</th>
             <th>ราคา</th>
             
-            <th colspan="2" >file</th>
+            <th colspan="2" >ไฟล์</th>
             </thead>
 
             <tbody>
@@ -141,7 +139,7 @@ height: 3px;"></hr>
                 <?php foreach ($orderlinelist as $index => $orderline): ?>   
                     <tr>
                         <td width="5%" ><? echo $index + 1; ?>   </td>
-                        <td width="5%"  ><? echo $orderline->getOrdlineno(); ?>   </td>
+                       
                         <td width="15%" ><? echo $orderline->getTmpname(); ?> &nbsp; 
                             <? echo $orderline->getTmpsize(); ?> &nbsp;
                            
