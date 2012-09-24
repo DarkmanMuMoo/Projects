@@ -14,7 +14,7 @@
             width: 50%; 
 
         }
-      
+
 
         #orderline th{text-align: center;}
         #orderline td{text-align: center;}
@@ -49,36 +49,41 @@
             <?php foreach ($ordstatuslist as $ordstatus): ?>
                 <?php if ($ordstatus->getStatus() == $order->getOrdstatus()): ?>
                     <? echo $ordstatus->getDescription();
-                    break; ?>
+                    break;
+                    ?>
                 <?php endif; ?>
 <?php endforeach; ?><br>
             Orderdate : <? echo $order->getOrderdate(); ?><br>
             Paymethod : <?php foreach ($ordpaylist as $ordpay): ?>
                 <?php if ($ordpay->getPaymethod() == $order->getPaymethod()): ?>
                     <? echo $ordpay->getDescription();
-                    break; ?>
+                    break;
+                    ?>
     <?php endif; ?>
 <?php endforeach; ?><br>
+            <strong> วันที่เสร็จสิ้น: <? echo ($order->getExpectedshipdate() == null) ? $order->getExpectedshipdate() : '-'; ?></strong><br />
+            <strong>วันส่งสินค้า: <? echo ($order->getRecievedate() == null) ? $order->getRecievedate() : '-'; ?></strong>
         </div> <div id="address"> 
             <h2>sendto</h2><br />
-            
-                      
-            <address>
-	<table>
-    
-ที่อยู่ : <? echo $order->getAddress(); ?></br>
-   
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <? echo $order->getProvince(); ?></br>
 
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <? echo $order->getPostcode(); ?></br>      </address>
-            
+
+            <address>
+                <table>
+
+                    ที่อยู่ : <? echo $order->getAddress(); ?></br>
+
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <? echo $order->getProvince(); ?></br>
+
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <? echo $order->getPostcode(); ?></br>      </address>
+
             </table>
             <p>
             <h4>sends method 
                 <?php foreach ($ordsendlist as $ordsend): ?>
                     <?php if ($ordsend->getSendmethod() == $order->getSendmethod()): ?>
                         <? echo $ordsend->getDescription();
-                        break; ?>
+                        break;
+                        ?>
     <?php endif; ?>
 <?php endforeach; ?><br></h4>
             </p>
@@ -111,7 +116,7 @@
 <?php foreach ($orderlinelist as $index => $orderline): ?>   
                     <tr>
                         <td width="5%" ><? echo $index + 1; ?>   </td>
-                      
+
                         <td width="25%" ><? echo $orderline->getTmpname(); ?> &nbsp; 
     <? echo $orderline->getTmpsize(); ?> &nbsp;
 
@@ -122,9 +127,10 @@
                             <? echo $orderline->getQty(); ?>
                         </td>
                         <td width="10%" style="text-align: right;"  >
-                            <? echo number_format( $orderline->getPrice(), 2, '.', ',');
-                            $totalprice+=$orderline->getPrice();
-                            ?>&nbsp; บาท
+    <?
+    echo number_format($orderline->getPrice(), 2, '.', ',');
+    $totalprice+=$orderline->getPrice();
+    ?>&nbsp; บาท
                         </td>
                         <td width="10%"  >  <?php if (($orderline->getFilepath() == '') || ($orderline->getFilepath() == null)): ?>
         <? echo '<h6 style="color:red" >notupload</h6>' ?>
@@ -143,50 +149,50 @@
 
 
         </table>
-        
-    <form action="<? echo site_url('Backend/bakorders/seller_comment'); ?>" method="post">
-    <div style="clear:both; display:table; width:100%;">
+
+        <form action="<? echo site_url('Backend/bakorders/seller_comment'); ?>" method="post">
+            <div style="clear:both; display:table; width:100%;">
 
 
-<div style="float:left ; text-align:left; width:50%; font-size:16px" >
-ความคิดเห็นของลูกค้า
-<p>
+                <div style="float:left ; text-align:left; width:50%; font-size:16px" >
+                    ความคิดเห็นของลูกค้า
+                    <p>
 <? echo $order->getCusremark(); ?>
-</p>
-</div>
+                    </p>
+                </div>
 
-<table style="float:left; width:50%;">
-<tr>
-<td>ข้อความส่งถึงลูกค้า</td>
+                <table style="float:left; width:50%;">
+                    <tr>
+                        <td>ข้อความส่งถึงลูกค้า</td>
 
-<td><textarea name="comment" cols="" rows="">
+                        <td><textarea name="comment" cols="" rows="">
 <? echo $order->getSellerremark(); ?>
-    </textarea></td>
-</tr>
+                            </textarea></td>
+                    </tr>
 
-<tr>
-<td></td>
-<td><input class="btn" type="submit" value="ตกลง" /> </td>
-</tr>
+                    <tr>
+                        <td></td>
+                        <td><input class="btn" type="submit" value="ตกลง" /> </td>
+                    </tr>
 
-</table>
+                </table>
 
-</div>
-   <input type="hidden" name="orderno" value="<? echo $order->getOrderno(); ?>">
-</form>
+            </div>
+            <input type="hidden" name="orderno" value="<? echo $order->getOrderno(); ?>">
+        </form>
 
 
     </div>
 <?php if ($order->getOrdstatus() < 40): ?>
         <div align="center" style="margin :5% auto;">  
             <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/waitforpay') . '/' . $order->getOrderno(); ?>">Approve</a> 
-            <button class="btn btn-danger" onclick="reject('<? echo $order->getOrderno();?> ');" >Rejects</button>
+            <button class="btn btn-danger" onclick="reject('<? echo $order->getOrderno(); ?> ');" >Rejects</button>
         </div>
         <div id="rejectdialog" style="display: none;">
             <form id="rejectform" method="post" action="<? echo site_url('Backend/bakorders/rejects') ?>">
                 <input  type="hidden" name="orderno"  value=""/>
                 <textarea name="msg"  >
-                   ข้อความที่ต้องการส่งถึงลูกค้า
+                       ข้อความที่ต้องการส่งถึงลูกค้า
                 </textarea>
             </form>
         </div>
@@ -205,31 +211,31 @@
 
 <? $this->load->view(lang('bakfooter')); ?>
 <script>
-function reject(orderno){
-     $('#rejectform input[name=orderno]').val(orderno);
-      $('#rejectdialog').dialog({
+    function reject(orderno){
+        $('#rejectform input[name=orderno]').val(orderno);
+        $('#rejectdialog').dialog({
       
-                    autoOpen: true,
-                     modal: true,
-                    title: "Rejectdialog",buttons: [
-                        {
-                            text: "sendEmail",
-                            click: function(){ 
-                                $('#rejectform').submit();
+            autoOpen: true,
+            modal: true,
+            title: "Rejectdialog",buttons: [
+                {
+                    text: "sendEmail",
+                    click: function(){ 
+                        $('#rejectform').submit();
                         
-                                $(this).dialog("close");    
+                        $(this).dialog("close");    
                             
-                            }
+                    }
                            
                             
-                        }
+                }
            
-                    ]
+            ]
           
           
-      });
+        });
     
-}
+    }
 
 
 </script>

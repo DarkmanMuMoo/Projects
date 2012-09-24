@@ -360,11 +360,10 @@ display: table;
 /* Footer */
 
 #footer {
-    margin-top: 5%;
-    margin-bottom: 0;
+ display: table;
     margin-left: auto;
     margin-right: auto;
-    width: 940px;
+    width: 960px;
     height: 50px;
 
     padding: 0px 0 15px 0;
