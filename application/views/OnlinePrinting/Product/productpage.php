@@ -17,13 +17,17 @@
         float: left;
         margin-left: 3px;
         margin-bottom: 5px;
-        height: auto;
+        height: 450px;
     }
     .caseproduct{
         margin: 0 auto; width: 100%;display: table;  
 
     }
-    .thumbnail h3 {
+    .thumbnail p{
+        
+        height: 115px;
+    }
+    .thumbnail h4 {
         font-size: 24px;
         line-height: 40px;
         margin: 10px 0;
@@ -32,6 +36,11 @@
 
         color: inherit;
         text-rendering: optimizelegibility;
+    }
+    .typeimg{
+        width: 200px;
+        height: 200px;
+        border: solid 5px #FFE3B5;
     }
 </style>
 
@@ -47,9 +56,9 @@
 
     <?php foreach ($typelist as $index => $type): ?>
         <div class="thumbnail product well" >
-            <img width="300" height="300" src="<? echo base_url($type->getPicurl()); ?>"   />  
+            <img class="typeimg" src="<? echo base_url($type->getPicurl()); ?>"   />  
             <div class="caption">
-                <h3> <? echo $type->getType(); ?>  </h3>
+                <h4> <? echo $type->getType(); ?>  </h4>
                 <p><? echo $type->getDescription(); ?></p>
                 <p>
                     <a class=" btn btn-primary" href="<? echo site_url("product/chooseProduct") . "/" . $type->getTypeno(); ?>"  > 
