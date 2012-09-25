@@ -29,7 +29,17 @@ class Testsome extends CI_Controller {
           echo var_export(false,true); */
     }
     
- 
+ public function testmd5(){
+     
+     $a='ammie1234';
+     $b= md5($a);
+     if ($b==md5('ammie1234')){
+         echo  $b;
+         echo 'complet';
+     }
+    
+     
+ }
 public function iscachning(){
     
     $this->load->driver('cache',array('adapter' => 'file'));
