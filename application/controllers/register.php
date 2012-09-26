@@ -49,7 +49,7 @@ class Register extends CI_Controller {
             $cus->setEmail($this->input->post('email'));
             $cus->setName($this->input->post('name'));
             $cus->setLastname($this->input->post('lastname'));
-            $cus->setPassword($this->input->post('password'));
+            $cus->setPassword(md5($this->input->post('password')));
             $province = $this->thailandutil->findbyid($this->input->post('province'));
             $province2 = $this->thailandutil->findbyid($this->input->post('province2'));
             $cus->setMobilephone($this->input->post('mphone'));

@@ -29,13 +29,17 @@ class User extends CI_Controller {
     }
 
     public function ajaxRetrivePassword() {
+        $this->load->helper('string');
         $emailtosend = $this->input->post('emailval');
         $user = $this->cusdao->findbyemail($emailtosend, 'T');
         $message = '';
+        $newpass = random_string('alnum', 15);
+        $newpassmd5 = md5($newpass);
         if ($user != null) {
             $message = 'ส่งemailเรียบร้อย';
-
-            $this->sendemail($user);
+            $user->setPassword($newpassmd5);
+            $this->cusdao->update($user);
+            $this->sendemail($user,$newpass);
         } else {
 
             $message = 'Emailนี้ไม่มีในระบบ';
@@ -77,12 +81,12 @@ class User extends CI_Controller {
 
     public function performlogout() {
         //session_start();
-       /* unset($_SESSION['user']);
-        unset($_SESSION['cart']);
-        unset($_SESSION['temp_orderlinelist']);
-        $_SESSION['hasuser'] = false;*/
-     session_destroy();
-   
+        /* unset($_SESSION['user']);
+          unset($_SESSION['cart']);
+          unset($_SESSION['temp_orderlinelist']);
+          $_SESSION['hasuser'] = false; */
+        session_destroy();
+
 
         $javascript = " 
   document.location.reload();
@@ -105,7 +109,7 @@ class User extends CI_Controller {
 
             $this->form_validation->set_message('user_check', 'email นี้ยังไม่ได้รับการvalidate');
             return FALSE;
-        } else if ($user->getPassword() != $password) {
+        } else if ($user->getPassword() != md5($password)) {
 
             $this->form_validation->set_message('user_check', 'email หรือ password ไม่ถุกต้อง');
             return FALSE;
@@ -127,7 +131,7 @@ class User extends CI_Controller {
         }
     }
 
-    private function sendemail(Custormer $cus) {
+    private function sendemail(Custormer $cus,$visiblepass) {
         $config = array();
         $config['protocol'] = 'sendmail';
         $config['mailpath'] = '/usr/sbin/sendmail';
@@ -139,10 +143,9 @@ class User extends CI_Controller {
         $this->email->from('phairoj@colourharmony.co.th', 'Name');
         $this->email->to($cus->getEmail());
 
-
         $this->email->subject('password');
 
-        $message = 'Passwordคุณคือ=' . $cus->getPassword();
+        $message = 'Passwordใหม่ของคุณคือ=' . $visiblepass;
         $this->email->message($message);
 
         $this->email->send();

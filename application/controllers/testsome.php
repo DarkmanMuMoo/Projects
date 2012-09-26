@@ -33,12 +33,13 @@ class Testsome extends CI_Controller {
     
  public function testmd5(){
      
-     $a='ammie1234';
-     $b= md5($a);
-     if ($b==md5('ammie1234')){
-         echo  $b;
-         echo 'complet';
-     }
+    $userlist=$this->cusdao->findall();
+    foreach($userlist as $user){
+        
+        echo $user->getPassword()." ".md5( $user->getPassword())."<br/>";
+        
+        
+    }
     
      
  }
