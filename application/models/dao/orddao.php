@@ -122,7 +122,7 @@ class Orddao extends CI_Model {
 
             $this->db->where($index, $row);
         }
-        $this->db->order_by('orderdate,cus_name, lastname');
+        $this->db->order_by('orderdate','desc');
         $query = $this->db->get();
         $result = array();
 
@@ -141,7 +141,7 @@ class Orddao extends CI_Model {
 
             $this->db->where($index, $row);
         }
-
+        $this->db->order_by('orderdate','desc');
         $query = $this->db->get('ord');
         $condition = array();
 

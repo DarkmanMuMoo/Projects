@@ -10,8 +10,8 @@
  *
  * @author Dark
  */
-class Template extends CI_Model{
-    
+class Template extends CI_Model {
+
     public function getName() {
         return $this->name;
     }
@@ -19,83 +19,75 @@ class Template extends CI_Model{
     public function setName($name) {
         $this->name = $name;
     }
-private $platesize;
-      private $tempno;
-  private $typeno;
-  private $size;
-  private $url;
+
+    private $platesize;
+    private $tempno;
+    private $typeno;
+    private $size;
+    private $url;
     private $name;
-    private $Y;
-    private $Z;
-    private $X;
+    private $printperream;
+    private $trimperprint;
 
-    public function getX() {
-        return $this->X;
+    public function getTrimPerPrint() {
+        return $this->trimperprint;
     }
 
-    public function setX($X) {
-        $this->X = $X;
+    public function setTrimPerPrint($X) {
+        $this->trimperprint = $X;
     }
 
-      public function getTempno() {
-      return $this->tempno;
-  }
+    public function getTempno() {
+        return $this->tempno;
+    }
 
-  public function setTempno($tempno) {
-      $this->tempno = $tempno;
-  }
-  public function getTypeno() {
-      return $this->typeno;
-  }
-  public function getPlatesize() {
-      return $this->platesize;
-  }
+    public function setTempno($tempno) {
+        $this->tempno = $tempno;
+    }
 
-  public function setPlatesize($platesize) {
-      $this->platesize = $platesize;
-  }
+    public function getTypeno() {
+        return $this->typeno;
+    }
+
+    public function getPlatesize() {
+        return $this->platesize;
+    }
+
+    public function setPlatesize($platesize) {
+        $this->platesize = $platesize;
+    }
 
     public function setType() {
-      return $this->typeno;
-  }
-  public function getY() {
-      return $this->Y;
-  }
+        return $this->typeno;
+    }
 
-  public function setY($Y) {
-      $this->Y = $Y;
-  }
+    public function getPrintperReam() {
+        return $this->printperream;
+    }
 
-  public function getZ() {
-      return $this->Z;
-  }
-
-  public function setZ($Z) {
-      $this->Z = $Z;
-  }
+    public function setPrintperReam($Z) {
+        $this->printperream = $Z;
+    }
 
     public function setTypeno($typeno) {
-      $this->typeno = $typeno;
-  }
+        $this->typeno = $typeno;
+    }
 
-   
+    public function getSize() {
+        return $this->size;
+    }
 
-  public function getSize() {
-      return $this->size;
-  }
+    public function setSize($size) {
+        $this->size = $size;
+    }
 
-  public function setSize($size) {
-      $this->size = $size;
-  }
+    public function getUrl() {
+        return $this->url;
+    }
 
-  public function getUrl() {
-      return $this->url;
-  }
-
-  public function setUrl($url) {
-      $this->url = $url;
-  }
-
+    public function setUrl($url) {
+        $this->url = $url;
+    }
 
 //put your code here
 }

@@ -48,7 +48,7 @@ class Product extends CI_Controller {
  
         $printprice = ceil($printprice);
            error_log("printprice".$printprice);
-        $papern = (($amount *( $temp->getY()/$temp->getX())) + (200*$temp->getY())) / $temp->getZ();
+        $papern = (($amount /$temp->getTrimPerPrint()) + (200)) / $temp->getPrintperReam();
         $papern = ceil($papern);
            error_log("papern".$papern);
         $price=$papern*$printprice;
@@ -62,18 +62,14 @@ class Product extends CI_Controller {
 
         if($temp->getPlatesize()=='L'){
       
-        if($temp->getTypeno()==8){
-            
-            $price+=4000*4;    //เพจ 4 ชุด
+            $price +=( $this->config->item('plate-L')+$this->config->item('print'));//ค่าเพลท  พิม ใหญ่
+      
         }else{
-            $price +=4000;//ค่าเพลท  พิม ใหญ่
-        }
-        }else{
-            $price +=3500;  //ค่าเพลท พิม  เล็ก
+            $price +=( $this->config->item('plate-S')+$this->config->item('print'));  //ค่าเพลท พิม  เล็ก
             
         }
         
-        $price+=1000;
+        $price+=$this->config->item('misc');
         
          
         

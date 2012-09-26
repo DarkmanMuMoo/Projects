@@ -110,9 +110,8 @@ class Templatedao extends CI_Model {
             'size' => $template->getSize(),
             'url' => $template->getUrl(),
             'tmp_name' => $template->getName(),
-            'X' => $template->getX(),
-            'Y' => $template->getY(),
-            'Z' => $template->getZ(),
+            'X' => $template->getTrimPerPrint(),
+            'Z' => $template->getPrintperReam(),
             'platesize' => $template->getPlatesize()
         );
 
@@ -124,9 +123,8 @@ class Templatedao extends CI_Model {
             'size' => $template->getSize(),
             'url' => $template->getUrl(),
             'tmp_name' => $template->getName(),
-            'X' => $template->getX(),
-            'Y' => $template->getY(),
-            'Z' => $template->getZ(),
+            'trimperprint' => $template->getTrimPerPrint(),
+            'printperream' => $template->getPrintperReam(),
             'platesize' => $template->getPlatesize()
         );
 
@@ -144,9 +142,9 @@ class Templatedao extends CI_Model {
         $template->setSize($row->size);
         $template->setUrl($row->url);
         $template->setName($row->tmp_name);
-        $template->setX($row->X);
-        $template->setZ($row->Z);
-        $template->setY($row->Y);
+        $template->setTrimPerPrint($row->trimperprint);
+        $template->setPrintperReam($row->printperream);
+
         $template->setPlatesize($row->platesize);
         return $template;
     }

@@ -22,6 +22,8 @@ class Testsome extends CI_Controller {
        $count = explode('-', $count);
       $count =  implode('', $count);
       echo $count;
+      
+      $this->config->item('plate-L');
         /* $first= load_class('emailutil', 'libraries','');
           var_dump($first);
           var_dump($this); */

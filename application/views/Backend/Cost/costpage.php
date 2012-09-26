@@ -14,6 +14,14 @@
 
         margin: 0 auto;
     }
+    #tabs{
+         margin: 10% auto;
+        width:50%;
+    }
+       #tabs table{
+        
+       margin: 0 auto;
+    }
 </style>
 
 <div class="container" >
@@ -25,17 +33,19 @@
             </li>
 
         </ul>
-        <div id="control" style="margin:50px auto; display: table;">
+    </div>
+        <div id="tabs" >
             <ul id="listmenu">
-                <li><input type="radio"  name="adress" value="paper"  /><label for="upd">กระดาษ</label></li>
+                <li><a href="#paper">กระดาษ</a></li>
 
-                <li><input type="radio"  name="adress" value="send"  /><label for="send">การจัดส่ง</label></li>
+                <li><a href="#send">การจัดส่ง</a></li>
 
-                <li><input type="radio"  name="adress" value="option"  /><label for="option">ตัวเลือกพิเศษ</label></li>
+                <li><a href="#option">ตัวเลือกพิเศษ</a></li>
+                  <li><a href="#cal">การคำนวณราคา</a></li>
             </ul> 
 
-            <div id="listform">
-                <div id="paper" style="display: none;">
+           
+                <div id="paper" >
                     <form action="<? echo site_url('Backend/bakCost/updatepaper'); ?>" method="post">
                         <table width="369" border="1" bordercolor="#CCCCCC">
                             <tr>
@@ -58,7 +68,7 @@
                 </div>
 
 
-                <div id="send" style="display: none;" >
+                <div id="send" >
                     <form action="<? echo site_url('Backend/bakCost/updateordsend'); ?>" method="post">
                         <table  table width="269" border="1" bordercolor="#CCCCCC" >
                             <tr>
@@ -76,7 +86,7 @@
                         <br /><input type="submit" value="แก้ไข"/>
                     </form>
                 </div >
-                <div  id="option" style="display: none;"  >
+                <div  id="option"   >
                     <form action="<? echo site_url('Backend/bakCost/updateoption'); ?>" method="post">
                         <table  table width="332" border="1" bordercolor="#CCCCCC" >
                             <tr>
@@ -94,28 +104,24 @@
                         <br /><input type="submit" value="แก้ไข"/>
                     </form>
                 </div>
-            </div>
+                <div id="cal">
+                    
+                    
+                </div>
+           
         </div>
     </div>
-</div>
+
 <? $this->load->view(lang('bakfooter')); ?>
 <script>
     $().ready(function() {
      
-        $('input[type=radio]').click(function(){
-            
-            var command=$(this).attr('value');
-            $('#listform div').hide();
-           
-            $('#'+command).fadeToggle();
-            
-            
-            
-        });
+  $( "#tabs" ).tabs();
      
  <?php if ($this->session->flashdata('ck')): ?>
 
- $('input[value=<?echo $this->session->flashdata('ck');?>]').click();
+
+ $( "#tabs" ).tabs( "select" , '<? echo $this->session->flashdata('ck')?>' )
 
 <?php endif; ?>
      

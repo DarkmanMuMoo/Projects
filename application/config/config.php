@@ -357,6 +357,10 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
+$config['plate-L'] = '2000';
+$config['plate-S'] = '1500';
+$config['print'] = '2000';
+$config['misc'] = '1000';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */

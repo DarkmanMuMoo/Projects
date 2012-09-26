@@ -37,7 +37,7 @@ class Paymentdao extends CI_Model {
             $this->db->where($index, $row);
         }
 
-        $query = $this->db->get('ord');
+        $query = $this->db->get('payment');
         $condition = array();
 
         foreach ($query->result() as $row) {

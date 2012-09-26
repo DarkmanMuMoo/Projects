@@ -24,8 +24,6 @@ class BakCost extends CI_Controller {
 
     public function index() {
 
-
-
         $data['paperlist'] = $this->paperdao->findall();
         $data['ordsendlist'] = $this->ordsenddao->findall();
         $data['optionlist'] = $this->optiondao->findall();
@@ -35,14 +33,7 @@ class BakCost extends CI_Controller {
         $this->load->view(lang('costpage'), $data);
     }
 
-    public function templatedetail($templateno) {
-        $this->load->model('dao/templatedao');
-        $template = $this->templatedao->findbyid($templateno);
 
-        $data = array();
-        $data['template'] = $template;
-        $this->load->view(lang('baktemplatedetail'), $data);
-    }
 
     public function showuploadframe($templateno) {
 
@@ -52,20 +43,6 @@ class BakCost extends CI_Controller {
         $this->load->view(lang('bakuploadframe'), $data);
     }
 
-    public function updatetemplate() {
-        $this->load->model('dao/templatedao');
-        $tempno = $this->input->post('templateno');
-        $template = $this->templatedao->findbyid($tempno);
-
-        $template->setX($this->input->post('x'));
-        $template->setZ($this->input->post('z'));
-        $template->setY($this->input->post('y'));
-        $template->setPlatesize($this->input->post('platesize'));
-
-        $result = $this->templatedao->update($template);
-        error_log(var_export($result, true) . 'update in template', 0);
-        redirect('Backend/bakCost/templatedetail/' . $tempno);
-    }
 
     public function updatetemplatefile() {
         $this->load->model('dao/templatedao');
@@ -153,6 +130,28 @@ class BakCost extends CI_Controller {
         redirect('Backend/bakCost');
     }
 
+    public function updatecal() {
+
+        if($this->config->item('plate-L')==$this->input->post('plate-L')){
+            
+            $this->config->set_item('plate-L', $this->input->post('plate-L'));
+        }
+          if($this->config->item('plate-S')==$this->input->post('plate-S')){
+            
+             $this->config->set_item('plate-S', $this->input->post('plate-S'));
+        }
+          if($this->config->item('print')==$this->input->post('print')){
+            
+             $this->config->set_item('print', $this->input->post('print'));
+        }
+          if($this->config->item('misc')==$this->input->post('misc')){
+            
+             $this->config->set_item('misc', $this->input->post('misc'));
+        }
+        $this->session->set_flashdata('ck', 'cal');
+        redirect('Backend/bakCost');
+    }
+    
     public function updateoption() {
 
         $updatelist = $this->input->post();

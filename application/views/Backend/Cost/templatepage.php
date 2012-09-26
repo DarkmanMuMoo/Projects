@@ -1,7 +1,7 @@
 <? $this->load->view(lang('bakheader')); ?>
 
 <div class="container" >
-      <div style="margin-top: 100px; margin-left: auto; margin-right: auto; margin-bottom: 20px;"> 
+    <div style="margin-top: 100px; margin-left: auto; margin-right: auto; margin-bottom: 20px;"> 
         <h1>Template</h1>
         <hr > </hr> 
     </div>
@@ -61,21 +61,20 @@
                             <?php foreach ($typelist as $type): ?>
 
                                 <?php if ($type->getTypeno() == $template->getTypeno()): ?>
-                                  <?
-                        echo $type->getType();
-                        break;
+                                    <?
+                                    echo $type->getType();
+                                    break;
                                     ?> 
                                 <?php endif; ?>
 
                             <?php endforeach; ?>
                         </td>
                         <td > <? echo $template->getPlatesize(); ?> </td>
-                           
+
                         <td >
-                            <a class="btn btn-info" href="<? echo site_url('Backend/bakCost/templatedetail') . "/" . $template->getTempno(); ?>"> 
-                                View
-                            </a>
-                           
+                            <button onclick="showupload('<? echo $template->getTempno(); ?>');" class="btn btn-warning">Upload</button> 
+
+                            <a href="<? echo site_url('orders/downloadtemplate') . '/' . $template->getTempno(); ?>" class="btn btn-primary">Download</a>
                         </td>  
                     </tr>
                 <?php endforeach; ?>
@@ -83,10 +82,9 @@
             </tbody>
         </table>
 
-        <div>
-
-        </div>
-
+     <div id="showuploaddialog" style="display:none;">
+    <iframe id="uploaddialog" width="500"  style="border-style:none;" scrolling="no"  ></iframe>
+</div>
 
         <? $this->load->view(lang('bakfooter')); ?>
         <script>
@@ -98,4 +96,28 @@
                 $('#searchform').submit();
         
             }
+            
+            function showupload(orderlineno){
+    
+     document.getElementById('uploaddialog').src = '<? echo site_url("Backend/bakCost/showuploadframe"); ?>/'+orderlineno; 
+        $('#showuploaddialog').dialog({ 
+                    autoOpen: true,
+                    modal: true,
+                    width:'auto',
+                    title: "Upload",
+                    close: function(event, ui) {
+                     window.location.reload();
+                 
+             }
+
+                }
+            
+            );
+                    
+                   
+               
+    
+    
+    
+}
         </script>
