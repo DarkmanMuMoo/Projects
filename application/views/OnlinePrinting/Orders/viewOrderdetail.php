@@ -184,7 +184,7 @@ height: 3px;"></hr>
     <div style="clear:both; display:table; width:100%;">
 <table style="float:left; width:50%;">
 <tr>
-<td>ความคิดเห็นลูกค้า</td>
+<td><strong>ความคิดเห็นลูกค้า</strong></td>
 
 <td><textarea name="comment" cols="" rows="">
 <? echo $order->getCusremark(); ?>
@@ -203,7 +203,7 @@ height: 3px;"></hr>
 </table>
 
 <div style="float:left ; width:50%;" >
-ข้อความจากโรงพิมพ์
+<strong>ข้อความจากโรงพิมพ์</strong>
 
 <p>
 <? echo $order->getSellerremark(); ?>

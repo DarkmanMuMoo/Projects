@@ -45,7 +45,7 @@
 
     <div id="headline" >
         <div id="order">
-            <h2>Orderno: <? echo $order->getOrderno(); ?></h2><br>
+            <h2>เลขใบสั่งซื้อ: <? echo $order->getOrderno(); ?></h2><br>
             <?php foreach ($ordstatuslist as $ordstatus): ?>
                 <?php if ($ordstatus->getStatus() == $order->getOrdstatus()): ?>
                     <? echo $ordstatus->getDescription();
@@ -53,8 +53,8 @@
                     ?>
                 <?php endif; ?>
 <?php endforeach; ?><br>
-            Orderdate : <? echo $order->getOrderdate(); ?><br>
-            Paymethod : <?php foreach ($ordpaylist as $ordpay): ?>
+            <strong>วันที่ : </strong><? echo $order->getOrderdate(); ?><br>
+           <strong> การชำระ :</strong> <?php foreach ($ordpaylist as $ordpay): ?>
                 <?php if ($ordpay->getPaymethod() == $order->getPaymethod()): ?>
                     <? echo $ordpay->getDescription();
                     break;
@@ -64,13 +64,13 @@
             <strong> วันที่เสร็จสิ้น: <? echo ($order->getExpectedshipdate() == null) ? $order->getExpectedshipdate() : '-'; ?></strong><br />
             <strong>วันส่งสินค้า: <? echo ($order->getRecievedate() == null) ? $order->getRecievedate() : '-'; ?></strong>
         </div> <div id="address"> 
-            <h2>sendto</h2><br />
+            <h2>ที่อยู่จัดส่ง</h2><br />
 
 
             <address>
                 <table>
 
-                    ที่อยู่ : <? echo $order->getAddress(); ?></br>
+                    <strong>ที่อยู่ : </strong><? echo $order->getAddress(); ?></br>
 
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <? echo $order->getProvince(); ?></br>
 
@@ -78,7 +78,7 @@
 
             </table>
             <p>
-            <h4>sends method 
+            <h4>การจัดส่ง : 
                 <?php foreach ($ordsendlist as $ordsend): ?>
                     <?php if ($ordsend->getSendmethod() == $order->getSendmethod()): ?>
                         <? echo $ordsend->getDescription();
@@ -100,15 +100,15 @@
         <table class="table table-bordered" >
             <thead>
             <th>
-                Number
+                #
             </th>
-            <th>template</th>
+            <th>เทมเพลต</th>
             <th>กระดาษ</th>
-            <th>option</th>
+            <th>ตัวเลือกพิเศษ</th>
             <th>จำนวน</th>
             <th>ราคา</th>
 
-            <th colspan="2" >file</th>
+            <th colspan="2" >ไฟล์</th>
             </thead>
 
             <tbody>
@@ -155,7 +155,7 @@
 
 
                 <div style="float:left ; text-align:left; width:50%; font-size:16px" >
-                    ความคิดเห็นของลูกค้า
+                    <strong>ความคิดเห็นของลูกค้า</strong>
                     <p>
 <? echo $order->getCusremark(); ?>
                     </p>
@@ -163,7 +163,7 @@
 
                 <table style="float:left; width:50%;">
                     <tr>
-                        <td>ข้อความส่งถึงลูกค้า</td>
+                        <td><strong>ข้อความส่งถึงลูกค้า</strong></td>
 
                         <td><textarea name="comment" cols="" rows="">
 <? echo $order->getSellerremark(); ?>

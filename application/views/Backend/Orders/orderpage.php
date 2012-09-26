@@ -31,19 +31,20 @@
 
     <div id="search-bar" >  
         <form id="searchform"action="<? echo site_url('Backend/bakorders') ?>" class="form-search" align="center"  method="post">
-            Keyword:<input type="text"  name="keyword" id="email" class="input-small"  value="<? echo $this->input->post('keyword'); ?>"/>
-            From :<input type="text" name="fromdate" id="fromdate" class="input-small datepicker"  value="<? echo $this->input->post('fromdate'); ?>"/>
-            To:<input type="text" name="todate" id="todate"  class="input-small datepicker"  value="<? echo $this->input->post('todate'); ?>" /> 
+            ค้นหา:<input type="text"  name="keyword" id="email" class="input-small"  value="<? echo $this->input->post('keyword'); ?>"/>
+            จากวันที่ :<input type="text" name="fromdate" id="fromdate" class="input-small datepicker"  value="<? echo $this->input->post('fromdate'); ?>"/>
+            ถึง:<input type="text" name="todate" id="todate"  class="input-small datepicker"  value="<? echo $this->input->post('todate'); ?>" /> 
 
-            Status: <select name="status" id="status" >   
-                <option value="" >all</option>
+            สถานะ: 
+            <select name="status" id="status" >   
+                <option value="" >ทั้งหมด</option>
                 <?php foreach ($ordstatuslist as $ord): ?>
 
                     <option  <? echo ($this->input->post('status') == $ord->getStatus()) ? 'selected="selected"' : ''; ?> value="<? echo $ord->getStatus(); ?>">  <? echo $ord->getDescription(); ?></option>
 
                 <?php endforeach; ?></select>
             <input type="hidden" name="startrow" value="0"/>
-            <button type="submit" class="btn">Search</button>
+            <button type="submit" class="btn">ค้นหา</button>
         </form>
     </div>
     <div id="result"  align="center">
