@@ -39,9 +39,9 @@
 
     <div id="search-bar" >  
         <form id="searchform"action="<? echo site_url('Backend/bakwork') ?>" class="form-search" align="center"  method="post">
-            Workname:<input type="text"  value="<? echo $this->input->post('keyword');?>" name="keyword" id="email" class="input-small " />
-            Employee: <select name="emp" id="emp" >  
-                <option value="0">All</option>
+            ชื่องาน:<input type="text"  value="<? echo $this->input->post('keyword');?>" name="keyword" id="email" class="input-small " />
+            ผู้รับผิดชอบ: <select name="emp" id="emp" >  
+                <option value="0">ทั้งหมด</option>
                 <?php foreach ($emplist as $emp): ?>
 
                     <option  <? echo($this->input->post('emp')==$emp->getEmpno())?'selected="selected"':''; ?> value="<? echo $emp->getEmpno(); ?>">  <? echo $emp->getName(); ?>&nbsp; <? echo $emp->getLastname(); ?> </option>
@@ -54,33 +54,33 @@
                 </option>
             </select></div>
             <input type="hidden" name="startrow" value="0"/>
-            <button type="submit" class="btn">Search</button>
+            <button type="submit" class="btn">ค้นหา</button>
         </form>
     </div>
     <div id="result"  align="center">
         <table class="table table-bordered" >
             <thead>
             <th>
-                Number
+                #
             </th>
             <th>
-                Workno 
+                รหัสงาน 
             </th>
             <th>
-                Workname
+                ชื่องาน
             </th>
             <th>
-                Employee
+                ผู้รับผิดชอบ
             </th>
             <th>
-                StartDate
+                วันเริ่มงาน
             </th>
             <th>
-                Enddate
+                วันสิ้นสุดงาน
             </th>
 
             <th>
-                management
+                
             </th>
             </thead>
 

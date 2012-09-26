@@ -31,30 +31,30 @@
             <tr>
                 <td width="660" height="44"><table width="695" border="0">
                         <tr>
-                            <td width="122" height="30"><strong>รหัสงาน</strong></td>
-                            <td width="10">&nbsp;</td>
+                            <td width="118" height="30"><strong>รหัสงาน</strong></td>
+                            <td width="26">&nbsp;</td>
                             <td width="161"><? echo $work->getWorkno(); ?></td>
-                            <td width="5">&nbsp;</td>
-                            <td width="171" height="44"><strong>ชื่องาน</strong></td>
-                            <td width="11">&nbsp;</td>
-                            <td width="194"><? echo $work->getWorkname(); ?></td>
+                            <td width="12">&nbsp;</td>
+                            <td width="203" height="44"><strong>ชื่องาน</strong></td>
+                            <td width="24">&nbsp;</td>
+                            <td width="121"><? echo $work->getWorkname(); ?></td>
                         </tr>
                         <tr>
-                            <td height="44"><strong>OrdNo</strong></td>
+                            <td height="44"><strong>รหัสสั่งซื้อ</strong></td>
                             <td>&nbsp;</td>
                             <td><a href="<? echo site_url('Backend/bakorders/vieworderdetail/' . $work->getOrdno()); ?>" ><? echo $work->getOrdno() ?></a></td>
-                            <td width="5">&nbsp;</td>
+                            <td width="12">&nbsp;</td>
                             <td height="44"><strong>ผู้รับผิดชอบ</strong></td>
                             <td>&nbsp;</td>
                             <td><? echo $work->getName(); ?>&nbsp;<? echo $work->getLastname(); ?></td>
                         </tr>
 
                         <tr>
-                            <td height="44"><strong>วันเริ่มทำงาน</strong></td>
+                            <td height="44"><strong>วันเริ่มงาน</strong></td>
                             <td>&nbsp;</td>
                             <td><? echo $work->getStartdate(); ?></td>
-                            <td width="5">&nbsp;</td>
-                            <td height="44"><strong>วันสิ้นสุดการทำงาน</strong></td>
+                            <td width="12">&nbsp;</td>
+                            <td height="44"><strong>วันสิ้นสุดงาน</strong></td>
                             <td>&nbsp;</td>
                             <td><?php if ($_SESSION['emp']->getPosition() == 'Boss'): ?>
                                     <?php if ($work->getEnddate() == null): ?>
@@ -82,19 +82,14 @@
                             <td>&nbsp;</td>
                             <td height="44"><strong>พนักงานที่มีส่วนร่วม</strong></td>
                             <td>&nbsp;</td>
-                            <td >  <ul style="list-style:none;">
-                                    <? $chkemp = array(); ?>
-                                    <?php foreach ($coemplist as $emp): ?>
-
-                                    <li>   <? echo $emp->getName(); ?>&nbsp;<? echo $emp->getLastname(); ?>
-                                        <a href="<?echo site_url('Backend/bakwork/removeCoemp/'.$emp->getEmpno().'/'.$work->getWorkno()); ?>"> <i class="icon-remove"></i></a>  </li>
-                                        <? array_push($chkemp, $emp->getEmpno()); ?>
-                                    <?php endforeach; ?>
-
-                                </ul>
-
-
-                            </td>
+                            <td ><? $chkemp = array(); ?>
+                              <?php foreach ($coemplist as $emp): ?>
+                              <p>                                      <? echo $emp->getName(); ?>&nbsp;<? echo $emp->getLastname(); ?>
+                              <a href="<?echo site_url('Backend/bakwork/removeCoemp/'.$emp->getEmpno().'/'.$work->getWorkno()); ?>"> <i class="icon-remove"></i></a></p>
+                              <p>
+                                <? array_push($chkemp, $emp->getEmpno()); ?>
+                                <?php endforeach; ?>
+                            </p></td>
                         </tr>
                         <?php if ($_SESSION['emp']->getPosition() == 'Boss' || $_SESSION['emp']->getEmpno() == $work->getEmpno()): ?>
                             <tr><td colspan="6">  </td> <td>

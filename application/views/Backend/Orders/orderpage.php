@@ -51,7 +51,7 @@
         <table class="table table-bordered" >
             <thead>
             <th>
-                ลำดับ
+                #
             </th>
             <th>
                 รหัสสั่งซื้อ 

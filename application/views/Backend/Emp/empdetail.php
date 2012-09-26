@@ -30,33 +30,34 @@ h1{ font-weight:bolder;
             <table class="elementcenter">
       
       <tr>
-                <td >Employee No</td>
-                <td ></td>
-              <td ><? echo $tmpemp->getEmpno();?></td>
+                <td width="84" >รหัสพนักงาน</td>
+                <td width="64" ></td>
+              <td width="144" ><? echo $tmpemp->getEmpno();?></td>
                 
         </tr>
             
             <tr>
-                <td>Employee Name</td>
+                <td>ชื่อ</td>
                 <td></td>
-              <td><? echo $tmpemp->getName();?></td>
+              <td><? echo $tmpemp->getName();?> 
+			 &nbsp;&nbsp; <? echo $tmpemp->getLastname();?></td>
                 
           </tr>
             
             <tr>
-                <td>E-mail</td>
+                <td>อีเมลล์</td>
                 <td></td>
                 <td><? echo $tmpemp->getEmail();?></td>
           </tr>
              
                 <tr>
-                <td >Phone</td>
+                <td >โทรศัพท์</td>
                 <td></td>
                 <td><? echo $tmpemp->getPhone();?></td>
           </tr>
              
                 <tr>
-                <td >Position</td>
+                <td >ตำแหน่ง</td>
                 <td></td>
                 <td><select name="position">
                         <?php foreach ($poslist as $pos): ?>

@@ -1,5 +1,17 @@
 <? $this->load->view(lang('bakheader')); ?>
 
+<style type="text/css">
+
+	hr{ text-align:center;
+color:#09F;
+border-color:#09F;
+size:3;
+}
+h1{ font-weight:bolder;
+}
+
+</style>
+
 <div class="container" >
     <div style="margin-top: 100px; margin-left: auto; margin-right: auto; margin-bottom: 20px;"> 
         <h1>Template</h1>
@@ -7,9 +19,9 @@
     </div>
     <div id="search-bar" >  
         <form id="searchform"action="<? echo site_url('Backend/bakCost/template') ?>" class="form-search" align="center"  method="post">
-            Tempname:<input type="text"  value="<? echo $this->input->post('keyword'); ?>" name="keyword" id="email" class="input-small " />
-            type: <select name="type" id="type" >  
-                <option value="0">All</option>
+            ชื่อเทมเพลต:<input type="text"  value="<? echo $this->input->post('keyword'); ?>" name="keyword" id="email" class="input-small " />
+            ประเภท: <select name="type" id="type" >  
+                <option value="0">ทั้งหมด</option>
                 <?php foreach ($typelist as $type): ?>
 
                     <option  <? echo($this->input->post('type') == $type->getTypeno()) ? 'selected="selected"' : ''; ?> value="<? echo $type->getTypeno(); ?>">  <? echo $type->getType(); ?> </option>
@@ -18,30 +30,30 @@
             </select>
 
             <input type="hidden" name="startrow" value="0"/>
-            <button type="submit" class="btn">Search</button>
+            <button type="submit" class="btn">ค้นหา</button>
         </form>
     </div>
     <div id="result"  align="center">
         <table class="table table-bordered" >
             <thead>
             <th>
-                Number
+                #
             </th>
             <th>
-                Templatename 
+                ชื่อเทมเพลต 
             </th>
             <th>
-                Size
+                ขนาด
             </th>
             <th>
-                Type
+                ประเภท
             </th>
             <th>
-                Platesize
+                เพลทไซต์
             </th>
 
             <th>
-                management
+                
             </th>
             </thead>
 

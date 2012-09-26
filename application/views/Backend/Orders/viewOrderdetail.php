@@ -106,7 +106,7 @@
             <th>กระดาษ</th>
             <th>ตัวเลือกพิเศษ</th>
             <th>จำนวน</th>
-            <th>ราคา</th>
+            <th>ราคา(บาท)</th>
 
             <th colspan="2" >ไฟล์</th>
             </thead>
@@ -130,7 +130,7 @@
     <?
     echo number_format($orderline->getPrice(), 2, '.', ',');
     $totalprice+=$orderline->getPrice();
-    ?>&nbsp; บาท
+    ?>&nbsp; 
                         </td>
                         <td width="10%"  >  <?php if (($orderline->getFilepath() == '') || ($orderline->getFilepath() == null)): ?>
         <? echo '<h6 style="color:red" >notupload</h6>' ?>

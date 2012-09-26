@@ -35,44 +35,44 @@ border-width:thin;
 
 <div id="search-bar" >  
             <form id="searchform"action="<? echo site_url('Backend/bakemp') ?>" class="form-search" align="center"  method="post">
-                Keyword:<input type="text"  name="keyword" id="email" class="input-small " />
-                position: <select name="position" id="position" >  
-                    <option value="">All</option>
+                ค้นหา:<input type="text"  name="keyword" id="email" class="input-small " />
+                ตำแหน่ง: <select name="position" id="position" >  
+                    <option value="">ทั้งหมด</option>
   <?php foreach ($positionlist as $ord): ?>
                                 
                     <option  <? echo ($this->input->post('position')==$ord->getPosition())? 'selected="selected"': '';?> value="<?echo $ord->getPosition();?>">  <? echo $ord->getPosdescription();  ?></option>
                               
                                  <?php endforeach; ?></select>
                 <input type="hidden" name="startrow" value="0"/>
-                <button type="submit" class="btn">Search</button>
+                <button type="submit" class="btn">ค้นหา</button>
             </form>
  </div>
 <div id="result"  align="center">
             <table class="table table-bordered" >
                 <thead>
                 <th>
-                    Number
+                    #
                 </th>
                 <th>
-                    empno 
+                    รหัสพนักงาน 
                 </th>
                 <th>
-                    Name
+                    ชื่อ
                 </th>
                 <th>
-                    Lastname
+                    นามสกุล
                 </th>
                 <th>
-                    Email
+                    อีเมลล์
                 </th>
                 <th>
-                    Phone
+                    โทรศัพท์
                 </th>
                 <th>
-                    Position
+                    ตำแหน่ง
                 </th>
                 <th>
-                   management
+                  
                 </th>
                 </thead>
    <? $page=($this->input->post('startrow'))?$this->input->post('startrow'):0; ?>
