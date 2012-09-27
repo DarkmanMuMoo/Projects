@@ -23,17 +23,19 @@ class BakCost extends CI_Controller {
     }
 
     public function index() {
-
+        $this->load->driver('cache', array('adapter' => 'file'));
         $data['paperlist'] = $this->paperdao->findall();
         $data['ordsendlist'] = $this->ordsenddao->findall();
         $data['optionlist'] = $this->optiondao->findall();
+        $data['plateL'] = $this->cache->file->get('plateL',true);
+        $data['plateS'] = $this->cache->file->get('plateS',true);
+        $data['print'] = $this->cache->file->get('print',true);
+        $data['misc'] = $this->cache->file->get('misc',true);
         $_SESSION['paperlist'] = $data['paperlist'];
         $_SESSION['ordsendlist'] = $data['ordsendlist'];
         $_SESSION['optionlist'] = $data['optionlist'];
         $this->load->view(lang('costpage'), $data);
     }
-
-
 
     public function showuploadframe($templateno) {
 
@@ -42,7 +44,6 @@ class BakCost extends CI_Controller {
 
         $this->load->view(lang('bakuploadframe'), $data);
     }
-
 
     public function updatetemplatefile() {
         $this->load->model('dao/templatedao');
@@ -131,11 +132,15 @@ class BakCost extends CI_Controller {
     }
 
     public function updatecal() {
-
+        $this->load->driver('cache', array('adapter' => 'file'));
+        $this->cache->file->save('plateL', $this->input->post('plateL'), 0);
+        $this->cache->file->save('plateS', $this->input->post('plateS'), 0);
+        $this->cache->file->save('print', $this->input->post('print'), 0);
+        $this->cache->file->save('misc', $this->input->post('misc'), 0);
         $this->session->set_flashdata('ck', 'cal');
         redirect('Backend/bakCost');
     }
-    
+
     public function updateoption() {
 
         $updatelist = $this->input->post();

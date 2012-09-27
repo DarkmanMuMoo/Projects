@@ -18,51 +18,48 @@ class Testsome extends CI_Controller {
 
     public function index() {
 
-       $count = '084-973-2746';
-       $count = explode('-', $count);
-      $count =  implode('', $count);
-      echo $count;
-        $this->config->set_item('plate-L','20');
-     echo  $this->config->item('plate-L');
+        $count = '084-973-2746';
+        $count = explode('-', $count);
+        $count = implode('', $count);
+   
         /* $first= load_class('emailutil', 'libraries','');
           var_dump($first);
           var_dump($this); */
         /* var_export(true,true);
           echo var_export(false,true); */
-    }
-    
- public function testmd5(){
-     
-    $userlist=$this->cusdao->findall();
-    foreach($userlist as $user){
         
-        echo $user->getPassword()." ".md5( $user->getPassword())."<br/>";
         
         
     }
-    
-     
- }
-public function iscachning(){
-    
-    $this->load->driver('cache',array('adapter' => 'file'));
-     echo  var_dump($this->cache->cache_info(),true);
-   echo  'apc : '.var_export($this->cache->apc->is_supported(),true).'<br>';
-   echo 'file : '. var_export($this->cache->file->is_supported(),true).'<br>';
-   echo  'memcached : '.var_export($this->cache->memcached->is_supported(),true).'<br>';
-   echo 'add';
-  // $this->cache->file->save('A', 'test', 45);
-    $foo = $this->cache->file->get('A');
-     echo $foo;
-   
-}
+
+    public function testmd5() {
+
+        $userlist = $this->cusdao->findall();
+        foreach ($userlist as $user) {
+
+            echo $user->getPassword() . " " . md5($user->getPassword()) . "<br/>";
+        }
+    }
+
+    public function iscachning() {
+
+        $this->load->driver('cache', array('adapter' => 'file'));
+        echo var_dump($this->cache->cache_info(), true);
+        echo 'apc : ' . var_export($this->cache->apc->is_supported(), true) . '<br>';
+        echo 'file : ' . var_export($this->cache->file->is_supported(), true) . '<br>';
+        echo 'memcached : ' . var_export($this->cache->memcached->is_supported(), true) . '<br>';
+        echo 'add';
+        $this->cache->file->save('plateL', '2000', 0);
+        $this->cache->file->save('plateS', '1500', 0);
+        $this->cache->file->save('print', '2000', 0);
+        $this->cache->file->save('misc', '1000', 0);
+    }
+
     private function test() {
         $updateuser = $_SESSION['user'];
         $updateuser->setName('abc');
         var_dump($updateuser);
         var_dump($_SESSION['user']);
-        
-    
     }
 
     public function viewsession() {
@@ -141,7 +138,7 @@ public function iscachning(){
     public function testutil() {
 
         $this->load->library('smsutil');
-        $result = $this->smsutil->sentsms('0867693988','finaltest');
+        $result = $this->smsutil->sentsms('0867693988', 'finaltest');
         var_dump($result);
         echo $this->smsutil->getDebumsg();
         /* $this->load->library('captchautil');
@@ -184,19 +181,19 @@ public function iscachning(){
     }
 
     public function testDB() {
-       /* $this->load->model('dao/workdao');
+        /* $this->load->model('dao/workdao');
 
-        $worklist = $this->workdao->findsharedwork('',3,0);
+          $worklist = $this->workdao->findsharedwork('',3,0);
 
-        var_dump($worklist);*/
-        
-      
+          var_dump($worklist); */
+
+
         $this->db->from('work');
         $this->db->join('work_emp', 'work.empno = work_emp.empno', 'left');
-        $this->db->where('work.empno', 8); 
+        $this->db->where('work.empno', 8);
         //$this->db->where('work_empno is not',' null',false); 
-         $query = $this->db->count_all_results();
-         echo  $query;
+        $query = $this->db->count_all_results();
+        echo $query;
         echo $this->db->last_query();
         // echo $paper;
         //echo $template;
@@ -274,19 +271,19 @@ public function iscachning(){
 
         $config['base_url'] = site_url("testsome/testpagination");
         $config['total_rows'] = $this->db->count_all("price");
-        echo $config['total_rows']."<br>";
+        echo $config['total_rows'] . "<br>";
         $config['per_page'] = 10;
         $startrow = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 
         $this->db->limit($config['per_page'], $startrow);
 
         $this->pagination->initialize($config);
-        
-     $pricelist =$this->pricedao->findall();
+
+        $pricelist = $this->pricedao->findall();
 
         foreach ($pricelist as $price) {
 
-            echo $price->getPriceno(). "<br>";
+            echo $price->getPriceno() . "<br>";
         }
         echo $this->pagination->create_links();
     }
@@ -315,7 +312,7 @@ public function iscachning(){
             $status = $xmlDoc->getElementsByTagName('DETAIL')->item(0)->textContent;
             echo $status;
         } else {
-            
+
             $msisdn = $que->item(0)->getElementsByTagName('Msisdn')->item(0);
             echo $msisdn->textContent;
         }

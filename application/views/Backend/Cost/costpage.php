@@ -113,20 +113,20 @@
                             </tr>
                             <tr>
                                 <td width="132">ต้นทุนการพิมพ์</td>
-                                <td width="184"><input type="text"  name="a" value="<? echo $this->config->item('print')?>"/></td>
+                                <td width="184"><input type="text"  name="print" value="<? echo $print?>"/></td>
                             </tr>
                              <tr>
                                 <td width="132">ต้นทุนเพลทใหญ่</td>
-                                <td width="184"><input type="text"  name="b" value="<? echo $this->config->item('plate-L')?>"/></td>
+                                <td width="184"><input type="text"  name="plateL" value="<? echo $plateL?>"/></td>
                             </tr>
                              <tr>
                                 <td width="132">ต้นทุนเพลทเล็ก</td>
-                                <td width="184"><input type="text"  name="c" value="<? echo $this->config->item('plate-S')?>"/>
+                                <td width="184"><input type="text"  name="plateS" value="<? echo $plateS ?>"/>
                                     </td>
                             </tr>
                             <tr>
                                 <td width="132">เบ็ดเตล็ด</td>
-                                <td width="184"><input type="text"  name="d" value="<? echo $this->config->item('misc')?>"/></td>
+                                <td width="184"><input type="text"  name="misc" value="<? echo $misc ?>"/></td>
                             </tr>
                     
                     </table>

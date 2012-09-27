@@ -50,7 +50,7 @@ class CI_Cache_file extends CI_Driver {
 	 * @param 	mixed		unique key id
 	 * @return 	mixed		data on success/false on failure
 	 */
-	public function get($id)
+	public function get($id,$ignorettl=false)
 	{
 		if ( ! file_exists($this->_cache_path.$id))
 		{
@@ -60,8 +60,10 @@ class CI_Cache_file extends CI_Driver {
 		$data = read_file($this->_cache_path.$id);
 		$data = unserialize($data);
 		
-		if (time() >  $data['time'] + $data['ttl'])
+		if ((time() >  $data['time'] + $data['ttl'])&& !$ignorettl)
 		{
+                    
+                    
 			unlink($this->_cache_path.$id);
 			return FALSE;
 		}
