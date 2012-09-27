@@ -105,7 +105,33 @@
                     </form>
                 </div>
                 <div id="cal">
+                    <form action="<? echo site_url('Backend/bakCost/updatecal'); ?>" method="post">
+                     <table  table width="332" border="1" bordercolor="#CCCCCC" >
+                            <tr>
+                                <td width="132">ตัวแปร</td>
+                                <td width="184">ราคา</td>
+                            </tr>
+                            <tr>
+                                <td width="132">ต้นทุนการพิมพ์</td>
+                                <td width="184"><input type="text"  name="a" value="<? echo $this->config->item('print')?>"/></td>
+                            </tr>
+                             <tr>
+                                <td width="132">ต้นทุนเพลทใหญ่</td>
+                                <td width="184"><input type="text"  name="b" value="<? echo $this->config->item('plate-L')?>"/></td>
+                            </tr>
+                             <tr>
+                                <td width="132">ต้นทุนเพลทเล็ก</td>
+                                <td width="184"><input type="text"  name="c" value="<? echo $this->config->item('plate-S')?>"/>
+                                    </td>
+                            </tr>
+                            <tr>
+                                <td width="132">เบ็ดเตล็ด</td>
+                                <td width="184"><input type="text"  name="d" value="<? echo $this->config->item('misc')?>"/></td>
+                            </tr>
                     
+                    </table>
+                        <br /><input type="submit" value="แก้ไข"/>
+                    </form>
                     
                 </div>
            

@@ -132,22 +132,6 @@ class BakCost extends CI_Controller {
 
     public function updatecal() {
 
-        if($this->config->item('plate-L')==$this->input->post('plate-L')){
-            
-            $this->config->set_item('plate-L', $this->input->post('plate-L'));
-        }
-          if($this->config->item('plate-S')==$this->input->post('plate-S')){
-            
-             $this->config->set_item('plate-S', $this->input->post('plate-S'));
-        }
-          if($this->config->item('print')==$this->input->post('print')){
-            
-             $this->config->set_item('print', $this->input->post('print'));
-        }
-          if($this->config->item('misc')==$this->input->post('misc')){
-            
-             $this->config->set_item('misc', $this->input->post('misc'));
-        }
         $this->session->set_flashdata('ck', 'cal');
         redirect('Backend/bakCost');
     }
