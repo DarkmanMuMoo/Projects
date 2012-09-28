@@ -117,7 +117,7 @@ and open the template in the editor.
             }
            $(document).ready(function(){
    // Your code here
-  // alert('<?echo get_class(get_instance())?>');
+   //alert('<?echo get_class(get_instance())?>');
         $('#menu #<?echo get_class(get_instance())?>').addClass('current_page_item');
         
  });      
@@ -142,7 +142,7 @@ and open the template in the editor.
                          <?php if (!$_SESSION['hasuser']): ?>
                     <li id="Register" ><a href="<?php echo site_url("register"); ?>">Register</a></li>
                        <?php endif; ?>
-                    <li ><a href="#">Help</a></li>
+                    <li id="Help" ><a  href="<?php echo site_url("help"); ?>">Help</a></li>
 
                 </ul>
 

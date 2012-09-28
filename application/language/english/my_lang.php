@@ -50,7 +50,10 @@ $lang['userprofile'] = 'OnlinePrinting/user/userprofile';
 
 $lang['adminemail']='phairoj@colourharmony.co.th';
 
-
+$lang['help']='OnlinePrinting/help/helppage';
+$lang['helppay']='OnlinePrinting/help/pay';
+$lang['helpregis']='OnlinePrinting/help/regis';
+$lang['helpstep']='OnlinePrinting/help/step';
 
 //----------------------------Back-------------------------------//
 
