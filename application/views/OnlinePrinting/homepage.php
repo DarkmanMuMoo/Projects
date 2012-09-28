@@ -16,10 +16,15 @@
         height: auto; 
         overflow: hidden; 
     }
+    .hero-unit{
+        margin-top: 20px;
+        height:150px;
+        background:url(asset/css/images/Banner.png);
+    }
 </style>
 
 <div id="page">
-    <div  class="hero-unit" style="margin-top: 20px;">
+    <div  class="hero-unit" >
         
     </div>
     <hr>

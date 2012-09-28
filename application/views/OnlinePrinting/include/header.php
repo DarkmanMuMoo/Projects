@@ -7,7 +7,7 @@ and open the template in the editor.
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title></title>
-
+<link rel="shortcut icon" href="favicon.ico.bmp" type="image/x-icon" />
         <? $this->load->view(lang('includeheader')) ?>
         <script src="<? echo base_url("asset/javascript/bootstrap-dropdown.js"); ?>" >  </script>
         <link href="<? echo base_url("asset/css/main.css"); ?>" rel="stylesheet">
@@ -126,10 +126,7 @@ and open the template in the editor.
         </script>
         <div id="wrapper">
             <div id="header">
-                <div id="logo">
-                    <h1><a href="#">OnlinePrinting </a></h1>
-                    <p>  by colour harmony </p>
-                </div>
+                <img src="<?echo base_url('asset/css/images/header.jpg')  ?>" />
             </div>
             <div id="menu">
                 <ul class="menu" >

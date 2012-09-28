@@ -76,9 +76,9 @@ background-color: white;
 /* Header */
 
 #header {
-    width: 940px;
-    height: 120px;
-    margin: 0 auto;
+width: 940px;
+height: 100px;
+margin: 5px auto 10px auto;
 }
 
 /* Logo */
@@ -169,7 +169,7 @@ background-color: white;
 /* Menu */
 
 #menu {
-    width: 100%;
+    width: 950px;
     height: 36px;
     margin: 0 auto;
     padding: 0;
