@@ -38,7 +38,7 @@ margin-left: 60px;">
   <li>เมื่อกลับมาดูที่เมนู Order สถานะของท่านจะเปลี่ยนเป็น ตรวจสอบความถูกต้อง <br>
   <img src="<? echo base_url("asset/css/images/32.png"); ?>" width="576" height="98"></li>
   <li>เมื่อทางโรงพิมพ์ตรวจสอบแล้วว่าไฟล์ของท่านถูกต้อง สถานะท่านจะถูกเปลี่ยนเป็นแจ้งชำระเงิน <br>
-  <img src="<? echo base_url("asset/css/images/06.png"); ?>" width="576" height="98"> <br>
+  <img src="<? echo base_url("asset/css/images/06.png"); ?>" width="353" height="540"> <br>
   <a onclick="loadpage('pay');"href="JavaScript:void(0);">วิธีการแจ้งชำระเงิน</a></li>
 </ul>
 
