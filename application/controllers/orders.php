@@ -202,7 +202,7 @@ class Orders extends CI_Controller {
 
     public function cancleorder($orderno) {
 
-        $this->orderlinedao->delete($orderno);
+
         $this->orddao->delete($orderno);
 
         $javascript = "
@@ -321,7 +321,10 @@ class Orders extends CI_Controller {
 
 
         unset($_SESSION['temp_orderlinelist']);
-        $this->load->view(lang('ordersumary'));
+       
+       //  $this->load->view(lang('ordersumary'));
+      $this->session->set_flashdata('alert', $orderid);
+       redirect('orders');
     }
 
     public function viewOrderdetail($orderno) {

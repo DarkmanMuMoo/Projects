@@ -18,7 +18,7 @@
     }
     .hero-unit{
         margin-top: 20px;
-        height:150px;
+        height:130px;
         background:url(asset/css/images/Banner.png);
     }
 </style>

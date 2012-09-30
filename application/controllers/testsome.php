@@ -21,15 +21,13 @@ class Testsome extends CI_Controller {
         $count = '084-973-2746';
         $count = explode('-', $count);
         $count = implode('', $count);
-   
+   $this->session->set_flashdata('alert', 1);
         /* $first= load_class('emailutil', 'libraries','');
           var_dump($first);
           var_dump($this); */
         /* var_export(true,true);
           echo var_export(false,true); */
-        
-        
-        
+
     }
 
     public function testmd5() {

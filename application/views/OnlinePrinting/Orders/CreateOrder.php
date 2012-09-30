@@ -168,7 +168,7 @@
 </table>
 <div style="float: right; margin-right: 30%" >
     <strong>ราคาสินค้า :<? echo number_format($totalprice, 2, '.', ','); ?> บาท</strong><br>
-    <strong>ค่าจัดส่ง :<span  id="adprice">-</span> บาท</strong><br>
+    <strong>ค่าจัดส่ง :<span  id="adprice">120.00</span> บาท</strong><br>
     <strong>ราคารวม :<span  id="sumprice"><? echo number_format($totalprice, 2, '.', ','); ?></span> บาท</strong>
 </div>
 

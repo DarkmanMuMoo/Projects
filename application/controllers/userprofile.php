@@ -102,7 +102,7 @@ class Userprofile extends CI_Controller {
         $oldpass = $this->input->post('pold');
         $pnew = $this->input->post('pnew');
         if ($password == md5($oldpass)) {
-            $updateuser->setPassword($pnew);
+            $updateuser->setPassword(md5($pnew));
             $result = $this->cusdao->update($updateuser);
             /* $_SESSION['emp']=null;
               $_SESSION['emp']=$emp; */

@@ -123,7 +123,7 @@
 
 
 </table>
-<div style="float: right" >
+<div style="float: right; margin-right: 30%;" >
     <strong>ราคาสินค้า :<? echo number_format($totalprice, 2, '.', ',') ;?> บาท</strong><br>
     <strong>ค่าจัดส่ง :<? echo  number_format($ordsend->getSendprice(), 2, '.', ','); ?> บาท</strong><br>
     <strong>ราคารวม :<? echo number_format($totalprice + $ordsend->getSendprice() , 2, '.', ','); ?> บาท</strong><br>

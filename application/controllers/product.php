@@ -36,45 +36,43 @@ class Product extends CI_Controller {
 
         // var_dump($data['type']);
         $data['paperlist'] = $this->paperdao->findbytypeno($typeno);
-        $data['optionlist'] = $this->optiondao->findbytypeno($typeno);
-
+        //$data['optionlist'] = $this->optiondao->findbytypeno($typeno);
+        $data['optionlist'] = $this->optiondao->findall();
         $this->load->view(lang('chooseproduct'), $data);
     }
 
     private function __calprice(Template
     $temp, Paper $paper, $amount) {
-        
+        $this->load->driver('cache', array('adapter' => 'file'));
         $printprice = (900 * $paper->getGrame() * $paper->getPriceperkilo()) / (3100 * 500);
- 
+
         $printprice = ceil($printprice);
-           error_log("printprice".$printprice);
-        $papern = (($amount /$temp->getTrimPerPrint()) + (200)) / $temp->getPrintperReam();
+        error_log("printprice" . $printprice);
+        $papern = (($amount / $temp->getTrimPerPrint()) + (200)) / $temp->getPrintperReam();
         $papern = ceil($papern);
-           error_log("papern".$papern);
-        $price=$papern*$printprice;
-        
-         if($temp->getTypeno()==8){
+        error_log("papern" . $papern);
+        $price = $papern * $printprice;
+
+        if ($temp->getTypeno() == 8) {
             $price+=300;    //ห่วงกระดูกงู ขาปติทิน
         }
-        if($temp->getTypeno()==10){
+        if ($temp->getTypeno() == 10) {
             $price+=1500;    //ไดคัท ทำเล่ม
         }
 
-        if($temp->getPlatesize()=='L'){
-      
-            $price +=( $this->config->item('plate-L')+$this->config->item('print'));//ค่าเพลท  พิม ใหญ่
-      
-        }else{
-            $price +=( $this->config->item('plate-S')+$this->config->item('print'));  //ค่าเพลท พิม  เล็ก
-            
+        if ($temp->getPlatesize() == 'L') {
+
+            $price +=( $this->cache->file->get('plateL', true) + $this->cache->file->get('print', true)); //ค่าเพลท  พิม ใหญ่
+        } else {
+            $price +=( $this->cache->file->get('plateS', true) + $this->cache->file->get('print', true));  //ค่าเพลท พิม  เล็ก
         }
-        
-        $price+=$this->config->item('misc');
-        
-         
-        
-      
-        
+
+        $price+=$this->cache->file->get('misc', true);
+
+
+
+
+
         return $price;
     }
 
@@ -96,31 +94,30 @@ class Product extends CI_Controller {
         $_SESSION['tmp_ordline']->setOptionno($optionno);
         $_SESSION['tmp_ordline']->setQty($qty);
 
-        $template =$this->templatedao->findbyid($tempno);
-        $paper=$this->paperdao->findbyid($paperno);
-        
-      
-        $price=$this->__calprice($template, $paper, $qty);
-           $option = $this->optiondao->findbyid($optionno);
-           
-           if($option->getOptionno()>0){
-               
-               $price+=($qty*$option->getPrice());
-           }
-        $price=  round($price*1.2);//กำไร
+        $template = $this->templatedao->findbyid($tempno);
+        $paper = $this->paperdao->findbyid($paperno);
+
+
+        $price = $this->__calprice($template, $paper, $qty);
+        $option = $this->optiondao->findbyid($optionno);
+
+        if ($option->getOptionno() > 0) {
+
+            $price+=($qty * $option->getPrice());
+        }
+        $price = round($price * 1.2); //กำไร
         //
         //   old version
         //  $priceextends = $this->pricedao->findPriceExtendsby(intval($paperno), intval($tempno), intval($qty));
+        //  if ($priceextends != null) {
+        $data['paper'] = $paper->getName() . ' ' . $paper->getGrame() . 'g';
+        $data['template'] = $template->getName() . ' ' . $template->getSize();
+        $data['qty'] = $qty;
+        $data['type'] = $type;
+        $data['price'] = $price;
+        $_SESSION['tmp_ordline']->setPrice($price);
+        //   }
 
-      //  if ($priceextends != null) {
-            $data['paper'] = $paper->getName() . ' ' . $paper->getGrame() . 'g';
-            $data['template'] = $template->getName() . ' ' . $template->getSize();
-            $data['qty'] = $qty;
-            $data['type'] = $type;
-            $data['price'] = $price;
-            $_SESSION['tmp_ordline']->setPrice($price);
-     //   }
-      
         $data['option'] = $option->getDescription();
 //need to fix later
         $this->load->view(lang('showpriceframe'), $data);

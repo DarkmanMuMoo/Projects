@@ -42,7 +42,11 @@
         });
         $('#<? echo $hilight; ?>').addClass('hilight');
         
-    });      
+<?php if ($this->session->flashdata('alert')): ?>
+            
+                      alert('รายการสั่งซื้อของคุณถูกสร้างขึ้นแล้ว หมายเลขสั่งซื้อ'+'<? echo $this->session->flashdata('alert'); ?>');
+<?php endif; ?>
+             });      
       
 </script>
 <style>
@@ -57,10 +61,10 @@
         background-color: #faa732;
 
     }
-      .dropdown-menu a{
-            
-            text-align: left;
-        }
+    .dropdown-menu a{
+
+        text-align: left;
+    }
 </style>
 <div id="page">
     <div id ="content">
@@ -94,7 +98,7 @@
                     ราคารวม
                 </th>
                 <th>
-                    
+
                 </th>
                 </thead>
 
@@ -116,7 +120,7 @@
                                         break;
                                         ?>
                                     <?php endif; ?>
-    <?php endforeach; ?>
+                                <?php endforeach; ?>
                             </td> 
                             <td style="text-align: right;" ><? echo number_format($ord->getTotalprice(), 2, '.', ','); ?>  &nbsp; บาท </td>                      
                             <td style="width: 100px;" >
@@ -136,7 +140,7 @@
                                         <?php endif; ?>
                                         <?php if ($ord->getOrdstatus() > 30): ?>
                                             <li> <a href="<? echo site_url('orders/getpaymentlist') . "/" . $ord->getOrderno(); ?>" >Payment</a> </li>   
-    <?php endif; ?>
+                                        <?php endif; ?>
 
                                     </ul>
                                 </div>
@@ -144,14 +148,14 @@
 
                             </td>  
                         </tr>
-<?php endforeach; ?>
+                    <?php endforeach; ?>
 
 
                 </tbody>
 
             </table>
 
-<? echo $this->pagination->create_onclick_links(); ?>
+            <? echo $this->pagination->create_onclick_links(); ?>
         </div>
 
     </div >
@@ -162,10 +166,10 @@
         <ul id="statuslist"class="nav nav-tabs nav-stacked">
 
             <li><a id="0" href="JavaScript:void(0);" onclick="Searchstatus('');">ทั้งหมด</a></li>
-<?php foreach ($ordstatuslist as $ord): ?>
+            <?php foreach ($ordstatuslist as $ord): ?>
                 <li ><a id="<? echo $ord->getStatus(); ?>" href="JavaScript:void(0);" onclick="Searchstatus('<? echo $ord->getStatus(); ?>');"><? echo $ord->getDescription() ?></a>
                 </li>
-<?php endforeach; ?>
+            <?php endforeach; ?>
         </ul> 
 
 
