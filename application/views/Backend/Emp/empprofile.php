@@ -41,11 +41,13 @@
 
 
 <div class="container"  >
+    <div class="header"> 
+        <h2>ประวัติส่วนตัว</h2>
+        <hr align="center" size="3" color="#C3C3C3">  </div>
+
+    <div align="center" >  
 
 
-    <div align="center" style="margin-top:100px">  
-    
-    
 
         <div class="divcenter" > 
             <img src="<? echo base_url('asset/Sys_img/emp_img/' . $picurl) ?>" width="200" height="200" />
@@ -75,10 +77,10 @@
                                 echo $pos->getPosdescription();
                                 break;
                                 ?>
-    <?php endif; ?>
+                            <?php endif; ?>
 
 
-<?php endforeach; ?></td>
+                        <?php endforeach; ?></td>
                     <td width="194">&nbsp;</td>
                 </tr>
 
@@ -108,7 +110,7 @@
 
     </div>
 
-<? $this->load->view(lang('bakfooter')); ?>
+    <? $this->load->view(lang('bakfooter')); ?>
     <div id="changepassword" style="display: none">
         <form id="changepasswordform">
             <p>
@@ -130,7 +132,7 @@
     <script>
         
         function changepassword(){
-           var validate= $("#changepasswordform").validate({
+            var validate= $("#changepasswordform").validate({
                 rules: {
                     pold:"required", 
                     pnew:"required",
@@ -158,23 +160,23 @@
                         text: "change",
                         click: function(){ 
                             if(validate.form()){
-                               // var param = {pold:$('#pold').val()
-                                    //,pnew:$('#pold').val()
-                                    //,pconnew:$('#pconnew').val()}
+                                // var param = {pold:$('#pold').val()
+                                //,pnew:$('#pold').val()
+                                //,pconnew:$('#pconnew').val()}
                                     
-                                   $.post("<? echo site_url('Backend/bakemp/ajaxchangepassword');?>", $("#changepasswordform").serialize(),
-                                   function(data){
+                                $.post("<? echo site_url('Backend/bakemp/ajaxchangepassword'); ?>", $("#changepasswordform").serialize(),
+                                function(data){
      
-                                   if(data==true){
+                                    if(data==true){
                               
-                                      $('#changepassword').dialog('close');
-                                   validate.resetForm();
-                                   document.getElementById('changepasswordform').reset();
-                                   }else{
-                                       $('#changepassword #showerror').html(data);
+                                        $('#changepassword').dialog('close');
+                                        validate.resetForm();
+                                        document.getElementById('changepasswordform').reset();
+                                    }else{
+                                        $('#changepassword #showerror').html(data);
                                        
-                                   }
-                                   });
+                                    }
+                                });
                                     
                             }
                             
@@ -186,9 +188,9 @@
                 modal: true,
                 close: function() {
             
-				  validate.resetForm();
-                                  document.getElementById('changepasswordform').reset();
-			},
+                    validate.resetForm();
+                    document.getElementById('changepasswordform').reset();
+                },
                 title: "change password"
                 
             

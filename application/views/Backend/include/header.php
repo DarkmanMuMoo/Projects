@@ -20,6 +20,7 @@
   </head>
     <body>
         <div class="navbar-fixed-top" style="clear: both;"> 
+            
                <div id="head"  > <span class="label label-info"><? echo $_SESSION['emp']->getName();?></span>  <a class="btn btn-danger" href="<? echo site_url('Backend/user/performlogout') ?>">
                <i class="icon-off icon-white"></i>Logout</a>    
         </div>
@@ -49,3 +50,9 @@
                 
      
             </div>
+        <div id="logo">
+            
+     
+         <img src="<?echo base_url('asset/css/images/header.jpg')  ?>" />
+           </div>
+       

@@ -25,7 +25,7 @@
             text-align: left;
         }
     </style>
-    <div style="margin-top: 100px; margin-left: auto; margin-right: auto; margin-bottom: 20px;"> 
+    <div class="header"> 
         <h1>รายการสั่งซื้อ</h1>
         <hr />  </div>    
 

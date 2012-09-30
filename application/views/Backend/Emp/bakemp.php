@@ -28,7 +28,7 @@ border-width:thin;
 
 </style>
 
-   <div style="margin-top: 100px; margin-left: auto; margin-right: auto; margin-bottom: 20px;"> 
+<div class="header"> 
         <h1>รายชื่อพนักงาน</h1>
       <hr />  </div>
 

@@ -5,7 +5,7 @@
         #paystasut{clear: both; margin :10 auto ; padding: 5 5;}
         #result{
 
-            margin-top: 100px;
+            margin-top: 30px;
             margin-left: auto;
             margin-right: auto;
             margin-bottom: 10px;

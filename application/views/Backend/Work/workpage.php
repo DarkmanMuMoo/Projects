@@ -28,7 +28,7 @@
 
 <div class="container" >
 
-    <div style="margin-top: 100px; margin-left: auto; margin-right: auto; margin-bottom: 20px;"> 
+    <div class="header"> 
         <h1>งานทั้งหมด</h1>
         <hr > </hr> 
     </div>

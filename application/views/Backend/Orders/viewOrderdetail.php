@@ -37,7 +37,7 @@
         }
     </style>
 
-    <div style="margin-top: 100px; margin-left: auto; margin-right: auto; margin-bottom: 20px;"> 
+    <div class="header"> 
         <h1>ใบสั่งสินค้า</h1>
         <hr />
     </div>
