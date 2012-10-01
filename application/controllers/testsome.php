@@ -21,7 +21,9 @@ class Testsome extends CI_Controller {
         $count = '084-973-2746';
         $count = explode('-', $count);
         $count = implode('', $count);
-   $this->session->set_flashdata('alert', 1);
+        $this->load->model('dao/orddao');
+        $ord= $this->orddao->findbyid(16);
+        var_dump($ord);
         /* $first= load_class('emailutil', 'libraries','');
           var_dump($first);
           var_dump($this); */

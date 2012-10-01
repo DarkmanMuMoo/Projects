@@ -77,7 +77,8 @@ function showupload(orderlineno){
 </script>
 <div id="page">
 
-    <div id="head" style="clear:both;"><div id="order">
+    <div id="head" style="clear:both;">
+        <div id="order">
             <h2>เลขใบสั่งซื้อ <? echo $order->getOrderno(); ?></h2> <h3>สถานะ :
             <?php foreach ($ordstatuslist as $ordstatus): ?>
                 <?php if ($ordstatus->getStatus() == $order->getOrdstatus()): ?>
@@ -90,8 +91,8 @@ function showupload(orderlineno){
                     <? echo $ordpay->getDescription();  break;?>
                 <?php endif; ?>
             <?php endforeach; ?><br>
-            <strong> วันที่เสร็จสิ้น: <?  echo ($order->getExpectedshipdate()==null)?$order->getExpectedshipdate():'-';?></strong><br />
-           <strong>วันส่งสินค้า: <?  echo ($order->getRecievedate()==null)?$order->getRecievedate():'-';?></strong>
+            <strong> วันที่เสร็จสิ้น: <?  echo ($order->getExpectedshipdate()!=null)?$order->getExpectedshipdate():'-';?></strong><br />
+           <strong>วันส่งสินค้า: <?  echo ($order->getRecievedate()!=null)?$order->getRecievedate():'-';?></strong>
            
         </div> <div id="address"> 
             <h2>ที่อยู่จัดส่ง</h2>
