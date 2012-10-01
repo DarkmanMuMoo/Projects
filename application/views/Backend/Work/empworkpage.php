@@ -8,7 +8,7 @@
     <div id="search-bar" >  
         <form id="searchform"action="<? echo site_url('Backend/bakwork/empworkpage') ?>" class="form-search" align="center"  method="post">
             Keyword:<input type="text" value="<? echo $this->input->post('keyword');?>" name="keyword" id="email" class="input-small " />
-            status: <select name="status" id="emp" >  
+            Status: <select name="status" id="emp" >  
                 <option <?  echo($this->input->post('status')==0)?'selected="selected"':''; ?> value="0">All</option>
                 <option  <?  echo($this->input->post('status')==1)?'selected="selected"':''; ?>   value="1">งานที่รับผิดชอบ</option>
                 <option  <?  echo($this->input->post('status')==2)?'selected="selected"':''; ?> value="2">งานทที่มีส่วนร่วม

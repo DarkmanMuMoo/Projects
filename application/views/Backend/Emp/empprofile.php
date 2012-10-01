@@ -102,7 +102,7 @@
                 </tr>
                 <tr>
                     <td width="95"></td>
-                    <td width="165"><input class="btn-info" type="submit"  value="แก้ไข"/></td>
+                    <td width="165"><input class="btn-info" type="submit"  value="Edit"/></td>
                     <td width="194"> </td>
                 </tr>
             </table>

@@ -166,7 +166,7 @@ border-width:thin;
            <tr>
                 <td></td>
                 <td></td>
-                <td><input class="btn-success" type="submit" value="ตกลง"/></td>
+                <td><input class="btn-success" type="submit" value="OK"/></td>
           </tr>
            
   </table>

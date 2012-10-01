@@ -73,7 +73,8 @@ h1{ font-weight:bolder;
            <tr>
                 <td></td>
                 <td>&nbsp;</td>
-                <td> <input type="submit" class="btn" value="ตกลง" >   <a class="btn"  href="<? echo site_url('Backend/bakemp')  ?>" > กลับ </a></td>
+                <td> <input type="submit" class="btn" value="OK" >   
+                <a class="btn"  href="<? echo site_url('Backend/bakemp')  ?>" >&lt;&lt;Back  </a></td>
           </tr>
            
   </table>

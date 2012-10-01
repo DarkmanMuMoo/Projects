@@ -99,7 +99,7 @@
                                             <?php endif; ?>
                                         <?php endforeach; ?>
                                     </select>
-                                    <button class="btn" onclick="addcoemp();" >เพิ่มพนักงาน</button>
+                                    <button class="btn" onclick="addcoemp();" >Add</button>
                                 </td>  </tr>
                         <?php endif; ?>
                     </table>         
@@ -142,7 +142,7 @@
                 </tr>
                 <tr>
                     <td>&nbsp;</td>
-                    <td><input type="submit" name="button" id="button" value="ตกลง" class="btn" /></td>
+                    <td><input type="submit" name="button" id="button" value="OK" class="btn" /></td>
                     <td>&nbsp;</td>
                 </tr>
                 <input type="hidden" name="workno" value="<? echo $work->getWorkno(); ?>"  />

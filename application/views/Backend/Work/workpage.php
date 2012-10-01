@@ -54,7 +54,7 @@
                 </option>
             </select></div>
             <input type="hidden" name="startrow" value="0"/>
-            <button type="submit" class="btn">ค้นหา</button>
+            <button type="submit" class="btn">Search</button>
         </form>
     </div>
     <div id="result"  align="center">
@@ -160,7 +160,7 @@
                 </tr>
                 <tr>
                     <td>&nbsp;</td>
-                    <td height="50"><input name="assign" type="submit" class="btn" value="มอบหมาย" /></td>
+                    <td height="50"><input name="assign" type="submit" class="btn" value="OK" /></td>
                     <td>&nbsp;</td>
                 </tr>
 

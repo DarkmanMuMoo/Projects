@@ -63,7 +63,7 @@
                             <?php endforeach; ?>
 
                         </table>
-                        <br /><input type="submit" value="แก้ไข"/>
+                        <br /><input type="submit" value="Edit"/>
                     </form>
                 </div>
 
@@ -83,7 +83,7 @@
                                 </tr>
                             <?php endforeach; ?>
                         </table>
-                        <br /><input type="submit" value="แก้ไข"/>
+                        <br /><input type="submit" value="Edit"/>
                     </form>
                 </div >
                 <div  id="option"   >
@@ -101,7 +101,7 @@
                                 </tr>
                             <?php endforeach; ?>
                         </table>
-                        <br /><input type="submit" value="แก้ไข"/>
+                        <br /><input type="submit" value="Edit"/>
                     </form>
                 </div>
                 <div id="cal">
@@ -130,7 +130,7 @@
                             </tr>
                     
                     </table>
-                        <br /><input type="submit" value="แก้ไข"/>
+                        <br /><input type="submit" value="Edit"/>
                     </form>
                     
                 </div>

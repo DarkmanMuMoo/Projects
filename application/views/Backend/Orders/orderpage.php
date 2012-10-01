@@ -44,7 +44,7 @@
 
                 <?php endforeach; ?></select>
             <input type="hidden" name="startrow" value="0"/>
-            <button type="submit" class="btn">ค้นหา</button>
+            <button type="submit" class="btn">Search</button>
         </form>
     </div>
     <div id="result"  align="center">
