@@ -20,7 +20,7 @@ class Product extends CI_Controller {
         $this->load->model('obj/orderline');
     }
 
-    public function index() {
+    public function index($data=array()) {
         $this->load->model('dao/typedao');
         $data['typelist'] = $this->typedao->findall();
         $this->load->view(lang('productpage'), $data);
@@ -127,7 +127,61 @@ class Product extends CI_Controller {
         // echo var_dump(($this));
         $this->load->view(lang('showpriceframe'));
     }
+ public function opencartdialog(){
+            $data=array();
+            $data['opencart']="<script> window.showcart();  </script>";
+            
+            $this->index($data);
+            
+        }
+         public function addtocart() {
 
+        // session_start();
+        //log_message('error', 'Some variable Some construct');
+
+        $ordline = $_SESSION['tmp_ordline'];
+        // echo var_dump($ordline);
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = array();
+        }
+        array_push($_SESSION['cart'], $ordline);
+        unset($_SESSION['tmp_ordline']);
+
+        // redirect('product', 'refresh');
+        redirect('product/opencartdialog');
+    }
+         public function loginframe(){
+             
+             $this->load->view(lang('loginframe'));
+             
+         }
+         public function showcart() {
+        $this->load->model('dao/templatedao');
+        $this->load->model('dao/paperdao');
+        $this->load->model('dao/optiondao');
+
+
+        $data = array();
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = array();
+        } else {
+
+            $data['templatelist'] = $this->templatedao->findall();
+            $data['paperlist'] = $this->paperdao->findall();
+            $data['optionlist'] = $this->optiondao->findall();
+        }
+
+        $data['Ncart']=  count($_SESSION['cart']);
+        
+        $this->load->view(lang('showcartframe'), $data);
+    }
+
+    public function removeCartItem($index) {
+
+
+        unset($_SESSION['cart'][$index]);
+        $this->showcart();
+    }
 }
 
 ?>

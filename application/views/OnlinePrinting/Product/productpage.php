@@ -74,3 +74,4 @@
 </div>
 
 <? $this->load->view(lang('footer')) ?>
+<? echo (isset($opencart)) ? $opencart : '' ?>

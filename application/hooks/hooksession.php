@@ -41,11 +41,11 @@ $controllername = get_class(get_instance());
 if(!$check){
   
 if($controllername=='Userprofile'||$controllername=='Orders'){
-redirect('home');
+redirect('product');
 }
 }else{
     if($controllername=='Register'){
-        redirect('home');
+        redirect('product');
     }
 }
 

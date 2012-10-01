@@ -30,7 +30,7 @@ and open the template in the editor.
             );
                     
                    
-                document.getElementById('cartdialog').src = '<? echo site_url("home/showcart"); ?>'; 
+                document.getElementById('cartdialog').src = '<? echo site_url("product/showcart"); ?>'; 
                     
          
           
@@ -48,7 +48,7 @@ and open the template in the editor.
             );
                     
                    
-                document.getElementById('loginframe').src = '<? echo site_url("home/loginframe"); ?>';   
+                document.getElementById('loginframe').src = '<? echo site_url("product/loginframe"); ?>';   
                     
                     
             }
@@ -130,7 +130,7 @@ and open the template in the editor.
             </div>
             <div id="menu">
                 <ul class="menu" >
-                    <li id="Home"><a href="<?php echo site_url("home"); ?>">Home</a></li>
+               <li id="Home"><a href="#">Home</a></li>
                     <li id="Product"><a href="<?php echo site_url("product"); ?>">Product</a></li>
                     <?php if ($_SESSION['hasuser']): ?>
                     <li id="Orders"><a href="<?php echo site_url("orders"); ?>">Orders</a></li>

@@ -80,7 +80,7 @@ if(data=='false'){
                             <?    echo number_format( $cart->getPrice(), 2, '.', ',');   $totalprice=$totalprice+$cart->getPrice(); ?>บาท
                       </td>
                       <td>
-                          <a href="<? echo site_url('home/removeCartItem').'/'.$index;  ?> ">remove </a>
+                          <a href="<? echo site_url('product/removeCartItem').'/'.$index;  ?> ">remove </a>
                       </td>
                       
                      

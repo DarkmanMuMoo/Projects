@@ -137,6 +137,15 @@ table{
     
 </p>
 <hr></hr>
+
+<div  id="alert" <? echo (validation_errors()==null)?'': 'class="alert alert-error alert-block"'; ?> style=" margin-bottom: 30px; width: 50%" > 
+<? echo (validation_errors()==null)?'': '<h4>ข้อผิดพลาด!</h4>'; ?>
+    
+    
+        <?php echo validation_errors(); ?>
+
+
+</div>
     <?php
     echo form_open('register', array('class' => 'email', 'id' => 'signupForm'));
     ?>
@@ -269,14 +278,7 @@ table{
               </tbody>
         <? echo form_close(); ?>
     </table>
-<div  id="alert" <? echo (validation_errors()==null)?'': 'class="alert alert-error alert-block"'; ?> style=" margin: 0 auto; width: 50%" > 
-<? echo (validation_errors()==null)?'': '<h4>ข้อผิดพลาด!</h4>'; ?>
-    
-    
-        <?php echo validation_errors(); ?>
 
-
-</div>
 </div>
 
 

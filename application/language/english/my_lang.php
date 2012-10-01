@@ -2,7 +2,7 @@
 
 $lang['Hello'] = 'hi my name is mumoo.';
 
-$lang['hompage'] = 'OnlinePrinting/homepage';
+
 
 $lang['header'] = 'OnlinePrinting/include/header';
 $lang['includeheader'] = 'OnlinePrinting/include/headinclude';
