@@ -11,26 +11,37 @@
  * @author Dark
  */
 class Emp extends CI_Model {
+
     //put your code here
-private $empno;
+    private $empno;
     private $name;
     private $lastname;
     private $email;
     private $phone;
-   private $position;
-   private $password;
-  private $picurl;
-  public function getPicurl() {
-      return $this->picurl;
-  }
+    private $position;
+    private $password;
+    private $picurl;
+    private $active;
 
-  public function setPicurl($picurl) {
-      $this->picurl = $picurl;
-  }
+    public function getPicurl() {
+        return $this->picurl;
+    }
+    public function getActive() {
+        return $this->active;
+    }
 
-      public function getPhone() {
+    public function setActive($active) {
+        $this->active = $active;
+    }
+
+        public function setPicurl($picurl) {
+        $this->picurl = $picurl;
+    }
+
+    public function getPhone() {
         return $this->phone;
     }
+
     public function getPassword() {
         return $this->password;
     }
@@ -39,7 +50,7 @@ private $empno;
         $this->password = $password;
     }
 
-        public function setPhone($phone) {
+    public function setPhone($phone) {
         $this->phone = $phone;
     }
 
@@ -50,6 +61,7 @@ private $empno;
     public function setName($name) {
         $this->name = $name;
     }
+
     public function getEmpno() {
         return $this->empno;
     }
@@ -58,9 +70,8 @@ private $empno;
         $this->empno = $empno;
     }
 
-        public function getLastname() {
+    public function getLastname() {
         return $this->lastname;
-        
     }
 
     public function setLastname($lastname) {
@@ -82,7 +93,6 @@ private $empno;
     public function setPosition($position) {
         $this->position = $position;
     }
-
 
 }
 
