@@ -36,11 +36,18 @@ h1{ font-weight:bolder;
                 
         </tr>
             
+         
             <tr>
                 <td>ชื่อ</td>
                 <td></td>
               <td><? echo $tmpemp->getName();?> 
 			 &nbsp;&nbsp; <? echo $tmpemp->getLastname();?></td>
+                
+          </tr>
+            <tr>
+                <td>Active</td>
+                <td></td>
+              <td><? echo ($tmpemp->getActive())?'<span class="badge badge-success">active</span>':'<span class="badge badge-important">unactive</span>'; ?></td>
                 
           </tr>
             

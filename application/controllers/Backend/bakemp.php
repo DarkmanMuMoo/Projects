@@ -60,10 +60,18 @@ class Bakemp extends CI_Controller {
   
         $this->load->view(lang('bakemp'), $data);
     }
+public function  setactive($empno,$value){
+    
+    $emp=$this->empdao->findbyid($empno);
+    
+    $emp->setActive($value);
+    
+    $this->empdao->update($emp);
+    
+    redirect('Backend/bakemp');
+}
 
-   
-
-    public function deleteemp() {
+public function deleteemp() {
         $empno = $this->input->post('empno');
 
         $result = $this->empdao->delete($empno);
