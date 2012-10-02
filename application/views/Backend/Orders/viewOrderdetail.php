@@ -48,17 +48,15 @@
             <h2>เลขใบสั่งซื้อ: <? echo $order->getOrderno(); ?></h2><br>
             <?php foreach ($ordstatuslist as $ordstatus): ?>
                 <?php if ($ordstatus->getStatus() == $order->getOrdstatus()): ?>
-                    <?
-                    echo $ordstatus->getDescription();
+                    <? echo $ordstatus->getDescription();
                     break;
                     ?>
                 <?php endif; ?>
 <?php endforeach; ?><br>
             <strong>วันที่ : </strong><? echo $order->getOrderdate(); ?><br>
-            <strong> การชำระ :</strong> <?php foreach ($ordpaylist as $ordpay): ?>
+           <strong> การชำระ :</strong> <?php foreach ($ordpaylist as $ordpay): ?>
                 <?php if ($ordpay->getPaymethod() == $order->getPaymethod()): ?>
-                    <?
-                    echo $ordpay->getDescription();
+                    <? echo $ordpay->getDescription();
                     break;
                     ?>
     <?php endif; ?>
@@ -83,8 +81,7 @@
             <h4>การจัดส่ง : 
                 <?php foreach ($ordsendlist as $ordsend): ?>
                     <?php if ($ordsend->getSendmethod() == $order->getSendmethod()): ?>
-                        <?
-                        echo $ordsend->getDescription();
+                        <? echo $ordsend->getDescription();
                         break;
                         ?>
     <?php endif; ?>
@@ -130,13 +127,13 @@
                             <? echo $orderline->getQty(); ?>
                         </td>
                         <td width="10%" style="text-align: right;"  >
-                            <?
-                            echo number_format($orderline->getPrice(), 2, '.', ',');
-                            $totalprice+=$orderline->getPrice();
-                            ?>&nbsp; 
+    <?
+    echo number_format($orderline->getPrice(), 2, '.', ',');
+    $totalprice+=$orderline->getPrice();
+    ?>&nbsp; 
                         </td>
                         <td width="10%"  >  <?php if (($orderline->getFilepath() == '') || ($orderline->getFilepath() == null)): ?>
-                                <? echo '<h6 style="color:red" >notupload</h6>' ?>
+        <? echo '<h6 style="color:red" >notupload</h6>' ?>
     <?php else: ?>
         <? echo '<h6>upload</h6>' ?>
     <?php endif; ?></td>
@@ -194,17 +191,17 @@
         <div id="rejectdialog" style="display: none;">
             <form id="rejectform" method="post" action="<? echo site_url('Backend/bakorders/rejects') ?>">
                 <input  type="hidden" name="orderno"  value=""/>
-                <textarea name="msg"  placeholder="ข้อความที่ต้องการส่งถึงลูกค้า" >
-                           
+                <textarea name="msg"  >
+                       ข้อความที่ต้องการส่งถึงลูกค้า
                 </textarea>
             </form>
         </div>
-<?php endif; ?>
+    <?php endif; ?>
     <?php if ($order->getOrdstatus() == 50): ?>
         <div align="center" style="margin :5% auto;">  
             <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/ontransfer') . '/' . $order->getOrderno(); ?>">set to on trasfer</a> 
         </div>
-<?php endif; ?>
+    <?php endif; ?>
     <?php if ($order->getOrdstatus() == 60): ?>
         <div align="center" style="margin :5% auto;">  
             <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/complete') . '/' . $order->getOrderno(); ?>">set to Complete</a> 

@@ -70,15 +70,15 @@
 
                 <div id="send" >
                     <form action="<? echo site_url('Backend/bakCost/updateordsend'); ?>" method="post">
-                        <table  table width="auto" border="1" bordercolor="#CCCCCC" >
+                        <table  table width="269" border="1" bordercolor="#CCCCCC" >
                             <tr>
                                 <td width="109">วิธีการส่ง</td>
-                                <td width="50">ราคา</td>
+                                <td width="144">ราคา</td>
                             </tr>
                             <?php foreach ($ordsendlist as $index => $ordsend): ?>
                                 <tr>
 
-                                    <td>  <? echo $ordsend->getDescription() ?></td>
+                                    <td>  <? echo $ordsend->getSendmethod() ?></td>
                                     <td><input type="text" name="<? echo $index ?>" value="<? echo $ordsend->getSendprice() ?>"/></td>
                                 </tr>
                             <?php endforeach; ?>

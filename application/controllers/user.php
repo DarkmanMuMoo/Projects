@@ -81,11 +81,11 @@ class User extends CI_Controller {
 
     public function performlogout() {
         //session_start();
-      unset($_SESSION['user']);
-          //unset($_SESSION['cart']);
+        /* unset($_SESSION['user']);
+          unset($_SESSION['cart']);
           unset($_SESSION['temp_orderlinelist']);
-          $_SESSION['hasuser'] = false;
-       // session_destroy();
+          $_SESSION['hasuser'] = false; */
+        session_destroy();
 
 
         $javascript = " 

@@ -149,7 +149,7 @@
 </p>
 <label> ข้อความถึงโรงพิมพ์: </label>
 <p>  
-<? echo $cusremark ?>
+
 </p>
 <input name="cusremark"  type="hidden" value="<? echo $cusremark ?>" >
 <div style="text-align: center;">
