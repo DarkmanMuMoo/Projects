@@ -162,8 +162,8 @@ and open the template in the editor.
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                
-                                <li> <a href="javascript:void(0);" id="forgetpassword"  onclick="PasswordDialog();" >forget password</a></li>
+                                <li><a  style="margin-left: 30px;"target="_top"  href="<?echo site_url('register'); ?>"  >Register</a>   </li>    
+                                <li> <a href="javascript:void(0);" id="forgetpassword"  onclick="PasswordDialog();" >Forget Password</a></li>
 
                             </ul>
                         </div>

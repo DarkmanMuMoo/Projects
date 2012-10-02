@@ -20,6 +20,7 @@ class Bakorders extends CI_Controller {
         $this->load->model('dao/empdao');
     }
  public function seller_comment() {
+             $this->load->model('dao/orddao');
         $orderno = $this->input->post('orderno');
         $comment = $this->input->post('comment');
 
