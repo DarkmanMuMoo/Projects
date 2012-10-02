@@ -191,7 +191,7 @@ table{
         </tr>
         
         <tr>
-           <td style ="vertical-align: text-top;">ที่อยู่</td>
+           <td style ="vertical-align: text-top;">ที่อยู่ติดต่อ</td>
            <td></td>
            <td><textarea rows="5" cols="15" name="address" id="address">
 
@@ -222,7 +222,7 @@ table{
         </tr>
         
         <tr>
-            <td><b>ที่อยู่สำรอง</b></td>
+            <td><b>ที่อยู่(ออกใบเสร็จ)</b></td>
             <td></td>
         <td></td>
         </tr>        
