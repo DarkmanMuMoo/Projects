@@ -107,7 +107,8 @@ class Empdao extends CI_Model {
             'phone' => $emp->getPhone(),
             'position' => $emp->getPosition(),
             'password' => $emp->getPassword(),
-            'pic_url' => $emp->getPicurl()
+            'pic_url' => $emp->getPicurl(),
+            'active' => $emp->getActive(),
         );
 
         $this->db->where('empno', $emp->getEmpno());
@@ -145,7 +146,8 @@ class Empdao extends CI_Model {
             'phone' => $emp->getPhone(),
             'position' => $emp->getPosition(),
             'password' => $emp->getPassword(),
-            'pic_url' => $emp->getPicurl()
+            'pic_url' => $emp->getPicurl(),
+            'active' => $emp->getActive()
         );
 
         return $this->db->insert('employee', $data);
@@ -186,6 +188,7 @@ class Empdao extends CI_Model {
         $emp->setPassword($row->password);
         $emp->setEmail($row->email);
         $emp->setPicurl($row->pic_url);
+        $emp->setActive($row->active);
         return $emp;
     }
 

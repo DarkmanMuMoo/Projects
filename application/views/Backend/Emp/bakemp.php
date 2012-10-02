@@ -53,9 +53,7 @@ border-width:thin;
                 <th>
                     #
                 </th>
-                <th>
-                    รหัสพนักงาน 
-                </th>
+                
                 <th>
                     ชื่อ
                 </th>
@@ -69,6 +67,9 @@ border-width:thin;
                     โทรศัพท์
                 </th>
                 <th>
+                    Active
+                </th>
+                <th>
                     ตำแหน่ง
                 </th>
                 <th>
@@ -77,34 +78,35 @@ border-width:thin;
                 </thead>
    <? $page=($this->input->post('startrow'))?$this->input->post('startrow'):0; ?>
                 <tbody>
-                    <?php foreach ($emplist as $index => $ord): ?>
+                    <?php foreach ($emplist as $index => $emp): ?>
                         <tr> <td  ><? echo $index + 1+$page ?> </td>  
                             <td  >
                                 
-                                    <? echo $ord->getEmpno(); ?> 
+                                    <? echo $emp->getEmpno(); ?> 
                               
                             </td> 
                             <td>
-                                 <? echo $ord->getName(); ?> 
+                                 <? echo $emp->getName(); ?> 
                             </td>
                                 <td>
-                                 <? echo $ord->getLastname(); ?> 
+                                 <? echo $emp->getLastname(); ?> 
                             </td>
-                            <td > <? echo $ord->getEmail(); ?> </td>
-                             <td ><? echo $ord->getPhone(); ?> </td>      
+                            <td > <? echo $emp->getEmail(); ?> </td>
+                             <td ><? echo $emp->getPhone(); ?> </td>  
+                             <td>  <? echo ($emp->getActive())?'active':'unactive'; ?> </td>
                             <td >
                                  <?php foreach ($positionlist as $pos): ?>
-                                <?php if ($ord->getPosition() == $pos->getPosition() ): ?>
+                                <?php if ($emp->getPosition() == $pos->getPosition() ): ?>
                                 <? echo $pos->getPosdescription(); break; ?>
                                <?php endif; ?>
                                  <?php endforeach; ?>
                             </td> 
                      
                             <td >
-                                <a class="btn btn-info" href="<?echo site_url('Backend/bakemp/viewempdetail') . "/" .$ord->getEmpno();   ?>"> 
+                                <a class="btn btn-info" href="<?echo site_url('Backend/bakemp/viewempdetail') . "/" .$emp->getEmpno();   ?>"> 
                                    View
                                 </a>
-                                <button class="btn btn-danger"  onclick="Confirmdelete('<? echo $ord->getEmpno(); ?>');"> 
+                                <button class="btn btn-danger"  onclick="Confirmdelete('<? echo $emp->getEmpno(); ?>');"> 
                                   Delete
                                 </button>
                             </td>  
@@ -153,9 +155,9 @@ border-width:thin;
                 <td >ตำแหน่ง</td>
                 <td></td>
                 <td><select name="position">
-                        <?php foreach ($positionlist as $ord): ?>
+                        <?php foreach ($positionlist as $pos): ?>
 
-     <option value="<? echo $ord->getPosition(); ?>" ><? echo $ord->getPosdescription(); ?></option>
+     <option value="<? echo $pos->getPosition(); ?>" ><? echo $pos->getPosdescription(); ?></option>
 
 <?php endforeach; ?>
              
