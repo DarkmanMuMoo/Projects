@@ -27,60 +27,51 @@
         <hr align="center" size="3" color="#C3C3C3">  </div>
     <div  style="margin: 0 auto;">  
 
-        <table width="666" border="0">
+        <table width="666" border="0" align="center">
             <tr>
                 <td width="660" height="44"><table width="695" border="0">
                         <tr>
-                            <td width="118" height="30"><strong>รหัสงาน</strong></td>
-                            <td width="26">&nbsp;</td>
+                            <td width="118" height="30"><strong>รหัสงาน </strong></td>
+                            <td width="26">:</td>
                             <td width="161"><? echo $work->getWorkno(); ?></td>
                             <td width="12">&nbsp;</td>
-                            <td width="203" height="44"><strong>ชื่องาน</strong></td>
-                            <td width="24">&nbsp;</td>
-                            <td width="121"><? echo $work->getWorkname(); ?></td>
+                            <td width="203" height="44"><strong>ผู้รับผิดชอบ</strong></td>
+                            <td width="24">:</td>
+                            <td width="121"><? echo $work->getName(); ?>&nbsp;<? echo $work->getLastname(); ?></td>
                         </tr>
+                        <tr>
+                            <td height="44"><strong>ชื่องาน </strong></td>
+                            <td>:</td>
+                            <td><? echo $work->getWorkname(); ?></td>
+                            <td width="12">&nbsp;</td>
+                            <td height="44"><strong>พนักงานที่มีส่วนร่วม</strong></td>
+                            <td>:</td>
+                            <td><select  id="empno">  <?php foreach ($allemp as $emp): ?> 
+                                            <?php if ($emp->getEmpno() != $_SESSION['emp']->getEmpno() && !in_array($emp->getEmpno(), $chkemp, true)): ?>
+                                        <option value="<? echo $emp->getEmpno(); ?>" > <a><? echo $emp->getName(); ?>&nbsp;<? echo $emp->getLastname(); ?></a></option>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </select></td>
+                        </tr>
+
                         <tr>
                             <td height="44"><strong>รหัสสั่งซื้อ</strong></td>
-                            <td>&nbsp;</td>
+                            <td>:</td>
                             <td><a href="<? echo site_url('Backend/bakorders/vieworderdetail/' . $work->getOrdno()); ?>" ><? echo $work->getOrdno() ?></a></td>
                             <td width="12">&nbsp;</td>
-                            <td height="44"><strong>ผู้รับผิดชอบ</strong></td>
+                            <td height="44"></td>
                             <td>&nbsp;</td>
-                            <td><? echo $work->getName(); ?>&nbsp;<? echo $work->getLastname(); ?></td>
-                        </tr>
-
-                        <tr>
-                            <td height="44"><strong>วันเริ่มงาน</strong></td>
-                            <td>&nbsp;</td>
-                            <td><? echo $work->getStartdate(); ?></td>
-                            <td width="12">&nbsp;</td>
-                            <td height="44"><strong>วันสิ้นสุดงาน</strong></td>
-                            <td>&nbsp;</td>
-                            <td><?php if ($_SESSION['emp']->getPosition() == 'Boss'): ?>
-                                    <?php if ($work->getEnddate() == null): ?>
-                                        <a class="btn" href="<? echo site_url('Backend/bakwork/completework/' . $work->getWorkno()) ?>" >End this work</a> 
-                                    <?php else: ?>
-                                       เสร็จ
-                                    <?php endif; ?>
-                                <?php else: ?>
-
-                                    <? echo ($work->getEnddate() == null) ? 'ยังไม่เสร็จ' : $work->getEnddate(); ?>
-                                <?php endif; ?>
-
-                            </td>
+                            <td>
+                                    <button class="btn" onclick="addcoemp();" >Add</button></td>
                         </tr>
                         <tr>
-                            <td height="79"><strong>รายละเอียด</strong></td>
-                            <td>&nbsp;</td>
+                            <td height="79"><strong>วันเริ่มงาน</strong></td>
+                            <td>:</td>
                             <td width="161" >
-                                <textarea>
-
-                                    <? echo $work->getWorkDescription() ?>
-
-                                </textarea>
+                                <? echo $work->getStartdate(); ?>
                             </td>
                             <td>&nbsp;</td>
-                            <td height="44"><strong>พนักงานที่มีส่วนร่วม</strong></td>
+                            <td height="44"></td>
                             <td>&nbsp;</td>
                             <td ><? $chkemp = array(); ?>
                               <?php foreach ($coemplist as $emp): ?>
@@ -91,26 +82,49 @@
                                 <?php endforeach; ?>
                             </p></td>
                         </tr>
+                        
+                        <tr>
+                        <td><strong>วันสิ้นสุดงาน</strong></td>
+                        <td>:
+
+                            </td>
+                        <td><?php if ($_SESSION['emp']->getPosition() == 'Boss'): ?>
+                                    <?php if ($work->getEnddate() == null): ?>
+                                        <a class="btn" href="<? echo site_url('Backend/bakwork/completework/' . $work->getWorkno()) ?>" >End this work</a> 
+                                    <?php else: ?>
+                                       เสร็จ
+                                    <?php endif; ?>
+                                <?php else: ?>
+
+                                    <? echo ($work->getEnddate() == null) ? 'ยังไม่เสร็จ' : $work->getEnddate(); ?>
+                                <?php endif; ?></td>
+                        <td></td>
+                        <td><strong>รายละเอียดงาน</strong></td>
+                        <td>:</td>
+                        <td><textarea>
+
+                                    <? echo $work->getWorkDescription() ?>
+
+                                </textarea></td>
+                        </tr>
+                        
+                        
+                        
                         <?php if ($_SESSION['emp']->getPosition() == 'Boss' || $_SESSION['emp']->getEmpno() == $work->getEmpno()): ?>
-                            <tr><td colspan="6">  </td> <td>
-                                    <select  id="empno">  <?php foreach ($allemp as $emp): ?> 
-                                            <?php if ($emp->getEmpno() != $_SESSION['emp']->getEmpno() && !in_array($emp->getEmpno(), $chkemp, true)): ?>
-                                        <option value="<? echo $emp->getEmpno(); ?>" > <a><? echo $emp->getName(); ?>&nbsp;<? echo $emp->getLastname(); ?></a></option>
-                                            <?php endif; ?>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <button class="btn" onclick="addcoemp();" >Add</button>
+                            <tr><td height="58" colspan="6">  </td> <td>
+                                    
                                 </td>  </tr>
                         <?php endif; ?>
                     </table>         
             </tr>
+         
         </table>
 
 
     </div>
 
     <div id="processtable" style="margin-top: 20px;width: 80%; ">
-        <table  class="table" style="margin-bottom: 30px;" >
+      <table  class="table" style="margin-bottom: 30px;" >
             <thead>
             <th  style="width: 40% ;text-align: center;" style=""scope="col" >สถานะงาน</th>
             <th  style="width: 10%">วันทีแก้ไข</th>
