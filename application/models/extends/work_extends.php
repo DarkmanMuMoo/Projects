@@ -23,6 +23,15 @@ class Work_extends extends Work {
     private $position;
     private $password;
     private $picurl;
+    private $active;
+
+    public function getActive() {
+        return $this->active;
+    }
+
+    public function setActive($active) {
+        $this->active = $active;
+    }
 
     public function getName() {
         return $this->name;

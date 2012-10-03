@@ -89,11 +89,13 @@
             <strong> การจัดส่ง :</strong> <?php foreach ($ordpaylist as $ordpay): ?>
                 <?php if ($ordpay->getPaymethod() == $order->getPaymethod()): ?>
                     <? echo $ordpay->getDescription();
-                    break; ?>
+                    break;
+                    ?>
                 <?php endif; ?>
 <?php endforeach; ?><br>
-            <strong> วันที่เสร็จสิ้น: <? echo ($order->getExpectedshipdate() != null) ? $order->getExpectedshipdate() : '-'; ?></strong><br />
             <strong>วันส่งสินค้า: <? echo ($order->getRecievedate() != null) ? $order->getRecievedate() : '-'; ?></strong>
+            <strong> วันที่เสร็จสิ้น: <? echo ($order->getExpectedshipdate() != null) ? $order->getExpectedshipdate() : '-'; ?></strong><br />
+
 
         </div> <div id="address"> 
             <h2>ที่อยู่จัดส่ง</h2>
@@ -107,7 +109,8 @@
                 <?php foreach ($ordsendlist as $ordsend): ?>
                     <?php if ($ordsend->getSendmethod() == $order->getSendmethod()): ?>
                         <? echo $ordsend->getDescription();
-                        break; ?>
+                        break;
+                        ?>
     <?php endif; ?>
 <?php endforeach; ?><br>
             </p>
@@ -153,9 +156,10 @@
                             <? echo $orderline->getQty(); ?>
                         </td>
                         <td width="10%" style="text-align: right;"  >
-    <? echo number_format($orderline->getPrice(), 2, '.', ',');
-    $totalprice+=$orderline->getPrice();
-    ?> &nbsp บาท
+                            <?
+                            echo number_format($orderline->getPrice(), 2, '.', ',');
+                            $totalprice+=$orderline->getPrice();
+                            ?> &nbsp บาท
                         </td>
                         <td width="10%"  >  <?php if (($orderline->getFilepath() == '') || ($orderline->getFilepath() == null)): ?>
                                 <? echo '<h6 style="color:red" >notupload</h6>' ?>

@@ -34,23 +34,25 @@ class Workdao extends CI_Model {
 
         return $this->db->insert('work', $data);
     }
-    public function addcoemp($workno,$empno){
-         $data = array(
-            'workno'=>$workno,
-        'empno'=>$empno);
-         return $this->db->insert('work_emp', $data);
+
+    public function addcoemp($workno, $empno) {
+        $data = array(
+            'workno' => $workno,
+            'empno' => $empno);
+        return $this->db->insert('work_emp', $data);
     }
 
     public function delete($workno) {
 
         return $this->db->delete('work', array('workno' => $workno));
     }
-public function findbymultifield($condition) {
+
+    public function findbymultifield($condition) {
         foreach ($condition as $index => $row) {
 
             $this->db->where($index, $row);
         }
-      
+
         $query = $this->db->get('work');
         $condition = array();
 
@@ -63,6 +65,7 @@ public function findbymultifield($condition) {
         // var_dump($this->db->last_query());
         return $condition;
     }
+
     public function update(Work $work) {
         $data = array(
             'work_name' => $work->getWorkname(),
@@ -76,41 +79,40 @@ public function findbymultifield($condition) {
         $this->db->where('workno', $work->getWorkno());
         return $this->db->update('work', $data);
     }
- public function findsharedwork($keyword, $empno ,$con) {
+
+    public function findsharedwork($keyword, $empno, $con) {
         $this->db->select(' work.workno as workno, work_name,work_description, startdate, enddate, ordno, work.empno as empno');
         $this->db->from('work');
         $this->db->join('work_emp', 'work.workno = work_emp.workno', 'left');
-     
-      // echo $sql;
-        if ($keyword != '') {
-         
-           $this->db->like('work_name', $keyword); 
-        }
-          if($empno!=0){
-      switch($con){
- 
-    case 1:{
 
-          
-        $this->db->where('work.empno', intval($empno)); 
-       
-        break;
-    }
-    case 2:{
-   
-      
-        $this->db->where('work_emp.empno', intval($empno)); 
-      
-        break;
-    }
-    case 0:{
-         $this->db->where('work.empno', intval($empno));
-        $this->db->or_where('work_emp.empno', intval($empno)); 
-        
-    }
-    
-    }
-          }
+        // echo $sql;
+        if ($keyword != '') {
+
+            $this->db->like('work_name', $keyword);
+        }
+        if ($empno != 0) {
+            switch ($con) {
+
+                case 1: {
+
+
+                        $this->db->where('work.empno', intval($empno));
+
+                        break;
+                    }
+                case 2: {
+
+
+                        $this->db->where('work_emp.empno', intval($empno));
+
+                        break;
+                    }
+                case 0: {
+                        $this->db->where('work.empno', intval($empno));
+                        $this->db->or_where('work_emp.empno', intval($empno));
+                    }
+            }
+        }
         $query = $this->db->get();
 
         $array = array();
@@ -124,15 +126,11 @@ public function findbymultifield($condition) {
 
 
             array_push($array, $type);
-
-
-        
         }
         //echo var_dump($array);
 
         return $array;
     }
-   
 
     public function findworkdetail($workno) {
         $sql = "select * from work w join employee emp  on w.empno=emp.empno where w.workno=?";
@@ -234,6 +232,7 @@ public function findbymultifield($condition) {
         $work->setPassword($row->password);
         $work->setEmail($row->email);
         $work->setPicurl($row->pic_url);
+        $work->setActive($row->active);
         return $work;
     }
 

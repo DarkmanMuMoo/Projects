@@ -204,7 +204,7 @@ table{
         <tr>
         <td><ul>ที่อยู่<span class="req">*</span></ul></td>
         <td></td>
-        <td><textarea name="add1" cols="" rows="" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง"></textarea></td>
+        <td><textarea  id="address" name="address" cols="" rows="" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง"></textarea></td>
       </tr>
       
         <tr>
@@ -237,7 +237,7 @@ table{
             <tr>
         <td><ul>ที่อยู่</ul></td>
         <td></td>
-        <td><textarea name="add2" cols="" rows="" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง"></textarea></td>
+        <td><textarea  id="address2" name="address2" cols="" rows="" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง"></textarea></td>
         </tr>
         <tr>
     <tr>

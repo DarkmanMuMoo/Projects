@@ -37,7 +37,10 @@
                             <td width="12">&nbsp;</td>
                             <td width="203" height="44"><strong>ผู้รับผิดชอบ</strong></td>
                             <td width="24">:</td>
-                            <td width="121"><? echo $work->getName(); ?>&nbsp;<? echo $work->getLastname(); ?></td>
+                            <td width="121"><? echo $work->getName(); ?>&nbsp;<? echo $work->getLastname(); ?> 
+                            &nbsp;&nbsp;
+                              <? echo ($work->getActive()) ? '<span class="badge badge-success">active</span>' : '<span class="badge badge-important">unactive</span>'; ?>
+                            </td>
                         </tr>
                         <tr>
                             <td height="44"><strong>ชื่องาน </strong></td>
@@ -76,7 +79,12 @@
                             <td ><? $chkemp = array(); ?>
                               <?php foreach ($coemplist as $emp): ?>
                               <p>                                      <? echo $emp->getName(); ?>&nbsp;<? echo $emp->getLastname(); ?>
-                              <a href="<?echo site_url('Backend/bakwork/removeCoemp/'.$emp->getEmpno().'/'.$work->getWorkno()); ?>"> <i class="icon-remove"></i></a></p>
+                                  
+                                   <? echo ($emp->getActive()) ? '<span class="badge badge-success">active</span>' : '<span class="badge badge-important">unactive</span>'; ?>
+                              <a href="<?echo site_url('Backend/bakwork/removeCoemp/'.$emp->getEmpno().'/'.$work->getWorkno()); ?>"> 
+                               
+                                  
+                                  <i class="icon-remove"></i></a></p>
                               <p>
                                 <? array_push($chkemp, $emp->getEmpno()); ?>
                                 <?php endforeach; ?>

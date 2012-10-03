@@ -51,7 +51,7 @@
                             <tr>
                                 <td width="145">ชนิดกระดาษ</td>
                                 <td width="57">แกรม</td>
-                                <td width="145">ราคา</td>
+                                <td width="145">ราคา(บาทต่อกิโล)</td>
                             </tr>
                             <?php foreach ($paperlist as $index => $paper): ?>
                                 <tr>
@@ -73,7 +73,7 @@
                         <table  table width="auto" border="1" bordercolor="#CCCCCC" >
                             <tr>
                                 <td width="109">วิธีการส่ง</td>
-                                <td width="50">ราคา</td>
+                                <td width="50">ราคา(บาท)</td>
                             </tr>
                             <?php foreach ($ordsendlist as $index => $ordsend): ?>
                                 <tr>
@@ -91,7 +91,7 @@
                         <table  table width="332" border="1" bordercolor="#CCCCCC" >
                             <tr>
                                 <td width="132">ตัวเลือกพิเศษ</td>
-                                <td width="184">ราคา</td>
+                                <td width="184">ราคา(บาท)</td>
                             </tr>
                             <?php foreach ($optionlist as $index=>$option): ?>
                                 <tr>
@@ -109,7 +109,7 @@
                      <table  table width="332" border="1" bordercolor="#CCCCCC" >
                             <tr>
                                 <td width="132">ตัวแปร</td>
-                                <td width="184">ราคา</td>
+                                <td width="184">ราคา(บาท)</td>
                             </tr>
                             <tr>
                                 <td width="132">ต้นทุนการพิมพ์</td>

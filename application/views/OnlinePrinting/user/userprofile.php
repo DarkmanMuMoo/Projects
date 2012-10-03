@@ -72,8 +72,12 @@
 <hr></hr>
 <div id="edit">
     <p>
-    <h5><strong>INFO</strong></h5>
-    </P>
+        
+        
+         <h5><strong>ข้อมูลส่วนตัว</strong></h5>
+    </p>
+   
+
     <form   id="editform" action="<? echo site_url('userprofile/updateinfo') ?>" method="post">
         <table  border="0" >
             <tr>

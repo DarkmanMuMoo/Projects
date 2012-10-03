@@ -53,7 +53,7 @@
                     break;
                     ?>
                 <?php endif; ?>
-<?php endforeach; ?><br>
+            <?php endforeach; ?><br>
             <strong>วันที่ : </strong><? echo $order->getOrderdate(); ?><br>
             <strong> การชำระ :</strong> <?php foreach ($ordpaylist as $ordpay): ?>
                 <?php if ($ordpay->getPaymethod() == $order->getPaymethod()): ?>
@@ -61,10 +61,11 @@
                     echo $ordpay->getDescription();
                     break;
                     ?>
-    <?php endif; ?>
-<?php endforeach; ?><br>
-            <strong> วันที่เสร็จสิ้น: <? echo ($order->getExpectedshipdate() != null) ? $order->getExpectedshipdate() : '-'; ?></strong><br />
+                <?php endif; ?>
+            <?php endforeach; ?><br>
             <strong>วันส่งสินค้า: <? echo ($order->getRecievedate() != null) ? $order->getRecievedate() : '-'; ?></strong>
+            <strong> วันที่เสร็จสิ้น: <? echo ($order->getExpectedshipdate() != null) ? $order->getExpectedshipdate() : '-'; ?></strong><br />
+
         </div> <div id="address"> 
             <h2>ที่อยู่จัดส่ง</h2><br />
 
@@ -87,8 +88,8 @@
                         echo $ordsend->getDescription();
                         break;
                         ?>
-    <?php endif; ?>
-<?php endforeach; ?><br></h4>
+                    <?php endif; ?>
+                <?php endforeach; ?><br></h4>
             </p>
 
         </div>
@@ -115,13 +116,13 @@
             </thead>
 
             <tbody>
-<? $totalprice = 0; ?>
-<?php foreach ($orderlinelist as $index => $orderline): ?>   
+                <? $totalprice = 0; ?>
+                <?php foreach ($orderlinelist as $index => $orderline): ?>   
                     <tr>
                         <td width="5%" ><? echo $index + 1; ?>   </td>
 
                         <td width="25%" ><? echo $orderline->getTmpname(); ?> &nbsp; 
-    <? echo $orderline->getTmpsize(); ?> &nbsp;
+                            <? echo $orderline->getTmpsize(); ?> &nbsp;
 
                         </td>
                         <td width="15%"  >  <? echo $orderline->getPapername(); ?> &nbsp; <? echo $orderline->getGram(); ?>        </td>
@@ -137,15 +138,15 @@
                         </td>
                         <td width="10%"  >  <?php if (($orderline->getFilepath() == '') || ($orderline->getFilepath() == null)): ?>
                                 <? echo '<h6 style="color:red" >notupload</h6>' ?>
-    <?php else: ?>
-        <? echo '<h6>upload</h6>' ?>
-    <?php endif; ?></td>
+                            <?php else: ?>
+                                <? echo '<h6>upload</h6>' ?>
+                            <?php endif; ?></td>
                         <td  width="30%" >
 
                             <a target="_blank" href="<? echo site_url('Backend/bakorders/downloadFile') . '/' . $orderline->getOrdlineno(); ?>" class="btn btn-primary">viewFile</a>
                         </td>
                     </tr>  
-<? endforeach; ?>
+                <? endforeach; ?>
 
             </tbody>
 
@@ -160,7 +161,7 @@
                 <div style="float:left ; text-align:left; width:50%; font-size:16px" >
                     <strong>ความคิดเห็นของลูกค้า</strong>
                     <p>
-<? echo $order->getCusremark(); ?>
+                        <? echo $order->getCusremark(); ?>
                     </p>
                 </div>
 
@@ -169,7 +170,7 @@
                         <td><strong>ข้อความส่งถึงลูกค้า</strong></td>
 
                         <td><textarea name="comment" cols="" rows="">
-<? echo $order->getSellerremark(); ?>
+                                <? echo $order->getSellerremark(); ?>
                             </textarea></td>
                     </tr>
 
@@ -186,7 +187,7 @@
 
 
     </div>
-<?php if ($order->getOrdstatus() < 40): ?>
+    <?php if ($order->getOrdstatus() < 40): ?>
         <div align="center" style="margin :5% auto;">  
             <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/waitforpay') . '/' . $order->getOrderno(); ?>">Approve</a> 
             <button class="btn btn-danger" onclick="reject('<? echo $order->getOrderno(); ?> ');" >Rejects</button>
@@ -195,21 +196,21 @@
             <form id="rejectform" method="post" action="<? echo site_url('Backend/bakorders/rejects') ?>">
                 <input  type="hidden" name="orderno"  value=""/>
                 <textarea name="msg"  placeholder="ข้อความที่ต้องการส่งถึงลูกค้า" >
-                           
+                               
                 </textarea>
             </form>
         </div>
-<?php endif; ?>
+    <?php endif; ?>
     <?php if ($order->getOrdstatus() == 50): ?>
         <div align="center" style="margin :5% auto;">  
             <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/ontransfer') . '/' . $order->getOrderno(); ?>">set to on trasfer</a> 
         </div>
-<?php endif; ?>
+    <?php endif; ?>
     <?php if ($order->getOrdstatus() == 60): ?>
         <div align="center" style="margin :5% auto;">  
             <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/complete') . '/' . $order->getOrderno(); ?>">set to Complete</a> 
         </div>
-<?php endif; ?>
+    <?php endif; ?>
 </div>
 
 <? $this->load->view(lang('bakfooter')); ?>
