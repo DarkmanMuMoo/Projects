@@ -150,13 +150,13 @@ public function chooseorder($orderno){
     public function deletework($workno) {
 
         $this->load->model('dao/workdao');
-        $this->load->model('dao/processdao');
-        $processresult = $this->processdao->delete($workno);
+       
+     
         $workresult = $this->workdao->delete($workno);
-        error_log('delete process of workno' . var_export($processresult, true));
+      
         error_log('delete work of workno' . var_export($workresult, true));
         $message = '';
-        if ($processresult && $workresult) {
+        if ($workresult) {
             $message = 'alert(\'delete complete\'); document.location.reload();';
         } else {
 

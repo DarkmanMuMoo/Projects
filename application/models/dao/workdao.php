@@ -45,7 +45,24 @@ class Workdao extends CI_Model {
 
         return $this->db->delete('work', array('workno' => $workno));
     }
+public function findbymultifield($condition) {
+        foreach ($condition as $index => $row) {
 
+            $this->db->where($index, $row);
+        }
+      
+        $query = $this->db->get('work');
+        $condition = array();
+
+        foreach ($query->result() as $row) {
+            $obj = null;
+            $obj = $this->makeObj($row);
+            array_push($condition, $obj);
+        }
+        // echo var_dump($obj);
+        // var_dump($this->db->last_query());
+        return $condition;
+    }
     public function update(Work $work) {
         $data = array(
             'work_name' => $work->getWorkname(),

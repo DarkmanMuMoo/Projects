@@ -57,29 +57,43 @@ class Bakemp extends CI_Controller {
 
         $data['emplist'] = $emplist;
         $data['positionlist'] = $positionlist;
-  
+
         $this->load->view(lang('bakemp'), $data);
     }
-public function  setactive($empno,$value){
-    
-    $emp=$this->empdao->findbyid($empno);
-    
-    $emp->setActive($value);
-    
-    $this->empdao->update($emp);
-    
-    redirect('Backend/bakemp');
-}
 
-public function deleteemp() {
+    public function setactive($empno, $value) {
+
+        $emp = $this->empdao->findbyid($empno);
+
+        $emp->setActive($value);
+
+        $this->empdao->update($emp);
+
+        redirect('Backend/bakemp');
+    }
+
+    public function deleteemp() {
+        $this->load->model('dao/workdao');
         $empno = $this->input->post('empno');
-
-        $result = $this->empdao->delete($empno);
+$cklist=$this->workdao->findbymultifield(array('empno'=>$empno)); 
+if(count($cklist)==0){
+    
+     $result = $this->empdao->delete($empno);
         error_log("delete emp  $empno =" . var_export($result, true), 0);
         $javascript = "
    document.location.reload();
    ";
         echo $javascript;
+}else{
+    
+    $javascript = "
+   alert('ไม่สามารถ ลบ พนักงานได้ เนื่องจากพนักงานนี้ รับมอบหมายงานอยู่')
+   ";
+        echo $javascript;
+    
+    
+}
+       
     }
 
     public function viewempdetail($empno) {
