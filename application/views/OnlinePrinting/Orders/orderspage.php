@@ -122,7 +122,7 @@
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             </td> 
-                            <td style="text-align: right;" ><? echo number_format($ord->getTotalprice(), 2, '.', ','); ?>  &nbsp; บาท </td>                      
+                            <td style="text-align: right;" ><? echo number_format($ord->getTotalprice(), 2, '.', ','); ?>  &nbsp; </td>                      
                             <td style="width: 100px;" >
                                 <div class="btn-group">
                                     <a class="btn btn-info" href="<? echo site_url('orders/viewOrderdetail') . "/" . $ord->getOrderno(); ?>"> 

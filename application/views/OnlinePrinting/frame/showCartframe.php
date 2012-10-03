@@ -28,18 +28,18 @@ if(data=='false'){
         
     </script>
     <div align="center"  >
-            <p> <h1> your Cart</h1></p>
+            <p> <h1> สินค้าในตะกร้า</h1></p>
                 <p>  
            <?  $totalprice=0; ?>
                 <table class="table table-bordered" id="Ccolum" style="width:auto; margin-top: 30px;">
                     <thead> <tr> 
                         
                       
-                             <td>template</td>
+                             <td>เทมเพลต</td>
                               <td>กระดาษ</td>
-                               <td>option</td>
+                               <td>ตัวเลือกพิเศษ</td>
                                 <td>จำนวน</td>
-                                 <td>ราคา</td>
+                                 <td>ราคา(บาท)</td>
                                  <td>ลบ</td>
 
                         </tr> </thead>
@@ -77,7 +77,7 @@ if(data=='false'){
                             <? echo $cart->getQty();?>
                       </td>
                           <td>
-                            <?    echo number_format( $cart->getPrice(), 2, '.', ',');   $totalprice=$totalprice+$cart->getPrice(); ?>บาท
+                            <?    echo number_format( $cart->getPrice(), 2, '.', ',');   $totalprice=$totalprice+$cart->getPrice(); ?>
                       </td>
                       <td>
                           <a href="<? echo site_url('product/removeCartItem').'/'.$index;  ?> ">remove </a>

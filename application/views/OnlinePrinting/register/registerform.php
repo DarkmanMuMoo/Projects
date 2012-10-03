@@ -191,16 +191,46 @@ table{
         </tr>
         
         <tr>
-           <td style ="vertical-align: text-top;">ที่อยู่ติดต่อ</td>
+           <td style ="vertical-align: text-top;"><strong>ที่อยู่ติดต่อ</strong></td>
            <td></td>
-           <td><textarea rows="5" cols="15" name="address" id="address">
-
-<?echo $this->input->post('address')?>
-            </textarea></td>
+           <td>&nbsp;</td>
         </tr>
-        
         <tr>
-            <td>จังหวัด</td>
+        <td><ul>เลขที่</ul></td>
+        <td></td>
+        <td><input name="ad" type="text" /></td>
+      </tr>
+       <tr>
+       <td>         <ul>หมู่ที่</ul>
+       </ul></td>
+       <td></td>
+       <td><input name="moo" type="text" /></td>
+      </tr>
+        <tr>
+        <td><ul>
+          หมู่บ้าน/ซอย
+        </ul></td>
+        <td></td>
+        <td><input name="soi" type="text" /></td>
+        </tr>
+        <tr>
+        <td><ul>ถนน</ul></td>
+        <td></td>
+        <td><input name="road" type="text" /></td>
+        </tr>
+        <tr>
+        <td><ul>แขวง/ตำบล</ul></td>
+        <td></td>
+        <td><input name="tb" type="text" /></td>
+        </tr>
+        <tr>
+        <td><ul>เขต/อำเภอ</ul></td>
+        <td></td>
+        <td><input name="am" type="text" /></td>
+        </tr>
+      
+        <tr>
+            <td><ul>จังหวัด</ul></td>
             <td></td>
             <td><select name="province" id="province">
                      <?php foreach ($provincelist as $province): ?>
@@ -210,13 +240,13 @@ table{
         </tr>
         
         <tr>
-            <td>รหัสไปรษณย์</td>
+            <td><ul>รหัสไปรษณย์</ul></td>
             <td></td>
             <td><input type="text" name="postcode" maxlength="5"  value="<?echo $this->input->post('postcode')?>"id="postcode"/></td>
         </tr>
         
         <tr>
-        <td>โทรศัพท์</td>
+        <td><ul>โทรศัพท์</ul></td>
         <td></td>
         <td><input type="text" name="phone1" value="<?echo $this->input->post('phone1')?>"  id="phone1"/></td>
         </tr>
@@ -224,18 +254,45 @@ table{
         <tr>
             <td><b>ที่อยู่(ออกใบเสร็จ)</b></td>
             <td></td>
-        <td></td>
+        <td><form id="form1" name="form1" method="post" action="">
+          <input type="checkbox" name="sameadd" id="sameadd" />
+          <label for="sameadd">เหมือนที่อยู่ติดต่อ</label>
+        </form></td>
         </tr>        
         
         
         
-        <tr>
-            <td style ="vertical-align: text-top;">ที่อยู่</td> 
+     
+            <tr>
+            <td><ul>เลขที่</ul></td>
             <td></td>
-            <td><textarea rows="5" cols="15" name="address2" id="address2"  >
-<?echo $this->input->post('address2')?>
-            </textarea></td>
-        </tr>
+            <td><input name="ad2" type="text" /></td>
+            </tr>
+            <tr>
+            <td><ul>หมู่ที่</ul></td>
+            <td></td>
+            <td><input name="moo2" type="text" /></td>
+            </tr>
+            <tr>
+            <td><ul>หมู่บ้าน/ซอย</ul></td>
+            <td></td>
+            <td><input name="soi2" type="text" /></td>
+            </tr>
+            <tr>
+            <td><ul>ถนน</ul></td>
+            <td></td>
+            <td><input name="road2" type="text" /></td>
+            </tr>
+            <tr>
+            <td><ul>แขวง/ตำบล</ul></td>
+            <td></td>
+            <td><input name="tb2" type="text" /></td>
+            </tr>
+            <tr>
+            <td><ul>เขต/อำเภอ</ul></td>
+            <td></td>
+            <td><input name="am2" type="text" /></td>
+            </tr>
             
             <tr>
             <td>จังหวัด</td> 

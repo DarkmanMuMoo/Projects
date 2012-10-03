@@ -15,7 +15,7 @@
 <? echo form_open('orders/ordersummary') ?>
 
  <p style ="margin-bottom: 10px;">
-  <h1><b>Confirm Order</b></h1>
+<h1><b>Confirm Order</b></h1>
     <h4>คอนเฟิมออร์เดอร์</h4>
 </p>
 <hr></hr>
@@ -67,7 +67,7 @@
             <td>กระดาษ</td>
             <td>option</td>
             <td>จำนวน</td>
-            <td>ราคา</td>
+            <td>ราคา(บาท)</td>
           <!--  <td>ลบ</td>-->
 
         </tr> </thead>
@@ -109,7 +109,7 @@
                 <td>
     <? echo  number_format( $cart->getPrice(), 2, '.', ',');
     $totalprice = $totalprice + $cart->getPrice(); 
-    ?>&nbsp; บาท
+    ?>&nbsp; 
                 </td>
               <!--  <td>
                     <a href="<? echo site_url('orders/removeCartItem') . '/' . $index; ?> ">remove </a>
@@ -124,9 +124,9 @@
 
 </table>
 <div style="float: right; margin-right: 30%;" >
-    <strong>ราคาสินค้า :<? echo number_format($totalprice, 2, '.', ',') ;?> บาท</strong><br>
-    <strong>ค่าจัดส่ง :<? echo  number_format($ordsend->getSendprice(), 2, '.', ','); ?> บาท</strong><br>
-    <strong>ราคารวม :<? echo number_format($totalprice + $ordsend->getSendprice() , 2, '.', ','); ?> บาท</strong><br>
+   <table> <tr><td><strong>ราคาสินค้า</strong></td> <td> &nbsp;:</td><td><? echo number_format($totalprice, 2, '.', ',') ;?> บาท</td></tr>
+    <tr><td><strong>ค่าจัดส่ง</strong></td><td> :</td><td><? echo  number_format($ordsend->getSendprice(), 2, '.', ','); ?> บาท<td></tr>
+    <tr><td><strong>ราคารวม</strong></td><td> :</td><td><? echo number_format($totalprice + $ordsend->getSendprice() , 2, '.', ','); ?> บาท</td></tr></table><br>
     <input type="hidden" name="totalprice" value="<? echo $totalprice + $ordsend->getSendprice(); ?>">
 </div>
 

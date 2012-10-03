@@ -50,11 +50,11 @@
 
 <? echo form_open('orders/confirmorder') ?>
 
-<h5>จัดส่ง</h5> <br/>
+<h5>ที่อยู่จัดส่ง</h5> <br/>
 <div id="selectadd" >
 
-    <input type="radio" id="add1" name="add" value="tabadd1" checked="checked" /><label for="add1">ที่อยหลัก</label>
-    <input type="radio" id="add2" name="add" value="tabadd2"  /><label for="add2">ที่อยู่รอง</label>
+    <input type="radio" id="add1" name="add" value="tabadd1" checked="checked" /><label for="add1">ที่ติดต่อ</label>
+    <input type="radio" id="add2" name="add" value="tabadd2"  /><label for="add2">ที่อยู่ออกใบเสร็จ</label>
     <input type="radio" id="add3" name="add" value="tabadd3"  /><label for="add3">ที่อยู่อื่น</label>
 </div>
 <br/><h5>จัดส่ง</h5> <br/>

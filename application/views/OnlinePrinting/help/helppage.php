@@ -43,7 +43,7 @@ function loadpage(page){
 <div id="page">
         <p style ="margin-bottom: 10px;">
     <h1><b>Help</b></h1>
-    <h4>คำแนะนำต่างๆ</h4>
+    <h4>คำแนะนำการใช้งานพิมพ์ออนไลน์</h4>
 </p>
 <hr></hr>
     <div id="sidebar">
