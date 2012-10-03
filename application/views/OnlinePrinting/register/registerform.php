@@ -1,4 +1,10 @@
 <? $this->load->view(lang('header')) ?>
+<style type="text/css">
+.req {
+	color: #F00;
+}
+</style>
+
 <br>
 <script>
     function changecaptcha(){
@@ -154,38 +160,38 @@ table{
 <table>
     <tbody>
         <tr>
-            <td>อีเมลล์ </td>
+            <td>อีเมลล์<span class="req">*</span></td>
             <td></td>
             <td><input type="text" name="email" id="email" value="<?echo $this->input->post('email')?>"  />
                 <input class="btn" type="button" onclick="check_email();"  value="ตรวจสอบอีเมลล์"/></td>
         </tr>
 
         <tr>
-            <td>ชื่อ</td>
+            <td>ชื่อ<span class="req">*</span></td>
             <td></td>
             <td><input type="text" name="name" id="name" value="<?echo $this->input->post('name')?>" /></td>
         </tr>
         
         <tr>
-        <td>นามสกุล</td>
+        <td>นามสกุล<span class="req">*</span></td>
         <td></td>
         <td><input type="text" name="lastname" id="lastname"  value="<?echo $this->input->post('lastname')?>"/></td>
         </tr>
         
         <tr>
-        <td>โทรศัพท์มือถือ</td>
+        <td>โทรศัพท์มือถือ<span class="req">*</span></td>
         <td></td>
         <td><input type="text" name="mphone"  value="<?echo $this->input->post('mphone')?>" id="mphone"/></td>
         </tr>
         
         <tr>
-        <td>รหัสผ่าน</td>
+        <td>รหัสผ่าน<span class="req">*</span></td>
         <td></td>
         <td><input size="15" maxlength="15"  value="" type="password" name="password" id="password" /></td>
         </tr>
         
         <tr>
-        <td>ยืนยันรหัสผ่าน</td> 
+        <td>ยืนยันรหัสผ่าน<span class="req">*</span></td> 
         <td></td>
         <td><input size="15" maxlength="15" type="password" name="confirm_password" id="confirm_password" /></td>
         </tr>
@@ -196,13 +202,13 @@ table{
            <td>&nbsp;</td>
         </tr>
         <tr>
-        <td><ul>ที่อยู่</ul></td>
+        <td><ul>ที่อยู่<span class="req">*</span></ul></td>
         <td></td>
         <td><textarea name="add1" cols="" rows="" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง"></textarea></td>
       </tr>
       
         <tr>
-            <td><ul>จังหวัด</ul></td>
+            <td><ul>จังหวัด<span class="req">*</span></ul></td>
             <td></td>
             <td><select name="province" id="province">
                      <?php foreach ($provincelist as $province): ?>
@@ -212,13 +218,13 @@ table{
         </tr>
         
         <tr>
-            <td><ul>รหัสไปรษณย์</ul></td>
+            <td><ul>รหัสไปรษณย์<span class="req">*</span></ul></td>
             <td></td>
             <td><input type="text" name="postcode" maxlength="5"  value="<?echo $this->input->post('postcode')?>"id="postcode"/></td>
         </tr>
         
         <tr>
-        <td><ul>โทรศัพท์</ul></td>
+        <td><ul>โทรศัพท์<span class="req">*</span></ul></td>
         <td></td>
         <td><input type="text" name="phone1" value="<?echo $this->input->post('phone1')?>"  id="phone1"/></td>
         </tr>
@@ -234,7 +240,7 @@ table{
         <td><textarea name="add2" cols="" rows="" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง"></textarea></td>
         </tr>
         <tr>
-            <tr>
+    <tr>
             <td><ul>จังหวัด</ul></td> 
             <td></td>
             <td><select name="province2" id="province2">
@@ -243,7 +249,7 @@ table{
                     value="<? echo $province->getProvinceid(); ?>"><? echo $province->getProvincename(); ?></option>
                 <? endforeach; ?>
             </select></td>
-            </tr>
+    </tr>
             
             <tr>
             <td><ul>รหัสไปรษณีย์</ul></td>
@@ -260,9 +266,9 @@ table{
              <td></td>
              <td> <img id="captcha" src="<? echo site_url('register/getcaptcha') ?>" width="150" heigth="40" /><a href="javascript:void(0)"  onclick="changecaptcha();"class="btn">เปลี่ยนรูป</a><br><br></td>
                   
-            </tr>
+    </tr>
               <tr>
-        <td>กรอกตัวอักษรในภาพ</td>
+        <td>กรอกตัวอักษรในภาพ<span class="req">*</span></td>
         <td></td>
         <td><input type="text" name="captcha"  id="captcha"/> </td>
         </tr>
