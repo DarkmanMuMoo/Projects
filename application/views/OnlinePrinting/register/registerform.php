@@ -196,38 +196,10 @@ table{
            <td>&nbsp;</td>
         </tr>
         <tr>
-        <td><ul>เลขที่</ul></td>
+        <td><ul>ที่อยู่</ul></td>
         <td></td>
-        <td><input name="ad" type="text" /></td>
+        <td><textarea name="add1" cols="" rows="" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง"></textarea></td>
       </tr>
-       <tr>
-       <td>         <ul>หมู่ที่</ul>
-       </ul></td>
-       <td></td>
-       <td><input name="moo" type="text" /></td>
-      </tr>
-        <tr>
-        <td><ul>
-          หมู่บ้าน/ซอย
-        </ul></td>
-        <td></td>
-        <td><input name="soi" type="text" /></td>
-        </tr>
-        <tr>
-        <td><ul>ถนน</ul></td>
-        <td></td>
-        <td><input name="road" type="text" /></td>
-        </tr>
-        <tr>
-        <td><ul>แขวง/ตำบล</ul></td>
-        <td></td>
-        <td><input name="tb" type="text" /></td>
-        </tr>
-        <tr>
-        <td><ul>เขต/อำเภอ</ul></td>
-        <td></td>
-        <td><input name="am" type="text" /></td>
-        </tr>
       
         <tr>
             <td><ul>จังหวัด</ul></td>
@@ -251,49 +223,17 @@ table{
         <td><input type="text" name="phone1" value="<?echo $this->input->post('phone1')?>"  id="phone1"/></td>
         </tr>
         
-        <tr>
             <td><b>ที่อยู่(ออกใบเสร็จ)</b></td>
             <td></td>
         <td><form id="form1" name="form1" method="post" action="">
-          <input type="checkbox" name="sameadd" id="sameadd" />
-          <label for="sameadd">เหมือนที่อยู่ติดต่อ</label>
         </form></td>
-        </tr>        
-        
-        
-        
-     
+        </tr>
             <tr>
-            <td><ul>เลขที่</ul></td>
-            <td></td>
-            <td><input name="ad2" type="text" /></td>
-            </tr>
-            <tr>
-            <td><ul>หมู่ที่</ul></td>
-            <td></td>
-            <td><input name="moo2" type="text" /></td>
-            </tr>
-            <tr>
-            <td><ul>หมู่บ้าน/ซอย</ul></td>
-            <td></td>
-            <td><input name="soi2" type="text" /></td>
-            </tr>
-            <tr>
-            <td><ul>ถนน</ul></td>
-            <td></td>
-            <td><input name="road2" type="text" /></td>
-            </tr>
-            <tr>
-            <td><ul>แขวง/ตำบล</ul></td>
-            <td></td>
-            <td><input name="tb2" type="text" /></td>
-            </tr>
-            <tr>
-            <td><ul>เขต/อำเภอ</ul></td>
-            <td></td>
-            <td><input name="am2" type="text" /></td>
-            </tr>
-            
+        <td><ul>ที่อยู่</ul></td>
+        <td></td>
+        <td><textarea name="add2" cols="" rows="" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง"></textarea></td>
+        </tr>
+        <tr>
             <tr>
             <td><ul>จังหวัด</ul></td> 
             <td></td>
