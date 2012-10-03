@@ -295,7 +295,7 @@ table{
             </tr>
             
             <tr>
-            <td>จังหวัด</td> 
+            <td><ul>จังหวัด</ul></td> 
             <td></td>
             <td><select name="province2" id="province2">
                      <?php foreach ($provincelist as $province): ?>
@@ -306,13 +306,13 @@ table{
             </tr>
             
             <tr>
-            <td>รหัสไปรษณีย์</td>
+            <td><ul>รหัสไปรษณีย์</ul></td>
             <td></td>
             <td><input type="text" name="postcode2" maxlength="5" id="postcode2" value="<?echo $this->input->post('postcode2')?>" /></td>
             </tr>
             
             <tr>
-        <td>โทรศัพท์</td>
+        <td><ul>โทรศัพท์</ul></td>
         <td></td>
         <td><input type="text" name="phone2"  id="phone2" value="<?echo $this->input->post('phone2')?>"/></td>
         </tr>
