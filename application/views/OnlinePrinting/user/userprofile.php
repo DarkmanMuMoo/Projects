@@ -147,7 +147,7 @@
      <td></td> 
       <td >   
            <input name="index" value="1" type="hidden"/>
-        <input class="btn-info" type="submit" value="edit"></td>
+        <input class="btn-info" type="submit" value="edit" /></td>
         <td></td>
         </tr>
          </table>
@@ -186,7 +186,7 @@
             <tr>
             <td></td>
            <td colspan="2" ><input name="index" value="2" type="hidden"/>
-            <input  class="btn-info"type="submit" value="edit"></td>
+            <input  class="btn-info"type="submit" value="edit" /></td>
             <td></td>
             </tr>
              </table>
