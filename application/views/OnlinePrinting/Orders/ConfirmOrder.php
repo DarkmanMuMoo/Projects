@@ -16,7 +16,7 @@
 
  <p style ="margin-bottom: 10px;">
 <h1><b>Confirm Order</b></h1>
-    <h4>คอนเฟิมออร์เดอร์</h4>
+    <h4>ยืนยันการสั่งสินค้า</h4>
 </p>
 <hr></hr>
 
@@ -63,9 +63,9 @@
     <thead> <tr> 
 
 
-            <td>template</td>
+            <td>เทมเพลต</td>
             <td>กระดาษ</td>
-            <td>option</td>
+            <td>ตัวเลือกพิเศษ</td>
             <td>จำนวน</td>
             <td>ราคา(บาท)</td>
           <!--  <td>ลบ</td>-->
@@ -124,35 +124,48 @@
 
 </table>
 <div style="float: right; margin-right: 30%;" >
-   <table> <tr><td><strong>ราคาสินค้า</strong></td> <td> &nbsp;:</td><td><? echo number_format($totalprice, 2, '.', ',') ;?> บาท</td></tr>
-    <tr><td><strong>ค่าจัดส่ง</strong></td><td> :</td><td><? echo  number_format($ordsend->getSendprice(), 2, '.', ','); ?> บาท<td></tr>
-    <tr><td><strong>ราคารวม</strong></td><td> :</td><td><? echo number_format($totalprice + $ordsend->getSendprice() , 2, '.', ','); ?> บาท</td></tr></table><br>
+   <table> 
+   <tr>
+   <td><strong>ราคาสินค้า</strong></td> 
+   <td> <strong>&nbsp;:&nbsp;</strong></td>
+   <td><? echo number_format($totalprice, 2, '.', ',') ;?> บาท</td>
+   </tr>
+    <tr>
+    <td><strong>ค่าจัดส่ง</strong></td>
+    <td><strong>&nbsp;:&nbsp;</strong></td>
+    <td><? echo  number_format($ordsend->getSendprice(), 2, '.', ','); ?> บาท</td>
+    </tr>
+    <tr>
+    <td><strong>ราคารวม</strong></td>
+    <td><strong>&nbsp;:&nbsp;</strong></td>
+    <td><? echo number_format($totalprice + $ordsend->getSendprice() , 2, '.', ','); ?> บาท</td>
+    </tr>
+  </table><br>
     <input type="hidden" name="totalprice" value="<? echo $totalprice + $ordsend->getSendprice(); ?>">
 </div>
 
-<p>
-    <label>จัดส่ง: </label> 
 
-    <strong><? echo $ordsend->getDescription(); ?>   </strong>
-    <input name="ordsend"  type="hidden" value="<? echo $ordsend->getSendmethod(); ?>"
+<table>
+	<tr>
+    <td>จัดส่ง</td>
+    <td>&nbsp;:&nbsp;</td> 
+    <td><strong><? echo $ordsend->getDescription(); ?>   </strong>
+    <input name="ordsend"  type="hidden" value="<? echo $ordsend->getSendmethod(); ?>"  /></td>
+    </tr>
+    <tr>
+    <td>  การจ่ายเงิน</td>
+    <td>&nbsp;:&nbsp;</td> 
+    <td><strong><? echo $ordpay->getDescription(); ?>   </strong>
+    <input name="ordpay"  type="hidden" value="<? echo $ordpay->getPaymethod(); ?>"  /></td>
+    </tr>
 
-</p>
+<tr>
+<td>ข้อความถึงโรงพิมพ์</td>
+<td>&nbsp;:&nbsp;</td>
+<td><p><strong><? echo $cusremark ?></strong>&nbsp;</p>
+<input name="cusremark"  type="hidden" value="<? echo $cusremark ?>" ></td></tr> </table>
 
-<p>
-    <label>การจ่ายเงิน: </label> 
-
-
-    <strong><? echo $ordpay->getDescription(); ?>   </strong>
-    <input name="ordpay"  type="hidden" value="<? echo $ordpay->getPaymethod(); ?>"
-
-
-</p>
-<label> ข้อความถึงโรงพิมพ์: </label>
-<p>  
-<? echo $cusremark ?>
-</p>
-<input name="cusremark"  type="hidden" value="<? echo $cusremark ?>" >
-<div style="text-align: center;">
+<div style="text-align: center; margin-top:20;" >
     <a href="javascript:void(0);" onclick="history.back()" class="btn btn-primary">Back</a> 
     <button type="submit" class="btn btn-primary">Confirm</button>
 </div>

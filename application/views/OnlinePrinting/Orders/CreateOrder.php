@@ -69,17 +69,28 @@
 
 </div>
 <div  class="tabadd" id="tabadd3" style="display: none;" >
-
-  
-       ที่อยู่ <textarea name="address" id="address" > </textarea><br/>
-      จังหวัด <select name="province" id="province">
+<table>
+  <tr>
+       <td>ที่อยู่</td> 
+       <td><textarea name="address" id="address" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง" > </textarea></td>
+  </tr>
+  <tr>
+      <td>จังหวัด</td> 
+      <td><select name="province" id="province">
             <?php foreach ($provincelist as $province): ?>
                 <option  value="<? echo $province->getProvinceid(); ?>"><? echo $province->getProvincename(); ?></option>
             <? endforeach; ?>
-        </select></br>
-       รหัสไปรษณีย์ <input type="text"id="postcode" name="postcode" maxlength="5" value=""/><br/>
-      โทรศัพท์ <input type="text" name="phone" value=""  id="phone"/><br/>
- 
+        </select></td>
+        </tr>
+  <tr>
+       <td>รหัสไปรษณีย์ &nbsp;&nbsp;&nbsp;</td> 
+       <td><input type="text"id="postcode" name="postcode" maxlength="5" value=""/></td>
+       </tr>
+  <tr>
+      <td>โทรศัพท์</td> 
+      <td><input type="text" name="phone" value=""  id="phone"/></td>
+      </tr>
+ </table>
 </div>
 
 <div  class="tabadd" id="tabadd2" style="display: none;">
@@ -101,9 +112,9 @@
     <thead> <tr> 
 
 
-            <td>template</td>
+            <td>เทมเพลต</td>
             <td>กระดาษ</td>
-            <td>option</td>
+            <td>ตัวเลือกพิเศษ</td>
             <td>จำนวน</td>
             <td>ราคา</td>
           <!--  <td>ลบ</td>-->
@@ -167,9 +178,23 @@
     </tbody>
 </table>
 <div style="float: right; margin-right: 30%" >
-    <strong>ราคาสินค้า :<? echo number_format($totalprice, 2, '.', ','); ?> บาท</strong><br>
-    <strong>ค่าจัดส่ง :<span  id="adprice">120.00</span> บาท</strong><br>
-    <strong>ราคารวม :<span  id="sumprice"><? echo number_format($totalprice, 2, '.', ','); ?></span> บาท</strong>
+<table>
+   <tr>
+    <td><strong>ราคาสินค้า</strong></td> 
+    <td><strong>&nbsp;: &nbsp;</strong></td>
+	<td><strong><? echo number_format($totalprice, 2, '.', ','); ?> บาท</strong></td>
+    </tr>
+    <tr>
+    <td><strong>ค่าจัดส่ง</strong></td> 
+    <td><strong>&nbsp;: &nbsp;</strong></td>
+    <td><strong><span  id="adprice">120.00</span> บาท</strong></td>
+    </tr>
+    <tr>
+    <td><strong>ราคารวม</strong></td> 
+    <td><strong>&nbsp;: &nbsp;</strong></td>
+    <td><strong><span  id="sumprice"><? echo number_format($totalprice, 2, '.', ','); ?></span> บาท</strong></td>
+    </tr>
+    </table>
 </div>
 
 <p>
@@ -189,7 +214,7 @@
 
 </p>
 
-<label> ความคิดเห็นลูกค้า: </label>
+<label> ข้อความถึงโรงพิมพ์: </label>
 <textarea name="cusremark">
 
 

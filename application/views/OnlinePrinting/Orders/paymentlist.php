@@ -70,16 +70,23 @@
 
     </div>
     <div id="paystatus"  >
-
-        วันที่ : <? echo $order->getOrderdate(); ?><br>
-        การจ่ายเงิน : <?php foreach ($ordpaylist as $ordpay): ?>
+<table >
+	<tr>
+        <td><strong>วันที่</strong></td>
+		<td><? echo $order->getOrderdate(); ?></td>
+     <tr>
+        <td><strong>การชำระเงิน</strong></td> 
+		<td><?php foreach ($ordpaylist as $ordpay): ?>
             <?php if ($ordpay->getPaymethod() == $order->getPaymethod()): ?>
                 <? echo $ordpay->getDescription();
                 break; ?>
             <?php endif; ?>
         <?php endforeach; ?><br>
-<? $showform = true; ?>
-        รอบการจ่ายเงิน: <?php if ($ordpay->getPaymethod() == '10'): ?>
+<? $showform = true; ?></td>
+      </tr>
+      <tr>
+        <td><strong>รอบการจ่ายเงิน&nbsp;&nbsp;</strong></td>
+		<td><?php if ($ordpay->getPaymethod() == '10'): ?>
 
             <? $showform = ($countactive > 0) ? false : true;
             echo $countactive; ?>/1 ครั้ง
@@ -87,7 +94,9 @@
             <? $showform = ($countactive > 1) ? false : true;
             echo $countactive; ?>/2 ครั้ง
 
-<?php endif; ?>
+<?php endif; ?></td>
+</tr>
+</table>
     </div>
 <?php if ($showform): ?>
         <div id ="payconfirm">

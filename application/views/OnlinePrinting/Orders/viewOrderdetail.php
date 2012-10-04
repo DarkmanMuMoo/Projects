@@ -3,7 +3,7 @@
     #order{
 
         float:left;
-        width: 50%;
+        
 
     }
     #address{
@@ -23,6 +23,9 @@
     .blue{
         color:#09C;	
     }
+	.orange{
+		color:#F60;
+		}
 </style>
 
 
@@ -79,41 +82,75 @@
 
     <div id="head" style="clear:both;">
         <div id="order">
-            <h2>เลขใบสั่งซื้อ <? echo $order->getOrderno(); ?></h2> <h3>สถานะ :
+            <h2>เลขใบสั่งซื้อ <? echo $order->getOrderno(); ?></h2> <h3>สถานะ 
                 <?php foreach ($ordstatuslist as $ordstatus): ?>
                     <?php if ($ordstatus->getStatus() == $order->getOrdstatus()): ?>
                         <span <? echo ($order->getOrdstatus() == 10) ? 'class="red"' : 'class="blue"'; ?> > <? echo $ordstatus->getDescription(); ?> </span></h3> <? break; ?>
                 <?php endif; ?>
             <?php endforeach; ?>
-            <strong>  วันที่ :</strong>  <? echo $order->getOrderdate(); ?><br>
-            <strong> การจัดส่ง :</strong> <?php foreach ($ordpaylist as $ordpay): ?>
+<table>
+	<tr>
+         <td><strong>วันที่</strong></td> 
+         <td><strong>&nbsp;:&nbsp;</strong></td>  
+		 <td><? echo $order->getOrderdate(); ?></td>
+    </tr>
+    <tr>
+          <td><strong> การชำระเงิน </strong></td>
+          <td><strong>&nbsp;:&nbsp;</strong></td> 
+		  <td><?php foreach ($ordpaylist as $ordpay): ?>
                 <?php if ($ordpay->getPaymethod() == $order->getPaymethod()): ?>
                     <? echo $ordpay->getDescription();
                     break;
                     ?>
                 <?php endif; ?>
-<?php endforeach; ?><br>
-            <strong>วันส่งสินค้า: <? echo ($order->getRecievedate() != null) ? $order->getRecievedate() : '-'; ?></strong>
-            <strong> วันที่เสร็จสิ้น: <? echo ($order->getExpectedshipdate() != null) ? $order->getExpectedshipdate() : '-'; ?></strong><br />
+<?php endforeach; ?></td>
+      </tr>
+      <tr>
+          <td><strong>วันส่งสินค้า</strong></td>
+          <td><strong>&nbsp;:&nbsp;</strong></td>
+          <td><? echo ($order->getRecievedate() != null) ? $order->getRecievedate() : '-'; ?></td>
+      </tr>
+      <tr>
+           <td><strong> วันที่เสร็จสิ้น</strong></td>
+           <td><strong>&nbsp;:&nbsp;</strong></td> 
+		   <td><? echo ($order->getExpectedshipdate() != null) ? $order->getExpectedshipdate() : '-'; ?></strong></td>
+           </tr>
+           </table>
 
 
         </div> <div id="address"> 
             <h2>ที่อยู่จัดส่ง</h2>
-            <address>
-                ที่อยู่ :    <? echo $order->getAddress(); ?></br>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <? echo $order->getProvince(); ?></br>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <? echo $order->getPostcode(); ?></br>
-            </address>
-            <p>
-                <strong>การจัดส่ง : </strong>
-                <?php foreach ($ordsendlist as $ordsend): ?>
+            
+  <table>
+  	<tr>
+         <td><strong>ที่อยู่</strong></td> 
+         <td><strong>&nbsp;:&nbsp;</strong></td>    
+		 <td><? echo $order->getAddress(); ?></br></td>
+         </tr>
+         <tr>
+         <td></td>
+         <td></td>
+         <td><? echo $order->getProvince(); ?></td>
+         </tr>
+         <tr>
+         <td></td>
+         <td></td>
+          <td><? echo $order->getPostcode(); ?></td>
+                </tr>
+            
+            <tr>
+          <td><strong>การจัดส่ง</strong></td> 
+          <td><strong>&nbsp;:&nbsp; </strong></td>
+          <td><?php foreach ($ordsendlist as $ordsend): ?>
                     <?php if ($ordsend->getSendmethod() == $order->getSendmethod()): ?>
                         <? echo $ordsend->getDescription();
                         break;
                         ?>
     <?php endif; ?>
 <?php endforeach; ?><br>
-            </p>
+            </td>
+            </tr>
+            </table>
 
         </div>
     </div>

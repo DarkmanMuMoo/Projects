@@ -64,9 +64,9 @@ font-style: italic;
          <input value="" class="input-xlarge" style="height: 28px;" type="password" name="password" id="password" placeholder="Enter password" /><br/>
     <!--remember me<input type="checkbox" name="remember" value="remember" /> I have a bike<br />-->
 
-         <input  class="btn btn-large btn-primary" type="submit"  value="Login"/> 
-         <a  style="margin-left: 30px;"target="_top"  href="javascript:void(0);" onclick="passworddialog()" >Forget Password??</a>
-         <a  style="margin-left: 30px;"target="_top"  href="<?echo site_url('register'); ?>"  >Register</a>        
+         <input class="btn btn-large btn-primary" type="submit"  value="Login" /> 
+         <a  style="margin-left: 30px;"target="_top"  href="javascript:void(0);" onclick="passworddialog()" >Forget Password??</a><br />
+         <a  style="margin-left: 102px;"target="_top"  href="<?echo site_url('register'); ?>"  >Register</a>        
        
         <br>
         
