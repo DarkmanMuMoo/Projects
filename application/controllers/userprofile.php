@@ -37,22 +37,24 @@ class Userprofile extends CI_Controller {
     }
 
     public function updateaddress() {
+  $this->load->library('thailandutil');
 
-
-
+  //var_dump($this->input->post());
         $ad = $this->input->post('ad');
-        $prov = $this->input->post('prov');
+        $prov = $this->thailandutil->findbyid($this->input->post('prov'))->getProvincename();
         $post = $this->input->post('post');
         $phone = $this->input->post('phone');
         $address = ($this->input->post('index') == '1') ? $_SESSION['user']->getAddress1() : $_SESSION['user']->getAddress2();
-
+       
         $update = ($ad != $address['address']) || ($prov != $address['province']) || ($ad != $address['postcode']) || ($ad != $address['phone']);
         if ($update) {
             $address['address'] = $ad;
             $address['province'] = $prov;
             $address['postcode'] = $post;
             $address['phone'] = $phone;
+              ($this->input->post('index') == '1') ?$_SESSION['user']->setAddress1($address):$_SESSION['user']->setAddress2($address);
              $result = $this->cusdao->update($_SESSION['user']);
+            
             error_log(var_export($result, true) . 'change address', 0);
             if (!$result) {
                 $_SESSION['user'] = $this->cusdao->findbyemail($_SESSION['user']->getEmail());
