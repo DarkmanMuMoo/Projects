@@ -58,11 +58,24 @@ class Register extends CI_Controller {
                 'postcode' => $this->input->post('postcode'),
                 'phone' => $this->input->post('phone1')
             );
-            $address2 = array('address' => $this->input->post('address2'),
+            $address2;
+            if($this->input->post('needop')){
+                 $address2 = array('address' => '',
+                'province' => '' ,
+                'postcode' => '',
+                'phone' => ''
+            );
+                
+            }else{
+                 $address2 = array('address' => $this->input->post('address2'),
                 'province' => $province2->getProvincename() ,
                 'postcode' => $this->input->post('postcode2'),
                 'phone' => $this->input->post('phone2')
             );
+                
+                
+            }
+           
             $cus->setAddress1($address1);
             $cus->setAddress2($address2);
 

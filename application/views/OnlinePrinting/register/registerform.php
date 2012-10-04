@@ -39,6 +39,15 @@
         $("#mphone").mask("999-999-9999");
         $("#phone1").mask("99-999-9999");
         $("#phone2").mask("99-999-9999");
+        $("#needop").click(function(){
+   
+          if($('#needop').attr('checked')!=undefined){
+                $('#optional').hide();
+          
+          }else{
+               $('#optional').show();
+          }
+        });
         // validate signup form on keyup and submit
         $("#signupForm").validate({
             rules: {
@@ -60,19 +69,19 @@
                     required: true,
                     email: true
                 },
-                postcode2:{
+               /* postcode2:{
                     required: true,
                     digits: true
-                },
+                },*/
                 postcode:{
                     required: true,
                     digits: true
                 },
                 address:"required",
-                address2:"required",
+               // address2:"required",
                 mphone:"required",
                 phone1:"required",
-                 phone2:"required",
+                // phone2:"required",
                  captcha:"required"
                       
                         
@@ -93,19 +102,19 @@
                     equalTo: "Please enter the same password as above"
                 },
                 email: "Please enter a valid email address Example: someone@example.com",
-                postcode2:{
+               /* postcode2:{
                     required: "required",
                     digits:"Please enter digit only"
-                },
+                },*/
                 postcode:{
                     required: "required",
                     digits:"Please enter digit only"
                 },
                 address:"required",
-                address2:"required",
+                //address2:"required",
                    mphone:"required",
                 phone1:"required",
-                 phone2:"required",
+                 //phone2:"required",
                   captcha:"required"
             }
             
@@ -202,13 +211,13 @@ table{
            <td>&nbsp;</td>
         </tr>
         <tr>
-        <td><ul>ที่อยู่<span class="req">*</span></ul></td>
+        <td>ที่อยู่<span class="req">*</span></td>
         <td></td>
         <td><textarea  id="address" name="address" cols="" rows="" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง"></textarea></td>
       </tr>
       
         <tr>
-            <td><ul>จังหวัด<span class="req">*</span></ul></td>
+            <td>จังหวัด<span class="req">*</span></td>
             <td></td>
             <td><select name="province" id="province">
                      <?php foreach ($provincelist as $province): ?>
@@ -218,31 +227,36 @@ table{
         </tr>
         
         <tr>
-            <td><ul>รหัสไปรษณย์<span class="req">*</span></ul></td>
+            <td>รหัสไปรษณย์<span class="req">*</span></td>
             <td></td>
             <td><input type="text" name="postcode" maxlength="5"  value="<?echo $this->input->post('postcode')?>"id="postcode"/></td>
         </tr>
         
         <tr>
-        <td><ul>โทรศัพท์<span class="req">*</span></ul></td>
+        <td>โทรศัพท์<span class="req">*</span></td>
         <td></td>
         <td><input type="text" name="phone1" value="<?echo $this->input->post('phone1')?>"  id="phone1"/></td>
         </tr>
-        
-            <td><b>ที่อยู่(ออกใบเสร็จ)</b></td>
-            <td></td>
-        <td><form id="form1" name="form1" method="post" action="">
-        </form></td>
+        <tr>
+        <td ><b>ที่อยู่(ออกใบเสร็จ)</b></td>
+       <td></td>
+            <td><span>ไม่มี</span><input  type="checkbox" name="needop" id="needop" value="ck" /></td>
+          
         </tr>
+        </tbody>
+</table>
+<table id="optional">
+    <tbody>
+    
             <tr>
-        <td><ul>ที่อยู่</ul></td>
-        <td></td>
+        <td style="width: 144px;" >ที่อยู่</td>
+       
         <td><textarea  id="address2" name="address2" cols="" rows="" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง"></textarea></td>
         </tr>
         <tr>
     <tr>
-            <td><ul>จังหวัด</ul></td> 
-            <td></td>
+            <td>จังหวัด</td> 
+            
             <td><select name="province2" id="province2">
                      <?php foreach ($provincelist as $province): ?>
                 <option <? echo ($province->getProvinceid()==$this->input->post('province2'))? 'selected="selected"':'' ?>
@@ -252,35 +266,42 @@ table{
     </tr>
             
             <tr>
-            <td><ul>รหัสไปรษณีย์</ul></td>
-            <td></td>
+            <td>รหัสไปรษณีย์</td>
+         
             <td><input type="text" name="postcode2" maxlength="5" id="postcode2" value="<?echo $this->input->post('postcode2')?>" /></td>
             </tr>
             
             <tr>
-        <td><ul>โทรศัพท์</ul></td>
-        <td></td>
+        <td>โทรศัพท์</td>
+        
         <td><input type="text" name="phone2"  id="phone2" value="<?echo $this->input->post('phone2')?>"/></td>
         </tr>
-         <tr><td></td>
-             <td></td>
+        </tbody>
+         </table>
+<table>
+    <tbody>
+         <tr><td style="
+    width: 144px;
+"></td>
+             
              <td> <img id="captcha" src="<? echo site_url('register/getcaptcha') ?>" width="150" heigth="40" /><a href="javascript:void(0)"  onclick="changecaptcha();"class="btn">เปลี่ยนรูป</a><br><br></td>
                   
     </tr>
               <tr>
         <td>กรอกตัวอักษรในภาพ<span class="req">*</span></td>
-        <td></td>
+       
         <td><input type="text" name="captcha"  id="captcha"/> </td>
         </tr>
             
             <tr>
                 <td></td>
-                <td></td>
+                
                 <td><input class="btn-info" type="submit"  value="ตกลง"/></td>
             </tr>
               </tbody>
+              </table>
         <? echo form_close(); ?>
-    </table>
+   
 
 </div>
 
