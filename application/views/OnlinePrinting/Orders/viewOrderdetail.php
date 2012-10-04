@@ -95,7 +95,7 @@
 		 <td><? echo $order->getOrderdate(); ?></td>
     </tr>
     <tr>
-          <td><strong> การชำระเงิน </strong></td>
+          <td><strong> การชำระ </strong></td>
           <td><strong>&nbsp;:&nbsp;</strong></td> 
 		  <td><?php foreach ($ordpaylist as $ordpay): ?>
                 <?php if ($ordpay->getPaymethod() == $order->getPaymethod()): ?>

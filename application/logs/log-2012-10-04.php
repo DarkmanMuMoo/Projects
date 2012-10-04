@@ -76,3 +76,38 @@ ERROR - 2012-10-04 09:27:28 --> Severity: Notice  --> Undefined variable: chkemp
 ERROR - 2012-10-04 09:27:28 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
 ERROR - 2012-10-04 09:27:28 --> Severity: Notice  --> Undefined variable: chkemp C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
 ERROR - 2012-10-04 09:27:28 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
+ERROR - 2012-10-04 12:45:56 --> 404 Page Not Found --> userprofile/favicon.ico.bmp
+ERROR - 2012-10-04 12:46:17 --> 404 Page Not Found --> userprofile/favicon.ico.bmp
+ERROR - 2012-10-04 13:05:58 --> Severity: Notice  --> Undefined variable: chkemp C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
+ERROR - 2012-10-04 13:05:58 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
+ERROR - 2012-10-04 13:05:58 --> Severity: Notice  --> Undefined variable: chkemp C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
+ERROR - 2012-10-04 13:05:58 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
+ERROR - 2012-10-04 13:05:58 --> Severity: Notice  --> Undefined variable: chkemp C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
+ERROR - 2012-10-04 13:05:58 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
+ERROR - 2012-10-04 13:05:58 --> Severity: Notice  --> Undefined variable: chkemp C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
+ERROR - 2012-10-04 13:05:58 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
+ERROR - 2012-10-04 13:06:11 --> Severity: Notice  --> Undefined variable: chkemp C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
+ERROR - 2012-10-04 13:06:11 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
+ERROR - 2012-10-04 13:06:11 --> Severity: Notice  --> Undefined variable: chkemp C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
+ERROR - 2012-10-04 13:06:11 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
+ERROR - 2012-10-04 13:06:11 --> Severity: Notice  --> Undefined variable: chkemp C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
+ERROR - 2012-10-04 13:06:11 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
+ERROR - 2012-10-04 13:06:11 --> Severity: Notice  --> Undefined variable: chkemp C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
+ERROR - 2012-10-04 13:06:11 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
+ERROR - 2012-10-04 13:07:39 --> 404 Page Not Found --> product/favicon.ico.bmp
+ERROR - 2012-10-04 13:07:40 --> 404 Page Not Found --> product/favicon.ico.bmp
+ERROR - 2012-10-04 13:07:43 --> 404 Page Not Found --> product/favicon.ico.bmp
+ERROR - 2012-10-04 13:07:44 --> 404 Page Not Found --> product/favicon.ico.bmp
+ERROR - 2012-10-04 13:12:28 --> Severity: Notice  --> Undefined variable: chkemp C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
+ERROR - 2012-10-04 13:12:28 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
+ERROR - 2012-10-04 13:12:28 --> Severity: Notice  --> Undefined variable: chkemp C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
+ERROR - 2012-10-04 13:12:28 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
+ERROR - 2012-10-04 13:12:28 --> Severity: Notice  --> Undefined variable: chkemp C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
+ERROR - 2012-10-04 13:12:28 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
+ERROR - 2012-10-04 13:12:28 --> Severity: Notice  --> Undefined variable: chkemp C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
+ERROR - 2012-10-04 13:12:28 --> Severity: Warning  --> in_array() expects parameter 2 to be array, null given C:\wamp\www\Projects\application\views\Backend\Work\workdetail.php 53
+ERROR - 2012-10-04 13:19:51 --> 404 Page Not Found --> product/favicon.ico.bmp
+ERROR - 2012-10-04 13:19:52 --> 404 Page Not Found --> product/favicon.ico.bmp
+ERROR - 2012-10-04 13:19:56 --> 404 Page Not Found --> orders/favicon.ico.bmp
+ERROR - 2012-10-04 13:23:02 --> 404 Page Not Found --> orders/favicon.ico.bmp
+ERROR - 2012-10-04 13:23:40 --> 404 Page Not Found --> orders/favicon.ico.bmp
