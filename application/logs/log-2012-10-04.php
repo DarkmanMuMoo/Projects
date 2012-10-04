@@ -35,3 +35,9 @@ ERROR - 2012-10-04 06:57:09 --> 404 Page Not Found --> orders/favicon.ico.bmp
 ERROR - 2012-10-04 06:57:23 --> 404 Page Not Found --> orders/favicon.ico.bmp
 ERROR - 2012-10-04 06:57:37 --> 404 Page Not Found --> orders/favicon.ico.bmp
 ERROR - 2012-10-04 06:57:51 --> 404 Page Not Found --> orders/favicon.ico.bmp
+ERROR - 2012-10-04 08:39:25 --> 404 Page Not Found --> userprofile/favicon.ico.bmp
+ERROR - 2012-10-04 08:40:10 --> 404 Page Not Found --> userprofile/favicon.ico.bmp
+ERROR - 2012-10-04 08:40:23 --> 404 Page Not Found --> userprofile/favicon.ico.bmp
+ERROR - 2012-10-04 08:42:26 --> 404 Page Not Found --> userprofile/favicon.ico.bmp
+ERROR - 2012-10-04 08:44:49 --> 404 Page Not Found --> userprofile/favicon.ico.bmp
+ERROR - 2012-10-04 08:45:03 --> 404 Page Not Found --> userprofile/favicon.ico.bmp
