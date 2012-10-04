@@ -82,7 +82,7 @@
 
     <div id="head" style="clear:both;">
         <div id="order">
-            <h2>เลขใบสั่งซื้อ <? echo $order->getOrderno(); ?></h2> <h3>สถานะ 
+            <h2 >เลขใบสั่งซื้อ <span class="orange" ><? echo $order->getOrderno(); ?></span></h2> <h3>สถานะ 
                 <?php foreach ($ordstatuslist as $ordstatus): ?>
                     <?php if ($ordstatus->getStatus() == $order->getOrdstatus()): ?>
                         <span <? echo ($order->getOrdstatus() == 10) ? 'class="red"' : 'class="blue"'; ?> > <? echo $ordstatus->getDescription(); ?> </span></h3> <? break; ?>

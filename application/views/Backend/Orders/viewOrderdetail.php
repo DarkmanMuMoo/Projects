@@ -3,7 +3,13 @@
 <div class="container" >
     <style>
 
+ .red{
+        color:#F00;
+    }
 
+    .blue{
+        color:#09C;	
+    }
         #order{
 
             float:left;
@@ -35,6 +41,9 @@
         .bottom{border:dashed;
                 border-width:thin;
         }
+        .orange{
+		color:#F60;
+		}
     </style>
 
     <div class="header"> 
@@ -45,13 +54,13 @@
 
     <div id="headline" >
         <div id="order">
-            <h2>เลขใบสั่งซื้อ: <? echo $order->getOrderno(); ?></h2><br>
+            <h2>เลขใบสั่งซื้อ:<span class="orange" > <? echo $order->getOrderno(); ?></span></h2><br>
             <?php foreach ($ordstatuslist as $ordstatus): ?>
                 <?php if ($ordstatus->getStatus() == $order->getOrdstatus()): ?>
-                    <?
+                 <span <? echo ($order->getOrdstatus() == 10) ? 'class="red"' : 'class="blue"'; ?> >   <?
                     echo $ordstatus->getDescription();
-                    break;
-                    ?>
+
+                    ?></span><?  break;?>
                 <?php endif; ?>
             <?php endforeach; ?><br>
             <strong>วันที่ : </strong><? echo $order->getOrderdate(); ?><br>

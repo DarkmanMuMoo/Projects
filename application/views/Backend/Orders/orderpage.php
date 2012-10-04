@@ -24,6 +24,13 @@
             
             text-align: left;
         }
+        .red{
+        color:#F00;
+    }
+
+    .blue{
+        color:#09C;	
+    }
     </style>
     <div class="header"> 
         <h1>รายการสั่งซื้อ</h1>
@@ -95,10 +102,12 @@
                         <td >
                             <?php foreach ($ordstatuslist as $ordstatus): ?>
                                 <?php if ($ordstatus->getStatus() == $ord->getOrdstatus()): ?>
+                             <span   <?echo ($ordstatus->getStatus()==10)?'class="red"':'class="blue"'; ?> >
                                     <?
                                     echo $ordstatus->getDescription();
                                     break;
                                     ?>
+                             </span>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </td> 

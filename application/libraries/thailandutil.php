@@ -69,8 +69,8 @@ class Thailandutil {
         
              $province = new Province();
 
-        $province->setProvincecode($row->PROVINCE_ID);
-        $province->setProvinceid($row->PROVINCE_CODE);
+        $province->setProvincecode($row->PROVINCE_CODE);
+        $province->setProvinceid($row->PROVINCE_ID);
         $province->setProvincename($row->PROVINCE_NAME);
        
         return $province;

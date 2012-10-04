@@ -123,10 +123,11 @@
                             <td style="width: 80px;" >
                                 <?php foreach ($ordstatuslist as $status): ?>
                                     <?php if ($status->getStatus() == $ord->getOrdstatus()): ?>
+                                <span   <?echo ($status->getStatus()==10)?'class="red"':'class="blue"'; ?> >
                                         <?
                                         echo $status->getDescription();
                                         break;
-                                        ?>
+                                        ?></span>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             </td> 
