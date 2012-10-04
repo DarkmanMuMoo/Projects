@@ -15,11 +15,7 @@
         padding: 5px;
 
     }
-    tr td:last-of-type {
-        width: 30%; 
-        text-align: center;
-
-    }
+   
 
     tr td:first-of-type {
         width: 30%; 
@@ -65,7 +61,7 @@
 <div id="page">
     <p style ="margin-bottom: 10px;">
     <h1><b>ประวัติ</b></h1>
-    <h4>แก้ไขได้</h4>
+    <h4>ข้อมูส่วนตัวเพื่อการสั่งพิมพ์</h4>
 
 
 </p>
@@ -74,7 +70,7 @@
     <p>
         
         
-         <h5><strong>ข้อมูลส่วนตัว</strong></h5>
+         <h4 ><strong>ข้อมูลส่วนตัว</strong></h4>
     </p>
    
 
@@ -108,32 +104,53 @@
                 <td><a  href="javascript:void(0);" class="btn" onclick="changepassword();">เปลี่ยนรหัสผ่าน</a></td>
             </tr>
             <tr>
-                <td colspan="3" > <input class="btn-info" type="submit" value="แก้ไข"/> </td>
+            <td></td>
+                <td  > <input class="btn-info" type="submit" value="edit"/> </td>
+            <td></td>
             </tr>
         </table>
     </form>
 
 <p>
-        <h5><strong>ที่อยู่</strong></h5>
+        <h4><strong>ที่อยู่ติดต่อ</strong></h4>
         </P>
-    <div id="address1" >
+   
         
         <form id="edit" action="<? echo site_url('userprofile/updateaddress') ?>" method="post" >
-             
-         ที่อยู่   <textarea name="ad" rows="5" cols="30"><? echo $address1['address'] ?></textarea><br/>
-           
-          จังหวัด  &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<select  name="prov" >
+        <table >
+        <tr> 
+        <td>ที่อยู่</td>   
+         
+          <td> <textarea name="ad" rows="5" cols="30"><? echo $address1['address'] ?></textarea></td>
+           </tr>
+         <tr>
+          <td>จังหวัด</td>  
+          
+          <td><select  name="prov" >
               <?php foreach ($provincelist as $province): ?>
                 <option value="<? echo $province->getProvinceid(); ?>"    <? echo ( $address1['provinceid'] ==$province->getProvinceid())? 'selected=\'selected\'':'';  ?>><? echo $province->getProvincename(); ?></option>
                 <? endforeach; ?>
-        
+        </select></td>
               
-          </select><br/>
-          รหัสไปรษณีย์  <input  maxlength="5" name="post"type="text" value="<? echo $address1['postcode'] ?>"><br/>
-          โทรศัพท์  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="phone1" name="phone"type="text" value="<? echo $address1['phone'] ?>">
-           <br />
+         
+        <tr> 
+        <td> รหัสไปรษณีย์</td> 
+        
+        <td> <input  maxlength="5" name="post"type="text" value="<? echo $address1['postcode'] ?>"></td></tr>
+      <tr>  
+      <td>โทรศัพท์  </td>
+      
+      <td><input id="phone1" name="phone"type="text" value="<? echo $address1['phone'] ?>"> </td>
+      </tr> 
+     
+     <tr>
+     <td></td> 
+      <td >   
            <input name="index" value="1" type="hidden"/>
-        <input class="btn-info" type="submit" value="edit">
+        <input class="btn-info" type="submit" value="edit"></td>
+        <td></td>
+        </tr>
+         </table>
              </div>
             
         
@@ -141,28 +158,42 @@
         
     </div>
     <p>
-            &nbsp;  &nbsp;  &nbsp; <h5><strong>ที่อยู่</strong></h5>
+            <h4><strong>ที่อยู่ออกใบเสร็จ</strong></h4>
         </p>
-    <div id="address2" >
-    
+       
         <form id="edit" action="<? echo site_url('userprofile/updateaddress') ?>" method="post" >
-            
-
-                <textarea  name="ad" rows="5" cols="50" ><? echo $address2['address'] ?></textarea>
-                <br />
-      จังหวัด &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-               <select name="prov"> <?php foreach ($provincelist as $province): ?>
+            <table>
+            <tr>
+            <td>ที่อยู่</td>
+           <td> <textarea  name="ad" rows="5" cols="50" ><? echo $address2['address'] ?></textarea>
+                </td>
+                </tr>
+    <tr>
+        <td>จังหวัด</td>
+              <td> <select name="prov"> <?php foreach ($provincelist as $province): ?>
                 <option value="<? echo $province->getProvinceid(); ?>"  <? echo ( $address2['provinceid'] ==$province->getProvinceid())? 'selected=\'selected\'':'';  ?>><? echo $province->getProvincename(); ?></option>
-                <? endforeach; ?></select><br/>
-                รหัสไปรษณีย์  
-                <input maxlength="5" name="post" type="text" value="<? echo $address2['postcode'] ?>"><br/>
-                โทรศัพท์   &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <input id="phone2" name="phone" type="text" value="<? echo $address2['phone'] ?>">
-            <br />
-            <input name="index" value="2" type="hidden"/>
-            <input  class="btn-info"type="submit" value="edit">
+                <? endforeach; ?></select></td>
+                </tr>
+                <tr>
+<td>                รหัสไปรษณีย์  </td>
+             <td>   <input maxlength="5" name="post" type="text" value="<? echo $address2['postcode'] ?>"></td>
+             </tr>
+             <tr>
+             <td>   โทรศัพท์</td>   
+             <td> <input id="phone2" name="phone" type="text" value="<? echo $address2['phone'] ?>">
+            </td>
+            </tr>
+            <tr>
+            <td></td>
+           <td colspan="2" ><input name="index" value="2" type="hidden"/>
+            <input  class="btn-info"type="submit" value="edit"></td>
+            <td></td>
+            </tr>
+             </table>
         </form>
+      
         </div>
-</table>
+
     </div>
 
 

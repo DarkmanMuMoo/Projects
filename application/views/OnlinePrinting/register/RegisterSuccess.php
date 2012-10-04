@@ -9,7 +9,7 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-         <h1> ลงทะเบียนสำเร็จ กรุณา รอรับemail เพื่อยืนยันการเป็นสมาชิก  </h1>
+         <h1> ลงทะเบียนสำเร็จแล้ว <br>กรุณา รอรับemail เพื่อยืนยันการเป็นสมาชิก  </h1>
            <?echo anchor('', ' คลิกที่นี่เพื่อกลับไปหน้า Homepage', 'title="SignUp"');?>
     </body>
 </html>

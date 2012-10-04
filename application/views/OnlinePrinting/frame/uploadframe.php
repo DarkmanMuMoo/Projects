@@ -49,7 +49,7 @@ $('#uploadform').ajaxForm({
             <form  id="uploadform" action="<? echo  site_url("uploader/uploadfile"); ?>" method="post" enctype="multipart/form-data">
         <input type="file" name="myfile"><br>
         <input type="hidden" name="orderlineno" value="<?echo $orderlineno;?>" >
-        <input class="btn btn-warning" type="submit" value="Upload File to Server">
+        <input class="btn btn-warning" type="submit" value="Upload File">
     </form>
         
         <div class="progress">

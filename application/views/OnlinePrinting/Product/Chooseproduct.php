@@ -90,33 +90,33 @@
         ?>
 
         <p  >
-            <label>template: </label> <select  name="template" >
+            <label>เทมเพลต: </label> <select  name="template" >
                 <?php foreach ($templatelist as $template): ?>
                     <option value="<? echo $template->getTempno() ?>" >
                         <? echo $template->getName() . 'ขนาด' . $template->getSize() ?></option>
                 <?php endforeach; ?>
             </select>
-            <label>paper: </label> <select  name="paper" >
+            <label>กระดาษ: </label> <select  name="paper" >
                 <?php foreach ($paperlist as $paper): ?>
                     <option value="<? echo $paper->getPaperno() ?>" >
                         <? echo $paper->getName() . $paper->getGrame() . 'แกรม' ?></option>
                 <?php endforeach; ?>
             </select>
-            <label>option: </label> <select  name="option" >
+            <label>คุณสมบัติพิเศษ: </label> <select  name="option" >
 
                 <?php foreach ($optionlist as $option): ?>
                     <option value="<? echo $option->getOptionno() ?>" >
                         <? echo $option->getDescription() ?></option>
                 <?php endforeach; ?>
             </select>
-            <label  >amount:</label>
+            <label  >จำนวน:</label>
 
             <input type="text"  name="amount" class="smartspinner" id="amount" value="50"  />
         </p>
 
 
         <input name="type" value="<? echo $type->getType(); ?>" type="hidden"/>
-        <input class="btn-primary" type="submit" value="calprice" >
+        <input class="btn-primary" type="submit" value="คำนวณราคา" >
         <? echo form_close(); ?>
     </div>
 

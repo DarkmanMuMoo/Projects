@@ -48,7 +48,7 @@
 
     <p style ="margin-bottom: 10px;">
     <h1><b>Product</b></h1>
-    <h4>เลือกสินค้าตรงนี้นะ</h4>
+    <h4>เลือกสินค้าเพื่อสั่งพิมพ์</h4>
 </p>
 <hr></hr>
 <div class="caseproduct" >  
