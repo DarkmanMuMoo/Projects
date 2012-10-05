@@ -126,13 +126,13 @@
         </table>
  <? echo $this->pagination->create_onclick_links(); ?>
     </div>
-    <button onclick="showinsertform();" class="btn" > insert new Work</button>
+    <button onclick="showinsertform();" class="btn" > insert new Task</button>
     <div  id="insertwork" class="divcenter" >
 
         <form id="creatworkform" action="<? echo site_url('Backend/bakwork/creatework') ?>" method="post">
             <table width="532" border="0" align="center">
                    <tr>
-                    <td height="50">OrdNo</td>
+                    <td height="50">เลขใบสั่งซื้อ</td>
                     <td><input name="ordno" type="text"  value="<?echo $this->session->flashdata('orderno'); ?>"/></td>
                     <td>&nbsp;</td>
                 </tr>

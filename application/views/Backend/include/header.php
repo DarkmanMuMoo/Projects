@@ -32,7 +32,7 @@
                     <li id="BakOrders" >
     <a href="<? echo site_url('Backend/bakorders');  ?>">Order</a>
   </li>
-  <li  id="Bakwork"  ><a href="<? echo site_url('Backend/bakwork');  ?>">Work</a></li>
+  <li  id="Bakwork"  ><a href="<? echo site_url('Backend/bakwork');  ?>">Task</a></li>
   <li id="Bakemp"  ><a href="<? echo site_url('Backend/bakemp');  ?>">Employee</a></li>
   <li id="BakCost"  ><a href="<? echo site_url('Backend/bakCost');  ?>">Cost</a></li>
            </ul>
@@ -41,7 +41,7 @@
                   <ul id="menu"class="nav nav-pills">
                     <li id="Home"  ><a href="<? echo site_url('Backend/home');  ?>">Main Menu</a></li>
            <li id="Bakemp"  ><a href="<? echo site_url('Backend/bakemp/empprofile');  ?>">Employee</a></li>         
-  <li  id="Bakwork"  ><a href="<? echo site_url('Backend/bakwork/empworkpage');  ?>">Work</a></li>
+  <li  id="Bakwork"  ><a href="<? echo site_url('Backend/bakwork/empworkpage');  ?>">Task</a></li>
 
            </ul>
                 
