@@ -23,7 +23,7 @@ and open the template in the editor.
                     autoOpen: true,
                     modal: true,
                     width:'auto',
-                    title: "Your Cart"
+                    title: "My Cart"
 
                 }
             
