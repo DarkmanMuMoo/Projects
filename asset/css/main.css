@@ -68,9 +68,10 @@ a {
 #wrapper {
     width: 960px;
     margin: 0 auto;
-    padding: 0;
+   
 display: table;
 background-color: white;
+padding-bottom: 50px;
 }
 
 /* Header */

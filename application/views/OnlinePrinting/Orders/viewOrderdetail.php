@@ -58,7 +58,7 @@
         $('#showuploaddialog').dialog({ 
             autoOpen: true,
             modal: true,
-            width:500,
+            width:'auto',
             title: "Upload",
             close: function(event, ui) {
                 window.location.reload();
@@ -183,16 +183,16 @@
                     <tr>
                         <td width="5%" ><? echo $index + 1; ?>   </td>
 
-                        <td width="15%" ><? echo $orderline->getTmpname(); ?> &nbsp; 
+                        <td width="20%" ><? echo $orderline->getTmpname(); ?> &nbsp; 
     <? echo $orderline->getTmpsize(); ?> &nbsp;
 
                         </td>
                         <td width="15%"  >  <? echo $orderline->getPapername(); ?> &nbsp; <? echo $orderline->getGram(); ?>        </td>
                         <td width="10%" >  <? echo $orderline->getOptiondescription(); ?>     </td>
-                        <td width="10%"  >
+                        <td width="5%"  >
                             <? echo $orderline->getQty(); ?>
                         </td>
-                        <td width="10%" style="text-align: right;"  >
+                        <td width="15%" style="text-align: right;"  >
                             <?
                             echo number_format($orderline->getPrice(), 2, '.', ',');
                             $totalprice+=$orderline->getPrice();
@@ -229,7 +229,7 @@
         <div style="clear:both; display:table; width:100%;">
             <table style="float:left; width:50%;">
                 <tr>
-                    <td><strong>ความคิดเห็นลูกค้า</strong></td>
+                    <td><strong>ข้อความถึงโรงพิมพ์</strong></td>
 
                     <td><textarea name="comment" cols="" rows="">
 <? echo $order->getCusremark(); ?>
@@ -281,5 +281,5 @@
 
 <!-- upload dialog-->
 <div id="showuploaddialog" style="display:none;">
-    <iframe id="uploaddialog" width="500"  style="border-style:none;" scrolling="no"  ></iframe>
+    <iframe id="uploaddialog" width="500" height="200" style="border-style:none;" scrolling="no"  ></iframe>
 </div>

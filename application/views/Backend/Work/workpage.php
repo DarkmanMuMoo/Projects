@@ -73,6 +73,9 @@
                 ผู้รับผิดชอบ
             </th>
             <th>
+                สถานะ
+            </th>
+            <th>
                 วันเริ่มงาน
             </th>
             <th>
@@ -107,6 +110,7 @@
 
     <?php endforeach; ?>
                         </td>
+                        <td>  <? echo ($work->getEnddate() == null) ? 'ยังไม่เสร็จ':'เสร็จ'; ?></td>
                         <td > <? echo $work->getStartdate(); ?> </td>
                         <td ><? echo ($work->getEnddate() == null) ? '-' : $work->getEnddate(); ?> </td>      
                         <td >

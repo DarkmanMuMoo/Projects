@@ -9,9 +9,23 @@
          <script src="<? echo base_url("asset/javascript/jquery.form.js"); ?>" >  </script>
          <script>
          
+        
+        
+             
+             
+      
 $().ready(function() {
 //$( "#progressbar" ).progressbar({ value: 0 });
 $('#uploadform').ajaxForm({
+    beforeSubmit: function(arr, $form, options) { 
+    // The array of form data takes the following form: 
+    // [ { name: 'username', value: 'jresig' }, { name: 'password', value: 'secret' } ] 
+      if(document.getElementById("file").value==''){
+               alert('ยังไม่ได้เลือกไฟล์');
+             return false ;
+           }
+    // return false to cancel submit                  
+},
     beforeSend: function() {
            
        $('#status').empty();
@@ -19,7 +33,7 @@ $('#uploadform').ajaxForm({
         
         $('.bar').width(percentVal)
         $('.percent').html(percentVal);
-     
+    
     },
     uploadProgress: function(event, position, total, percentComplete) {
       
@@ -43,11 +57,10 @@ $('#uploadform').ajaxForm({
 });      
 
      </script>
-    </head>
-    <body>
-        <div class="container">
+
+        <div class="well">
             <form  id="uploadform" action="<? echo  site_url("uploader/uploadfile"); ?>" method="post" enctype="multipart/form-data">
-        <input type="file" name="myfile"><br>
+                <input id="file" type="file" name="myfile"><br>
         <input type="hidden" name="orderlineno" value="<?echo $orderlineno;?>" >
         <input class="btn btn-warning" type="submit" value="Upload File">
     </form>

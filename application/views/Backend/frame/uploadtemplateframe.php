@@ -43,9 +43,8 @@ $('#uploadform').ajaxForm({
 });      
 
      </script>
-    </head>
-    <body>
-      
+ 
+     <div class="well">
 <form  id="uploadform" action="<? echo  site_url("Backend/BakCost/updatetemplatefile"); ?>" method="post" enctype="multipart/form-data">
         <input type="file" name="myfile"><br>
         <input type="hidden" name="templateno" value="<?echo $templateno;?>" >
@@ -59,4 +58,4 @@ $('#uploadform').ajaxForm({
              <div id="status"></div>
              
              <div id="progressbar"></div>
-      
+        </div>

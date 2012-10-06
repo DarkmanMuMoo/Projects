@@ -204,7 +204,7 @@
 
                 <table style="float:left; width:50%;">
                     <tr>
-                        <td><strong>ข้อความส่งถึงลูกค้า</strong></td>
+                        <td><strong>ข้อความถึงโรงพิมพ์</strong></td>
 
                         <td><textarea name="comment" cols="" rows="">
                                 <? echo $order->getSellerremark(); ?>
@@ -224,7 +224,7 @@
 
 
     </div>
-    <?php if ($order->getOrdstatus() < 40): ?>
+    <?php if ($order->getOrdstatus() < 40 && $order->getOrdstatus() >10): ?>
         <div align="center" style="margin :5% auto;">  
             <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/waitforpay') . '/' . $order->getOrderno(); ?>">Approve</a> 
             <button class="btn btn-danger" onclick="reject('<? echo $order->getOrderno(); ?> ');" >Rejects</button>
