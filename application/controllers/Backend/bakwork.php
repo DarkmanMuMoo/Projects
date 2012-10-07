@@ -25,13 +25,14 @@ class Bakwork extends CI_Controller {
         $this->load->model('dao/workdao');
         $condition = array();
         $keyword = '';
+        $finish=false;
         if ($this->input->post('keyword')) {
             $keyword = $this->input->post('keyword');
         }
+
         if ($this->input->post('emp')) {
             $empno = $this->input->post('emp');
 
-            $condition['empno'] = $empno;
         }else{
             
             $empno=0;
@@ -39,11 +40,12 @@ class Bakwork extends CI_Controller {
 
         $config['per_page'] = 10;
         $startrow = ($this->input->post()) ? $this->input->post('startrow') : 0;
-        $config['total_rows'] = $this->gettotalpage($empno, $this->input->post('status'),$keyword);
+        $config['total_rows'] = $this->gettotalpage($empno,$this->input->post('finish'), $this->input->post('status'),$keyword);
+         
         $this->pagination->initialize($config);
         $this->db->limit($config['per_page'], $startrow);
-        $worklist = $this->workdao->findsharedwork($keyword, $empno, $this->input->post('status'));
-      //  echo $this->db->last_query();
+        $worklist = $this->workdao->findsharedwork($keyword,$this->input->post('finish'), $empno, $this->input->post('status'));
+   // echo $this->db->last_query();
         $emplist = $this->empdao->findbymultifield(array('position' => 'des'));
         $data = array();
         $data['worklist'] = $worklist;
@@ -84,12 +86,12 @@ public function chooseorder($orderno){
         
         $this->db->limit($config['per_page'], $startrow);
          $allworklist = $this->workdao->findsharedwork($keyword, $empno, $this->input->post('status'));
-
+            
         $data['worklist'] = $allworklist;
 
         $this->load->view(lang('bakempwork'), $data);
     }
-      private function gettotalpage($empno, $status, $keyword = '') {
+      private function gettotalpage($empno,$finish, $status, $keyword = '') {
         $this->db->from('work');
         $this->db->join('work_emp', 'work.empno = work_emp.empno', 'left');
        
@@ -98,6 +100,15 @@ public function chooseorder($orderno){
          
            $this->db->like('work_name', $keyword); 
         }
+  
+                switch ($finish) {
+
+                case 1: {  $this->db->where('enddate is not null',null,false); break;}
+                 case 2: {  $this->db->where('enddate is null',null,false);break;}
+                 
+                 }
+          
+     
         
         if($empno!=0){
       switch($status){
@@ -117,8 +128,8 @@ public function chooseorder($orderno){
         break;
     }
     case 3:{
-         $this->db->where('work.empno', intval($empno));
-        $this->db->or_where('work_emp.empno', intval($empno)); 
+        $where="( `work`.`empno` = ".intval($empno)." OR `work_emp`.`empno` = ".intval($empno).")";
+     $this->db->where($where);
         
     }
     

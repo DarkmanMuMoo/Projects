@@ -21,7 +21,10 @@
         
         display: inline;
     }
-    
+    #search-bar select{
+
+        width: 150px;
+    }
 </style>
 
 
@@ -40,6 +43,13 @@
     <div id="search-bar" >  
         <form id="searchform"action="<? echo site_url('Backend/bakwork') ?>" class="form-search" align="center"  method="post">
             ชื่องาน:<input type="text"  value="<? echo $this->input->post('keyword');?>" name="keyword" id="email" class="input-small " />
+            สถานะ 
+            <select name="finish" >
+                <option <?  echo($this->input->post('finish')==0)?'selected="selected"':''; ?> value="0"> ทั้งหมด </option>
+            <option <?  echo($this->input->post('finish')==1)?'selected="selected"':''; ?> value="1"> เสร็จ </option>
+            <option <?  echo($this->input->post('finish')==2)?'selected="selected"':''; ?> value="2"> ไม่เสร็จ </option>
+            </select> 
+        
             ผู้รับผิดชอบ: <select name="emp" id="emp" >  
                 <option value="0">ทั้งหมด</option>
                 <?php foreach ($emplist as $emp): ?>
@@ -195,6 +205,11 @@
     
      $().ready(function() {
          
+         
+         if($('#searchform select[name=emp]').val()!= 0){
+
+              $('#status').addClass( 'showstatus' );
+         }
         $('#searchform select[name=emp]').change(function(){
             
        if( $(this).val()!='0'){

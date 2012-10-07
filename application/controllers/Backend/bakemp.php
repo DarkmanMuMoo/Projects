@@ -53,6 +53,7 @@ class Bakemp extends CI_Controller {
         $this->db->limit($config['per_page'], $startrow);
         $emplist = $this->empdao->findemplist($keyword, $condition);
         $this->pagination->initialize($config);
+       // echo $this->db->last_query();
         $positionlist = $this->positiondao->findall();
 
         $data['emplist'] = $emplist;

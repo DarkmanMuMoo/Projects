@@ -80,7 +80,7 @@ class Workdao extends CI_Model {
         return $this->db->update('work', $data);
     }
 
-    public function findsharedwork($keyword, $empno, $con) {
+    public function findsharedwork($keyword,$finish,$empno, $con) {
         $this->db->select(' work.workno as workno, work_name,work_description, startdate, enddate, ordno, work.empno as empno');
         $this->db->from('work');
         $this->db->join('work_emp', 'work.workno = work_emp.workno', 'left');
@@ -90,6 +90,16 @@ class Workdao extends CI_Model {
 
             $this->db->like('work_name', $keyword);
         }
+        
+        
+                switch ($finish) {
+
+                case 1: {  $this->db->where('enddate is not null',null,false); break;}
+                 case 2: {  $this->db->where('enddate is null',null,false);break;}
+                 
+                 }
+          
+        
         if ($empno != 0) {
             switch ($con) {
 
@@ -108,8 +118,8 @@ class Workdao extends CI_Model {
                         break;
                     }
                 case 0: {
-                        $this->db->where('work.empno', intval($empno));
-                        $this->db->or_where('work_emp.empno', intval($empno));
+                    $where="( `work`.`empno` = ".intval($empno)." OR `work_emp`.`empno` = ".intval($empno).")";
+                   $this->db->where($where);
                     }
             }
         }
