@@ -182,6 +182,7 @@ if(count($cklist)==0){
         $emp->setPhone($phone);
         $emp->setPassword($password);
         $emp->setPosition($position);
+        $emp->setActive(1);
         $emp->setPicurl(null);
 
         $insertresult = $this->empdao->insert($emp);

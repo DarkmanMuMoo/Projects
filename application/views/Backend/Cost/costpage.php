@@ -18,6 +18,12 @@
          margin: 10% auto;
         width:50%;
     }
+    #tabs input[type=text]{
+        
+        
+        height:25px;
+        margin-bottom: 0px;
+    }
        #tabs table{
         
        margin: 0 auto;

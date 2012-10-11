@@ -98,7 +98,7 @@ if(data=='false'){
                
 <div style="float: right; margin-top: 15px;" >
     <strong>ราคารวม :<?  echo number_format( $totalprice, 2, '.', ',') ?>บาท</strong><p>
-        <button class="btn btn-success"  onclick="checkuser();"  style="margin-top: 15px;" > <i class="icon-shopping-cart icon-white"></i> CreatOrder </button>
+        <button class="btn btn-success"  onclick="checkuser();"  style="margin-top: 15px;" > <i class="icon-shopping-cart icon-white"></i> Create Order </button>
     </p>
     <a  id="checkout" target="_parent" href="<? echo site_url('orders/Checkout')?>">
                         </a>

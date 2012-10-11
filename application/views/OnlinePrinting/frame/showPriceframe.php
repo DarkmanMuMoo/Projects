@@ -25,7 +25,7 @@
 
     <div  align="center" >   <a class="btn btn-success"  href="<? echo site_url('product/addtocart') ?>"
                                 target="_parent" >
-            <i class="icon-shopping-cart icon-white"></i>Add to cart</a>   </div>
+            <i class="icon-shopping-cart icon-white"></i>ใส่ ตะกร้า</a>   </div>
 
     </p>
 <?php endif; ?>

@@ -7,8 +7,14 @@
 
     <div id="search-bar" >  
         <form id="searchform"action="<? echo site_url('Backend/bakwork/empworkpage') ?>" class="form-search" align="center"  method="post">
-            Keyword:<input type="text" value="<? echo $this->input->post('keyword');?>" name="keyword" id="email" class="input-small " />
-            Status: <select name="status" id="emp" >  
+            ชื่องาน:<input type="text" value="<? echo $this->input->post('keyword');?>" name="keyword" id="email" class="input-small " />
+            สถานะ: 
+            <select name="finish" >
+                <option <?  echo($this->input->post('finish')==0)?'selected="selected"':''; ?> value="0"> ทั้งหมด </option>
+            <option <?  echo($this->input->post('finish')==1)?'selected="selected"':''; ?> value="1"> เสร็จ </option>
+            <option <?  echo($this->input->post('finish')==2)?'selected="selected"':''; ?> value="2"> ไม่เสร็จ </option>
+            </select> 
+            รับผิดชอบ: <select name="status" id="emp" >  
                 <option <?  echo($this->input->post('status')==0)?'selected="selected"':''; ?> value="0">All</option>
                 <option  <?  echo($this->input->post('status')==1)?'selected="selected"':''; ?>   value="1">งานที่รับผิดชอบ</option>
                 <option  <?  echo($this->input->post('status')==2)?'selected="selected"':''; ?> value="2">งานทที่มีส่วนร่วม
@@ -21,25 +27,30 @@
     <div id="result"  align="center">
         <table class="table table-bordered" >
             <thead>
-            <th>
-                Number
+             <th>
+                #
             </th>
             <th>
-                Workno   
+                รหัสงาน 
             </th>
             <th>
-                Workname
+                ชื่องาน
+            </th>
+            <th>
+                ผู้รับผิดชอบ
+            </th>
+            <th>
+                สถานะ
+            </th>
+            <th>
+                วันเริ่มงาน
+            </th>
+            <th>
+                วันสิ้นสุดงาน
             </th>
 
             <th>
-                StartDate
-            </th>
-            <th>
-                Enddate
-            </th>
-
-            <th>
-                management
+                
             </th>
             </thead>
 
@@ -55,7 +66,18 @@
                         <td>
                             <? echo $work->getWorkname(); ?> 
                         </td>
+                         <td>
+                            <?php foreach ($emplist as $emp): ?>
 
+                                <?php if ($emp->getEmpno() == $work->getEmpno()): ?>
+                                    <? echo $emp->getName(); ?>&nbsp; <? echo $emp->getLastname();
+                        break;
+                                    ?> 
+                                <?php endif; ?>
+
+    <?php endforeach; ?>
+                        </td>
+    <td>  <? echo ($work->getEnddate() == null) ? 'ยังไม่เสร็จ':'เสร็จ'; ?></td>
                         <td > <? echo $work->getStartdate(); ?> </td>
                         <td ><? echo ($work->getEnddate() == null) ? '-' : $work->getEnddate(); ?> </td>      
                         <td >
