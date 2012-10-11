@@ -116,7 +116,7 @@
 
 
         <input name="type" value="<? echo $type->getType(); ?>" type="hidden"/>
-        <input class="btn-primary" type="submit" value="คำนวณราคา" >
+        <input class="btn-primary" type="submit" value="Calculate" >
         <? echo form_close(); ?>
     </div>
 
