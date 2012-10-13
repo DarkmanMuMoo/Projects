@@ -147,7 +147,7 @@
             <table width="532" border="0" align="center">
                    <tr>
                     <td height="50">เลขใบสั่งซื้อ</td>
-                    <td><input name="ordno" type="text"  value="<?echo $this->session->flashdata('orderno'); ?>"/></td>
+                    <td><input name="ordno" type="text" readonly="true" value="<?echo $this->session->flashdata('orderno'); ?>"/></td>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>

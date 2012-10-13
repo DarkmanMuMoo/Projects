@@ -84,12 +84,13 @@
      <tr>
          <td><strong>วันส่งสินค้า</strong></td>
          <td><strong>&nbsp;:&nbsp;</strong></td> 
-		 <td><? echo ($order->getRecievedate() != null) ? $order->getRecievedate() : '-'; ?></td>
+		 <td><? echo ($order->getExpectedshipdate() != null) ? $order->getExpectedshipdate() : '-'; ?></strong><br /></td>
      </tr>
      <tr>
           <td><strong> วันที่เสร็จสิ้น</strong></td>
           <td><strong>&nbsp;:&nbsp;</strong></td> 
-		  <td><? echo ($order->getExpectedshipdate() != null) ? $order->getExpectedshipdate() : '-'; ?></strong><br /></td>
+           <td><? echo ($order->getRecievedate() != null) ? $order->getRecievedate() : '-'; ?></td>
+		 
       </tr>
       </table>
 

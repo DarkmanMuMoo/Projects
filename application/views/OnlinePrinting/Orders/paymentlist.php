@@ -172,27 +172,30 @@
             if( value.lastIndexOf(".png")>=0)
                 result=true;
             return result;	
-        }, 'Picture must be jpg or png');	
+        }, 'Picture must be jpg or png');
+$.validator.addMethod("minus", function(value) {	
+            var result=true;
+            if( value.lastIndexOf("-")>=0)
+                result=false;
+          
+            return result;	
+        }, 'ไม่สามารถกรอกจำนวนลบได้');
+
         $("#payform").validate({
             errorLabelContainer: $("#con"),
              
             rules: {
                 date:"required",
-                slipno:"required",
                 amount:{
                     required: true,
-                    number: true
+                    number: true,
+                    minus:true
                 },
                 pic:"checkextends"
-              
-                      
-                        
+
             },messages: {
                 date: "Please enter your date",
-                slipno: {
-                    required: "Please enter slipno"
-
-                },
+               
                 amount:{
                     required: "Please enter amount",
                     number:"number"

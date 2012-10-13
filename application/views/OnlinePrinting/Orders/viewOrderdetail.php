@@ -108,12 +108,13 @@
       <tr>
           <td><strong>วันส่งสินค้า</strong></td>
           <td><strong>&nbsp;:&nbsp;</strong></td>
-          <td><? echo ($order->getRecievedate() != null) ? $order->getRecievedate() : '-'; ?></td>
+          <td><? echo ($order->getExpectedshipdate() != null) ? $order->getExpectedshipdate() : '-'; ?></strong></td>
       </tr>
       <tr>
            <td><strong> วันที่เสร็จสิ้น</strong></td>
            <td><strong>&nbsp;:&nbsp;</strong></td> 
-		   <td><? echo ($order->getExpectedshipdate() != null) ? $order->getExpectedshipdate() : '-'; ?></strong></td>
+            <td><? echo ($order->getRecievedate() != null) ? $order->getRecievedate() : '-'; ?></td>
+		  
            </tr>
            </table>
 
@@ -187,23 +188,23 @@
     <? echo $orderline->getTmpsize(); ?> &nbsp;
 
                         </td>
-                        <td width="15%"  >  <? echo $orderline->getPapername(); ?> &nbsp; <? echo $orderline->getGram(); ?>        </td>
+                        <td width="10%"  >  <? echo $orderline->getPapername(); ?> &nbsp; <? echo $orderline->getGram(); ?>        </td>
                         <td width="10%" >  <? echo $orderline->getOptiondescription(); ?>     </td>
                         <td width="5%"  >
                             <? echo $orderline->getQty(); ?>
                         </td>
-                        <td width="15%" style="text-align: right;"  >
+                        <td width="10%" style="text-align: right;"  >
                             <?
                             echo number_format($orderline->getPrice(), 2, '.', ',');
                             $totalprice+=$orderline->getPrice();
                             ?> &nbsp บาท
                         </td>
-                        <td width="10%"  >  <?php if (($orderline->getFilepath() == '') || ($orderline->getFilepath() == null)): ?>
-                                <? echo '<h6 style="color:red" >notupload</h6>' ?>
+                        <td width="20%"  >  <?php if (($orderline->getFilepath() == '') || ($orderline->getFilepath() == null)): ?>
+                            <h6 style="color:red" >Not upload</h6>'
     <?php else: ?>
-        <? echo '<h6>upload</h6>' ?>
+                            <h6>Uploaded(<a href="<? echo site_url('orders/previewfile/'.$orderline->getOrdlineno()); ?>">Preview File</a>)</h6>
                             <?php endif; ?></td>
-                        <td  width="30%" >
+                        <td  width="20%" >
 
                             <a href="<? echo site_url('orders/downloadtemplate') . '/' . $orderline->getTempno(); ?>" class="btn btn-primary">Download</a>
     <?php if ($order->getOrdstatus() <= 20): ?>

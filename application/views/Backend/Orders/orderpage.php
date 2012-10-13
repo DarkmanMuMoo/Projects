@@ -41,7 +41,6 @@
             ค้นหา:<input type="text"  name="keyword" id="email" class="input-small"  value="<? echo $this->input->post('keyword'); ?>"/>
             จากวันที่ :<input type="text" name="fromdate" id="fromdate" class="input-small datepicker"  value="<? echo $this->input->post('fromdate'); ?>"/>
             ถึง:<input type="text" name="todate" id="todate"  class="input-small datepicker"  value="<? echo $this->input->post('todate'); ?>" /> 
-
             สถานะ: 
             <select name="status" id="status" >   
                 <option value="" >ทั้งหมด</option>

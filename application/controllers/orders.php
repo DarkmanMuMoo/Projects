@@ -22,7 +22,15 @@ class Orders extends CI_Controller {
         $this->load->model('obj/orderline');
         $this->load->model('dao/orddao');
     }
-
+public function previewfile($orderlineno){
+    
+    $orderlineno=$this->orderlinedao->findbyid($orderlineno);
+    $this->output
+    ->set_content_type('pdf') 
+    ->set_output(file_get_contents(base_url('uploads'.$orderlineno->getFilepath())));
+    
+    
+}
     public function cus_comment() {
         $orderno = $this->input->post('orderno');
         $comment = $this->input->post('comment');

@@ -69,7 +69,7 @@
                             <?php endforeach; ?>
 
                         </table>
-                        <br /><input type="submit" value="Edit"/>
+                        <br /><input type="submit" value="Save"/>
                     </form>
                 </div>
 
@@ -89,7 +89,7 @@
                                 </tr>
                             <?php endforeach; ?>
                         </table>
-                        <br /><input type="submit" value="Edit"/>
+                        <br /><input type="submit" value="Save"/>
                     </form>
                 </div >
                 <div  id="option"   >
@@ -107,7 +107,7 @@
                                 </tr>
                             <?php endforeach; ?>
                         </table>
-                        <br /><input type="submit" value="Edit"/>
+                        <br /><input type="submit" value="Save"/>
                     </form>
                 </div>
                 <div id="cal">
@@ -136,7 +136,7 @@
                             </tr>
                     
                     </table>
-                        <br /><input type="submit" value="Edit"/>
+                        <br /><input type="submit" value="Save"/>
                     </form>
                     
                 </div>

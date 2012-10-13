@@ -53,7 +53,7 @@ class Bakemp extends CI_Controller {
         $this->db->limit($config['per_page'], $startrow);
         $emplist = $this->empdao->findemplist($keyword, $condition);
         $this->pagination->initialize($config);
-       // echo $this->db->last_query();
+        // echo $this->db->last_query();
         $positionlist = $this->positiondao->findall();
 
         $data['emplist'] = $emplist;
@@ -76,25 +76,22 @@ class Bakemp extends CI_Controller {
     public function deleteemp() {
         $this->load->model('dao/workdao');
         $empno = $this->input->post('empno');
-$cklist=$this->workdao->findbymultifield(array('empno'=>$empno)); 
-if(count($cklist)==0){
-    
-     $result = $this->empdao->delete($empno);
-        error_log("delete emp  $empno =" . var_export($result, true), 0);
-        $javascript = "
+        $cklist = $this->workdao->findbymultifield(array('empno' => $empno));
+        if (count($cklist) == 0) {
+
+            $result = $this->empdao->delete($empno);
+            error_log("delete emp  $empno =" . var_export($result, true), 0);
+            $javascript = "
    document.location.reload();
    ";
-        echo $javascript;
-}else{
-    
-    $javascript = "
+            echo $javascript;
+        } else {
+
+            $javascript = "
    alert('ไม่สามารถ ลบ พนักงานได้ เนื่องจากพนักงานนี้ รับมอบหมายงานอยู่')
    ";
-        echo $javascript;
-    
-    
-}
-       
+            echo $javascript;
+        }
     }
 
     public function viewempdetail($empno) {
@@ -153,16 +150,25 @@ if(count($cklist)==0){
     public function updateprofile() {
         $empno = $_SESSION['emp']->getEmpno();
         $tmp_emp = $this->empdao->findbyid($empno);
+        $email = $this->input->post('email');
         $name = $this->input->post('name');
         $lastname = $this->input->post('lastname');
-        $pasword = $this->input->post('telephone');
-        $phone = $this->input->post('password');
+        $pasword = $this->input->post('password');
+        $phone = $this->input->post('telephone');
+        $tmp_emp->setEmail($email);
         $tmp_emp->setName($name);
         $tmp_emp->setLastname($lastname);
         $tmp_emp->setPassword($pasword);
         $tmp_emp->setPhone($phone);
         $result = $this->empdao->update($tmp_emp);
         error_log(var_export($result, true) . 'update in emp profile', 0);
+        if ($result) {
+            $_SESSION['emp']->setEmail($email);
+            $_SESSION['emp']->setName($name);
+            $_SESSION['emp']->setLastname($lastname);
+            $_SESSION['emp']->setPassword($pasword);
+            $_SESSION['emp']->setPhone($phone);
+        }
         $this->empprofile();
     }
 

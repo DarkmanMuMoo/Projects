@@ -240,7 +240,7 @@ table{
         <tr>
         <td ><b>ที่อยู่(ออกใบเสร็จ)</b></td>
        <td></td>
-            <td><span>ไม่มี</span><input  type="checkbox" name="needop" id="needop" value="ck" /></td>
+            <td><span>เหมือรที่อยู่ติดต่อ</span><input  type="checkbox" name="needop" id="needop" value="ck" /></td>
           
         </tr>
         </tbody>

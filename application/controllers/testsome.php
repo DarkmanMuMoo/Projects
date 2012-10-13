@@ -18,10 +18,9 @@ class Testsome extends CI_Controller {
 
     public function index() {
 
-        $count = '084-973-2746';
-        $count = explode('-', $count);
-        $count = implode('', $count);
-        $this->load->model('dao/empdao');
+      $this->output
+    ->set_content_type('pdf') // You could also use ".jpeg" which will have the full stop removed before looking in config/mimes.php
+    ->set_output(file_get_contents(base_url('uploads/Piyakarn_2012-09-06_06-26-40.ai')));
       
 
      
