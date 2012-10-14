@@ -113,6 +113,10 @@ class Bakorders extends CI_Controller {
         $data['order'] = $order;
         $data['ordstatuslist'] = $ordstatuslist;
         $data['orderlinelist'] = $orderlinelist;
+         if($order->getOrdstatus()>=40){
+            
+            $data['paymentview']=$this->getpaymentlist($orderno);
+        }
         $this->load->view(lang('BakviewOrderdetail'), $data);
     }
 
@@ -207,7 +211,7 @@ class Bakorders extends CI_Controller {
         $data['order'] = $order;
         $data['ordpaylist'] = $ordpaylist;
 
-        $this->load->view(lang('bakpaymentlist'), $data);
+        return  $this->load->view(lang('bakpaymentlist'), $data,true);
     }
 
     public function onproduction($orderno) {

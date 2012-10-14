@@ -101,7 +101,10 @@ public function previewfile($orderlineno){
         $this->load->model('dao/ordpaydao');
         $this->load->model('dao/paymentdao');
         $ordpaylist = $this->ordpaydao->findall();
-        $paymentlist = $this->paymentdao->findbyorderno($orderno, '1');
+        $condition=array();
+        $condition['orderno']=$orderno;
+        $condition['active !=']=0;
+        $paymentlist = $this->paymentdao->findbymultifield($condition);
         $order = $this->orddao->findbyid($orderno);
         $data['paymentlist'] = $paymentlist;
         $data['order'] = $order;
@@ -118,7 +121,7 @@ public function previewfile($orderlineno){
 
         $data['hour'] = $hour;
         $data['min'] = $min;
-        $this->load->view(lang('paymentlist'), $data);
+       return $this->load->view(lang('paymentlist'), $data,true);
     }
 
     public function index() {
@@ -351,6 +354,10 @@ public function previewfile($orderlineno){
         $data['order'] = $order;
         $data['ordstatuslist'] = $ordstatuslist;
         $data['orderlinelist'] = $orderlinelist;
+        if($order->getOrdstatus()>=40){
+            
+            $data['paymentview']=$this->getpaymentlist($orderno);
+        }
         $this->load->view(lang('viewOrderdetail'), $data);
     }
 

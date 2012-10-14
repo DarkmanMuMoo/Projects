@@ -24,7 +24,7 @@ $('#uploadform').ajaxForm({
                alert('ยังไม่ได้เลือกไฟล์');
              return false ;
            }
-              if(document.getElementById("file").value.lastIndexOf(".pdf")==-1||document.getElementById("file").value.lastIndexOf(".ai")==-1){
+              if(document.getElementById("file").value.lastIndexOf(".pdf")==-1&&document.getElementById("file").value.lastIndexOf(".ai")==-1){
                alert('ไฟล์ที่upload ต้องเป็น pdf หรือ ai เท่านั้น');
              return false ;
            }

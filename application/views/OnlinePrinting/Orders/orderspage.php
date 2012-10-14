@@ -147,9 +147,6 @@
                                         <?php if ($ord->getOrdstatus() <= 20): ?>
                                             <li>   <a  href="JavaScript:void(0);"  onclick="Confirmdelete('<? echo $ord->getOrderno(); ?>');" >cancel </a>  </li>
                                         <?php endif; ?>
-                                        <?php if ($ord->getOrdstatus() > 30): ?>
-                                            <li> <a href="<? echo site_url('orders/getpaymentlist') . "/" . $ord->getOrderno(); ?>" >Payment</a> </li>   
-                                        <?php endif; ?>
 
                                     </ul>
                                 </div>

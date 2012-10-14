@@ -21,16 +21,16 @@
         h1{ font-weight:bolder;
         }
         .dropdown-menu a{
-            
+
             text-align: left;
         }
         .red{
-        color:#F00;
-    }
+            color:#F00;
+        }
 
-    .blue{
-        color:#09C;	
-    }
+        .blue{
+            color:#09C;	
+        }
     </style>
     <div class="header"> 
         <h1>รายการสั่งซื้อ</h1>
@@ -101,12 +101,12 @@
                         <td >
                             <?php foreach ($ordstatuslist as $ordstatus): ?>
                                 <?php if ($ordstatus->getStatus() == $ord->getOrdstatus()): ?>
-                             <span   <?echo ($ordstatus->getStatus()==10)?'class="red"':'class="blue"'; ?> >
-                                    <?
-                                    echo $ordstatus->getDescription();
-                                    break;
-                                    ?>
-                             </span>
+                                    <span   <? echo ($ordstatus->getStatus() == 10) ? 'class="red"' : 'class="blue"'; ?> >
+                                        <?
+                                        echo $ordstatus->getDescription();
+                                        break;
+                                        ?>
+                                    </span>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </td> 
@@ -124,13 +124,10 @@
                                     <li><a  href="<? echo site_url('Backend/bakorders/vieworderdetail') . "/" . $ord->getOrderno(); ?>"> 
                                             View
                                         </a></li>
-                                    <?php if ($ord->getOrdstatus() >= 40): ?>
-                                        <li>  <a href="<? echo site_url('Backend/bakorders/getpaymentlist') . "/" . $ord->getOrderno(); ?>"  >Payment</a> </li>
-                                    <?php endif; ?>
-                                         <li><a  href="<? echo site_url('Backend/bakwork/chooseorder') . "/" . $ord->getOrderno(); ?>"> 
-                                          create work from this order
+                                    <li><a  href="<? echo site_url('Backend/bakwork/chooseorder') . "/" . $ord->getOrderno(); ?>"> 
+                                            create work from this order
                                         </a></li>   
-                                        
+
                                 </ul>
                             </div>
 
@@ -152,7 +149,7 @@
 
 
 <? $this->load->view(lang('bakfooter')); ?>
-   <script src="<? echo base_url("asset/javascript/bootstrap-dropdown.js"); ?>" >  </script>
+<script src="<? echo base_url("asset/javascript/bootstrap-dropdown.js"); ?>" >  </script>
 <script>
     function pag(i){
         $('#searchform input[name=startrow]').val(i);

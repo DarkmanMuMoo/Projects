@@ -1,13 +1,41 @@
+<? $this->load->view(lang('header')) ?>
+<style> 
+    #paystasut{clear: both; margin :10 auto ; padding: 5 5;}
+
+    #result th{text-align: center;}
+    #result td{text-align: center;}
+    #payconfirm{ margin-top: 15px;}
+    #payconfirm form{
+        margin-left: 20px;
+        margin-top: 15px;
+    }
+    #payconfirm table{
+
+        width: 50%;
+
+    }
+    #con{
+
+        width: 20%;
+        margin-left: 10%;
+    }
+    hr{color: orangeRed;
+       background-color: orange;
+       height: 1px;
+
+    }
+
+</style>
+<div id="page">
+
 
     <p style ="margin-bottom: 10px;">
-  
-    <h4>การชำระเงิน&nbsp;<button  class="btn"onclick="swappaydetail();">รายละเอียด</button></h4>
+    <h1><b>Payment</b></h1>
+    <h4>แจ้งการชำระสินค้า</h4>
 </p>
-
+<hr></hr>
 <? $countactive = 0;
 $paidamount = 0; ?>
-<div id="paydetail" style="display: none">
-    <hr></hr>
 <div id="result" align="center">
     <table class="table table-bordered">
         <thead>
@@ -148,12 +176,10 @@ $paidamount = 0; ?>
     </div>
 <?php endif; ?>
 </div>
+
+
+<? $this->load->view(lang('footer')) ?>
 <script>
-    function swappaydetail(){
-        
-        
-        $('#paydetail').fadeToggle();
-    }
     $().ready(function() {
         var nextpaid=parseInt($('#nextpay').val()).toFixed(2);
         $( ".datepicker" ).datepicker({

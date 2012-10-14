@@ -1,39 +1,11 @@
-<? $this->load->view(lang('bakheader')); ?>
-
-<div class="container" >
-    <style> 
-        #paystasut{clear: both; margin :10 auto ; padding: 5 5;}
-        #result{
-
-            margin-top: 30px;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 10px;
-        }
-        #result th{text-align: center;}
-        #result td{text-align: center;}
-        #payconfirm{ margin-top: 15px;}
-        #payconfirm form{
-            margin-left: 20px;
-            margin-top: 15px;
-        }
-        #payconfirm table{
-
-            width: 50%;
-
-        }
-        #con{
-
-            width: 20%;
-            margin-left: 10%;
-        }
-
-    </style>
-    <? $countactive = 0; ?>
+<h2>การชำระเงิน&nbsp;<button  class="btn"onclick="swappaydetail();">รายละเอียด</button></h2>
+<hr align="center" size="3" color="#C3C3C3">  
+<? $countactive = 0;
+$paidamount = 0; ?>
+<div id="paydetail">
     <div id="result" >
         <table class="table table-bordered">
-            <h2>รายละเอียดงาน</h2>
-            <hr align="center" size="3" color="#C3C3C3">  </div>
+
             <thead>
 
             <th>Seqno</th> 
@@ -45,7 +17,7 @@
             </thead>
             <tbody>
                 <?php if (!empty($paymentlist)): ?>
-                    <?php foreach ($paymentlist as $index => $payment): ?>
+    <?php foreach ($paymentlist as $index => $payment): ?>
 
 
                     <td><? echo $payment->getSeqno(); ?> </td> 
@@ -56,14 +28,16 @@
                     <td><?php if ($payment->getActive() == '1'): ?>
                             <span class="label label-success">Active</span>
                             <? $countactive++; ?>
-                        <?php else: ?>
+        <?php else: ?>
 
                             <button class="btn btn-danger" onclick="settoactive('<? echo $payment->getPayno(); ?>');" >set to active</button>
-                        <?php endif; ?>
+        <?php endif; ?>
                     </td> 
 
                     </tr>
-
+                    <?php if ($payment->getActive() == 1): ?>
+                        <? $paidamount+=$payment->getAmount(); ?>
+                    <?php endif; ?>
                 <? endforeach; ?>
             <?php else: ?>
                 <tr><td colspan="7" >  <h6>ยังไม่มีรายการชำระเงิน</h6>  </td></tr>
@@ -75,24 +49,55 @@
 
     </div>
     <div id="paystatus"  >
+        <table >
+            <tr>
+                <td><strong>วันที่</strong></td>
+                <td><? echo $order->getOrderdate(); ?></td>
+            <tr>
+                <td><strong>การชำระเงิน</strong></td> 
+                <td><?php foreach ($ordpaylist as $ordpay): ?>
+                        <?php if ($ordpay->getPaymethod() == $order->getPaymethod()): ?>
+                            <?
+                            echo $ordpay->getDescription();
+                            break;
+                            ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?><br>
+<? $showform = true; ?></td>
+            </tr>
 
-        Orderdate : <? echo $order->getOrderdate(); ?><br>
-        Paymethod : <?php foreach ($ordpaylist as $ordpay): ?>
-            <?php if ($ordpay->getPaymethod() == $order->getPaymethod()): ?>
-                <? echo $ordpay->getDescription();
-                break; ?>
-            <?php endif; ?>
-        <?php endforeach; ?><br>
-<? $showform = true; ?>
-        Period: <?php if ($ordpay->getPaymethod() == '10'): ?>
+            <tr>
+                <td><strong>รอบการจ่ายเงิน&nbsp;&nbsp;</strong></td>
+                <td><?php if ($ordpay->getPaymethod() == '10'): ?>
 
-            <? $showform = ($countactive > 0) ? false : true;
-            echo $countactive; ?>/1 Time
-        <?php else: ?>
-            <? $showform = ($countactive > 1) ? false : true;
-            echo $countactive; ?>/2 Time
+                        <?
+                        $showform = ($countactive > 0) ? false : true;
+                        echo $countactive;
+                        ?>/1 ครั้ง
+                    <?php else: ?>
+                        <?
+                        $showform = ($countactive > 1) ? false : true;
+                        echo $countactive;
+                        ?>/2 ครั้ง
 
-<?php endif; ?>
+                    <?php endif; ?></td>
+            </tr>
+            <tr><td><strong>ชำระครั้งต่อไป&nbsp;&nbsp;</strong></td><td> <?php if ($showform): ?>
+
+                        <? echo ($ordpay->getPaymethod() == '10') ? number_format($order->getTotalprice(), 2, '.', ',') : number_format($order->getTotalprice() / 2, 2, '.', ',') ?>&nbsp;บาท
+
+<?php else: ?>
+                        0.00&nbsp;บาท
+                    <?php endif; ?></td> </tr>
+            <tr><td><strong>ค้างชำระ&nbsp;&nbsp;</strong></td><td> <?php if ($showform): ?>
+
+                        <? echo number_format($order->getTotalprice() - $paidamount, 2, '.', ',') ?>&nbsp;บาท
+<?php else: ?>
+                        0.00&nbsp;บาท
+<?php endif; ?></td> </tr>
+            <tr><td><strong>ยอดทั้งหมด&nbsp;&nbsp;</strong></td><td><? echo number_format($order->getTotalprice(), 2, '.', ',') ?>&nbsp;บาท </td> </tr>
+
+        </table>
     </div>
 
     <form id="settoactive" action="<? echo site_url('Backend/bakorders/settoactive'); ?>"  method="post">
@@ -101,12 +106,13 @@
         <input  type="hidden"name="paymethod" value="<? echo $order->getPaymethod(); ?>" /> 
         <input type="hidden" name="countactive" value="<? echo $countactive; ?>"/>
     </form>
-
 </div>
-<? $this->load->view(lang('bakfooter')); ?>
-
 <script>
-    
+    function swappaydetail(){
+        
+        
+        $('#paydetail').fadeToggle();
+    }
     function settoactive(payno){
         
         var test=$('#settoactive input[name=payno]');
