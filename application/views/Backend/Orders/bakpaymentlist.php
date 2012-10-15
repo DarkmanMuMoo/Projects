@@ -2,7 +2,7 @@
 <hr align="center" size="3" color="#C3C3C3">  
 <? $countactive = 0;
 $paidamount = 0; ?>
-<div id="paydetail">
+<div id="paydetail" style="display: none;">
     <div id="result" >
         <table class="table table-bordered">
 

@@ -22,15 +22,15 @@ class Orders extends CI_Controller {
         $this->load->model('obj/orderline');
         $this->load->model('dao/orddao');
     }
-public function previewfile($orderlineno){
-    
-    $orderlineno=$this->orderlinedao->findbyid($orderlineno);
-    $this->output
-    ->set_content_type('pdf') 
-    ->set_output(file_get_contents(base_url('uploads'.$orderlineno->getFilepath())));
-    
-    
-}
+
+    public function previewfile($orderlineno) {
+
+        $orderlineno = $this->orderlinedao->findbyid($orderlineno);
+        $this->output
+                ->set_content_type('pdf')
+                ->set_output(file_get_contents(base_url('uploads' . $orderlineno->getFilepath())));
+    }
+
     public function cus_comment() {
         $orderno = $this->input->post('orderno');
         $comment = $this->input->post('comment');
@@ -101,9 +101,9 @@ public function previewfile($orderlineno){
         $this->load->model('dao/ordpaydao');
         $this->load->model('dao/paymentdao');
         $ordpaylist = $this->ordpaydao->findall();
-        $condition=array();
-        $condition['orderno']=$orderno;
-        $condition['active !=']=0;
+        $condition = array();
+        $condition['orderno'] = $orderno;
+        $condition['active !='] = 0;
         $paymentlist = $this->paymentdao->findbymultifield($condition);
         $order = $this->orddao->findbyid($orderno);
         $data['paymentlist'] = $paymentlist;
@@ -121,7 +121,7 @@ public function previewfile($orderlineno){
 
         $data['hour'] = $hour;
         $data['min'] = $min;
-       return $this->load->view(lang('paymentlist'), $data,true);
+        return $this->load->view(lang('paymentlist'), $data, true);
     }
 
     public function index() {
@@ -278,7 +278,9 @@ public function previewfile($orderlineno){
 
 
         $ordsendmethod = $this->input->post('ordsend');
+        $this->session->set_flashdata('ordsend', $ordsendmethod);
         $ordpaymethod = $this->input->post('ordpay');
+        $this->session->set_flashdata('ordpay', $ordpaymethod);
         $cusremark = $this->input->post('cusremark');
         $data['templatelist'] = $this->templatedao->findall();
         $data['paperlist'] = $this->paperdao->findall();
@@ -341,12 +343,13 @@ public function previewfile($orderlineno){
         $this->load->model('dao/ordstatusdao');
         $this->load->model('dao/ordpaydao');
         $this->load->model('dao/ordsenddao');
-
+        $this->load->model('dao/ordtrackingdao');
 
         $ordstatuslist = $this->ordstatusdao->findall();
         $orderlinelist = $this->orderlinedao->findjoinbyorderno($orderno);
         $ordsendlist = $this->ordsenddao->findall();
         $ordpaylist = $this->ordpaydao->findall();
+
         $order = $this->orddao->findbyid($orderno);
         $data = array();
         $data['ordsendlist'] = $ordsendlist;
@@ -354,9 +357,16 @@ public function previewfile($orderlineno){
         $data['order'] = $order;
         $data['ordstatuslist'] = $ordstatuslist;
         $data['orderlinelist'] = $orderlinelist;
-        if($order->getOrdstatus()>=40){
-            
-            $data['paymentview']=$this->getpaymentlist($orderno);
+        if ($order->getSendmethod() == 'A') {
+           $ordtracking= $this->ordtrackingdao->findbyorderno($orderno);
+            if($ordtracking!=null){
+
+               $data['ordtracking']=$ordtracking->getTrackingno();
+            }
+        }
+        if ($order->getOrdstatus() >= 40) {
+
+            $data['paymentview'] = $this->getpaymentlist($orderno);
         }
         $this->load->view(lang('viewOrderdetail'), $data);
     }
@@ -412,14 +422,14 @@ public function previewfile($orderlineno){
         $subject = "Colour Harmony:รายการสั่งซื้อ $orderno  สถานะตรวจสอบงาน";
         $message = 'ท่านได้อัพโหลดงานเรียบร้อยแล้ว งานของท่านอยู่ในระหว่างการตรวจสอบความถูกต้องค่ะ';
 
-       // $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
-       // error_log("send email to $to result is" . var_export($emailresult, true), 0);
+        // $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
+        // error_log("send email to $to result is" . var_export($emailresult, true), 0);
         //sent sms here
         $phone = $_SESSION['user']->getMobilephone();
         $phone = explode('-', $phone);
         $phone = implode('', $phone);
-      //  $result = $this->smsutil->sentsms($phone, "Colour Harmony:รายการสั่งซื้อ $orderno  สถานะตรวจสอบงาน");
-       // error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
+        //  $result = $this->smsutil->sentsms($phone, "Colour Harmony:รายการสั่งซื้อ $orderno  สถานะตรวจสอบงาน");
+        // error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
         // redirect("orders/viewOrderdetail/$orderno");
         redirect("orders");
     }

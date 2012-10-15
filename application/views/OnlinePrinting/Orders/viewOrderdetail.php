@@ -54,13 +54,19 @@
        height: 1px;
 
     }
+    #head{
+        
+        clear: both;
+display: table;
+width: 100%;
+    }
 </style>
 
 
 
 <div id="page">
 
-    <div id="head" style="clear:both;">
+    <div id="head" >
         <div id="order">
             <h2 >เลขใบสั่งซื้อ <span class="orange" ><? echo $order->getOrderno(); ?></span></h2> <h3>สถานะ 
                 <?php foreach ($ordstatuslist as $ordstatus): ?>
@@ -133,12 +139,18 @@
                         <?php endforeach; ?><br>
                     </td>
                 </tr>
+                <tr>
+                    <td><strong>tracking no</strong></td> 
+                    <td><strong>&nbsp;:&nbsp; </strong></td>
+                    <td><br>
+                      <?echo (isset($ordtracking))?$ordtracking:''?></td>
+                </tr>
             </table>
 
         </div>
     </div>
 
-    <div id="orderline" align="center" style="clear: both; margin: 5% auto;">
+    <div id="orderline" align="center" style="clear: both; margin: 0 auto;">
         <hr style="color: orange;
             background-color: orange;
             height: 3px;"></hr>

@@ -25,7 +25,9 @@
         #orderline th{text-align: center;}
         #orderline td{text-align: center;}
         #headline{
+            display: table;
             clear: both;
+            width: 100%;
 
 
         }
@@ -84,8 +86,8 @@
                         <span <? echo ($order->getOrdstatus() == 10) ? 'class="red"' : 'class="blue"'; ?> >   <?
                 echo $ordstatus->getDescription();
                         ?></span></h3><? break; ?>
-                        <?php endif; ?>
-            <?php endforeach; ?><br>
+                <?php endif; ?>
+                    <?php endforeach; ?><br>
             <table>
                 <tr>
                     <td><strong>วันที่</strong></td> 
@@ -138,6 +140,7 @@
                         <td></td>
                         <td><? echo $order->getPostcode(); ?></td>
                     </tr>
+
             </address>
             <tr>          
                 <td><strong>การจัดส่ง</strong></td> 
@@ -150,6 +153,12 @@
                             ?>
                         <?php endif; ?>
                     <?php endforeach; ?></td>
+            </tr>
+            <tr>
+                <td><strong>tracking no</strong></td> 
+                <td><strong>&nbsp;:&nbsp; </strong></td>
+                <td><br>
+                    <? echo (isset($ordtracking)) ? $ordtracking : '' ?></td>
             </tr>
             </table>
 
@@ -257,7 +266,7 @@
             <form id="rejectform" method="post" action="<? echo site_url('Backend/bakorders/rejects') ?>">
                 <input  type="hidden" name="orderno"  value=""/>
                 <textarea name="msg"  placeholder="ข้อความที่ต้องการส่งถึงลูกค้า" >
-                                   
+                                       
                 </textarea>
             </form>
         </div>
@@ -273,7 +282,7 @@
         </div>
     <?php endif; ?>
     <? echo(isset($paymentview) ? $paymentview : '') ?>
-    
+
 </div>
 
 <? $this->load->view(lang('bakfooter')); ?>

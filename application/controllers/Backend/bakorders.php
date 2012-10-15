@@ -20,6 +20,15 @@ class Bakorders extends CI_Controller {
         $this->load->model('dao/empdao');
     }
 
+    private function addtrackingno($orderno, $trackingno) {
+        $this->load->model('dao/ordtrackingdao');
+        $ordtracking = new Ordtracking();
+        $ordtracking->setOrderno($orderno);
+        $ordtracking->setTrackingno($trackingno);
+        $result = $this->ordtrackingdao->insert($ordtracking);
+        return $result;
+    }
+
     public function seller_comment() {
         $this->load->model('dao/orddao');
         $orderno = $this->input->post('orderno');
@@ -98,6 +107,7 @@ class Bakorders extends CI_Controller {
 
         $this->load->model('dao/ordstatusdao');
         $this->load->model('dao/orderlinedao');
+         $this->load->model('dao/ordtrackingdao');
         $this->load->model('dao/ordsenddao');
         $this->load->model('dao/ordpaydao');
         $this->load->model('dao/orddao');
@@ -113,9 +123,16 @@ class Bakorders extends CI_Controller {
         $data['order'] = $order;
         $data['ordstatuslist'] = $ordstatuslist;
         $data['orderlinelist'] = $orderlinelist;
-         if($order->getOrdstatus()>=40){
-            
-            $data['paymentview']=$this->getpaymentlist($orderno);
+         if ($order->getSendmethod() == 'A') {
+           $ordtracking= $this->ordtrackingdao->findbyorderno($orderno);
+            if($ordtracking!=null){
+
+               $data['ordtracking']=$ordtracking->getTrackingno();
+            }
+        }
+        if ($order->getOrdstatus() >= 40) {
+
+            $data['paymentview'] = $this->getpaymentlist($orderno);
         }
         $this->load->view(lang('BakviewOrderdetail'), $data);
     }
@@ -211,7 +228,7 @@ class Bakorders extends CI_Controller {
         $data['order'] = $order;
         $data['ordpaylist'] = $ordpaylist;
 
-        return  $this->load->view(lang('bakpaymentlist'), $data,true);
+        return $this->load->view(lang('bakpaymentlist'), $data, true);
     }
 
     public function onproduction($orderno) {

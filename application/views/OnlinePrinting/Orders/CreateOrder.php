@@ -3,6 +3,13 @@
     var totalprice;
     $(function() {
         $( "#selectadd" ).buttonset();
+        var sid =document.getElementById('ordsend').options[document.getElementById('ordsend').selectedIndex].value;
+            $.post('<? echo site_url('orders/ajaxordersendprice'); ?>', {id:sid}, function(data){
+                
+                $('#adprice').html(data);
+                
+                $('#sumprice').html((parseFloat(data)+(totalprice*1.07)).toFixed(2));
+            });
         $('#ordsend').change(function(){
             
             var sid =document.getElementById('ordsend').options[document.getElementById('ordsend').selectedIndex].value;
@@ -10,10 +17,11 @@
                 
                 $('#adprice').html(data);
                 
-                $('#sumprice').html((parseFloat(data)+totalprice).toFixed(2))
+                $('#sumprice').html((parseFloat(data)+(totalprice*1.07)).toFixed(2));
             });
             
         });
+        
         $('#selectadd input').click(function(){
 
             var value = $(this).attr('value');
@@ -189,25 +197,31 @@
     <td><strong>&nbsp;: &nbsp;</strong></td>
     <td><strong><span  id="adprice">120.00</span> บาท</strong></td>
     </tr>
+      <tr>
+    <td><strong>ภาษี 7%</strong></td> 
+    <td><strong>&nbsp;: &nbsp;</strong></td>
+    <td><strong><? echo number_format($totalprice*0.07, 2, '.', ','); ?>บาท</strong></td>
+    </tr>
     <tr>
     <td><strong>ราคารวม</strong></td> 
     <td><strong>&nbsp;: &nbsp;</strong></td>
-    <td><strong><span  id="sumprice"><? echo number_format($totalprice, 2, '.', ','); ?></span> บาท</strong></td>
+    <td><strong><span  id="sumprice"></span> บาท</strong></td>
     </tr>
+    
     </table>
 </div>
 
 <p>
     <label>จัดส่ง: </label> <select id="ordsend" name="ordsend" >
 <?php foreach ($ordsendlist as $ordsend): ?>
-            <option value="<? echo $ordsend->getSendmethod() ?>" >
+            <option <? echo ($this->session->flashdata('ordsend')==$ordsend->getSendmethod())?'selected="selected"':''?> value="<? echo $ordsend->getSendmethod() ?>" >
             <? echo $ordsend->getDescription() ?></option>
         <?php endforeach; ?>
     </select>
 
     <label>การจ่ายเงิน: </label> <select  name="ordpay" >
 <?php foreach ($ordpaylist as $ordpay): ?>
-            <option value="<? echo $ordpay->getPaymethod() ?>" >
+            <option   <? echo ($this->session->flashdata('ordpay')==$ordpay->getPaymethod())?'selected="selected"':''?>   value="<? echo $ordpay->getPaymethod() ?>" >
     <? echo $ordpay->getDescription() ?></option>
 <?php endforeach; ?>
     </select>

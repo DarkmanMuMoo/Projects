@@ -136,12 +136,17 @@
     <td><? echo  number_format($ordsend->getSendprice(), 2, '.', ','); ?> บาท</td>
     </tr>
     <tr>
+    <td><strong>ภาษี7%</strong></td>
+    <td><strong>&nbsp;:&nbsp;</strong></td>
+    <td><? echo  number_format($totalprice *0.07, 2, '.', ','); ?> บาท</td>
+    </tr>
+    <tr>
     <td><strong>ราคารวม</strong></td>
     <td><strong>&nbsp;:&nbsp;</strong></td>
-    <td><? echo number_format($totalprice + $ordsend->getSendprice() , 2, '.', ','); ?> บาท</td>
+    <td><? echo number_format(($totalprice*1.07) + $ordsend->getSendprice() , 2, '.', ','); ?> บาท</td>
     </tr>
   </table><br>
-    <input type="hidden" name="totalprice" value="<? echo $totalprice + $ordsend->getSendprice(); ?>">
+    <input type="hidden" name="totalprice" value="<? echo ($totalprice*1.07) + $ordsend->getSendprice(); ?>">
 </div>
 
 
@@ -165,7 +170,7 @@
 <td><p><strong><? echo $cusremark ?></strong>&nbsp;</p>
 <input name="cusremark"  type="hidden" value="<? echo $cusremark ?>" ></td></tr> </table>
 
-<div style="text-align: center; margin-top:20;" >
+<div style="text-align: center; margin-top:20px;" >
     <a href="javascript:void(0);" onclick="history.back()" class="btn btn-primary">Back</a> 
     <button type="submit" class="btn btn-primary">Confirm</button>
 </div>
