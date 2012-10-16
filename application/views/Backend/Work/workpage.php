@@ -71,13 +71,13 @@
         <table class="table table-bordered" >
             <thead>
             <th>
-                #
-            </th>
-            <th>
                 รหัสงาน 
             </th>
             <th>
                 ชื่องาน
+            </th>
+            <th>
+                เลขที่ใบสั่งซื้อ
             </th>
             <th>
                 ผู้รับผิดชอบ
@@ -100,7 +100,7 @@
             <tbody>
                    <? $page=($this->input->post('startrow'))?$this->input->post('startrow'):0; ?>
                 <?php foreach ($worklist as $index => $work): ?>
-                    <tr> <td  ><? echo $index+1+$page ?> </td>  
+                    <tr>  
                         <td  >
 
                             <? echo $work->getWorkno(); ?> 
@@ -109,7 +109,10 @@
                         <td>
                             <? echo $work->getWorkname(); ?> 
                         </td>
-                        <td>
+     <td>
+     <? echo $work->getOrdno(); ?>
+     </td>
+                  <td>
                             <?php foreach ($emplist as $emp): ?>
 
                                 <?php if ($emp->getEmpno() == $work->getEmpno()): ?>

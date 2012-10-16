@@ -19,6 +19,16 @@ margin-left: 60px;">
   ตัวอย่างรูปสลิปโอนเงิน<br>
   <img src="<? echo base_url("asset/css/images/slip.jpg"); ?>" width="275" height="366"></li>
 </ul>
+<p>&nbsp;</p>
+<p>ชำระเงินโดยการโอนเงินผ่านธนาคาร</p>
+<ul>เลขที่บัญชี : 0-321-4545-1</ul>
+<ul>
+ธนาคาร : ไทยพาณิชย์ จำกัด(มหาชน)
+</ul>
+<ul>ชื่อบัญชี : Mr.Pisut Hamkongkeaw</ul>
+<ul>สาขา : ถนนสุขสวัสดิ์</ul>
+<ul>ประเภท : ออมทรัพย์</ul>
+
 </div>
 
 </body></html>

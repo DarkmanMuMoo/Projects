@@ -24,6 +24,9 @@
        height: 1px;
 
     }
+.req {
+	color: #F00;
+}
 
 </style>
 <div id="page">
@@ -131,11 +134,11 @@ $paidamount = 0; ?>
                     <td ><input class="input-medium" id="slipno" name="slipno" type="text" /></td>
                 </tr>
                 <tr>
-                    <td scope="row">วันทีี่ชำระเงิน:</td>
+                    <td scope="row">วันทีี่ชำระเงิน<span class="req">*</span>:</td>
                     <td><input class="input-medium datepicker"  id="date"  name="date" type="text" /></td>
                 </tr>
                 <tr>
-                    <td scope="row">เวลา:</td>
+                    <td scope="row">เวลา<span class="req">*</span>:</td>
                     <td>ชั่วโมง<select style="width:20%;" name="hour"> 
                             <?php foreach ($hour as $index => $h): ?>
 
@@ -155,12 +158,12 @@ $paidamount = 0; ?>
                     </td>
                 </tr>
                 <tr>
-                    <td scope="row">จำนวนเงิน:</td>
+                    <td scope="row">จำนวนเงิน<span class="req">*</span>:</td>
                     <td><input  class="input-medium" name="amount"  id="amount" type="text" value="0.00"/>
                         บาท</td>
                 </tr>
                 <tr>
-                    <td scope="row">รูปภาพใบเสร็จ:</td>
+                    <td scope="row">รูปภาพใบเสร็จ<span class="req">*</span>:</td>
                     <td><input  class="input-medium" name="pic"  id="pic" type="file" />
                     </td>
                 </tr>

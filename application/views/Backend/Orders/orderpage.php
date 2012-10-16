@@ -57,9 +57,6 @@
         <table class="table table-bordered" >
             <thead>
             <th>
-                #
-            </th>
-            <th>
                 รหัสสั่งซื้อ 
             </th>
             <th>
@@ -85,7 +82,7 @@
             <tbody>
                 <? $page = ($this->input->post('startrow')) ? $this->input->post('startrow') : 0; ?>
                 <?php foreach ($orderlist as $index => $ord): ?>
-                    <tr> <td  ><? echo $index + 1 + $page ?> </td>  
+                    <tr>   
                         <td style="width:52px;" >
 
                             <? echo $ord->getOrderno(); ?> 
