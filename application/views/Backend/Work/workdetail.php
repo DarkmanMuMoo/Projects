@@ -35,10 +35,14 @@
                             <td width="26">:</td>
                             <td width="161"><? echo $work->getWorkno(); ?></td>
                             <td width="12">&nbsp;</td>
-                            <td width="203" height="44"><strong>ผู้รับผิดชอบ</strong></td>
+                            <td width="180" height="44"><strong>ผู้รับผิดชอบ</strong></td>
                             <td width="24">:</td>
-                            <td width="121"><? echo $work->getName(); ?>&nbsp;<? echo $work->getLastname(); ?> 
-                            &nbsp;(<? echo $work->getPosition(); ?>)&nbsp;
+                            <td width="300"><? echo $work->getName(); ?>&nbsp;<? echo $work->getLastname(); ?> 
+                                 <?php foreach ($positionlist as $pos): ?> 
+                                 <?php if ( $work->getPosition()==$pos->getPosition()): ?>
+                            &nbsp;(<? echo $pos->getPosdescription();  ?>)&nbsp;<?break;?>
+                             <?php endif; ?>
+                               <?php endforeach; ?>
                             <? echo ($work->getActive()) ? '<span class="badge badge-success">active</span>' : '<span class="badge badge-important">unactive</span>'; ?></td>
                         </tr>
                         <tr>

@@ -153,12 +153,12 @@ class Bakemp extends CI_Controller {
         $email = $this->input->post('email');
         $name = $this->input->post('name');
         $lastname = $this->input->post('lastname');
-        $pasword = $this->input->post('password');
+   
         $phone = $this->input->post('telephone');
         $tmp_emp->setEmail($email);
         $tmp_emp->setName($name);
         $tmp_emp->setLastname($lastname);
-        $tmp_emp->setPassword($pasword);
+  
         $tmp_emp->setPhone($phone);
         $result = $this->empdao->update($tmp_emp);
         error_log(var_export($result, true) . 'update in emp profile', 0);
@@ -166,7 +166,7 @@ class Bakemp extends CI_Controller {
             $_SESSION['emp']->setEmail($email);
             $_SESSION['emp']->setName($name);
             $_SESSION['emp']->setLastname($lastname);
-            $_SESSION['emp']->setPassword($pasword);
+         
             $_SESSION['emp']->setPhone($phone);
         }
         $this->empprofile();

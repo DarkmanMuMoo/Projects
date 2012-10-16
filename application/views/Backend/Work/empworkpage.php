@@ -2,7 +2,7 @@
 
 <div class="container" >
     <div class="header"> 
-        <h2>งานของ<? $_SESSION['emp']->getEmpno(); ?></h2>
+        <h2>งานของ<? echo $_SESSION['emp']->getName(); ?></h2>
         <hr align="center" size="3" color="#C3C3C3">  </div>
 
     <div id="search-bar" >  

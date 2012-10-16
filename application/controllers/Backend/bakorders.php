@@ -343,9 +343,20 @@ class Bakorders extends CI_Controller {
 
     public function ontransfer($orderno) {
         $this->load->model('dao/orddao');
+        $this->load->model('dao/ordtrackingdao');
+        
         $this->load->library('smsutil');
         $this->load->library('emailutil');
 
+        
+        if($this->input->post('tracking')){
+            $ordtrack =new Ordtracking();
+            $ordtrack->setOrderno($orderno);
+            $ordtrack->setTrackingno($this->input->post('tracking'));
+            $this->ordtrackingdao->insert('$ordtrack');
+
+        }
+        
         $this->changestatus('60', $orderno, date("Y-m-d"));
 //sent mail here;
         $config = $this->emailutil->getSmtpconfig();

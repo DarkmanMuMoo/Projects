@@ -69,7 +69,12 @@
             width: 20%;
             margin-left: 10%;
         }
-
+#trackform label.error {
+	margin-left: 10px;
+	width: auto;
+	display: inline;
+        color:#F00;
+}
     </style>
 
     <div class="header"> 
@@ -266,14 +271,24 @@
             <form id="rejectform" method="post" action="<? echo site_url('Backend/bakorders/rejects') ?>">
                 <input  type="hidden" name="orderno"  value=""/>
                 <textarea name="msg"  placeholder="ข้อความที่ต้องการส่งถึงลูกค้า" >
-                                       
+                                                       
                 </textarea>
             </form>
         </div>
     <?php endif; ?>
     <?php if ($order->getOrdstatus() == 50): ?>
         <div align="center" style="margin :5% auto;">  
-            <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/ontransfer') . '/' . $order->getOrderno(); ?>">set to on trasfer</a> 
+            <?php if ($order->getSendmethod() == 'A'): ?>
+
+                <form id="trackform"action="<? echo site_url('Backend/bakorders/ontransfer') . '/' . $order->getOrderno(); ?>" method="post">
+                    Tracking No.<input class="input-small" type="text" name="tracking"  id="tracking" value=""><br/><br/>
+                    <input class="btn btn-success" type="submit" value="จัดส่ง">
+                </form>
+            <?php else: ?>
+
+                <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/ontransfer') . '/' . $order->getOrderno(); ?>">จัดส่ง</a> 
+
+            <?php endif; ?>
         </div>
     <?php endif; ?>
     <?php if ($order->getOrdstatus() == 60): ?>
@@ -286,7 +301,26 @@
 </div>
 
 <? $this->load->view(lang('bakfooter')); ?>
+<script src="<? echo base_url("asset/javascript/jquery.validate.js"); ?>" >  </script>
+<script src="<? echo base_url("asset/javascript/jquery.metadata.js"); ?>" >  </script>
 <script>
+    $().ready(function() {
+         
+         
+        if($('#trackform').length!= 0){
+
+            $("#trackform").validate({
+                rules: {
+                    tracking:"required" 
+              
+                },messages:{
+                    tracking:"required" 
+             
+                }
+        
+            });
+        }
+    });
     function reject(orderno){
         $('#rejectform input[name=orderno]').val(orderno);
         $('#rejectdialog').dialog({

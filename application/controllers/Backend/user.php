@@ -63,10 +63,15 @@ class User extends CI_Controller {
              $this->form_validation->set_message('user_check', 'email หรือ password ไม่ถูกต้อง');
             return FALSE;
           
-            }else{
+            }else if ($emp->getActive()== 0 ){
    
-                return TRUE; 
+                $this->form_validation->set_message('user_check', 'email หรือ password ไม่ถูกต้อง');
+            return FALSE;
                
+            }else{
+                
+                return true;
+                
             }
            }
      

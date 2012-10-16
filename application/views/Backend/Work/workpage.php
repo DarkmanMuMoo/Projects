@@ -150,7 +150,7 @@
             <table width="532" border="0" align="center">
                    <tr>
                     <td height="50">เลขใบสั่งซื้อ</td>
-                    <td><input name="ordno" type="text" readonly="true" value="<?echo $this->session->flashdata('orderno'); ?>"/></td>
+                    <td><input id="ordno" name="ordno" type="text" readonly="true" value="<?echo $this->session->flashdata('orderno'); ?>"/></td>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
@@ -240,10 +240,11 @@
     function showinsertform(){
         var validate=  $("#creatworkform").validate({
             rules: {
-                workname:"required" 
-                  
+                workname:"required" ,
+                ordno:"required"  
             },messages:{
-                workname:"required" 
+                workname:"required" ,
+                ordno:"required"  
             }
         
         });

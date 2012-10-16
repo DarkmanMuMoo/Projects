@@ -192,14 +192,17 @@ class Bakwork extends CI_Controller {
     public function viewworkdetail($workno) {
         $this->load->model('dao/workdao');
         $this->load->model('dao/processdao');
+        $this->load->model('dao/positiondao');
         $data = array();
         $work = $this->workdao->findworkdetail($workno);
         $allemp = $this->empdao->findbymultifield(array('position' => 'des'));
         $processlist = $this->processdao->findprocesslist($workno);
         $coemplist = $this->empdao->findcoemp($workno);
+        $positionlist = $this->positiondao->findall();
         $data['coemplist'] = $coemplist;
         $data['work'] = $work;
         $data['allemp'] = $allemp;
+        $data['positionlist'] = $positionlist;
         $data['processlist'] = $processlist;
 
         $this->load->view(lang('workdetail'), $data);

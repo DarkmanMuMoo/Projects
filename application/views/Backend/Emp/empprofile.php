@@ -91,7 +91,7 @@
 
                 <tr>
                     <td width="95">โทรศัพท์</td>
-                    <td width="165"><input name="telephone" class="input-medium"  type="text" value="<? echo $tmpemp->getPhone(); ?>" /></td>
+                    <td width="165"><input id="telephone" name="telephone" class="input-medium"  type="text" value="<? echo $tmpemp->getPhone(); ?>" /></td>
                     <td width="194">&nbsp;</td>
                 </tr>
 
@@ -127,10 +127,14 @@
 
 
     </div>
+    <script src="<? echo base_url("asset/javascript/jquery.maskedinput-1.2.1.js"); ?>" >  </script>
     <script src="<? echo base_url("asset/javascript/jquery.validate.js"); ?>" >  </script>
     <script src="<? echo base_url("asset/javascript/jquery.metadata.js"); ?>" >  </script>
     <script>
-        
+          $().ready(function() {
+        // validate the comment form when it is submitted
+        $("#telephone").mask("999-999-9999");
+    });
         function changepassword(){
             var validate= $("#changepasswordform").validate({
                 rules: {
@@ -172,6 +176,7 @@
                                         $('#changepassword').dialog('close');
                                         validate.resetForm();
                                         document.getElementById('changepasswordform').reset();
+                                        alert("เปลี่ยนPasswordเรียบร้อย");
                                     }else{
                                         $('#changepassword #showerror').html(data);
                                        
