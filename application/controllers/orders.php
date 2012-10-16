@@ -94,7 +94,7 @@ class Orders extends CI_Controller {
         }
 
         $this->session->set_flashdata('message', $message);
-        redirect("orders/getpaymentlist/$ordno");
+        redirect("orders/viewOrderdetail/$ordno");
     }
 
     public function getpaymentlist($orderno) {

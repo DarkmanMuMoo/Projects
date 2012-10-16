@@ -12,10 +12,10 @@ $paidamount = 0; ?>
     <table class="table table-bordered">
         <thead>
 
-        <th>#</th> 
+        <th>เลขที่สลิป</th> 
         <th>รอบการจ่ายเงิน</th>
         <th>ราคารวม(บาท)</th>
-
+        <th>สถานะ</th>
         <th>วันที่</th>
         <th>ภาพใบเสร็จ</th>
         </thead>
@@ -26,7 +26,15 @@ $paidamount = 0; ?>
                 <td><? echo $payment->getSeqno(); ?> </td> 
                 <td><? echo $payment->getPeriod() ?> </td> 
                 <td><? echo number_format($payment->getAmount(), 2, '.', ','); ?> &nbsp;</td> 
+                <td> <?php if ($payment->getActive() == '1'): ?>
 
+   <span class="label label-success">Success</span>
+
+<?php elseif ($payment->getActive() == '2'): ?>
+
+<span class="label label-important">Rejects</span>
+
+<?php endif; ?></td>
                 <td><? echo $payment->getPaymentdate(); ?> </td> 
                 <td>  <a target="_blank" href="<? echo site_url('orders/paymentimg/' . $payment->getPayno()) ?>" class="btn" >
                         <i class="icon-picture"></i>ใบเสร็จ</a>   </td>

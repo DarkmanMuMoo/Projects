@@ -107,7 +107,7 @@ class Bakorders extends CI_Controller {
 
         $this->load->model('dao/ordstatusdao');
         $this->load->model('dao/orderlinedao');
-         $this->load->model('dao/ordtrackingdao');
+        $this->load->model('dao/ordtrackingdao');
         $this->load->model('dao/ordsenddao');
         $this->load->model('dao/ordpaydao');
         $this->load->model('dao/orddao');
@@ -123,11 +123,11 @@ class Bakorders extends CI_Controller {
         $data['order'] = $order;
         $data['ordstatuslist'] = $ordstatuslist;
         $data['orderlinelist'] = $orderlinelist;
-         if ($order->getSendmethod() == 'A') {
-           $ordtracking= $this->ordtrackingdao->findbyorderno($orderno);
-            if($ordtracking!=null){
+        if ($order->getSendmethod() == 'A') {
+            $ordtracking = $this->ordtrackingdao->findbyorderno($orderno);
+            if ($ordtracking != null) {
 
-               $data['ordtracking']=$ordtracking->getTrackingno();
+                $data['ordtracking'] = $ordtracking->getTrackingno();
             }
         }
         if ($order->getOrdstatus() >= 40) {
@@ -164,6 +164,20 @@ class Bakorders extends CI_Controller {
                 echo $javascript;
             }
         }
+    }
+
+    public function rejectpayment() {
+        $this->load->model('dao/paymentdao');
+        $payno = $this->input->post('payno');
+        $orderno = $this->input->post('orderno');
+        $payment = $this->paymentdao->findbyid($payno);
+        $payment->setActive('2');
+
+        $result = $this->paymentdao->update($payment);
+
+        error_log(var_export($result, true) . 'set active payment', 0);
+
+        redirect('Backend/bakorders/vieworderdetail/'.$orderno);
     }
 
     public function settoactive() {
