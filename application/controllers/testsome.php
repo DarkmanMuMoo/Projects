@@ -18,10 +18,9 @@ class Testsome extends CI_Controller {
 
     public function index() {
 
-      $this->output
-    ->set_content_type('pdf') // You could also use ".jpeg" which will have the full stop removed before looking in config/mimes.php
-    ->set_output(file_get_contents(base_url('uploads/Ammie_2012-08-09_08-16-58.pdf')));
-      
+     $this->load->library('thailandutil');
+      $thai=$this->thailandutil->findbyid(1);
+      var_dump($thai);
 
      
         /* $first= load_class('emailutil', 'libraries','');

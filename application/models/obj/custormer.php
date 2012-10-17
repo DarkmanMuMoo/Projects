@@ -16,8 +16,6 @@ class Custormer extends CI_Model {
     private $name;
     private $lastname;
     private $password;
-    private $address1;
-    private $address2;
     private $validate;
     private $mobilephone;
 

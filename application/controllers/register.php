@@ -49,36 +49,8 @@ class Register extends CI_Controller {
             $cus->setEmail($this->input->post('email'));
             $cus->setName($this->input->post('name'));
             $cus->setLastname($this->input->post('lastname'));
-            $cus->setPassword(md5($this->input->post('password')));
-            $province = $this->thailandutil->findbyid($this->input->post('province'));
-            $province2 = $this->thailandutil->findbyid($this->input->post('province2'));
+            $cus->setPassword(md5($this->input->post('password'))); 
             $cus->setMobilephone($this->input->post('mphone'));
-            $address1 = array('address' => $this->input->post('address'),
-                'province' => $province->getProvincename() ,
-                'postcode' => $this->input->post('postcode'),
-                'phone' => $this->input->post('phone1')
-            );
-            $address2;
-            if($this->input->post('needop')){
-                 $address2 = array('address' => '',
-                'province' => '' ,
-                'postcode' => '',
-                'phone' => ''
-            );
-                
-            }else{
-                 $address2 = array('address' => $this->input->post('address2'),
-                'province' => $province2->getProvincename() ,
-                'postcode' => $this->input->post('postcode2'),
-                'phone' => $this->input->post('phone2')
-            );
-                
-                
-            }
-           
-            $cus->setAddress1($address1);
-            $cus->setAddress2($address2);
-
             $this->cusdao->insert($cus);
             // echo var_dump( $this->cusdao->insert($cus));
             $result = $this->sendemail($cus);

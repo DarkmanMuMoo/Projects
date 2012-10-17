@@ -18,49 +18,47 @@ class Userprofile extends CI_Controller {
 
 
     public function index() {
+
+        $this->load->model('dao/addressdao');
+
         $this->load->library('thailandutil');
         $updateuser = $_SESSION['user'];
-        $address1 = $_SESSION['user']->getAddress1();
-        $address2 = $_SESSION['user']->getAddress2();
+        $con = array();
+
+        $con['email'] = $updateuser->getEmail();
         $data = array();
         $data['updateuser'] = $updateuser;
-        $id1 = $this->thailandutil->findbyname($address1['province']);
-        $address1['provinceid'] = ($id1 == null) ? '' : $id1->getProvinceid();
-        $id2 = $this->thailandutil->findbyname($address2['province']);
-        $address2['provinceid'] = ($id2 == null) ? '' : $id2->getProvinceid();
-        $data['address1'] = $address1;
-        $data['address2'] = $address2;
-
+        $data['addresslist'] = $this->addressdao->findbymultifield($con);
         $data['provincelist'] = $this->thailandutil->getAllprovinceList();
-   
+
         $this->load->view(lang('userprofile'), $data);
     }
 
     public function updateaddress() {
-  $this->load->library('thailandutil');
-
-  //var_dump($this->input->post());
-        $ad = $this->input->post('ad');
-        $prov = $this->thailandutil->findbyid($this->input->post('prov'))->getProvincename();
-        $post = $this->input->post('post');
+        $this->load->library('thailandutil');
+        $this->load->model('dao/addressdao');
+        //var_dump($this->input->post());
+        $addressno = $this->input->post('addressno');
+        $updateaddress = $this->addressdao->findbyid($addressno);
+        $address = $this->input->post('address');
+        $province = $this->thailandutil->findbyid($this->input->post('province'))->getProvincename();
+        $postcode = $this->input->post('postcode');
         $phone = $this->input->post('phone');
-        $address = ($this->input->post('index') == '1') ? $_SESSION['user']->getAddress1() : $_SESSION['user']->getAddress2();
-       
-        $update = ($ad != $address['address']) || ($prov != $address['province']) || ($ad != $address['postcode']) || ($ad != $address['phone']);
-        if ($update) {
-            $address['address'] = $ad;
-            $address['province'] = $prov;
-            $address['postcode'] = $post;
-            $address['phone'] = $phone;
-              ($this->input->post('index') == '1') ?$_SESSION['user']->setAddress1($address):$_SESSION['user']->setAddress2($address);
-             $result = $this->cusdao->update($_SESSION['user']);
-            
-            error_log(var_export($result, true) . 'change address', 0);
-            if (!$result) {
-                $_SESSION['user'] = $this->cusdao->findbyemail($_SESSION['user']->getEmail());
-            }
-        }
-          $this->index();
+        $addressname = $this->input->post('addressname');
+        $updateaddress->setAddressname($addressname);
+      
+        $updateaddress->setAddress($address);
+        $updateaddress->setProvince($province);
+        $updateaddress->setPostcode($postcode);
+        $updateaddress->setPhone($phone);
+
+
+        $result = $this->addressdao->update($updateaddress);
+
+        error_log(var_export($result, true) . 'change address', 0);
+
+
+       redirect('userprofile');
     }
 
     public function updateinfo() {
@@ -95,7 +93,7 @@ class Userprofile extends CI_Controller {
                 $_SESSION['user'] = $this->cusdao->findbyemail($_SESSION['user']->getEmail());
             }
         }
-        $this->index();
+        redirect('userprofile');
     }
 
     public function ajaxchangepassword() {
@@ -115,6 +113,37 @@ class Userprofile extends CI_Controller {
 
             echo 'password  not valid';
         }
+    }
+
+    public function addaddress() {
+
+        $this->load->library('thailandutil');
+        $this->load->model('dao/addressdao');
+        $addressname = $this->input->post('addressname');
+        $address = $this->input->post('address');
+        $province = $this->thailandutil->findbyid($this->input->post('province'));
+        $phone = $this->input->post('phone');
+        $postcode = $this->input->post('postcode');
+        $email = $_SESSION['user']->getEmail();
+
+        $newaddress = new Address();
+        $newaddress->setAddress(trim($address));
+        $newaddress->setAddressname($addressname);
+        $newaddress->setEmail($email);
+        $newaddress->setPhone($phone);
+        $newaddress->setPostcode($postcode);
+        $newaddress->setProvince($province->getProvincename());
+
+        $result = $this->addressdao->insert($newaddress);
+
+        redirect('userprofile');
+    }
+
+    public function deleteaddress($addressno) {
+        $this->load->model('dao/addressdao');
+
+        $result = $this->addressdao->delete($addressno);
+        redirect('userprofile');
     }
 
 }

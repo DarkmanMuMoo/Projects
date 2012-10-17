@@ -39,22 +39,13 @@ class Cusdao extends CI_Model {
 
     public function update(Custormer $cus) {
 
-        $address1 = $cus->getAddress1();
-        $address2 = $cus->getAddress2();
+     
         $data = array(
             'email' => $cus->getEmail(),
             'cus_name' => $cus->getName(),
             'lastname' => $cus->getLastname(),
             'mobilephone' => $cus->getMobilephone(),
-            'password' => $cus->getPassword(),
-            'phone1' => $address1['phone'],
-            'phone2' => $address2['phone'],
-            'address' => $address1['address'],
-            'province' => $address1['province'],
-            'postcode' => $address1['postcode'],
-            'address_2' => $address2['address'],
-            'province_2' => $address2['province'],
-            'postcode_2' => $address2['postcode']
+            'password' => $cus->getPassword()
         );
         $this->db->where('email', $cus->getEmail());
         return $this->db->update('custormer', $data);
@@ -93,16 +84,8 @@ class Cusdao extends CI_Model {
             'email' => $cus->getEmail(),
             'cus_name' => $cus->getName(),
             'lastname' => $cus->getLastname(),
-            'phone1' => $address1['phone'],
-            'phone2' => $address2['phone'],
             'mobilephone' => $cus->getMobilephone(),
             'password' => $cus->getPassword(),
-            'address' => $address1['address'],
-            'province' => $address1['province'],
-            'postcode' => $address1['postcode'],
-            'address_2' => $address2['address'],
-            'province_2' => $address2['province'],
-            'postcode_2' => $address2['postcode'],
             'validate' => 'F'
         );
 
@@ -141,10 +124,10 @@ class Cusdao extends CI_Model {
         $cus->setPassword($row->password);
 
         $cus->setMobilephone($row->mobilephone);
-        $cus->setAddress1(array('address' => $row->address, 'province' => $row->province, 'postcode' => $row->postcode, 'phone' => $row->phone1));
+
         $cus->setValidate($row->validate);
 
-        $cus->setAddress2(array('address' => $row->address_2, 'province' => $row->province_2, 'postcode' => $row->postcode_2, 'phone' => $row->phone2));
+
 
         return $cus;
     }
