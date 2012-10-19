@@ -2,26 +2,13 @@
 <script>
     var totalprice;
     $(function() {
-        $( "#selectadd" ).buttonset();
-        var sid =document.getElementById('ordsend').options[document.getElementById('ordsend').selectedIndex].value;
-        $.post('<? echo site_url('orders/ajaxordersendprice'); ?>', {id:sid}, function(data){
-                
-            $('#adprice').html(data);
-                
-            $('#sumprice').html((parseFloat(data)+(totalprice*1.07)).toFixed(2));
-        });
-        $('#ordsend').change(function(){
-            
-            var sid =document.getElementById('ordsend').options[document.getElementById('ordsend').selectedIndex].value;
-            $.post('<? echo site_url('orders/ajaxordersendprice'); ?>', {id:sid}, function(data){
-                
-                $('#adprice').html(data);
-                
-                $('#sumprice').html((parseFloat(data)+(totalprice*1.07)).toFixed(2));
-            });
-            
-        });
-        
+
+        changeprice();
+        changesendaddress();
+        changereceiptaddress();
+        $('#ordsend').change(function(){changeprice();});
+        $('#choosereceiptdaddress').change(function(){ changereceiptaddress(); });
+        $('#choosesendaddress').change(function(){ changesendaddress(); });
         $('#selectadd input').click(function(){
 
             var value = $(this).attr('value');
@@ -31,7 +18,46 @@
         
         
     });
-
+    function changeprice(){
+        var sid =document.getElementById('ordsend').options[document.getElementById('ordsend').selectedIndex].value;
+        $.post('<? echo site_url('orders/ajaxordersendprice'); ?>', {id:sid}, function(data){      
+            $('#adprice').html(data);   
+            $('#sumprice').html((parseFloat(data)+(totalprice*1.07)).toFixed(2));
+        });
+    
+    }
+    function changesendaddress(){
+        var sid=$('#choosesendaddress').val();
+        if(sid=='0'){
+            
+            $('#showsendadd').hide();
+            $('#newsendadd').show();
+        }else{
+            $('#showsendadd').show();
+            $('#newsendadd').hide();
+            $.post('<? echo site_url('orders/ajaxorderaddress'); ?>', {id:sid}, function(data){
+                $("#showsendadd #line1").html(data.address);
+                $("#showsendadd #line2").html("จังหวัด: "+data.province+"  รหัสไปรษณีย์: "+data.postcode);
+                $("#showsendadd #line3").html("โทรศัพท์: "+data.phone);
+            });
+        }
+    }
+    function changereceiptaddress(){
+        var sid=$('#choosereceiptdaddress').val();
+        if(sid=='0'){
+            $('#newreceiptadd').show();
+             $('#showreceiptadd').hide();
+        }else{
+            $('#newreceiptadd').hide();
+            $('#showreceiptadd').show();
+            $.post('<? echo site_url('orders/ajaxorderaddress'); ?>', {id:sid}, function(data){
+                
+                $("#showreceiptadd #line1").html(data.address);
+                $("#showreceiptadd #line2").html("จังหวัด"+data.province+"  รหัสไปรษณีย์"+data.postcode);
+                $("#showreceiptadd #line3").html("โทรศัพท์ "+data.phone);
+            });
+        }
+    }
 </script>
 <style>
     #mainaddress address {
@@ -54,12 +80,12 @@
         display: table;
     }
     #sendaddress{
-width: 50%;
-float: left;
+        width: 50%;
+        float: left;
     }
     #receiptadd{
-width: 50%;
-float: right;
+        width: 50%;
+        float: right;
 
     }
 </style>
@@ -74,25 +100,29 @@ float: right;
 <div id="addressbar">
     <div id="sendaddress">
         <h5>ที่อยู่จัดส่ง</h5> <br/>
-        <select name="choosesendaddress">
-            <option></option>
+        <select id="choosesendaddress" name="choosesendaddress">
+            <?php foreach ($addresslist as $address): ?>
+                <option value="<? echo $address->getAddressno(); ?>"><? echo $address->getAddressname(); ?></option>
+            <?php endforeach; ?>
+            <option value="0">ที่อยู่อื่นๆ</option>
         </select>
         <br/><h5>จัดส่ง</h5> <br/>
-        <div class="showsendadd"id="showsendadd" >
+        <div id="showsendadd" >
 
-            <address>
+            <address id="line1" ></address>
+            <address id="line2" ></address>
+            <address id="line3" ></address>
 
-            </address>
         </div>
-        <div  class="newsendadd" id="newsendadd" style="display: none;" >
+        <div  id="newsendadd" style="display: none;" >
             <table>
                 <tr>
                     <td>ที่อยู่</td> 
-                    <td><textarea name="address" id="address" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง" > </textarea></td>
+                    <td><textarea name="address1" id="address1" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง" > </textarea></td>
                 </tr>
                 <tr>
                     <td>จังหวัด</td> 
-                    <td><select name="province" id="province">
+                    <td><select name="province1" id="province1">
                             <?php foreach ($provincelist as $province): ?>
                                 <option  value="<? echo $province->getProvinceid(); ?>"><? echo $province->getProvincename(); ?></option>
                             <? endforeach; ?>
@@ -100,11 +130,11 @@ float: right;
                 </tr>
                 <tr>
                     <td>รหัสไปรษณีย์ &nbsp;&nbsp;&nbsp;</td> 
-                    <td><input type="text"id="postcode" name="postcode" maxlength="5" value=""/></td>
+                    <td><input type="text"id="postcode1" name="postcode1" maxlength="5" value=""/></td>
                 </tr>
                 <tr>
                     <td>โทรศัพท์</td> 
-                    <td><input type="text" name="phone" value=""  id="phone"/></td>
+                    <td><input type="text" name="phone1" value=""  id="phone1"/></td>
                 </tr>
             </table>
         </div>
@@ -114,25 +144,27 @@ float: right;
     </div>
     <div id="receiptadd">
         <h5>ที่อยู่ออกใบเสร็จ</h5> <br/>
-        <select name="choosesendaddress">
-            <option></option>
+        <select id="choosereceiptdaddress" name="choosereceiptdaddress">
+            <?php foreach ($addresslist as $address): ?>
+                <option value="<? echo $address->getAddressno(); ?>"><? echo $address->getAddressname(); ?></option>
+            <?php endforeach; ?>
+            <option value="0">ที่อยู่อื่นๆ</option>
         </select>
         <br/><h5>จัดส่ง</h5> <br/>
-        <div class="showreceiptadd"id="showreceiptadd" >
-
-            <address>
-
-            </address>
+        <div id="showreceiptadd" >
+            <address id="line1" ></address>
+            <address id="line2" ></address>
+            <address id="line3" ></address>
         </div>
-        <div  class="newreceiptaddress" id="newreceiptaddress" style="display: none;" >
+        <div   id="newreceiptadd" style="display: none;" >
             <table>
                 <tr>
                     <td>ที่อยู่</td> 
-                    <td><textarea name="address" id="address" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง" > </textarea></td>
+                    <td><textarea name="address" id="address2" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง" > </textarea></td>
                 </tr>
                 <tr>
                     <td>จังหวัด</td> 
-                    <td><select name="province" id="province">
+                    <td><select name="province" id="province2">
                             <?php foreach ($provincelist as $province): ?>
                                 <option  value="<? echo $province->getProvinceid(); ?>"><? echo $province->getProvincename(); ?></option>
                             <? endforeach; ?>
@@ -140,11 +172,11 @@ float: right;
                 </tr>
                 <tr>
                     <td>รหัสไปรษณีย์ &nbsp;&nbsp;&nbsp;</td> 
-                    <td><input type="text"id="postcode" name="postcode" maxlength="5" value=""/></td>
+                    <td><input type="text"id="postcode2" name="postcode" maxlength="5" value=""/></td>
                 </tr>
                 <tr>
                     <td>โทรศัพท์</td> 
-                    <td><input type="text" name="phone" value=""  id="phone"/></td>
+                    <td><input type="text" name="phone" value=""  id="phone2"/></td>
                 </tr>
             </table>
         </div>

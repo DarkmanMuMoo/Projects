@@ -10,15 +10,15 @@
  *
  * @author Dark
  */
-class Address  extends CI_Model{
+class Address  extends CI_Model {
     //put your code here
-    private $addressno;
-    private $addressname;
-    private $email;
-    private $address;
-    private $province;
-    private $postcode;
-    private $phone;
+    public $addressno;
+    public $addressname;
+    public $email;
+    public $address;
+    public $province;
+    public $postcode;
+    public $phone;
     public function getAddressname() {
         return $this->addressname;
     }

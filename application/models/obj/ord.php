@@ -23,12 +23,17 @@ class Ord extends CI_Model {
     private $address;
     private $province;
     private $postcode;
+    private $phone;
+    private $address2;
+    private $province2;
+    private $postcode2;
+    private $phone2;
     private $orderdate;
     private $expectedshipdate;
     private $recievedate;
     private $cusremark;
     private $sellerremark;
-    
+
     public function getExpectedshipdate() {
         return $this->expectedshipdate;
     }
@@ -48,8 +53,47 @@ class Ord extends CI_Model {
     public function getCusremark() {
         return $this->cusremark;
     }
+    public function getPhone() {
+        return $this->phone;
+    }
 
-    public function setCusremark($cusremark) {
+    public function setPhone($phone) {
+        $this->phone = $phone;
+    }
+
+    public function getAddress2() {
+        return $this->address2;
+    }
+
+    public function setAddress2($address2) {
+        $this->address2 = $address2;
+    }
+
+    public function getProvince2() {
+        return $this->province2;
+    }
+
+    public function setProvince2($province2) {
+        $this->province2 = $province2;
+    }
+
+    public function getPostcode2() {
+        return $this->postcode2;
+    }
+
+    public function setPostcode2($postcode2) {
+        $this->postcode2 = $postcode2;
+    }
+
+    public function getPhone2() {
+        return $this->phone2;
+    }
+
+    public function setPhone2($phone2) {
+        $this->phone2 = $phone2;
+    }
+
+        public function setCusremark($cusremark) {
         $this->cusremark = $cusremark;
     }
 
@@ -62,12 +106,12 @@ class Ord extends CI_Model {
     }
 
     public function getOrderdate() {
-    return $this->orderdate;
-}
+        return $this->orderdate;
+    }
 
-public function setOrderdate($orderdate) {
-    $this->orderdate = $orderdate;
-}
+    public function setOrderdate($orderdate) {
+        $this->orderdate = $orderdate;
+    }
 
     public function getOrderno() {
         return $this->orderno;
@@ -85,7 +129,6 @@ public function setOrderdate($orderdate) {
         $this->ordstatus = $ordstatus;
     }
 
-    
     public function getEmail() {
         return $this->email;
     }

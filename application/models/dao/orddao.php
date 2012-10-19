@@ -30,6 +30,11 @@ class Orddao extends CI_Model {
             'address' => $ord->getAddress(),
             'province' => $ord->getProvince(),
             'postcode' => $ord->getPostcode(),
+            'phone' => $ord->getPhone(),
+            'phone2' => $ord->getPhone2(),
+            'address2' => $ord->getAddress2(),
+            'province2' => $ord->getProvince2(),
+            'postcode2' => $ord->getPostcode2(),
             'expected_ship_date' => $ord->getExpectedshipdate(),
             'received_date' => $ord->getRecievedate(),
             'cus_remark' => $ord->getCusremark(),
@@ -122,7 +127,7 @@ class Orddao extends CI_Model {
 
             $this->db->where($index, $row);
         }
-        $this->db->order_by('orderdate','desc');
+        $this->db->order_by('orderdate', 'desc');
         $query = $this->db->get();
         $result = array();
 
@@ -141,7 +146,7 @@ class Orddao extends CI_Model {
 
             $this->db->where($index, $row);
         }
-        $this->db->order_by('orderdate','desc');
+        $this->db->order_by('orderdate', 'desc');
         $query = $this->db->get('ord');
         $condition = array();
 
@@ -189,6 +194,11 @@ class Orddao extends CI_Model {
             'address' => $ord->getAddress(),
             'province' => $ord->getProvince(),
             'postcode' => $ord->getPostcode(),
+            'phone' => $ord->getPhone(),
+            'phone2' => $ord->getPhone2(),
+            'address2' => $ord->getAddress2(),
+            'province2' => $ord->getProvince2(),
+            'postcode2' => $ord->getPostcode2(),
             'expected_ship_date' => $ord->getExpectedshipdate(),
             'received_date' => $ord->getRecievedate(),
             'cus_remark' => $ord->getCusremark(),
@@ -211,6 +221,11 @@ class Orddao extends CI_Model {
         $ord->setAddress($row->address);
         $ord->setProvince($row->province);
         $ord->setPostcode($row->postcode);
+        $ord->setPhone($row->phone);
+        $ord->setAddress2($row->address2);
+        $ord->setProvince2($row->province2);
+        $ord->setPostcode2($row->postcode2);
+        $ord->setPhone2($row->phone2);
         $ord->setOrderdate($row->orderdate);
         $ord->setExpectedshipdate($row->expected_ship_date);
         $ord->setRecievedate($row->received_date);

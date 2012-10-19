@@ -10,6 +10,20 @@
        height: 1px;
 
     }
+     #addressbar{
+        width:100%;
+        clear: both;
+        display: table;
+    }
+    #sendaddress{
+        width: 50%;
+        float: left;
+    }
+    #receiptadd{
+        width: 50%;
+        float: right;
+
+    }
 </style>
 <div id="page">  
 <? echo form_open('orders/ordersummary') ?>
@@ -21,40 +35,27 @@
 <hr></hr>
 
 <h5>จัดส่ง</h5><br/>
+<div id="addressbar"> 
 <div id="sendaddress" >
-    <?
-    if ($address == 'tabadd1') {
-        $addr1 = $_SESSION['user']->getAddress1();
-        ?>
-        <address>
-            <? echo $addr1['address']; ?><br/>
-            <? echo $addr1['province']; ?>
-            <? echo $addr1['postcode']; ?><br/>
-            <? echo $addr1['phone']; ?><br/>
-        </address>
-    <? } else   if ($address == 'tabadd2') {
-        $addr2 = $_SESSION['user']->getAddress2(); ?>
-        <address>
-            <? echo $addr2['address']; ?><br/>
-            <? echo $addr2['province']; ?>
-            <? echo $addr2['postcode']; ?><br/>
-    <? echo $addr2['phone']; ?><br/>
-        </address>
+ <h5>ที่อยู่จัดส่ง</h5> <br/>
+       
+        <div id="showsendadd" >
 
-<? } else{ $addr3 = $_SESSION['newadd']; ?>
+            <address id="line1" ><?  echo $_SESSION['sendadd']->getAddress();?></address>
+            <address id="line2" >จังหวัด:&nbsp;<? echo $_SESSION['sendadd']->getProvince();?>&nbsp;รหัสไปรษณีย์:&nbsp;<? echo  $_SESSION['sendadd']->getPostcode();?></address>
+            <address id="line3" >โทรศัพท์&nbsp;<?echo  $_SESSION['sendadd']->getPhone();?></address>
 
-        <address>
-            <? echo $addr3['address']; ?><br/>
-            <? echo $addr3['province']; ?>
-            <? echo $addr3['postcode']; ?><br/>
-    <? echo $addr3['phone']; ?><br/>
-        </address>
-    
-    
-<?}?>
-    <input type="hidden" name="address" value="<? echo $address ?>"/>
+        </div>
 </div>
-
+    <div id="receiptadd">
+        <h5>ที่อยู่ออกใบเสร็จ</h5> <br/>
+        <div id="showreceiptadd" >
+             <address id="line1" ><? echo $_SESSION['receiptadd']->getAddress();?></address>
+            <address id="line2" >จังหวัด:&nbsp;<? echo $_SESSION['receiptadd']->getProvince();?>&nbsp;รหัสไปรษณีย์:&nbsp;<? echo $_SESSION['receiptadd']->getPostcode();?></address>
+            <address id="line3" >โทรศัพท์&nbsp;<? echo  $_SESSION['receiptadd']->getPhone();?></address>
+        </div>
+    </div>
+</div>
 
 </p>
 <!-- <? echo var_dump($_SESSION); ?>-->

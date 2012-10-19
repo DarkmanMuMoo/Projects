@@ -21,6 +21,7 @@ class Orders extends CI_Controller {
         $this->load->model('dao/orderlinedao');
         $this->load->model('obj/orderline');
         $this->load->model('dao/orddao');
+        $this->load->model('obj/address');
     }
 
     public function previewfile($orderlineno) {
@@ -228,6 +229,7 @@ class Orders extends CI_Controller {
         $this->load->model('dao/optiondao');
         $this->load->model('dao/ordpaydao');
         $this->load->model('dao/ordsenddao');
+        $this->load->model('dao/addressdao');
         $this->load->library('thailandutil');
 
 
@@ -244,7 +246,7 @@ class Orders extends CI_Controller {
         $data['templatelist'] = $this->templatedao->findall();
         $data['paperlist'] = $this->paperdao->findall();
         $data['optionlist'] = $this->optiondao->findall();
-
+        $data['addresslist'] = $this->addressdao->findbymultifield(array('email' => $_SESSION['user']->getEmail()));
 
         $data['ordpaylist'] = $this->ordpaydao->findall();
         $data['ordsendlist'] = $this->ordsenddao->findall();
@@ -261,21 +263,35 @@ class Orders extends CI_Controller {
         $this->load->model('dao/optiondao');
         $this->load->model('dao/ordpaydao');
         $this->load->model('dao/ordsenddao');
+        $this->load->model('dao/addressdao');
         $this->load->library('thailandutil');
 
-        if ($this->input->post('add') == 'tabadd3') {
-            $_SESSION['newadd'] = array();
-            $_SESSION['newadd']['address'] = $this->input->post('address');
-
-            $_SESSION['newadd']['province'] = $this->thailandutil->findbyid($this->input->post('province'))->getProvincename();
-            $_SESSION['newadd']['postcode'] = $this->input->post('postcode');
-
-            $_SESSION['newadd']['phone'] = $this->input->post('phone');
+        $sendaddno = $this->input->post('choosesendaddress');
+        $receiptaddno = $this->input->post('choosereceiptdaddress');
+        $sendadd;
+        $receiptadd;
+        if ($sendaddno != 0) {
+            $sendadd = $this->addressdao->findbyid($sendaddno);
+        } else {
+            $sendadd = new Address();
+            $sendadd->setAddressno(0);
+            $sendadd->setAddress($this->input->post('address1'));
+            $sendadd->setPhone($this->input->post('phone1'));
+            $sendadd->setPostcode($this->input->post('postcode1'));
+            $sendadd->setProvince($this->thailandutil->findbyid($this->input->post('province1'))->getProvincename());
         }
-        $data['address'] = $this->input->post('add');
-        ;
-
-
+        if ($receiptaddno != 0) {
+            $receiptadd = $this->addressdao->findbyid($receiptaddno);
+        } else {
+            $receiptadd = new Address();
+            $receiptadd->setAddressno(0);
+            $receiptadd->setAddress($this->input->post('address2'));
+            $receiptadd->setPhone($this->input->post('phone2'));
+            $receiptadd->setPostcode($this->input->post('postcode2'));
+            $receiptadd->setProvince($this->thailandutil->findbyid($this->input->post('province2'))->getProvincename());
+        }
+        $_SESSION['sendadd'] = $sendadd;
+        $_SESSION['receiptadd'] = $receiptadd;
 
         $ordsendmethod = $this->input->post('ordsend');
         $this->session->set_flashdata('ordsend', $ordsendmethod);
@@ -299,11 +315,7 @@ class Orders extends CI_Controller {
 
 
     public function ordersummary() {
-        if ($this->input->post('address') == 'tabadd3') {
-            $address = $_SESSION['newadd'];
-        } else {
-            $address = ($this->input->post('address') == 'tabadd1') ? $_SESSION['user']->getAddress1() : $_SESSION['user']->getAddress2();
-        }
+
         $ordsend = $this->input->post('ordsend');
         $ordpay = $this->input->post('ordpay');
         $totalprice = $this->input->post('totalprice');
@@ -311,9 +323,15 @@ class Orders extends CI_Controller {
         $cusremark = $this->input->post('cusremark');
 
         $ord = new Ord();
-        $ord->setAddress($address['address']);
-        $ord->setProvince($address['province']);
-        $ord->setPostcode($address['postcode']);
+        $ord->setAddress($_SESSION['sendadd']->getAddress());
+        $ord->setProvince($_SESSION['sendadd']->getProvince());
+        $ord->setPostcode($_SESSION['sendadd']->getPostcode());
+        $ord->setPhone($_SESSION['sendadd']->getPhone());
+        $ord->setAddress2($_SESSION['receiptadd']->getAddress());
+        $ord->setProvince2($_SESSION['receiptadd']->getProvince());
+        $ord->setPostcode2($_SESSION['receiptadd']->getPostcode());
+        $ord->setPhone2($_SESSION['receiptadd']->getPhone());
+
         $ord->setEmail($user->getEmail());
         $ord->setPaymethod($ordpay);
         $ord->setSendmethod($ordsend);
@@ -358,10 +376,10 @@ class Orders extends CI_Controller {
         $data['ordstatuslist'] = $ordstatuslist;
         $data['orderlinelist'] = $orderlinelist;
         if ($order->getSendmethod() == 'A') {
-           $ordtracking= $this->ordtrackingdao->findbyorderno($orderno);
-            if($ordtracking!=null){
+            $ordtracking = $this->ordtrackingdao->findbyorderno($orderno);
+            if ($ordtracking != null) {
 
-               $data['ordtracking']=$ordtracking->getTrackingno();
+                $data['ordtracking'] = $ordtracking->getTrackingno();
             }
         }
         if ($order->getOrdstatus() >= 40) {
@@ -376,6 +394,15 @@ class Orders extends CI_Controller {
         $id = $this->input->post('id');
         $price = $this->ordsenddao->findbyid($id);
         echo number_format($price->getSendprice(), 2, '.', ',');
+    }
+
+    public function ajaxorderaddress() {
+        $this->load->model('dao/addressdao');
+        $id = $this->input->post('id');
+        $price = $this->addressdao->findbyid($id);
+        $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode($price));
     }
 
     public function ajaxcheckuploadfile() {

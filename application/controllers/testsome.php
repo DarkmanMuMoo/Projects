@@ -18,10 +18,12 @@ class Testsome extends CI_Controller {
 
     public function index() {
 
-     $this->load->library('thailandutil');
-      $thai=$this->thailandutil->findbyid(1);
-      var_dump($thai);
-
+    $this->load->model('dao/addressdao');
+        $id = 20;
+        $price = $this->addressdao->findbyid($id);
+        //echo($price);
+   $this->output->set_content_type('application/json')
+    ->set_output(json_encode($price));
      
         /* $first= load_class('emailutil', 'libraries','');
           var_dump($first);
