@@ -206,24 +206,8 @@ class Bakorders extends CI_Controller {
                     break;
             }
             $payment->setActive('1');
-
             $result = $this->paymentdao->update($payment);
             error_log(var_export($result, true) . 'set active payment', 0);
-            if ($countactive != 2) {
-                $this->onproduction($orderno);
-            }
-            if ($iscomplete && $result) {
-                $con['orderno'] = $orderno;
-                $con['active'] = '0';
-                $paylist = $this->paymentdao->findbymultifield($con);
-
-                foreach ($paylist as $pay) {
-
-
-                    unlink('./uploads/Slips/' . $pay->getPicurl());
-                }
-                $this->paymentdao->deleteinactive($orderno);
-            }
             redirect('Backend/bakorders/getpaymentlist/' . $orderno);
         } else {
 
@@ -231,6 +215,7 @@ class Bakorders extends CI_Controller {
         }
     }
 
+    
     public function getpaymentlist($orderno) {
         $this->load->model('dao/orddao');
         $this->load->model('dao/ordpaydao');
@@ -249,7 +234,8 @@ class Bakorders extends CI_Controller {
         $this->load->model('dao/orddao');
         $this->load->library('smsutil');
         $this->load->library('emailutil');
-        $result = $this->changestatus('50', $orderno);
+        $date = $this->input->post('expecdate');
+        $result = $this->changestatus('50', $orderno,$date);
         $config = $this->emailutil->getSmtpconfig();
         $form = lang('adminemail');
 
@@ -357,7 +343,7 @@ class Bakorders extends CI_Controller {
 
         }
         
-        $this->changestatus('60', $orderno, date("Y-m-d"));
+        $this->changestatus('60', $orderno);
 //sent mail here;
         $config = $this->emailutil->getSmtpconfig();
         $form = lang('adminemail');
@@ -419,7 +405,7 @@ class Bakorders extends CI_Controller {
         $order->setOrdstatus($status); //wait for validate
         if ($date != null) {
 
-            if ($status == 60 || $status == 55) {
+            if ($status == 40 ) {
 
                 $order->setExpectedshipdate($date);
             } else {

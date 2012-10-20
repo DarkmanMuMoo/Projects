@@ -2,6 +2,11 @@
 
 <div class="container" >
     <style>
+        .headelement{
+            float:left;
+            width: 30%; 
+
+        }
 
         .red{
             color:#F00;
@@ -10,16 +15,8 @@
         .blue{
             color:#09C;	
         }
-        #order{
 
-            float:left;
-            width: 50%;
-        }
-        #address{
-            float:right;
-            width: 50%; 
 
-        }
 
 
         #orderline th{text-align: center;}
@@ -69,12 +66,12 @@
             width: 20%;
             margin-left: 10%;
         }
-#trackform label.error {
-	margin-left: 10px;
-	width: auto;
-	display: inline;
-        color:#F00;
-}
+        #trackform label.error {
+            margin-left: 10px;
+            width: auto;
+            display: inline;
+            color:#F00;
+        }
     </style>
 
     <div class="header"> 
@@ -84,7 +81,7 @@
 
 
     <div id="headline" >
-        <div id="order">
+        <div id="order" class="headelement">
             <h2>เลขใบสั่งซื้อ:<span class="orange" > <? echo $order->getOrderno(); ?></span></h2><br>
             <h3>สถานะ <?php foreach ($ordstatuslist as $ordstatus): ?>
                     <?php if ($ordstatus->getStatus() == $order->getOrdstatus()): ?>
@@ -124,7 +121,7 @@
                 </tr>
             </table>
 
-        </div> <div id="address"> 
+        </div> <div id="address" class="headelement" > 
             <h2>ที่อยู่จัดส่ง</h2><br />
 
 
@@ -143,7 +140,7 @@
                     <tr>
                         <td></td>
                         <td></td>
-                        <td><? echo $order->getPostcode(); ?></td>
+                        <td><? echo $order->getPostcode(); ?>&nbsp;<? echo $order->getPhone(); ?></td>
                     </tr>
 
             </address>
@@ -165,6 +162,42 @@
                 <td><br>
                     <? echo (isset($ordtracking)) ? $ordtracking : '' ?></td>
             </tr>
+            </table>
+
+        </div><div id="address2" class="headelement"> 
+            <h2>ที่อยู่ออกใบเสร็จ</h2>
+
+            <table>
+                <tr>
+                    <td><strong>ที่อยู่</strong></td> 
+                    <td><strong>&nbsp;:&nbsp;</strong></td>    
+                    <td><? echo $order->getAddress2(); ?></br></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><? echo $order->getProvince2(); ?></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><? echo $order->getPostcode2(); ?>&nbsp;<? echo $order->getPhone2(); ?></td>
+                </tr>
+
+                <tr>
+                    <td><strong>การจัดส่ง</strong></td> 
+                    <td><strong>&nbsp;:&nbsp; </strong></td>
+                    <td><?php foreach ($ordsendlist as $ordsend): ?>
+                            <?php if ($ordsend->getSendmethod() == $order->getSendmethod()): ?>
+                                <?
+                                echo $ordsend->getDescription();
+                                break;
+                                ?>
+                            <?php endif; ?>
+                        <?php endforeach; ?><br>
+                    </td>
+                </tr>
+
             </table>
 
         </div>
@@ -271,26 +304,46 @@
             <form id="rejectform" method="post" action="<? echo site_url('Backend/bakorders/rejects') ?>">
                 <input  type="hidden" name="orderno"  value=""/>
                 <textarea name="msg"  placeholder="ข้อความที่ต้องการส่งถึงลูกค้า" >
-                                                       
+                                                               
                 </textarea>
             </form>
         </div>
     <?php endif; ?>
-    <?php if ($order->getOrdstatus() == 50): ?>
+    <?php if ($order->getOrdstatus() == 40): ?>
+
+        <div  id="onproduct" align="center" style="margin :5% auto;" > 
+            <form id="onproductform" action="<? echo site_url('Backend/bakorders/onproduction') . '/' . $order->getOrderno(); ?>" >
+                วันที่คาดว่าจัดส่ง<input name="expecdate" type="text" value=""/><br/><br/>
+                <input class="btn btn-success" type="submit" value="ผลิต"/>
+            </form>
+        </div>
+
+    <?php endif; ?>
+    <?php if ($order->getOrdstatus() == 50 ||$order->getOrdstatus() == 55): ?>
         <div align="center" style="margin :5% auto;">  
-            <?php if ($order->getSendmethod() == 'A'): ?>
+            
+                <?php if ($order->getSendmethod() == 'A'): ?>
 
-                <form id="trackform"action="<? echo site_url('Backend/bakorders/ontransfer') . '/' . $order->getOrderno(); ?>" method="post">
-                    Tracking No.<input class="input-small" type="text" name="tracking"  id="tracking" value=""><br/><br/>
-                    <input class="btn btn-success" type="submit" value="จัดส่ง">
-                </form>
-            <?php else: ?>
+                    <form id="trackform"action="<? echo site_url('Backend/bakorders/ontransfer') . '/' . $order->getOrderno(); ?>" method="post">
+                        Tracking No.<input class="input-small" type="text" name="tracking"  id="tracking" value=""><br/><br/>
+                        <input class="btn btn-success" type="submit" value="จัดส่ง">
+                    </form>
+                <?php else: ?>
 
-                <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/ontransfer') . '/' . $order->getOrderno(); ?>">จัดส่ง</a> 
+                    <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/ontransfer') . '/' . $order->getOrderno(); ?>">จัดส่ง</a> 
 
+                <?php endif; ?>
+                 <?php if ($order->getPaymethod() == 20): ?>
+                    
+                    
+                    
+                    
             <?php endif; ?>
         </div>
     <?php endif; ?>
+
+
+
     <?php if ($order->getOrdstatus() == 60): ?>
         <div align="center" style="margin :5% auto;">  
             <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/complete') . '/' . $order->getOrderno(); ?>">set to Complete</a> 
@@ -306,7 +359,7 @@
 <script>
     $().ready(function() {
          
-         
+            
         if($('#trackform').length!= 0){
 
             $("#trackform").validate({
@@ -320,6 +373,7 @@
         
             });
         }
+     
     });
     function reject(orderno){
         $('#rejectform input[name=orderno]').val(orderno);
