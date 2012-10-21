@@ -3,7 +3,7 @@
  
     .headelement{
          float:left;
-        width: 30%; 
+        width: 300px; 
         
     }
 
@@ -134,12 +134,14 @@ width: 100%;
                         <?php endforeach; ?><br>
                     </td>
                 </tr>
+                <?php if ($order->getSendmethod() == 'A'): ?>
                 <tr>
                     <td><strong>tracking no</strong></td> 
                     <td><strong>&nbsp;:&nbsp; </strong></td>
                     <td><br>
                       <?echo (isset($ordtracking))?$ordtracking:''?></td>
                 </tr>
+                <?php endif; ?>
             </table>
 
         </div>

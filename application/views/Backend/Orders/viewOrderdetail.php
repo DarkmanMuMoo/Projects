@@ -4,7 +4,7 @@
     <style>
         .headelement{
             float:left;
-            width: 30%; 
+            width: 300px; 
 
         }
 
@@ -166,7 +166,7 @@
 
         </div><div id="address2" class="headelement"> 
             <h2>ที่อยู่ออกใบเสร็จ</h2>
-
+<br/>
             <table>
                 <tr>
                     <td><strong>ที่อยู่</strong></td> 
@@ -304,7 +304,7 @@
             <form id="rejectform" method="post" action="<? echo site_url('Backend/bakorders/rejects') ?>">
                 <input  type="hidden" name="orderno"  value=""/>
                 <textarea name="msg"  placeholder="ข้อความที่ต้องการส่งถึงลูกค้า" >
-                                                               
+                                                                       
                 </textarea>
             </form>
         </div>
@@ -319,9 +319,9 @@
         </div>
 
     <?php endif; ?>
-    <?php if ($order->getOrdstatus() == 50 ||$order->getOrdstatus() == 55): ?>
+    <?php if ($order->getOrdstatus() == 50): ?>
         <div align="center" style="margin :5% auto;">  
-            
+            <?php if ($order->getPaymethod() == 10): ?>
                 <?php if ($order->getSendmethod() == 'A'): ?>
 
                     <form id="trackform"action="<? echo site_url('Backend/bakorders/ontransfer') . '/' . $order->getOrderno(); ?>" method="post">
@@ -333,13 +333,28 @@
                     <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/ontransfer') . '/' . $order->getOrderno(); ?>">จัดส่ง</a> 
 
                 <?php endif; ?>
-                 <?php if ($order->getPaymethod() == 20): ?>
-                    
-                    
-                    
-                    
+
+            <?php else: ?>
+
+                <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/waitforpay2') . '/' . $order->getOrderno(); ?>">แจ้งชำระก่อนส่ง</a> 
+
             <?php endif; ?>
         </div>
+    <?php endif; ?>
+     <?php if ($order->getOrdstatus() == 55): ?>
+     <div align="center" style="margin :5% auto;">  
+     <?php if ($order->getSendmethod() == 'A'): ?>
+
+                    <form id="trackform"action="<? echo site_url('Backend/bakorders/ontransfer') . '/' . $order->getOrderno(); ?>" method="post">
+                        Tracking No.<input class="input-small" type="text" name="tracking"  id="tracking" value=""><br/><br/>
+                        <input class="btn btn-success" type="submit" value="จัดส่ง">
+                    </form>
+                <?php else: ?>
+
+                    <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/ontransfer') . '/' . $order->getOrderno(); ?>">จัดส่ง</a> 
+
+                <?php endif; ?>
+     </div>
     <?php endif; ?>
 
 

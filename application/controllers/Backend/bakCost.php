@@ -140,7 +140,31 @@ class BakCost extends CI_Controller {
         $this->session->set_flashdata('ck', 'cal');
         redirect('Backend/bakCost');
     }
-
+ public function addpaper(){
+        
+        $name=$this->input->post('name');
+        $grame=$this->input->post('gram');
+        $price=$this->input->post('price');
+        $paper=new Paper();
+        $paper->setName($name);
+        $paper->setGrame($grame);
+        $paper->setPrice($price);
+        $this->paperdao->insert($paper);
+        $this->session->set_flashdata('ck', 'paper');
+        redirect('Backend/bakCost');
+    }
+    public function addoption(){
+        
+        $description=$this->input->post('description');
+        $price=$this->input->post('price');
+        $option=new Option();
+        $option->setDescription($description);
+        $option->setPrice($price);
+        $this->optiondao->insert($option);
+        $this->session->set_flashdata('ck', 'option');
+        redirect('Backend/bakCost');
+    }
+    
     public function updateoption() {
 
         $updatelist = $this->input->post();

@@ -258,6 +258,39 @@ class Bakorders extends CI_Controller {
         return $result;
     }
 
+    
+     public function waitforpay2($orderno) {
+        $this->load->model('dao/orddao');
+
+        $this->load->library('smsutil');
+        $this->load->library('emailutil');
+        $this->changestatus('40', $orderno);
+
+
+        //sent mail here;
+        $config = $this->emailutil->getSmtpconfig();
+
+        $form = lang('adminemail');
+        $ord = $this->orddao->findbyid($orderno);
+        $to = $ord->getEmail();
+        $subject = 'Colour Harmony: สถานะรอชำระเงินก่อนส่งสินค้า';
+        $message = 'งามพิมพ์เสร็จแล้ว กรุณาโอนเงินที่เหลือ';
+
+
+
+
+        //sent sms here
+        $cus = $this->cusdao->findbyEmail($ord->getEmail());
+        $phone = $cus->getMobilephone();
+        $phone = explode('-', $phone);
+        $phone = implode('', $phone);
+
+        // $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
+        // error_log("send email to $to result is" . var_export($emailresult, true), 0);
+        // $result = $this->smsutil->sentsms($phone, 'finaltest');
+        // error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
+        redirect("Backend/bakorders/vieworderdetail/$orderno");
+    }
     public function waitforpay($orderno) {
         $this->load->model('dao/orddao');
 
@@ -273,7 +306,7 @@ class Bakorders extends CI_Controller {
         $ord = $this->orddao->findbyid($orderno);
         $to = $ord->getEmail();
         $subject = 'Colour Harmony: สถานะรอชำระเงิน';
-        $message = 'งานของท่านถูกต้องค่ะ กรุณาโอนเงินเพื่อการทำงานต่อไปค่ะ';
+        $message = 'งานของท่านถูกต้องค่ะ กรุณาโอนเงินทังหมด หรือ เงินมัดจำ(ในกรณีที่เลือกวิธีการชำระเงินเป็นแบ่งจ่าย)เพื่อการทำงานต่อไปค่ะ';
 
 
 

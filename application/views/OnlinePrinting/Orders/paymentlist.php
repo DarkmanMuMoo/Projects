@@ -101,7 +101,7 @@ $paidamount = 0; ?>
 
     </table>
 </div>
-<?php if ($showform): ?>
+<?php if ($showform && ($order->getOrdstatus()==40||$order->getOrdstatus()==55)): ?>
     <div id ="payconfirm">
         <h4>Payment confirmation</h4>
         <form id="payform"  method="post" action="<? echo site_url('orders/addpayment'); ?>" enctype="multipart/form-data" id="payconfirmform" >
