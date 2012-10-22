@@ -6,6 +6,18 @@
 <body >
     <div style="padding: 10px;
 margin-left: 60px;">
+
+<table width="476" border-style="double" bgcolor="#FFCA95">
+<tr><td width="468">
+<p align="center">ชำระเงินโดยการโอนเงินผ่านธนาคาร<br>
+เลขที่บัญชี : 0-321-4545-1 <br>
+
+ธนาคาร : ไทยพาณิชย์ จำกัด(มหาชน)<br> 
+
+ชื่อบัญชี : Mr.Pisut Hamkongkeaw<br>
+สาขา : ถนนสุขสวัสดิ์ <br>
+ประเภท : ออมทรัพย์ </p>
+</td></tr></table>
 <h1>วิธีการแจ้งชำระเงิน</h1>
 <p>1.log in เพื่อเข้าสู่ระบบ<br>
 <img src="<? echo base_url("asset/css/images/12.png"); ?>" width="322" height="189"></p>
@@ -20,14 +32,6 @@ margin-left: 60px;">
   <img src="<? echo base_url("asset/css/images/slip.jpg"); ?>" width="275" height="366"></li>
 </ul>
 <p>&nbsp;</p>
-<p>ชำระเงินโดยการโอนเงินผ่านธนาคาร</p>
-<ul>เลขที่บัญชี : 0-321-4545-1</ul>
-<ul>
-ธนาคาร : ไทยพาณิชย์ จำกัด(มหาชน)
-</ul>
-<ul>ชื่อบัญชี : Mr.Pisut Hamkongkeaw</ul>
-<ul>สาขา : ถนนสุขสวัสดิ์</ul>
-<ul>ประเภท : ออมทรัพย์</ul>
 
 </div>
 
