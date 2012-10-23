@@ -37,7 +37,7 @@ class Orders extends CI_Controller {
         $comment = $this->input->post('comment');
 
         $order = $this->orddao->findbyid($orderno);
-        $order->setCusremark($comment);
+        $order->setCusremark(trim($comment));
         $result = $this->orddao->update($order);
 
         redirect("orders/viewOrderdetail/$orderno");

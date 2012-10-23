@@ -2,6 +2,8 @@
 <script>
     var totalprice;
     $(function() {
+$("#phone").mask("99-999-9999");
+$("#phone1").mask("99-999-9999");
 
         changeprice();
         changesendaddress();
@@ -118,11 +120,11 @@
             <table>
                 <tr>
                     <td>ที่อยู่</td> 
-                    <td><textarea name="address1" id="address1" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง" > </textarea></td>
+                    <td><textarea name="address" id="address" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง" > </textarea></td>
                 </tr>
                 <tr>
                     <td>จังหวัด</td> 
-                    <td><select name="province1" id="province1">
+                    <td><select name="province" id="province">
                             <?php foreach ($provincelist as $province): ?>
                                 <option  value="<? echo $province->getProvinceid(); ?>"><? echo $province->getProvincename(); ?></option>
                             <? endforeach; ?>
@@ -130,11 +132,11 @@
                 </tr>
                 <tr>
                     <td>รหัสไปรษณีย์ &nbsp;&nbsp;&nbsp;</td> 
-                    <td><input type="text"id="postcode1" name="postcode1" maxlength="5" value=""/></td>
+                    <td><input type="text"id="postcode" name="postcode" maxlength="5" value=""/></td>
                 </tr>
                 <tr>
                     <td>โทรศัพท์</td> 
-                    <td><input type="text" name="phone1" value=""  id="phone1"/></td>
+                    <td><input type="text" name="phone" value=""  id="phone"/></td>
                 </tr>
             </table>
         </div>
@@ -160,11 +162,11 @@
             <table>
                 <tr>
                     <td>ที่อยู่</td> 
-                    <td><textarea name="address" id="address2" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง" > </textarea></td>
+                    <td><textarea name="address1" id="address1" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง" > </textarea></td>
                 </tr>
                 <tr>
                     <td>จังหวัด</td> 
-                    <td><select name="province" id="province2">
+                    <td><select name="province1" id="province1">
                             <?php foreach ($provincelist as $province): ?>
                                 <option  value="<? echo $province->getProvinceid(); ?>"><? echo $province->getProvincename(); ?></option>
                             <? endforeach; ?>
@@ -172,11 +174,11 @@
                 </tr>
                 <tr>
                     <td>รหัสไปรษณีย์ &nbsp;&nbsp;&nbsp;</td> 
-                    <td><input type="text"id="postcode2" name="postcode" maxlength="5" value=""/></td>
+                    <td><input type="text"id="postcode1" name="postcode1" maxlength="5" value=""/></td>
                 </tr>
                 <tr>
                     <td>โทรศัพท์</td> 
-                    <td><input type="text" name="phone" value=""  id="phone2"/></td>
+                    <td><input type="text" name="phone1" value=""  id="phone1"/></td>
                 </tr>
             </table>
         </div>

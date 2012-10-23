@@ -35,7 +35,8 @@ class Product extends CI_Controller {
         $data['templatelist'] = $this->templatedao->findbytypeno($typeno);
 
         // var_dump($data['type']);
-        $data['paperlist'] = $this->paperdao->findbytypeno($typeno);
+       $data['paperlist'] = $this->paperdao->findall();
+       // $data['paperlist'] = $this->paperdao->findbytypeno($typeno);
         //$data['optionlist'] = $this->optiondao->findbytypeno($typeno);
         $data['optionlist'] = $this->optiondao->findall();
         $this->load->view(lang('chooseproduct'), $data);

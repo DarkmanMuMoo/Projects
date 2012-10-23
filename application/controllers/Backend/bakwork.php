@@ -150,7 +150,7 @@ class Bakwork extends CI_Controller {
         $process = new Process();
         $process->setEmpno($_SESSION['emp']->getEmpno());
         $process->setDate(date("Y-m-d"));
-        $process->setProdescription($description);
+        $process->setProdescription(trim($description));
         $process->setWorkno($workno);
 
         $result = $this->processdao->insert($process);
@@ -222,7 +222,7 @@ class Bakwork extends CI_Controller {
             $insertwork = new Work();
             $insertwork->setOrdno($ordno);
             $insertwork->setWorkname($workname);
-            $insertwork->setWorkDescription($workDescription);
+            $insertwork->setWorkDescription(trim($workDescription));
             $insertwork->setEmpno($empno);
             $insertwork->setStartdate($startdate);
         } else {

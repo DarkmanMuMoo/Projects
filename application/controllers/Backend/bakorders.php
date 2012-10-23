@@ -35,7 +35,7 @@ class Bakorders extends CI_Controller {
         $comment = $this->input->post('comment');
 
         $order = $this->orddao->findbyid($orderno);
-        $order->setSellerremark($comment);
+        $order->setSellerremark(trim($comment));
         $result = $this->orddao->update($order);
 
         redirect("Backend/bakorders/vieworderdetail/$orderno");

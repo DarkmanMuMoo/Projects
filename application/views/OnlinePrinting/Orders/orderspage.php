@@ -145,7 +145,7 @@
                                                 View
                                             </a></li>
                                         <?php if ($ord->getOrdstatus() <= 20): ?>
-                                            <li>   <a  href="JavaScript:void(0);"  onclick="Confirmdelete('<? echo $ord->getOrderno(); ?>');" >cancel </a>  </li>
+                                            <li>   <a  href="JavaScript:void(0);"  onclick="Confirmdelete('<? echo $ord->getOrderno(); ?>');" >cancel &nbsp<i class="icon-remove"></i> </a>  </li>
                                         <?php endif; ?>
 
                                     </ul>

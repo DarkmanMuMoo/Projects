@@ -28,6 +28,11 @@
         
        margin: 0 auto;
     }
+    #paper,#option,#send,#cal{
+        
+        
+        text-align: center;
+    }
 </style>
 
 <div class="container" >
@@ -69,8 +74,25 @@
                             <?php endforeach; ?>
 
                         </table>
-                        <br /><input type="submit" value="Save"/>
+                        <br /><input  class="btn btn-primary" type="submit" value="Save"/>
                     </form>
+                          <form action="<? echo site_url('Backend/bakCost/addpaper'); ?>" method="post">
+                        <table  table width="332" border="1" bordercolor="#CCCCCC" >
+                            <tr>
+                                <td width="132">ชื่อกระดาษ</td>
+                                <td width="184"><input type="text" name="name"/></td>
+                            </tr>
+                             <tr>
+                                <td width="132">แกรม</td>
+                                <td width="184"><input type="text" name="gram"/></td>
+                            </tr>
+                               <tr>
+                                <td width="132">ราคา(บาทต่อกิโล)</td>
+                                <td width="184"><input type="text" name="price"/></td>
+                            </tr>
+                        </table>
+                         <br /><input  class="btn btn-inverse" type="submit" value="Add"/>
+                     </form>
                 </div>
 
 
@@ -89,7 +111,7 @@
                                 </tr>
                             <?php endforeach; ?>
                         </table>
-                        <br /><input type="submit" value="Save"/>
+                        <br /><input  class="btn btn-primary" type="submit" value="Save"/>
                     </form>
                 </div >
                 <div  id="option"   >
@@ -107,8 +129,21 @@
                                 </tr>
                             <?php endforeach; ?>
                         </table>
-                        <br /><input type="submit" value="Save"/>
+                        <br /><input  class="btn btn-primary" type="submit" value="Save"/>
                     </form>
+                     <form action="<? echo site_url('Backend/bakCost/addoption'); ?>" method="post">
+                        <table  table width="332" border="1" bordercolor="#CCCCCC" >
+                            <tr>
+                                <td width="132">ชื่อตัวเลือก</td>
+                                <td width="184"><input type="text" name="description"/></td>
+                            </tr>
+                             <tr>
+                                <td width="132">ราคา(บาท)</td>
+                                <td width="184"><input type="text" name="price"/></td>
+                            </tr>
+                        </table>
+                         <br /><input  class="btn btn-inverse" type="submit" value="Add"/>
+                     </form>
                 </div>
                 <div id="cal">
                     <form action="<? echo site_url('Backend/bakCost/updatecal'); ?>" method="post">
@@ -136,7 +171,7 @@
                             </tr>
                     
                     </table>
-                        <br /><input type="submit" value="Save"/>
+                        <br /><input  class="btn btn-primary" type="submit" value="Save"/>
                     </form>
                     
                 </div>
@@ -148,6 +183,10 @@
 <script>
     $().ready(function() {
      
+     
+     
+     
+     
   $( "#tabs" ).tabs();
      
  <?php if ($this->session->flashdata('ck')): ?>
@@ -156,6 +195,9 @@
  $( "#tabs" ).tabs( "select" , '<? echo $this->session->flashdata('ck')?>' )
 
 <?php endif; ?>
+     
+     
+     
      
      
     });
