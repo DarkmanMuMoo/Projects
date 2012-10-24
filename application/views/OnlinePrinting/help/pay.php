@@ -7,7 +7,7 @@
     <div style="padding: 10px;
 margin-left: 60px;">
 
-<table width="476" border-style="double" bgcolor="#FFCA95">
+<table width="476" bgcolor="#FFCA95">
 <tr><td width="468">
 <p align="center">ชำระเงินโดยการโอนเงินผ่านธนาคาร<br>
 เลขที่บัญชี : 0-321-4545-1 <br>
