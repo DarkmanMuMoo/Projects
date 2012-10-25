@@ -101,8 +101,48 @@ width: 100%;
 
 
         </div> 
+        
+        <div id="address2" class="headelement"> 
+           <br />
+           <br /> <h3><strong>ที่อยู่ออกใบเสร็จ</strong></h3>
+
+            <table>
+                <tr>
+                    <td><strong>ที่อยู่</strong></td> 
+                    <td><strong>&nbsp;:&nbsp;</strong></td>    
+                    <td><? echo $order->getAddress2(); ?></br></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><? echo $order->getProvince2(); ?>&nbsp;<? echo $order->getPostcode2(); ?></td>
+                </tr>
+                <tr>
+                    <td><strong>เบอร์ติดต่อ</strong></td>
+                    <td><strong>&nbsp;:&nbsp;</strong></td>
+                    <td><? echo $order->getPhone2(); ?></td>
+                </tr>
+
+                <tr>
+                    <td><strong>การจัดส่ง</strong></td> 
+                    <td><strong>&nbsp;:&nbsp; </strong></td>
+                    <td><?php foreach ($ordsendlist as $ordsend): ?>
+                            <?php if ($ordsend->getSendmethod() == $order->getSendmethod()): ?>
+                                <?
+                                echo $ordsend->getDescription();
+                                break;
+                                ?>
+                            <?php endif; ?>
+                        <?php endforeach; ?><br>
+                    </td>
+                </tr>
+             
+            </table>
+
+        </div>
         <div id="address" class="headelement"> 
-            <h2>ที่อยู่จัดส่ง</h2>
+            <br />
+            <br /><h3><strong>ที่อยู่จัดส่ง</strong></h3>
 
             <table>
                 <tr>
@@ -113,12 +153,12 @@ width: 100%;
                 <tr>
                     <td></td>
                     <td></td>
-                    <td><? echo $order->getProvince(); ?></td>
+                    <td><? echo $order->getProvince(); ?>&nbsp;<? echo $order->getPostcode(); ?> </td>
                 </tr>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td><? echo $order->getPostcode(); ?> &nbsp;<? echo $order->getPhone(); ?> </td>
+                    <td><strong>เบอร์ติดต่อ</strong></td>
+                    <td><strong>&nbsp;:&nbsp; </strong></td>
+                    <td><? echo $order->getPhone(); ?> </td>
                 </tr>
 
                 <tr>
@@ -145,43 +185,7 @@ width: 100%;
             </table>
 
         </div>
-        <div id="address2" class="headelement"> 
-            <h2>ที่อยู่ออกใบเสร็จ</h2>
-
-            <table>
-                <tr>
-                    <td><strong>ที่อยู่</strong></td> 
-                    <td><strong>&nbsp;:&nbsp;</strong></td>    
-                    <td><? echo $order->getAddress2(); ?></br></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td><? echo $order->getProvince2(); ?></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td><? echo $order->getPostcode2(); ?>&nbsp;<? echo $order->getPhone2(); ?></td>
-                </tr>
-
-                <tr>
-                    <td><strong>การจัดส่ง</strong></td> 
-                    <td><strong>&nbsp;:&nbsp; </strong></td>
-                    <td><?php foreach ($ordsendlist as $ordsend): ?>
-                            <?php if ($ordsend->getSendmethod() == $order->getSendmethod()): ?>
-                                <?
-                                echo $ordsend->getDescription();
-                                break;
-                                ?>
-                            <?php endif; ?>
-                        <?php endforeach; ?><br>
-                    </td>
-                </tr>
-             
-            </table>
-
-        </div>
+        
     </div>
 
   

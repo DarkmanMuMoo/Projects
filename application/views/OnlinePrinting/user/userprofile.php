@@ -33,13 +33,8 @@
        height: 1px;}
 
 
-    }
-    .address{
-        width: 75%;
-        clear: both;
-        display: table;
-        margin: 10px auto;
-    }
+    
+    
     .leftadd{
         float: left;
         width: 35%;
@@ -104,7 +99,7 @@
             </tr>
             <tr>
                 <td></td>
-                <td  > <input class="btn-info" type="submit" value="edit"/> </td>
+                <td  > <input class="btn-info" type="submit" value="Save"/> </td>
                 <td></td>
             </tr>
         </table>
@@ -144,8 +139,9 @@
             <td><input type="text" name="phone" id="phone" class="mark" value="<? echo $address->getPhone(); ?>"/></td>
        </tr>
   	<tr>
-       <td><button class="btn  btn-large btn-success" onclick="editaddress('<? echo $address->getAddressno(); ?>');"/>Save</button></td>
-       	<td><a class="btn  btn-large btn-danger" href="<? echo site_url('userprofile/deleteaddress/' . $address->getAddressno()); ?>"  >ลบ</a></td>
+       <td></td>
+       <td><button class="btn btn-info" onclick="editaddress('<? echo $address->getAddressno(); ?>');"/>Save</button>
+       	<a class="btn btn-danger" href="<? echo site_url('userprofile/deleteaddress/' . $address->getAddressno()); ?>"  >Clear</a></td>
         <?php endforeach; ?></td>
         </tr>
         </table>
@@ -193,11 +189,13 @@
 	<tr>
      	<td>เบอร์โทรศัพท์</td> 
        	<td><input type="text" name="phone" id="phone" class="mark"  value=""/></td>
-	</tr>
+	
+     </tr>
+     <tr>
+     	<td></td>   
+    	<td><input class="btn btn-info"  type="submit" value="Save"/></td>
+</tr>
  </table>
-        
-    <div class="divcenter"> <input class="btn  btn-large btn-success"  type="submit" value="เพิ่ม"/></div>
-
 </form>
 
 
@@ -333,4 +331,5 @@
         });
         
     });
+
 </script>

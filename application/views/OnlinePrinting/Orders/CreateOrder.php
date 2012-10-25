@@ -2,8 +2,8 @@
 <script>
     var totalprice;
     $(function() {
-$("#phone").mask("99-999-9999");
-$("#phone1").mask("99-999-9999");
+        $("#phone").mask("99-999-9999");
+        $("#phone1").mask("99-999-9999");
 
         changeprice();
         changesendaddress();
@@ -39,8 +39,9 @@ $("#phone1").mask("99-999-9999");
             $('#newsendadd').hide();
             $.post('<? echo site_url('orders/ajaxorderaddress'); ?>', {id:sid}, function(data){
                 $("#showsendadd #line1").html(data.address);
-                $("#showsendadd #line2").html("จังหวัด: "+data.province+"  รหัสไปรษณีย์: "+data.postcode);
-                $("#showsendadd #line3").html("โทรศัพท์: "+data.phone);
+                $("#showsendadd #line2").html(data.province+data.postcode);
+                $("#showsendadd #line3").html("โทรศัพท์ : "+data.phone);
+                
             });
         }
     }
@@ -48,15 +49,16 @@ $("#phone1").mask("99-999-9999");
         var sid=$('#choosereceiptdaddress').val();
         if(sid=='0'){
             $('#newreceiptadd').show();
-             $('#showreceiptadd').hide();
+            $('#showreceiptadd').hide();
         }else{
             $('#newreceiptadd').hide();
             $('#showreceiptadd').show();
             $.post('<? echo site_url('orders/ajaxorderaddress'); ?>', {id:sid}, function(data){
                 
                 $("#showreceiptadd #line1").html(data.address);
-                $("#showreceiptadd #line2").html("จังหวัด"+data.province+"  รหัสไปรษณีย์"+data.postcode);
-                $("#showreceiptadd #line3").html("โทรศัพท์ "+data.phone);
+                $("#showreceiptadd #line2").html(data.province+data.postcode);
+                $("#showreceiptadd #line3").html("โทรศัพท์ : "+data.phone);
+                
             });
         }
     }
@@ -111,9 +113,11 @@ $("#phone1").mask("99-999-9999");
         <br/><h5>จัดส่ง</h5> <br/>
         <div id="showsendadd" >
 
+
             <address id="line1" ></address>
             <address id="line2" ></address>
             <address id="line3" ></address>
+            <address id="line4" ></address>
 
         </div>
         <div  id="newsendadd" style="display: none;" >
@@ -157,6 +161,7 @@ $("#phone1").mask("99-999-9999");
             <address id="line1" ></address>
             <address id="line2" ></address>
             <address id="line3" ></address>
+            <address id="line4" ></address>
         </div>
         <div   id="newreceiptadd" style="display: none;" >
             <table>
