@@ -31,11 +31,8 @@
     hr{color: orangered;
        background-color: orange;
        height: 1px;}
-    #addresslist{
 
 
-        margin: 3% auto;
-        padding: 8px;
     }
     .address{
         width: 75%;
@@ -113,44 +110,45 @@
         </table>
     </form>
 
-</div>
+
 <h4 ><strong>รายการที่อยู่</strong></h4>
-<div id="addresslist">
+
     <?php if (!empty($addresslist)): ?>
 
         <?php foreach ($addresslist as $address): ?>
             <div  id="<? echo $address->getAddressno(); ?>" class="address" >
-                <div class="leftadd">
-                    <p>
-                        <label>ชื่อที่อยู่</label><input type="text" name="addressname" id="addressname" value="<? echo $address->getAddressname(); ?>" />
-                    </p>
-                    <p>
-                        <label>ที่อยู่</label>  <textarea  style="height: 46px;" id="address" name="address" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง"><? echo $address->getAddress(); ?> </textarea>
-                    </p>
-                </div>
-                <div class="rightadd">
-                    <p>
-                        <label>จังหวัด</label> 
-                        <select name="province" id="province">
+                      
+<table >
+        <tr>
+        	<td>ชื่อที่อยู่</td>
+        	<td><input type="text" name="addressname" id="addressname" value="<? echo $address->getAddressname(); ?>" /></td>
+        </tr>
+       	<tr>
+        	<td>ที่อยู่</td>
+            <td><textarea  style="height: 46px;" id="address" name="address" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง"><? echo $address->getAddress(); ?> </textarea></td>
+        </tr>
+       	<tr>
+         	<td>จังหวัด</td> 
+            <td><select name="province" id="province">
                             <?php foreach ($provincelist as $province): ?>
                                 <option <? echo($province->getProvincename() == $address->getProvince()) ? 'selected="selected"' : ''; ?> value="<? echo $province->getProvinceid(); ?>"><? echo $province->getProvincename(); ?></option>
                             <? endforeach; ?>
-                        </select>
-                    </p>
-                    <p>
-                        <label>รหัสไปรษณีย์</label> 
-                        <input type="text" name="postcode" id="postcode"  value="<? echo $address->getPostcode(); ?>"/>
-                    </p>
-                    <p>
-                        <label>เบอร์โทรศัพท์</label> 
-                        <input type="text" name="phone" id="phone" class="mark" value="<? echo $address->getPhone(); ?>"/>
-                    </p>
-                </div>
-
-            </div>
-            <div class="divcenter"> <button class="btn  btn-large btn-success" onclick="editaddress('<? echo $address->getAddressno(); ?>');"/>Save</button>
-                <a class="btn  btn-large btn-danger" href="<? echo site_url('userprofile/deleteaddress/' . $address->getAddressno()); ?>"  >ลบ</a></div>
-        <?php endforeach; ?>
+                        </select></td>
+      	</tr>
+        <tr>
+       		<td>รหัสไปรษณีย์</td> 
+            <td><input type="text" name="postcode" id="postcode"  value="<? echo $address->getPostcode(); ?>"/></td>
+       	</tr>
+        <tr>
+        	<td>เบอร์โทรศัพท์</td> 
+            <td><input type="text" name="phone" id="phone" class="mark" value="<? echo $address->getPhone(); ?>"/></td>
+       </tr>
+  	<tr>
+       <td><button class="btn  btn-large btn-success" onclick="editaddress('<? echo $address->getAddressno(); ?>');"/>Save</button></td>
+       	<td><a class="btn  btn-large btn-danger" href="<? echo site_url('userprofile/deleteaddress/' . $address->getAddressno()); ?>"  >ลบ</a></td>
+        <?php endforeach; ?></td>
+        </tr>
+        </table>
         <form  id="editaddressform" action="<? echo site_url('userprofile/updateaddress'); ?>"  method="post">
             <input type="hidden" name="addressno"  value=""/>
             <input type="hidden" name="addressname"  value=""/>
@@ -167,37 +165,37 @@
 </div>
 <button class="btn" onclick="swapaddaddress();"> เพิ่มที่อยู่</button>
 <form id="addadress"  method="post" style="  display: none;margin: 0 auto;" action="<? echo site_url('userprofile/addaddress'); ?>">
-    <div  class="address" >
-        <div class="leftadd">
-            <p>
-                <label>ชื่อที่อยู่</label><input type="text" name="addressname" id="addressname" />
-            </p>
-            <p>
-                <label>ที่อยู่</label>  <textarea  style="height: 46px;" id="address" name="address" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง">
+    
+<table>
+	<tr>
+    	<td>ชื่อที่อยู่</td>
+        <td><input type="text" name="addressname" id="addressname" /></td>
+  	</tr>
+   	<tr>
+      	<td>ที่อยู่</td>
+        <td><textarea  style="height: 46px;" id="address" name="address" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง">
                    
-                </textarea>
-            </p>
-        </div>
-        <div class="rightadd">
-            <p>
-                <label>จังหวัด</label> 
-                <select name="province" id="province">
+                </textarea></td>
+	</tr>
+  	<tr>
+  		<td>จังหวัด</td> 
+      	<td><select name="province" id="province">
                     <?php foreach ($provincelist as $province): ?>
                         <option  value="<? echo $province->getProvinceid(); ?>"><? echo $province->getProvincename(); ?></option>
                     <? endforeach; ?>
                 </select>
-            </p>
-            <p>
-                <label>รหัสไปรษณีย์</label> 
-                <input type="text" name="postcode" id="postcode" maxlength="5" />
-            </p>
-            <p>
-                <label>เบอร์โทรศัพท์</label> 
-                <input type="text" name="phone" id="phone" class="mark"  value=""/>
-            </p>
-        </div>
-
-    </div>
+     	</td>
+   	</tr>
+   	<tr>
+      	<td>รหัสไปรษณีย์</td> 
+      	<td><input type="text" name="postcode" id="postcode" maxlength="5" /></td>
+ 	</tr>
+	<tr>
+     	<td>เบอร์โทรศัพท์</td> 
+       	<td><input type="text" name="phone" id="phone" class="mark"  value=""/></td>
+	</tr>
+ </table>
+        
     <div class="divcenter"> <input class="btn  btn-large btn-success"  type="submit" value="เพิ่ม"/></div>
 
 </form>
@@ -218,7 +216,7 @@
         </p>
         <div id="showerror" style="text-align: center; color: red; "></div>
     </form>
-
+</div>
 
 </div>
 <script src="<? echo base_url("asset/javascript/jquery.validate.js"); ?>" >  </script>

@@ -7,8 +7,8 @@
     <div style="padding: 10px;
 margin-left: 60px;">
 
-<table width="476" >
-<tr><td width="468" bgcolor="#FFCA95">
+<table width="420" >
+<tr><td width="412" bgcolor="#FFCA95" border-style="">
 <p align="center">ชำระเงินโดยการโอนเงินผ่านธนาคาร<br>
 เลขที่บัญชี : 0-321-4545-1 <br>
 
