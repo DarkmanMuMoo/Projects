@@ -18,7 +18,7 @@ class Testsome extends CI_Controller {
 
     public function index() {
 
-        echo floatval("1000.00");
+        echo date('Y-m-d',time()+(20*60 * 60 * 24));
      
         /* $first= load_class('emailutil', 'libraries','');
           var_dump($first);

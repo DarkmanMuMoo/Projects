@@ -29,6 +29,17 @@ class Bakorders extends CI_Controller {
         return $result;
     }
 
+    public function ajaxchangeshipdate() {
+        $this->load->model('dao/orddao');
+        $newdate = $this->input->post('date');
+        $orderno = $this->input->post('orderno');
+        $order = $this->orddao->findbyid($orderno);
+        $order->setExpectedshipdate($newdate);
+        $this->orddao->update($order);
+     
+        $this->output->set_output($newdate);
+    }
+
     public function seller_comment() {
         $this->load->model('dao/orddao');
         $orderno = $this->input->post('orderno');
@@ -177,7 +188,7 @@ class Bakorders extends CI_Controller {
 
         error_log(var_export($result, true) . 'set active payment', 0);
 
-        redirect('Backend/bakorders/vieworderdetail/'.$orderno);
+        redirect('Backend/bakorders/vieworderdetail/' . $orderno);
     }
 
     public function settoactive() {
@@ -207,9 +218,9 @@ class Bakorders extends CI_Controller {
             }
             $payment->setActive('1');
             $result = $this->paymentdao->update($payment);
-            if(!$iscomplete){
-                
-                
+            if (!$iscomplete) {
+
+
                 $this->onproduction($orderno);
             }
             error_log(var_export($result, true) . 'set active payment', 0);
@@ -220,7 +231,6 @@ class Bakorders extends CI_Controller {
         }
     }
 
-    
     public function getpaymentlist($orderno) {
         $this->load->model('dao/orddao');
         $this->load->model('dao/ordpaydao');
@@ -239,8 +249,9 @@ class Bakorders extends CI_Controller {
         $this->load->model('dao/orddao');
         $this->load->library('smsutil');
         $this->load->library('emailutil');
-        $date = $this->input->post('expecdate');
-        $result = $this->changestatus('50', $orderno,$date);
+        
+        $next15day=time()+( 15*60 * 60 * 24 );
+        $result = $this->changestatus('50', $orderno,date("Y-m-d",$next15day));
         $config = $this->emailutil->getSmtpconfig();
         $form = lang('adminemail');
 
@@ -263,8 +274,7 @@ class Bakorders extends CI_Controller {
         return $result;
     }
 
-    
-     public function waitforpay2($orderno) {
+    public function waitforpay2($orderno) {
         $this->load->model('dao/orddao');
         $this->load->library('smsutil');
         $this->load->library('emailutil');
@@ -295,11 +305,13 @@ class Bakorders extends CI_Controller {
         // error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
         redirect("Backend/bakorders/vieworderdetail/$orderno");
     }
+
     public function waitforpay($orderno) {
         $this->load->model('dao/orddao');
 
         $this->load->library('smsutil');
         $this->load->library('emailutil');
+        
         $this->changestatus('40', $orderno);
 
 
@@ -367,19 +379,15 @@ class Bakorders extends CI_Controller {
     public function ontransfer($orderno) {
         $this->load->model('dao/orddao');
         $this->load->model('dao/ordtrackingdao');
-        
+
         $this->load->library('smsutil');
         $this->load->library('emailutil');
 
-        
-        if($this->input->post('tracking')){
-            $ordtrack =new Ordtracking();
-            $ordtrack->setOrderno($orderno);
-            $ordtrack->setTrackingno($this->input->post('tracking'));
-            $this->ordtrackingdao->insert('$ordtrack');
 
+        if ($this->input->post('tracking')) {
+            $this->addtrackingno($orderno, $this->input->post('tracking'));
         }
-        
+
         $this->changestatus('60', $orderno);
 //sent mail here;
         $config = $this->emailutil->getSmtpconfig();
@@ -442,7 +450,7 @@ class Bakorders extends CI_Controller {
         $order->setOrdstatus($status); //wait for validate
         if ($date != null) {
 
-            if ($status == 40 ) {
+            if ($status == 40) {
 
                 $order->setExpectedshipdate($date);
             } else {
