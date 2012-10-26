@@ -55,9 +55,7 @@ display: table;
 width: 100%;
     }
 </style>
-
-
-
+<script src="<? echo base_url("asset/javascript/priceformat.js"); ?>" >  </script>
 <div id="page">
 
     <div id="head" >
@@ -265,11 +263,7 @@ width: 100%;
                 <tr>
                     <td><strong>ข้อความถึงโรงพิมพ์</strong></td>
 
-                    <td><textarea name="comment" cols="" rows="">
-                            <? echo $order->getCusremark(); ?>
-
-
-                        </textarea>
+                    <td><textarea name="comment" > <? echo $order->getCusremark(); ?> </textarea>
 
                     </td>
                 </tr>

@@ -18,12 +18,7 @@ class Testsome extends CI_Controller {
 
     public function index() {
 
-    $this->load->model('dao/addressdao');
-        $id = 20;
-        $price = $this->addressdao->findbyid($id);
-        //echo($price);
-   $this->output->set_content_type('application/json')
-    ->set_output(json_encode($price));
+        echo floatval("1000.00");
      
         /* $first= load_class('emailutil', 'libraries','');
           var_dump($first);

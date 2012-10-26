@@ -3,7 +3,7 @@
 <? $countactive = 0;
 $paidamount = 0;
 ?>
-<div id="paydetail" style="display: none;">
+<div id="paydetail" >
     <div id="result" >
         <table class="table table-bordered">
 
@@ -56,10 +56,10 @@ $paidamount = 0;
     </div>
     <div id="paystatus"  >
         <table >
-            <tr>
+          <!--  <tr>
                 <td><strong>วันที่</strong></td>
                 <td><? echo $order->getOrderdate(); ?></td>
-            <tr>
+            <tr>-->
                 <td><strong>การชำระเงิน</strong></td> 
                 <td><?php foreach ($ordpaylist as $ordpay): ?>
                         <?php if ($ordpay->getPaymethod() == $order->getPaymethod()): ?>
@@ -123,6 +123,7 @@ $paidamount = 0;
         
         
         $('#paydetail').fadeToggle();
+        window.scrollTo(0,document.height);
     }
     function settoactive(payno){
         

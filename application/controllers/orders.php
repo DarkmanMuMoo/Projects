@@ -63,12 +63,12 @@ class Orders extends CI_Controller {
         $hour = $this->input->post('hour');
         $min = $this->input->post('min');
         $sec = '00';
-        $amount = $this->input->post('amount');
+        $amount = $this->input->post('nextpay');
         $time = implode(':', array($hour, $min, $sec));
         $paymentdate = $date . ' ' . $time;
         $insertpayment = new Payment();
 
-        $insertpayment->setAmount($amount);
+        $insertpayment->setAmount(floatval($amount));
         $insertpayment->setPaymentdate($paymentdate);
         $insertpayment->setSeqno($slipno);
         $insertpayment->setOrderno($ordno);

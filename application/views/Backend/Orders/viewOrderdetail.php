@@ -275,7 +275,7 @@
 
                 <table style="float:left; width:50%;">
                     <tr>
-                        <td><strong>ข้อความถึงโรงพิมพ์</strong></td>
+                        <td><strong>ข้อความจากโรงพิมพ์</strong></td>
 
                         <td><textarea name="comment" cols="" rows="">
                                 <? echo $order->getSellerremark(); ?>
@@ -309,14 +309,14 @@
             </form>
         </div>
     <?php endif; ?>
-    <?php if ($order->getOrdstatus() == 40): ?>
+  <!--  <?php if ($order->getOrdstatus() == 40): ?>
 
         <div  id="onproduct" align="center" style="margin :5% auto;" > 
             <form id="onproductform" action="<? echo site_url('Backend/bakorders/onproduction') . '/' . $order->getOrderno(); ?>" >
                 วันที่คาดว่าจัดส่ง<input name="expecdate" type="text" value=""/><br/><br/>
                 <input class="btn btn-success" type="submit" value="ผลิต"/>
             </form>
-        </div>
+        </div>-->
 
     <?php endif; ?>
     <?php if ($order->getOrdstatus() == 50): ?>

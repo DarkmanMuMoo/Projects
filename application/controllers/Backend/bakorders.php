@@ -207,6 +207,11 @@ class Bakorders extends CI_Controller {
             }
             $payment->setActive('1');
             $result = $this->paymentdao->update($payment);
+            if(!$iscomplete){
+                
+                
+                $this->onproduction($orderno);
+            }
             error_log(var_export($result, true) . 'set active payment', 0);
             redirect('Backend/bakorders/getpaymentlist/' . $orderno);
         } else {
@@ -261,10 +266,9 @@ class Bakorders extends CI_Controller {
     
      public function waitforpay2($orderno) {
         $this->load->model('dao/orddao');
-
         $this->load->library('smsutil');
         $this->load->library('emailutil');
-        $this->changestatus('40', $orderno);
+        $this->changestatus('55', $orderno);
 
 
         //sent mail here;
