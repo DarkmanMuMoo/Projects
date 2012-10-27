@@ -25,11 +25,13 @@ class Orders extends CI_Controller {
     }
 
     public function previewfile($orderlineno) {
-
         $orderlineno = $this->orderlinedao->findbyid($orderlineno);
-        $this->output
-                ->set_content_type('pdf')
-                ->set_output(file_get_contents(base_url('uploads' . $orderlineno->getFilepath())));
+        
+      //  var_dump($orderlineno->getFilepath());
+       
+      $this->output
+            ->set_content_type('pdf')
+              ->set_output(file_get_contents(base_url('uploads'.$orderlineno->getFilepath())));
     }
 
     public function cus_comment() {
@@ -351,7 +353,8 @@ class Orders extends CI_Controller {
 
 
         unset($_SESSION['temp_orderlinelist']);
-
+        unset($_SESSION['receiptadd']);
+        unset($_SESSION['sendadd']);
         //  $this->load->view(lang('ordersumary'));
         $this->session->set_flashdata('alert', $orderid);
         redirect('orders');
@@ -386,7 +389,14 @@ class Orders extends CI_Controller {
 
             $data['paymentview'] = $this->getpaymentlist($orderno);
         }
+        
+        
+        if($order->getEmail()!=$_SESSION['user']->getEmail()){
+           
+            show_error('คุณไม่มีสิทธ์เข้าถึงส่วนนี้',404,'คุณไม่มีสิทธ์เข้าถึงส่วนนี้');
+        }else{
         $this->load->view(lang('viewOrderdetail'), $data);
+        }
     }
 
     public function ajaxordersendprice() {

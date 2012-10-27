@@ -112,9 +112,9 @@
                     <td><strong>วันส่งสินค้า</strong></td>
                     <td><strong>&nbsp;:&nbsp;</strong></td> 
                     <td><?php if ($order->getExpectedshipdate() != null): ?>
-                        <input style="height: 25px;
-margin-bottom: 0px;" class="input-small datepicker" onchange="changeshipdate('<? echo $order->getOrderno(); ?>');" type="text"  id="shipdate"class="datepicker"  value="<? echo $order->getExpectedshipdate() ?>"/>
-       
+                            <input style="height: 25px;
+                                   margin-bottom: 0px;" class="input-small datepicker" onchange="changeshipdate('<? echo $order->getOrderno(); ?>');" type="text"  id="shipdate"class="datepicker"  value="<? echo $order->getExpectedshipdate() ?>"/>
+
                         <?php else: ?>
                             <strong>-</strong>
                         <?php endif; ?>
@@ -311,21 +311,30 @@ margin-bottom: 0px;" class="input-small datepicker" onchange="changeshipdate('<?
             <form id="rejectform" method="post" action="<? echo site_url('Backend/bakorders/rejects') ?>">
                 <input  type="hidden" name="orderno"  value=""/>
                 <textarea name="msg"  placeholder="ข้อความที่ต้องการส่งถึงลูกค้า" >
-                                                                           
+                                                                                   
                 </textarea>
             </form>
         </div>
     <?php endif; ?>
-    <!--  <?php //if ($order->getOrdstatus() == 40): ?>
-      
-              <div  id="onproduct" align="center" style="margin :5% auto;" > 
-                  <form id="onproductform" action="<?// echo site_url('Backend/bakorders/onproduction') . '/' . $order->getOrderno(); ?>" >
-                      วันที่คาดว่าจัดส่ง<input name="expecdate" type="text" value=""/><br/><br/>
-                      <input class="btn btn-success" type="submit" value="ผลิต"/>
-                  </form>
-              </div> 
+    <?php if ($order->getOrdstatus() == 40): ?>
 
-    <?php //endif; ?>-->
+        <div align="center" style="margin :5% auto;">  
+            <?php if ($order->getPaymethod() == 20): ?>
+                <?php if ($order->getSendmethod() == 'A'): ?>
+
+                    <form id="trackform"action="<? echo site_url('Backend/bakorders/ontransfer') . '/' . $order->getOrderno(); ?>" method="post">
+                        Tracking No.<input class="input-small" type="text" name="tracking"  id="tracking" value=""><br/><br/>
+                        <input class="btn btn-success" type="submit" value="จัดส่ง">
+                    </form>
+                <?php else: ?>
+
+                    <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/ontransfer') . '/' . $order->getOrderno(); ?>">จัดส่ง</a> 
+
+                <?php endif; ?>
+            <?php endif; ?>
+        </div>
+
+    <?php endif; ?>
     <?php if ($order->getOrdstatus() == 50): ?>
         <div align="center" style="margin :5% auto;">  
             <?php if ($order->getPaymethod() == 10): ?>
@@ -343,28 +352,11 @@ margin-bottom: 0px;" class="input-small datepicker" onchange="changeshipdate('<?
 
             <?php else: ?>
 
-                <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/waitforpay2') . '/' . $order->getOrderno(); ?>">แจ้งชำระก่อนส่ง</a> 
+                <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/waitforpay') . '/' . $order->getOrderno(); ?>">แจ้งชำระเงิน</a> 
 
             <?php endif; ?>
         </div>
     <?php endif; ?>
-    <?php if ($order->getOrdstatus() == 55): ?>
-        <div align="center" style="margin :5% auto;">  
-            <?php if ($order->getSendmethod() == 'A'): ?>
-
-                <form id="trackform"action="<? echo site_url('Backend/bakorders/ontransfer') . '/' . $order->getOrderno(); ?>" method="post">
-                    Tracking No.<input class="input-small" type="text" name="tracking"  id="tracking" value=""><br/><br/>
-                    <input class="btn btn-success" type="submit" value="จัดส่ง">
-                </form>
-            <?php else: ?>
-
-                <a class="btn btn-success" href="<? echo site_url('Backend/bakorders/ontransfer') . '/' . $order->getOrderno(); ?>">จัดส่ง</a> 
-
-            <?php endif; ?>
-        </div>
-    <?php endif; ?>
-
-
 
     <?php if ($order->getOrdstatus() == 60): ?>
         <div align="center" style="margin :5% auto;">  
@@ -380,59 +372,63 @@ margin-bottom: 0px;" class="input-small datepicker" onchange="changeshipdate('<?
 <script src="<? echo base_url("asset/javascript/jquery.metadata.js"); ?>" >  </script>
 <script>
     $().ready(function() {
-            $('.datepicker').datepicker({
-            buttonText: "เปลี่ยนวันที่" ,
-            showOn: "button",
-            dateFormat: "yy-mm-dd"
-        });
-        if($('#trackform').length!= 0){
+<?php if ($this->session->flashdata('warning')): ?>
+            
+            alert('<? echo  $this->session->flashdata('warning');  ?>');
+<?php endif; ?>
+                   $('.datepicker').datepicker({
+                       buttonText: "เปลี่ยนวันที่" ,
+                       showOn: "button",
+                       dateFormat: "yy-mm-dd"
+                   });
+                   if($('#trackform').length!= 0){
 
-            $("#trackform").validate({
-                rules: {
-                    tracking:"required" 
+                       $("#trackform").validate({
+                           rules: {
+                               tracking:"required" 
               
-                },messages:{
-                    tracking:"required" 
+                           },messages:{
+                               tracking:"required" 
              
-                }
+                           }
         
-            });
-        }
+                       });
+                   }
      
-    });
-    function reject(orderno){
-        $('#rejectform input[name=orderno]').val(orderno);
-        $('#rejectdialog').dialog({
+               });
+               function reject(orderno){
+                   $('#rejectform input[name=orderno]').val(orderno);
+                   $('#rejectdialog').dialog({
       
-            autoOpen: true,
-            modal: true,
-            title: "Rejectdialog",buttons: [
-                {
-                    text: "sendEmail",
-                    click: function(){ 
-                        $('#rejectform').submit();
+                       autoOpen: true,
+                       modal: true,
+                       title: "Rejectdialog",buttons: [
+                           {
+                               text: "sendEmail",
+                               click: function(){ 
+                                   $('#rejectform').submit();
                         
-                        $(this).dialog("close");    
+                                   $(this).dialog("close");    
                             
-                    }
+                               }
                            
                             
-                }
+                           }
            
-            ]
+                       ]
           
           
-        });
+                   });
     
-    }
-function changeshipdate(ordno){
- var date=$('#shipdate').val();
- $.post('<? echo site_url('Backend/bakorders/ajaxchangeshipdate') ?>', {date:date,orderno:ordno}, function(data){
+               }
+               function changeshipdate(ordno){
+                   var date=$('#shipdate').val();
+                   $.post('<? echo site_url('Backend/bakorders/ajaxchangeshipdate') ?>', {date:date,orderno:ordno}, function(data){
 
-        $('#shipdate').val(data);
+                       $('#shipdate').val(data);
      
- });
+                   });
 
-}
+               }
 
 </script>

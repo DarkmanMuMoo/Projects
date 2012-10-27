@@ -70,7 +70,7 @@ class Uploader extends CI_Controller {
               error_log(var_export('update filepath' . $result, true));
             
             if (!empty($filepath)&&$result) {
-                $re = unlink('./uploads/' . $filepath);
+                $re = unlink('./uploads' . $filepath);
 
                 error_log(var_export('delete file' . $re, true));
             }

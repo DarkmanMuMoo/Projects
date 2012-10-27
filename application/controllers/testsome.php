@@ -17,9 +17,11 @@ class Testsome extends CI_Controller {
 
 
     public function index() {
-
+  $this->load->model('dao/orderlinedao');
         echo date('Y-m-d',time()+(20*60 * 60 * 24));
-     
+     $orderlineno = $this->orderlinedao->findbyid(30);
+    $str= mb_convert_encoding($orderlineno->getFilepath(),'UTF-8','auto');
+        var_dump($str);
         /* $first= load_class('emailutil', 'libraries','');
           var_dump($first);
           var_dump($this); */
