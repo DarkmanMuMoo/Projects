@@ -28,7 +28,7 @@ margin-left: 60px;">
 <li>กด payment ในรายการที่ต้องการแจ้งชำระเงิน จะต้องมีสถานะเป็น"แจ้งชำระเงิน"เท่านั้น <br>
   <img src="<? echo base_url("asset/css/images/36.png"); ?>" width="718" height="122"></li>
   <li>กรอกรายละเอียดของสลิปโอนเงิน แล้วแนบไฟล์สลิป จากนั้นกด แจ้งชำระเงิน <br>
-  <img src="<? echo base_url("asset/css/images/38.png"); ?>" width="388" height="381"> <br>
+  <img src="<? echo base_url("asset/css/images/38edit.png"); ?>" width="770" height="332"> <br>
   ตัวอย่างรูปสลิปโอนเงิน<br>
   <img src="<? echo base_url("asset/css/images/slip.jpg"); ?>" width="275" height="366"></li>
 </ul>

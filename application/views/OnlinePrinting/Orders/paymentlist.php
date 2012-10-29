@@ -1,7 +1,13 @@
+<style>
+.red{
+        color:#F00;
+    }
+</style>
+
 
 <p style ="margin-bottom: 10px;">
 
-<h4>การชำระเงิน&nbsp;<button  class="btn"onclick="swappaydetail();">รายละเอียด</button></h4>
+<h4>การชำระเงิน&nbsp;<button id="swap" class="btn"onclick="swappaydetail();">แสดงรายละเอียด <i class="icon-chevron-up"></i></button></h4>
 </p>
 
 <? $countactive = 0;
@@ -9,7 +15,7 @@ $paidamount = 0;
 ?>
 <div id="paydetail" >
     <hr></hr>
-    <div id="result" align="center">
+  <div id="result" align="center">
         <table class="table table-bordered">
             <thead>
 
@@ -24,7 +30,7 @@ $paidamount = 0;
                 <?php if (!empty($paymentlist)): ?>
     <?php foreach ($paymentlist as $index => $payment): ?>
 
-                    <td><? echo $payment->getSeqno(); ?> </td> 
+          <td><? echo $payment->getSeqno(); ?> </td> 
                     <td><? echo $payment->getPeriod() ?> </td> 
                     <td><? echo number_format($payment->getAmount(), 2, '.', ','); ?> &nbsp;</td> 
                     <td> <?php if ($payment->getActive() == '1'): ?>
@@ -55,14 +61,15 @@ $paidamount = 0;
         </table>
 
     </div>
-    <div id="paystatus"  >
-        <table >
+    
+    
+        <table width="692" >
           <!--  <tr>
                 <td><strong>วันที่</strong></td>
                 <td><? echo $order->getOrderdate(); ?></td>
             <tr>-->
-                <td><strong>การชำระเงิน</strong></td> 
-                <td><?php foreach ($ordpaylist as $ordpay): ?>
+                <td width="121"><strong>การชำระเงิน</strong></td> 
+                <td width="215"><?php foreach ($ordpaylist as $ordpay): ?>
                         <?php if ($ordpay->getPaymethod() == $order->getPaymethod()): ?>
                             <?
                             echo $ordpay->getDescription();
@@ -71,6 +78,15 @@ $paidamount = 0;
     <?php endif; ?>
 <?php endforeach; ?><br>
 <? $showform = true; ?></td>
+       <td width="144"><strong>ยอดเงินที่ต้องชำระ&nbsp;&nbsp;</strong></td>
+       <td width="192" ><strong><u><?php if ($showform): ?>
+
+    <? echo ($ordpay->getPaymethod() == '10') ? number_format($order->getTotalprice(), 2, '.', ',') : number_format($order->getTotalprice() / 2, 2, '.', ',') ?>&nbsp;</u>บาท
+
+                    <?php else: ?>
+                        0.00&nbsp;บาท
+                    <?php endif; ?></strong></td>     
+            
             </tr>
 
             <tr>
@@ -88,27 +104,28 @@ $paidamount = 0;
                         ?>/2 ครั้ง
 
                     <?php endif; ?></td>
+             <td><strong>ค้างชำระ&nbsp;&nbsp;</strong></td>
+             <td class="red"> 0.00 บาท </td>       
             </tr>
-            <tr><td><strong>ชำระครั้งต่อไป&nbsp;&nbsp;</strong></td><td> <?php if ($showform): ?>
-
-    <? echo ($ordpay->getPaymethod() == '10') ? number_format($order->getTotalprice(), 2, '.', ',') : number_format($order->getTotalprice() / 2, 2, '.', ',') ?>&nbsp;บาท
-
-                    <?php else: ?>
-                        0.00&nbsp;บาท
-                    <?php endif; ?></td> </tr>
-            <tr><td><strong>ค้างชำระ&nbsp;&nbsp;</strong></td><td> <?php if ($showform): ?>
-
-    <? echo number_format($order->getTotalprice() - $paidamount, 2, '.', ',') ?>&nbsp;บาท
-<?php else: ?>
-                        0.00&nbsp;บาท
-    <?php endif; ?></td> </tr>
-            <tr><td><strong>ยอดทั้งหมด&nbsp;&nbsp;</strong></td><td><? echo number_format($order->getTotalprice(), 2, '.', ',') ?>&nbsp;บาท </td> </tr>
+            <tr>
+            <td></td>
+            <td></td>
+              <td><strong>ยอดทั้งหมด&nbsp;&nbsp;</strong></td>
+              <td><? echo number_format($order->getTotalprice(), 2, '.', ',') ?>&nbsp;บาท&nbsp;</td>
+          </tr>
+            <tr>
+            <td></td>
+            <td></td> 
+            </tr>
+            <tr><td></td>
+            <td></td> 
+            </tr>
 
         </table>
-    </div>
+</div>
 <?php if ($showform && ($order->getOrdstatus() == 40 || $order->getOrdstatus() == 55)): ?>
         <div id ="payconfirm">
-            <h4>Payment confirmation</h4>
+            <h4>แจ้งชำระเงิน</h4>
             <form id="payform"  method="post" action="<? echo site_url('orders/addpayment'); ?>" enctype="multipart/form-data" id="payconfirmform" >
                 <table border="0">
                     <tr>
@@ -116,11 +133,11 @@ $paidamount = 0;
                         <td ><input class="input-medium" id="slipno" name="slipno" type="text" /></td>
                     </tr>
                     <tr>
-                        <td scope="row">วันทีี่ชำระเงิน:</td>
+                        <td scope="row">วันทีี่ชำระเงิน<span class="red">*</span>:</td>
                         <td><input class="input-medium datepicker"  id="date"  name="date" type="text" /></td>
                     </tr>
                     <tr>
-                        <td scope="row">เวลา:</td>
+                        <td scope="row">เวลา<span class="red">*</span>:</td>
                         <td>ชั่วโมง<select style="width:20%;" name="hour"> 
                                 <?php foreach ($hour as $index => $h): ?>
 
@@ -140,18 +157,18 @@ $paidamount = 0;
                         </td>
                     </tr>
                     <tr>
-                        <td scope="row">จำนวนเงิน:</td>
+                        <td scope="row">จำนวนเงิน<span class="red">*</span>:</td>
                         <td><input  class="input-medium"  name="amount"  id="amount" type="text" />
                             บาท</td>
                     </tr>
                     <tr>
-                        <td scope="row">รูปภาพใบเสร็จ:</td>
+                        <td scope="row">รูปภาพใบเสร็จ<span class="red">*</span>:</td>
                         <td><input  class="input-medium" name="pic"  id="pic" type="file" />
                         </td>
                     </tr>
                     <tr>
                         <th scope="row">&nbsp;</th>
-                        <td><input type="submit" value="แจ้งชำระเงิน"  /></td>
+                        <td><input class="btn" type="submit" value="แจ้งชำระเงิน"  /></td>
                     </tr>
                 </table>
                 <input type="hidden" name="ordno" value="<? echo $order->getOrderno(); ?>">
@@ -164,7 +181,13 @@ $paidamount = 0;
 </div>
 <script>
     function swappaydetail(){
-        
+        $('#swap i').toggleClass(function() {
+  if ($(this).hasClass('icon-chevron-up')) {
+    return 'icon-chevron-down';
+  } else {
+    return 'icon-chevron-up';
+  }
+});
         
         $('#paydetail').fadeToggle();
        // window.scrollTo(0,document.height);

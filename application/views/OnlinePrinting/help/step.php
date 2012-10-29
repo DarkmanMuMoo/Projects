@@ -20,8 +20,8 @@ margin-left: 60px;">
   <li>เมื่อเลือกงานพิมพ์ที่ต้องการแล้ว รายการของท่านจะปรากฏอยู่ใน your Cart <br>
   <img src="<? echo base_url("asset/css/images/17.png"); ?>" width="357" height="200" alt="yourCart"> <br>
   กด Create Order เพื่อสั่งซื้อ</li>
-  <li>เลือกที่อยู่จัดส่ง วิธีการจัดส่ง และการชำระเงิน จากนั้น กด Create Order เพื่อยืนยัน <br>
-  <img src="<? echo base_url("asset/css/images/19.png"); ?>" width="385" height="404" alt="order"></li>
+  <li>เลือกที่อยู่จัดส่ง ที่อยู่ออกใบเสร็จ วิธีการจัดส่ง และการชำระเงิน จากนั้น กด Create Order เพื่อยืนยัน <br>
+  <img src="<? echo base_url("asset/css/images/19edit.png"); ?>" width="697" height="419" alt="order"></li>
 </ul>
 <p>3.เข้ามาที่เมนู Order เพื่อ ดาวน์โหลดเทมเพลต และอัพโหลดไฟล์งานของท่าน <br>
 <img src="<? echo base_url("asset/css/images/23.png"); ?>" width="427" height="88" alt="ord"></p>
@@ -38,7 +38,7 @@ margin-left: 60px;">
   <li>เมื่อกลับมาดูที่เมนู Order สถานะของท่านจะเปลี่ยนเป็น ตรวจสอบความถูกต้อง <br>
   <img src="<? echo base_url("asset/css/images/32.png"); ?>" width="576" height="98"></li>
   <li>เมื่อทางโรงพิมพ์ตรวจสอบแล้วว่าไฟล์ของท่านถูกต้อง สถานะท่านจะถูกเปลี่ยนเป็นแจ้งชำระเงิน <br>
-  <img src="<? echo base_url("asset/css/images/06.png"); ?>" width="353" height="540"> <br>
+  <img src="<? echo base_url("asset/css/images/34.png"); ?>" width="826" height="73"> <br>
   <a onclick="loadpage('pay');"href="JavaScript:void(0);">วิธีการแจ้งชำระเงิน</a></li>
 </ul>
 

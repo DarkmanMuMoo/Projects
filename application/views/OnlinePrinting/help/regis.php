@@ -16,9 +16,9 @@ margin-left: 60px;">
     <img src="<? echo base_url("asset/css/images/02.png"); ?>" width="395" height="92"></p>
 <ul>
 <li>ตรวจสอบอีเมลล์ว่าเคยใช้ในการสมัครสมาชิกหรือไม่<br>
-  <img src="<? echo base_url("asset/css/images/04.png"); ?>" width="462" height="194"></li>
+  <img src="<? echo base_url("asset/css/images/04edit.png"); ?>" width="462" height="194"></li>
 <li>กรอกข้อมูลให้ครบถ้วนและถูกต้อง แล้วกด ตกลง<br>
-  <img src="<? echo base_url("asset/css/images/06.png"); ?>" width="353" height="540"></li>
+  <img src="<? echo base_url("asset/css/images/06edit.png"); ?>" width="418" height="427"></li>
 </ul>
 <p>2.ระบบจะส่งอีเมลล์ไปให้ท่านกดยืนยันการไปสมาชิก<br>
 <img src="<? echo base_url("asset/css/images/08.png"); ?>" width="351" height="193"></p>
