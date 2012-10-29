@@ -56,8 +56,8 @@ class Uploader extends CI_Controller {
         $filepath = $orderline->getFilepath();
 
         $user = $_SESSION['user'];
-        $uname = $user->getName();
-        $filename = $uname . '_' . date("Y-m-d_H-i-s");
+        
+        $filename = date("Y-m-d_H-i-s");
         $config['file_name'] = $filename;
 
         $mesg = $this->upload($config);
