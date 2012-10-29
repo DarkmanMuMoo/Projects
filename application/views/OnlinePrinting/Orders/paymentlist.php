@@ -167,7 +167,7 @@ $paidamount = 0;
         
         
         $('#paydetail').fadeToggle();
-        window.scrollTo(0,document.height);
+       // window.scrollTo(0,document.height);
     }
     $().ready(function() {
       
