@@ -194,7 +194,7 @@ width: 100%;
         <p>
         <h2>รายการสินค้า</h2>
         </p>
-        <table class="table table-bordered" >
+        <table class="table table-bordered colourtable" >
             <thead>
             <th>
                 #

@@ -72,6 +72,7 @@
     .blue{
         color:#09C;	
     }
+   
 </style>
 <div id="page">
     <div id ="content">
@@ -86,8 +87,8 @@
                 <button type="submit" class="btn">Search</button>
             </form>
         </div>
-        <div id="result"  align="center">
-            <table class="table table-bordered" >
+        <div id="result" align="center">
+            <table class="table table-bordered colourtable" >
                 <thead>
                 <th >
                     #

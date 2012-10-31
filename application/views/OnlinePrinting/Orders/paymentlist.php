@@ -1,9 +1,3 @@
-<style>
-.red{
-        color:#F00;
-    }
-</style>
-
 
 <p style ="margin-bottom: 10px;">
 
@@ -16,7 +10,7 @@ $paidamount = 0;
 <div id="paydetail" >
     <hr></hr>
   <div id="result" align="center">
-        <table class="table table-bordered">
+        <table class="table table-bordered colourtable">
             <thead>
 
             <th>เลขที่สลิป</th> 

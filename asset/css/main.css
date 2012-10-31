@@ -4,7 +4,19 @@ Design by Free CSS Templates
 http://www.freecsstemplates.org
 Released for free under a Creative Commons Attribution 2.5 License
 */
+ .colourtable thead tr{
+        
+        background:#FC9D00;
+        color: white;
+    }
+   .colourtable tbody tr:nth-child(even){
+        background:#FFFF99;
 
+    }
+    .colourtable tbody tr:nth-child(odd){
+        background:#FFC;
+
+    }
     label.error {
 color: red;
 font-style: italic;

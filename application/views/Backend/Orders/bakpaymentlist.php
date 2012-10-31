@@ -1,4 +1,4 @@
-<h2>การชำระเงิน&nbsp;<button  class="btn"onclick="swappaydetail();">รายละเอียด</button></h2>
+<h2>การชำระเงิน&nbsp;<button id="swap" class="btn"onclick="swappaydetail();">รายละเอียด<i class="icon-chevron-up"></i></button></h2>
 <hr align="center" size="3" color="#C3C3C3">  
 <? $countactive = 0;
 $paidamount = 0;
@@ -121,9 +121,16 @@ $paidamount = 0;
 <script>
     function swappaydetail(){
         
-        
+                $('#swap i').toggleClass(function() {
+  if ($(this).hasClass('icon-chevron-up')) {
+    return 'icon-chevron-down';
+  } else {
+    return 'icon-chevron-up';
+  }
+});
+     
         $('#paydetail').fadeToggle();
-        window.scrollTo(0,document.height);
+    
     }
     function settoactive(payno){
         
