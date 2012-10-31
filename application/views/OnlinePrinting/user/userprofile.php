@@ -106,7 +106,7 @@
     </form>
 
 
-<h4 ><strong>รายการที่อยู่</strong></h4>
+<h4 ><strong>รายการที่อยู่(ท่านสามารถสร้างที่อยู่ได้ไม่เกิน 3 ที่อยู่)</strong></h4>
 
     <?php if (!empty($addresslist)): ?>
 
@@ -159,6 +159,7 @@
 
     <?php endif; ?>
 </div>
+<?php if (count($addresslist)<3): ?>
 <button class="btn" onclick="swapaddaddress();"> เพิ่มที่อยู่</button>
 <form id="addadress"  method="post" style="  display: none;margin: 0 auto;" action="<? echo site_url('userprofile/addaddress'); ?>">
     
@@ -197,7 +198,7 @@
 </tr>
  </table>
 </form>
-
+ <?php endif; ?>
 
 </div>
 <? $this->load->view(lang('footer')) ?>
@@ -305,6 +306,7 @@
     }
     
     $().ready(function() {
+ 
         $(".mark").mask("99-999-9999");
         $("#addadress").validate({
             rules: {

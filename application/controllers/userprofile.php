@@ -35,6 +35,7 @@ class Userprofile extends CI_Controller {
     }
 
     public function updateaddress() {
+        
         $this->load->library('thailandutil');
         $this->load->model('dao/addressdao');
         //var_dump($this->input->post());
@@ -115,6 +116,7 @@ class Userprofile extends CI_Controller {
         }
     }
 
+    
     public function addaddress() {
 
         $this->load->library('thailandutil');
@@ -134,8 +136,13 @@ class Userprofile extends CI_Controller {
         $newaddress->setPostcode($postcode);
         $newaddress->setProvince($province->getProvincename());
 
+        $allow=$this->checklimit(3, $email);
+        
+        if($allow){
         $result = $this->addressdao->insert($newaddress);
-
+        }else{
+            $this->session->set_flashdata('waring', 'คุณมีที่อยู่เกิน3ที่');
+        }
         redirect('userprofile');
     }
 
