@@ -60,8 +60,8 @@ $paidamount = 0;
                 <td><strong>วันที่</strong></td>
                 <td><? echo $order->getOrderdate(); ?></td>
             <tr>-->
-                <td><strong>การชำระเงิน</strong></td> 
-                <td><?php foreach ($ordpaylist as $ordpay): ?>
+                <td width="121"><strong>การชำระเงิน</strong></td> 
+                <td width="154"><?php foreach ($ordpaylist as $ordpay): ?>
                         <?php if ($ordpay->getPaymethod() == $order->getPaymethod()): ?>
                             <?
                             echo $ordpay->getDescription();
@@ -70,6 +70,14 @@ $paidamount = 0;
                         <?php endif; ?>
                     <?php endforeach; ?><br>
 <? $showform = true; ?></td>
+<td width="143"><strong>ยอดเงินที่ต้องชำระ&nbsp;&nbsp;</strong></td>
+<td width="213"><strong><u><?php if ($showform): ?>
+
+                        <? echo ($ordpay->getPaymethod() == '10') ? number_format($order->getTotalprice(), 2, '.', ',') : number_format($order->getTotalprice() / 2, 2, '.', ',') ?>&nbsp;บาท
+
+                    <?php else: ?>
+                        0.00&nbsp;บาท
+<?php endif; ?></strong></u></td>
             </tr>
 
             <tr>
@@ -87,24 +95,22 @@ $paidamount = 0;
                         ?>/2 ครั้ง
 
 <?php endif; ?></td>
-            </tr>
-            <tr><td><strong>ชำระครั้งต่อไป&nbsp;&nbsp;</strong></td><td> <?php if ($showform): ?>
-
-                        <? echo ($ordpay->getPaymethod() == '10') ? number_format($order->getTotalprice(), 2, '.', ',') : number_format($order->getTotalprice() / 2, 2, '.', ',') ?>&nbsp;บาท
-
-                    <?php else: ?>
-                        0.00&nbsp;บาท
-<?php endif; ?></td> </tr>
-            <tr><td><strong>ค้างชำระ&nbsp;&nbsp;</strong></td><td> <?php if ($showform): ?>
+<td><strong>ค้างชำระ&nbsp;&nbsp;</strong></td>
+<td class="red"><?php if ($showform): ?>
 
                         <? echo number_format($order->getTotalprice() - $paidamount, 2, '.', ',') ?>&nbsp;บาท
                     <?php else: ?>
                         0.00&nbsp;บาท
-<?php endif; ?></td> </tr>
-            <tr><td><strong>ยอดทั้งหมด&nbsp;&nbsp;</strong></td><td><? echo number_format($order->getTotalprice(), 2, '.', ',') ?>&nbsp;บาท </td> </tr>
+<?php endif; ?></td>
+            </tr>
+            <tr><td>&nbsp;</td><td>&nbsp;</td> 
+<td><strong>ยอดทั้งหมด&nbsp;&nbsp;</strong></td>
+<td><? echo number_format($order->getTotalprice(), 2, '.', ',') ?>&nbsp;บาท </td>
+</tr>
+            
 
         </table>
-    </div>
+  </div>
 
     <form id="settoactive" action="<? echo site_url('Backend/bakorders/settoactive'); ?>"  method="post">
         <input  type="hidden" name="orderno" value="<? echo $order->getOrderno(); ?>"/>
