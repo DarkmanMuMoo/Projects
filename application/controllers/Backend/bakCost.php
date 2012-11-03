@@ -21,16 +21,68 @@ class BakCost extends CI_Controller {
         $this->load->model('dao/ordsenddao');
         $this->load->model('dao/optiondao');
     }
+public function  deletetemp($tmpno){
+    $this->load->model('dao/templatedao');
+
+        $this->templatedao->delete($orderno);
+
+        $javascript = "
+   document.location.reload();
+   ";
+        echo $javascript;
+   
+    
+}
+    public function inserttemp() {
+        $this->load->library('uploadutil');
+        $this->load->model('dao/typedao');
+        $this->load->model('dao/templatedao');
+        $typeno = $this->input->post('typeno');
+       
+        $name = $this->input->post('name');
+        $size = $this->input->post('size');
+        $platesize = $this->input->post('platesize');
+        $tpp = $this->input->post('tpp');
+        $ppr = $this->input->post('ppr');
+        $template = new Template();
+        $template->setName($name);
+        $template->setSize($size);
+        $template->setTypeno($typeno);
+        $template->setPlatesize($platesize);
+        $template->setTrimPerPrint($tpp);
+        $template->setPrintperReam($ppr);
+    
+        $config = array();
+        $config['upload_path'] = './asset/templatefile';
+        $config['allowed_types'] = 'pdf|ai';
+        $config['max_size'] = '51200';
+        $upload=$this->uploadutil->upload($config,'file');
+         if ($upload == 'complete') {
+
+            $data = $this->upload->data();
+
+            $template->setUrl( $data['file_name'] );
+
+            $result = $this->templatedao->insert($template);
+            error_log(var_export($result, true) . 'insert template', 0);
+            redirect('Backend/bakCost/template');
+        } else {
+         
+            echo "<script>alert('$upload');</script>";
+        }
+        
+        
+    }
 
     public function index() {
         $this->load->driver('cache', array('adapter' => 'file'));
         $data['paperlist'] = $this->paperdao->findall();
         $data['ordsendlist'] = $this->ordsenddao->findall();
         $data['optionlist'] = $this->optiondao->findall();
-        $data['plateL'] = $this->cache->file->get('plateL',true);
-        $data['plateS'] = $this->cache->file->get('plateS',true);
-        $data['print'] = $this->cache->file->get('print',true);
-        $data['misc'] = $this->cache->file->get('misc',true);
+        $data['plateL'] = $this->cache->file->get('plateL', true);
+        $data['plateS'] = $this->cache->file->get('plateS', true);
+        $data['print'] = $this->cache->file->get('print', true);
+        $data['misc'] = $this->cache->file->get('misc', true);
         $_SESSION['paperlist'] = $data['paperlist'];
         $_SESSION['ordsendlist'] = $data['ordsendlist'];
         $_SESSION['optionlist'] = $data['optionlist'];
@@ -140,12 +192,13 @@ class BakCost extends CI_Controller {
         $this->session->set_flashdata('ck', 'cal');
         redirect('Backend/bakCost');
     }
- public function addpaper(){
-        
-        $name=$this->input->post('name');
-        $grame=$this->input->post('gram');
-        $price=$this->input->post('price');
-        $paper=new Paper();
+
+    public function addpaper() {
+
+        $name = $this->input->post('name');
+        $grame = $this->input->post('gram');
+        $price = $this->input->post('price');
+        $paper = new Paper();
         $paper->setName($name);
         $paper->setGrame($grame);
         $paper->setPrice($price);
@@ -153,18 +206,19 @@ class BakCost extends CI_Controller {
         $this->session->set_flashdata('ck', 'paper');
         redirect('Backend/bakCost');
     }
-    public function addoption(){
-        
-        $description=$this->input->post('description');
-        $price=$this->input->post('price');
-        $option=new Option();
+
+    public function addoption() {
+
+        $description = $this->input->post('description');
+        $price = $this->input->post('price');
+        $option = new Option();
         $option->setDescription($description);
         $option->setPrice($price);
         $this->optiondao->insert($option);
         $this->session->set_flashdata('ck', 'option');
         redirect('Backend/bakCost');
     }
-    
+
     public function updateoption() {
 
         $updatelist = $this->input->post();

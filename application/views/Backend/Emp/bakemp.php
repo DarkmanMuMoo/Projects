@@ -10,6 +10,10 @@
             margin-bottom: 5%;
 
         }
+        #insertform label{ display: inline;
+margin-left: 3px;
+color: red;
+}
         #result th{text-align: center;}
         #result td{text-align: center;}
 
@@ -141,7 +145,7 @@
     </div>
 
 
-    <button onclick="showinsertform();" class="btn" > insert new emp</button>
+    <button onclick="showinsertform();" class="btn" >เพิ่ม พนักงาน ใหม่</button>
     <div  id="insertemp" class="divcenter"  >
         <form  id="insertform" action="<? echo site_url('Backend/bakemp/insertemp') ?>" method="post">
 

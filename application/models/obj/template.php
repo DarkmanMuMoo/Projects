@@ -57,9 +57,6 @@ class Template extends CI_Model {
         $this->platesize = $platesize;
     }
 
-    public function setType() {
-        return $this->typeno;
-    }
 
     public function getPrintperReam() {
         return $this->printperream;

@@ -143,7 +143,7 @@ class Bakemp extends CI_Controller {
             $this->empprofile();
         } else {
 
-            echo "<script>alert('$upload');<script>";
+            echo "<script>alert('$upload');</script>";
         }
     }
 

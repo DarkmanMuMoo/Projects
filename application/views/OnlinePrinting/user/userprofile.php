@@ -77,14 +77,12 @@
             </tr>
             <tr>
                 <td >ชื่อ</td>
-                <td colspan="2" style="text-align: left"><input  class="input-medium"name="name" type="text" value="<? echo $updateuser->getName(); ?>">&nbsp;&nbsp;
+                <td colspan="2" style="text-align: left"><input  name="name" type="text" value="<? echo $updateuser->getName(); ?>">&nbsp;&nbsp;
                 </td>
-
-
             </tr>
             <tr>
                 <td>นามสกุล</td>
-                <td colspan="2" style="text-align: left"><input class="input-medium" name="lastname" type="text" value="<? echo $updateuser->getLastname(); ?>"></td>
+                <td colspan="2" style="text-align: left"><input  name="lastname" type="text" value="<? echo $updateuser->getLastname(); ?>"></td>
 
             </tr>
             <tr>

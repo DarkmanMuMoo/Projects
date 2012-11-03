@@ -12,6 +12,19 @@
 $().ready(function() {
 //$( "#progressbar" ).progressbar({ value: 0 });
 $('#uploadform').ajaxForm({
+       beforeSubmit: function(arr, $form, options) { 
+    // The array of form data takes the following form: 
+    // [ { name: 'username', value: 'jresig' }, { name: 'password', value: 'secret' } ] 
+      if(document.getElementById("file").value==''){
+               alert('ยังไม่ได้เลือกไฟล์');
+             return false ;
+           }
+              if(document.getElementById("file").value.lastIndexOf(".pdf")==-1&&document.getElementById("file").value.lastIndexOf(".ai")==-1){
+               alert('ไฟล์ที่upload ต้องเป็น pdf หรือ ai เท่านั้น');
+             return false ;
+           }
+    // return false to cancel submit                  
+},
     beforeSend: function() {
            
        $('#status').empty();
@@ -46,7 +59,7 @@ $('#uploadform').ajaxForm({
  
      <div class="well">
 <form  id="uploadform" action="<? echo  site_url("Backend/BakCost/updatetemplatefile"); ?>" method="post" enctype="multipart/form-data">
-        <input type="file" name="myfile"><br>
+    <input type="file"id="file" name="myfile"><br>
         <input type="hidden" name="templateno" value="<?echo $templateno;?>" >
         <input class="btn btn-warning" type="submit" value="Upload File to Server">
     </form>

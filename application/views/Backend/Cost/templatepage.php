@@ -1,15 +1,31 @@
 <? $this->load->view(lang('bakheader')); ?>
 
 <style type="text/css">
+    #insertform label{ 
+        display: inline;
+        margin-left: 3px;
+        color: red;
+    }
+    hr{ 
+        text-align:center;
+        color:#09F;
+        border-color:#09F;
+        size:3;
+    }
+    h1{ font-weight:bolder;
+    }
+    #inserttemp{
+        display: none;
+        width: 60%;
 
-	hr{ text-align:center;
-color:#09F;
-border-color:#09F;
-size:3;
-}
-h1{ font-weight:bolder;
-}
+    }
+    #insertform{
 
+
+        margin-top: 5%;
+        margin-bottom: 5%;
+
+    }
 </style>
 
 <div class="container" >
@@ -19,7 +35,7 @@ h1{ font-weight:bolder;
     </div>
     <div id="search-bar" >  
         <form id="searchform"action="<? echo site_url('Backend/bakCost/template') ?>" class="form-search" align="center"  method="post">
-            ชื่อเทมเพลต:<input type="text"  value="<? echo $this->input->post('keyword'); ?>" name="keyword" id="email" class="input-small " />
+            ชื่อเทมเพลต:<input type="text"  value="<? echo $this->input->post('keyword'); ?>" name="keyword" id="email"  />
             ประเภท: <select name="type" id="type" >  
                 <option value="0">ทั้งหมด</option>
                 <?php foreach ($typelist as $type): ?>
@@ -53,7 +69,7 @@ h1{ font-weight:bolder;
             </th>
 
             <th>
-                
+
             </th>
             </thead>
 
@@ -85,51 +101,165 @@ h1{ font-weight:bolder;
 
                         <td >
                             <button onclick="showupload('<? echo $template->getTempno(); ?>');" class="btn btn-warning">Upload</button> 
-
                             <a href="<? echo site_url('orders/downloadtemplate') . '/' . $template->getTempno(); ?>" class="btn btn-primary">Download</a>
+                             <a href="<? echo site_url('Backend/bakCost/deletetemp') . '/' . $template->getTempno(); ?>" class="btn btn-danger">Delete</a>
                         </td>  
                     </tr>
                 <?php endforeach; ?>
 
             </tbody>
         </table>
+         <? echo $this->pagination->create_onclick_links(); ?>
+    </div>
+    <button onclick="showinsertform();" class="btn" >เพิ่ม Template</button>
+    <div  id="inserttemp" class="divcenter">
 
-     <div id="showuploaddialog" style="display:none;">
-    <iframe id="uploaddialog" width="500"  style="border-style:none;" scrolling="no"  ></iframe>
-</div>
+        <form id="insertform" enctype="multipart/form-data" method="post" action="<? echo site_url('Backend/bakCost/inserttemp') ?>">
+            <table class="elementcenter">
+                <tr>
+                    <td>ชื่อ</td>
+                    <td>&nbsp;</td>
+                    <td><input type="text"  name="name" id="name" ></input></td>
 
-        <? $this->load->view(lang('bakfooter')); ?>
-        <script>
+                </tr>
+                <tr>
+                    <td>ขนาด</td>
+                    <td>&nbsp;</td>
+                    <td><input type="text"  name="size" id="size" ></input></td>
+                </tr>
+                <tr>
+                    <td>ประเภท</td>
+                    <td>&nbsp;</td>
+                    <td><select name="typeno">
+                            <?php foreach ($typelist as $type): ?>
 
+                                <option   value="<? echo $type->getTypeno(); ?>">  <? echo $type->getType(); ?> </option>
 
-            function pag(i){
-                $('#searchform input[name=startrow]').val(i);
+                            <?php endforeach; ?>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td>Plate size</td>
+                    <td>&nbsp;</td>
+                    <td><select name="platesize">
+                            <option value="L">L</option>
+                             <option value="S">S</option>
+                        </select></input></td>
+                </tr>
+                <tr>
+                    <td>Print Per Ream</td>
+                    <td>&nbsp;</td>
+                    <td><input type="text"  name="ppr" id="ppr" ></input></td>
+                </tr>
+                <tr>
+                    <td>Trim Per Print</td>
+                    <td>&nbsp;</td>
+                    <td><input type="text"  name="tpp" id="tpp" ></input></td>
+                </tr>
+                <tr>
+                    <td>Template file</td>
+                    <td>&nbsp;</td>
+                    <td><input type="file"  name="file" id="file" ></input></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td><input class="btn-success" type="submit" value="OK"/></td>
+                </tr>
+            </table>
+
+        </form>
+
+    </div>
+    <div id="showuploaddialog" style="display:none;">
+        <iframe id="uploaddialog" width="500"  style="border-style:none;" scrolling="no"  ></iframe>
+    </div>
+    <? $this->load->view(lang('bakfooter')); ?>
+    <script src="<? echo base_url("asset/javascript/jquery.validate.js"); ?>" >  </script>
+    <script>
+        $().ready(function() {
+            $.validator.addMethod("checkextends", function(value) {	
+                var result=false;
+                if( value.lastIndexOf(".pdf")>=0)
+                    result=true;
+                if( value.lastIndexOf(".ai")>=0)
+                    result=true;
+                return result;	
+            }, 'file must be pdf or ai');
+            $("#insertform").validate({
+                //errorLabelContainer: $("#con"),
+                rules: {
+                    name:"required",
+                    size:"required",
+                  
+                    tpp: {
+                        required: true,
+                        digits: true
+                    },
+                    ppr: {
+                        required: true,
+                        digits: true
+                    },file:{
+                        required: true,
+                        checkextends:true
+                    }
+               
+                },messages: {
+                    name:"required",
+                    size:"required",
+                
+                    tpp: {
+                        required: "required",
+                        digits: "ตัวเลขเท่านั้น"
+                    },
+                    ppr: {
+                        required: "required",
+                        digits: "ตัวเลขเท่านั้น"
+                    }
+                    ,file:{
+                        required: "required"
+                    }
+                }	
+            }	        
+        );
+       
+       
+       
+        });
+        function showinsertform(){
+    
+            $('#inserttemp').fadeToggle();
+    
+    
+        }
+        function pag(i){
+            $('#searchform input[name=startrow]').val(i);
    
-                $('#searchform').submit();
+            $('#searchform').submit();
         
+        }
+            
+        function showupload(orderlineno){
+    
+            document.getElementById('uploaddialog').src = '<? echo site_url("Backend/bakCost/showuploadframe"); ?>/'+orderlineno; 
+            $('#showuploaddialog').dialog({ 
+                autoOpen: true,
+                modal: true,
+                width:'auto',
+                title: "Upload",
+                close: function(event, ui) {
+                    window.location.reload();
+                 
+                }
+
             }
             
-            function showupload(orderlineno){
-    
-     document.getElementById('uploaddialog').src = '<? echo site_url("Backend/bakCost/showuploadframe"); ?>/'+orderlineno; 
-        $('#showuploaddialog').dialog({ 
-                    autoOpen: true,
-                    modal: true,
-                    width:'auto',
-                    title: "Upload",
-                    close: function(event, ui) {
-                     window.location.reload();
-                 
-             }
-
-                }
-            
-            );
+        );
                     
                    
                
     
     
     
-}
-        </script>
+        }
+    </script>

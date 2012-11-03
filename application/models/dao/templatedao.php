@@ -110,8 +110,8 @@ class Templatedao extends CI_Model {
             'size' => $template->getSize(),
             'url' => $template->getUrl(),
             'tmp_name' => $template->getName(),
-            'X' => $template->getTrimPerPrint(),
-            'Z' => $template->getPrintperReam(),
+            'trimperprint' => $template->getTrimPerPrint(),
+            'printperream' => $template->getPrintperReam(),
             'platesize' => $template->getPlatesize()
         );
 
