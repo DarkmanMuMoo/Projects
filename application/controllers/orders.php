@@ -277,20 +277,20 @@ class Orders extends CI_Controller {
         } else {
             $sendadd = new Address();
             $sendadd->setAddressno(0);
-            $sendadd->setAddress($this->input->post('address1'));
-            $sendadd->setPhone($this->input->post('phone1'));
-            $sendadd->setPostcode($this->input->post('postcode1'));
-            $sendadd->setProvince($this->thailandutil->findbyid($this->input->post('province1'))->getProvincename());
+            $sendadd->setAddress($this->input->post('address'));
+            $sendadd->setPhone($this->input->post('phone'));
+            $sendadd->setPostcode($this->input->post('postcode'));
+            $sendadd->setProvince($this->thailandutil->findbyid($this->input->post('province'))->getProvincename());
         }
         if ($receiptaddno != 0) {
             $receiptadd = $this->addressdao->findbyid($receiptaddno);
         } else {
             $receiptadd = new Address();
             $receiptadd->setAddressno(0);
-            $receiptadd->setAddress($this->input->post('address2'));
-            $receiptadd->setPhone($this->input->post('phone2'));
-            $receiptadd->setPostcode($this->input->post('postcode2'));
-            $receiptadd->setProvince($this->thailandutil->findbyid($this->input->post('province2'))->getProvincename());
+            $receiptadd->setAddress($this->input->post('address1'));
+            $receiptadd->setPhone($this->input->post('phone1'));
+            $receiptadd->setPostcode($this->input->post('postcode1'));
+            $receiptadd->setProvince($this->thailandutil->findbyid($this->input->post('province1'))->getProvincename());
         }
         $_SESSION['sendadd'] = $sendadd;
         $_SESSION['receiptadd'] = $receiptadd;
@@ -453,20 +453,20 @@ class Orders extends CI_Controller {
 
 
 //sent mail here;
-        $config = $this->emailutil->getSmtpconfig();
+        $config = $this->emailutil->getServerconfig();
         $form = lang('adminemail');
         $to = $_SESSION['user']->getEmail();
         $subject = "Colour Harmony:รายการสั่งซื้อ $orderno  สถานะตรวจสอบงาน";
         $message = 'ท่านได้อัพโหลดงานเรียบร้อยแล้ว งานของท่านอยู่ในระหว่างการตรวจสอบความถูกต้องค่ะ';
 
-        // $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
-        // error_log("send email to $to result is" . var_export($emailresult, true), 0);
+        $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
+         error_log("send email to $to result is" . var_export($emailresult, true), 0);
         //sent sms here
         $phone = $_SESSION['user']->getMobilephone();
         $phone = explode('-', $phone);
         $phone = implode('', $phone);
-        //  $result = $this->smsutil->sentsms($phone, "Colour Harmony:รายการสั่งซื้อ $orderno  สถานะตรวจสอบงาน");
-        // error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
+          $result = $this->smsutil->sentsms($phone, "Colour Harmony:รายการสั่งซื้อ $orderno  สถานะตรวจสอบงาน");
+         error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
         // redirect("orders/viewOrderdetail/$orderno");
         redirect("orders");
     }

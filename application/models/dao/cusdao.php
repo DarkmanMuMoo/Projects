@@ -78,8 +78,7 @@ class Cusdao extends CI_Model {
     public function insert(Custormer $cus) {
 
 
-        $address1 = $cus->getAddress1();
-        $address2 = $cus->getAddress2();
+    
         $data = array(
             'email' => $cus->getEmail(),
             'cus_name' => $cus->getName(),

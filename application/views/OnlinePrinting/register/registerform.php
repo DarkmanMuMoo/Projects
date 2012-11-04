@@ -9,8 +9,17 @@
 <script>
     function changecaptcha(){
         
-        $('#captcha').attr('src', '<? echo site_url('register/getcaptcha') ?>');
-        
+        if(jQuery.browser.mozilla){
+            document.getElementById('captcha').src='';
+            document.getElementById('captcha').src='<? echo site_url('register/getcaptcha') ?>';
+            
+        }else{
+            
+              $('#captcha').attr('src', '<? echo site_url('register/getcaptcha') ?>');
+        }
+    
+
+       
     }
      function check_email (){
 
@@ -183,7 +192,7 @@ table{
     width: 144px;
 "></td>
              
-             <td> <img id="captcha" src="<? echo site_url('register/getcaptcha') ?>" width="150" heigth="40" /><a href="javascript:void(0)"  onclick="changecaptcha();"class="btn">เปลี่ยนรูป</a><br><br></td>
+             <td> <img  id="captcha" src="<? echo site_url('register/getcaptcha') ?>" width="150" heigth="40" /><a href="javascript:void(0)"  onclick="changecaptcha();"class="btn">เปลี่ยนรูป</a><br><br></td>
                   
     </tr>
               <tr>

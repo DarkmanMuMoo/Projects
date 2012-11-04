@@ -102,7 +102,7 @@
                         <td >
                             <button onclick="showupload('<? echo $template->getTempno(); ?>');" class="btn btn-warning">Upload</button> 
                             <a href="<? echo site_url('orders/downloadtemplate') . '/' . $template->getTempno(); ?>" class="btn btn-primary">Download</a>
-                             <a href="<? echo site_url('Backend/bakCost/deletetemp') . '/' . $template->getTempno(); ?>" class="btn btn-danger">Delete</a>
+                           <!--  <a href="<? echo site_url('Backend/bakCost/deletetemp') . '/' . $template->getTempno(); ?>" class="btn btn-danger">Delete</a>-->
                         </td>  
                     </tr>
                 <?php endforeach; ?>

@@ -195,7 +195,7 @@ class Bakemp extends CI_Controller {
         error_log('result of insert emp' . var_export($insertresult, true), 0);
 
         $this->load->library('emailutil');
-        $config = $this->emailutil->getSmtpconfig();
+        $config = $this->emailutil->getServerconfig();
         $form = lang('adminemail');
         $to = $email;
         $subject = 'ยินดีต้อนรับ พนักงาน ใหม่';

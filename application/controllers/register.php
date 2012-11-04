@@ -40,16 +40,15 @@ class Register extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
 
             $provincelist = $this->thailandutil->getAllprovinceList();
-            $data = array();   
+            $data = array();
             $data['provincelist'] = $provincelist;
             $this->load->view(lang('registerform'), $data);
-            
         } else {
             $cus = new Custormer();
             $cus->setEmail($this->input->post('email'));
             $cus->setName($this->input->post('name'));
             $cus->setLastname($this->input->post('lastname'));
-            $cus->setPassword(md5($this->input->post('password'))); 
+            $cus->setPassword(md5($this->input->post('password')));
             $cus->setMobilephone($this->input->post('mphone'));
             $this->cusdao->insert($cus);
             // echo var_dump( $this->cusdao->insert($cus));
@@ -95,24 +94,25 @@ class Register extends CI_Controller {
         $this->load->library('myencrypt');
         $config = array();
         //for server
-        /*
-          $config['protocol'] = 'sendmail';
-          $config['mailpath'] = '/usr/sbin/sendmail';
-          $config['charset'] = 'utf-8';
-          $config['wordwrap'] = TRUE;
-          $config['mailtype'] = 'html';
-         */
+
+        $config['protocol'] = 'sendmail';
+        $config['mailpath'] = '/usr/sbin/sendmail';
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = TRUE;
+        $config['mailtype'] = 'html';
+        $config['newline'] = "\r\n";
+
 
         //for test in localhost   
-        $config['protocol'] = 'smtp';
-        $config['smtp_host'] = 'ssl://smtp.googlemail.com';
-        $config['smtp_port'] = '465';
-        $config['smtp_timeout'] = '30';
-        $config['smtp_user'] = 'darkmanmumoonaja@gmail.com';
-        $config['smtp_pass'] = '15710804';
-        $config['mailtype'] = 'html';
-        $config['charset'] = 'utf-8';
-        $config['newline'] = "\r\n";
+        /* $config['protocol'] = 'smtp';
+          $config['smtp_host'] = 'ssl://smtp.googlemail.com';
+          $config['smtp_port'] = '465';
+          $config['smtp_timeout'] = '30';
+          $config['smtp_user'] = 'darkmanmumoonaja@gmail.com';
+          $config['smtp_pass'] = '15710804';
+          $config['mailtype'] = 'html';
+          $config['charset'] = 'utf-8';
+          $config['newline'] = "\r\n"; */
 
         $this->load->library('email', $config);
         $this->email->from('phairoj@colourharmony.co.th', 'Colour Harmony');
@@ -122,7 +122,7 @@ class Register extends CI_Controller {
         $this->email->subject('ยืนยันการเป็นสมาชิก');
         $url = site_url("register/validate_user/$encrypted_email");
         $alink = "<a href=\"$url\" >กดเพื่อยืนยันการเป็นสมาชิก</a>";
-        $message = ' อีเมลล์ที่ใช้เข้าสู่ระบบของคุณคือ'.  $cus->getEmail().' <br/> validate email link ' . '<br> <p>' . $alink . '</p> ';
+        $message = ' อีเมลล์ที่ใช้เข้าสู่ระบบของคุณคือ' . $cus->getEmail() . ' <br/> validate email link ' . '<br> <p>' . $alink . '</p> ';
         $this->email->message($message);
 
         return $this->email->send();

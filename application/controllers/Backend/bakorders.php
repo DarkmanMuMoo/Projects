@@ -166,7 +166,7 @@ class Bakorders extends CI_Controller {
             if (file_exists($path)) {
                 $data = file_get_contents($path); // Read the file's contents
                 $name = basename($path);
-          
+
 
                 force_download($name, $data);
             } else {
@@ -252,7 +252,7 @@ class Bakorders extends CI_Controller {
 
         $next15day = time() + ( 15 * 60 * 60 * 24 );
         $result = $this->changestatus('50', $orderno, date("Y-m-d", $next15day));
-        $config = $this->emailutil->getSmtpconfig();
+        $config = $this->emailutil->getServerconfig();
         $form = lang('adminemail');
 
         $ord = $this->orddao->findbyid($orderno);
@@ -265,11 +265,11 @@ class Bakorders extends CI_Controller {
         $phone = explode('-', $phone);
         $phone = implode('', $phone);
         $messagephone = $subject . "\n" . $message;
-        // $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
-        // error_log("send email to $to result is" . var_export($emailresult, true), 0);
+        $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
+        error_log("send email to $to result is" . var_export($emailresult, true), 0);
         // sent sms here
-        // $result = $this->smsutil->sentsms($phone, $messagephone);
-        // error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
+        $result = $this->smsutil->sentsms($phone, $messagephone);
+        error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
 
         return $result;
     }
@@ -282,7 +282,7 @@ class Bakorders extends CI_Controller {
 
 
         //sent mail here;
-        $config = $this->emailutil->getSmtpconfig();
+        $config = $this->emailutil->getServerconfig();
 
         $form = lang('adminemail');
         $ord = $this->orddao->findbyid($orderno);
@@ -299,10 +299,10 @@ class Bakorders extends CI_Controller {
         $phone = explode('-', $phone);
         $phone = implode('', $phone);
 
-        // $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
-        // error_log("send email to $to result is" . var_export($emailresult, true), 0);
-        // $result = $this->smsutil->sentsms($phone, 'finaltest');
-        // error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
+        $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
+        error_log("send email to $to result is" . var_export($emailresult, true), 0);
+        $result = $this->smsutil->sentsms($phone, 'finaltest');
+        error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
         redirect("Backend/bakorders/vieworderdetail/$orderno");
     }
 
@@ -316,7 +316,7 @@ class Bakorders extends CI_Controller {
 
 
         //sent mail here;
-        $config = $this->emailutil->getSmtpconfig();
+        $config = $this->emailutil->getServerconfig();
 
         $form = lang('adminemail');
         $ord = $this->orddao->findbyid($orderno);
@@ -333,10 +333,10 @@ class Bakorders extends CI_Controller {
         $phone = explode('-', $phone);
         $phone = implode('', $phone);
 
-        // $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
-        // error_log("send email to $to result is" . var_export($emailresult, true), 0);
-        // $result = $this->smsutil->sentsms($phone, 'finaltest');
-        // error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
+        $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
+        error_log("send email to $to result is" . var_export($emailresult, true), 0);
+        $result = $this->smsutil->sentsms($phone, 'finaltest');
+        error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
         redirect("Backend/bakorders/vieworderdetail/$orderno");
     }
 
@@ -348,7 +348,7 @@ class Bakorders extends CI_Controller {
         $msg = $this->input->post('msg');
         $this->changestatus('10', $orderno);
 //sent mail here;
-        $config = $this->emailutil->getSmtpconfig();
+        $config = $this->emailutil->getServerconfig();
         $form = lang('adminemail');
 
         // $to = $email;
@@ -368,23 +368,23 @@ class Bakorders extends CI_Controller {
 
         $messagephone = "งานของท่านไม่ถูกต้อง กรุณาอัพโหลดงานใหม่ค่ะ \n";
         $messagephone.=$msg;
-        //$emailresult = $this->emailutil->sendemail($config, $form, $ord->getEmail(), $subject, $message);
-        // error_log("send email to" . $ord->getEmail() . " result is" . var_export($emailresult, true), 0);
+        $emailresult = $this->emailutil->sendemail($config, $form, $ord->getEmail(), $subject, $message);
+        error_log("send email to" . $ord->getEmail() . " result is" . var_export($emailresult, true), 0);
         //sent sms here
-        // $result = $this->smsutil->sentsms($phone, $messagephone);
-        //error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
+        $result = $this->smsutil->sentsms($phone, $messagephone);
+        error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
         redirect("Backend/bakorders/vieworderdetail/$orderno");
     }
 
     private function checkpayment($orderno) {
-        $result=true;
+        $result = true;
         $this->load->model('dao/paymentdao');
         $this->load->model('dao/orddao');
         $ord = $this->orddao->findbyid($orderno);
-        if($ord->getPaymethod()==20){
-          $payment=  $this->paymentdao->findbyorderno($orderno,1);
-            
-           $result=(count($payment)>=2)?true:false;
+        if ($ord->getPaymethod() == 20) {
+            $payment = $this->paymentdao->findbyorderno($orderno, 1);
+
+            $result = (count($payment) >= 2) ? true : false;
         }
         return $result;
     }
@@ -397,43 +397,40 @@ class Bakorders extends CI_Controller {
         $this->load->library('emailutil');
 
 
-     
 
-$checkpayment=$this->checkpayment($orderno);
-if($checkpayment){
-   if ($this->input->post('tracking')) {
-            $this->addtrackingno($orderno, $this->input->post('tracking'));
-        }
-        $this->changestatus('60', $orderno);
+
+        $checkpayment = $this->checkpayment($orderno);
+        if ($checkpayment) {
+            if ($this->input->post('tracking')) {
+                $this->addtrackingno($orderno, $this->input->post('tracking'));
+            }
+            $this->changestatus('60', $orderno);
 //sent mail here;
-        $config = $this->emailutil->getSmtpconfig();
-        $form = lang('adminemail');
-        $ord = $this->orddao->findbyid($orderno);
-        $to = $ord->getEmail();
-        //  $to = $email;
-        $subject = 'Colour Harmony: สถานะสำเร็จ';
-        $message = 'งานของท่านเสร็จเรียบร้อยแล้วค่ะ';
+            $config = $this->emailutil->getServerconfig();
+            $form = lang('adminemail');
+            $ord = $this->orddao->findbyid($orderno);
+            $to = $ord->getEmail();
+            //  $to = $email;
+            $subject = 'Colour Harmony: สถานะสำเร็จ';
+            $message = 'งานของท่านเสร็จเรียบร้อยแล้วค่ะ';
 
 
-        $cus = $this->cusdao->findbyEmail($ord->getEmail());
-        $phone = $cus->getMobilephone();
-        $phone = explode('-', $phone);
-        $phone = implode('', $phone);
+            $cus = $this->cusdao->findbyEmail($ord->getEmail());
+            $phone = $cus->getMobilephone();
+            $phone = explode('-', $phone);
+            $phone = implode('', $phone);
 
-        $messagephone = "Colour Harmony:($orderno) สถานะกำลังส่ง \n";
-        $messagephone.= $message;
+            $messagephone = "Colour Harmony:($orderno) สถานะกำลังส่ง \n";
+            $messagephone.= $message;
 
-        // $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
-        //error_log("send email to $to result is".var_export($emailresult, true),0);
-        //sent sms here
-        //$result = $this->smsutil->sentsms($phone,$messagephone);
-        // error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
-        
-}else{
-    $this->session->set_flashdata('warning', 'ยังชำระเงินไม่ครบไม่สามารดำเนินการต่อไปได้');
-    
-    
-}
+            $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
+            error_log("send email to $to result is" . var_export($emailresult, true), 0);
+            //sent sms here
+            $result = $this->smsutil->sentsms($phone, $messagephone);
+            error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
+        } else {
+            $this->session->set_flashdata('warning', 'ยังชำระเงินไม่ครบไม่สามารดำเนินการต่อไปได้');
+        }
         redirect("Backend/bakorders/vieworderdetail/$orderno");
     }
 
@@ -443,7 +440,7 @@ if($checkpayment){
         $this->load->library('emailutil');
         $this->changestatus('70', $orderno, date("Y-m-d"));
 //sent mail here;
-        $config = $this->emailutil->getSmtpconfig();
+        $config = $this->emailutil->getServerconfig();
         $form = lang('adminemail');
 
         $ord = $this->orddao->findbyid($orderno);
@@ -458,10 +455,10 @@ if($checkpayment){
         $messagephone = "Colour Harmony: สถานะcomplete \n";
         $messagephone.= $message;
 
-        // $emailresult= $this->emailutil->sendemail($config,$form,$to,$subject,$message);
-        //error_log("send email to $to result is".var_export($emailresult, true),0);
+        $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
+        error_log("send email to $to result is" . var_export($emailresult, true), 0);
         //sent sms here
-        //$result = $this->smsutil->sentsms('0849731746','finaltest');
+        $result = $this->smsutil->sentsms($phone, 'finaltest');
         redirect("Backend/bakorders/vieworderdetail/$orderno");
     }
 

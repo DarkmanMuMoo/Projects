@@ -5,7 +5,10 @@
     Description:
         Purpose of the stylesheet follows.
 */
+input{
 
+    height: 25px;
+}
 .divcenter{
 
     text-align: center;

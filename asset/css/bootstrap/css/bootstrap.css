@@ -747,7 +747,6 @@ legend small {
   font-size: 13.5px;
   color: #999999;
 }
-
 label,
 input,
 button,
@@ -777,7 +776,7 @@ select,
 .uneditable-input {
   display: inline-block;
   width: 210px;
-  height: 25px;
+  height: 18px;
   padding: 4px;
   margin-bottom: 9px;
   font-size: 13px;
