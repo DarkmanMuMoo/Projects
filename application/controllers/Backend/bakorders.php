@@ -323,7 +323,7 @@ class Bakorders extends CI_Controller {
         $to = $ord->getEmail();
         $subject = 'Colour Harmony: สถานะรอชำระเงิน';
         $message = 'งานของท่านถูกต้องค่ะ กรุณาโอนเงินทังหมด หรือ เงินมัดจำ(ในกรณีที่เลือกวิธีการชำระเงินเป็นแบ่งจ่าย)เพื่อการทำงานต่อไปค่ะ';
-
+        $messagephone = $subject . $message;
 
 
 
@@ -335,7 +335,7 @@ class Bakorders extends CI_Controller {
 
         $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
         error_log("send email to $to result is" . var_export($emailresult, true), 0);
-        $result = $this->smsutil->sentsms($phone, 'finaltest');
+        $result = $this->smsutil->sentsms($phone, $messagephone);
         error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
         redirect("Backend/bakorders/vieworderdetail/$orderno");
     }
@@ -458,7 +458,7 @@ class Bakorders extends CI_Controller {
         $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
         error_log("send email to $to result is" . var_export($emailresult, true), 0);
         //sent sms here
-        $result = $this->smsutil->sentsms($phone, 'finaltest');
+        $result = $this->smsutil->sentsms($phone, $messagephone);
         redirect("Backend/bakorders/vieworderdetail/$orderno");
     }
 
