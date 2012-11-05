@@ -123,7 +123,10 @@
                                         </a></li>
                                     <li><a  href="<? echo site_url('Backend/bakwork/chooseorder') . "/" . $ord->getOrderno(); ?>"> 
                                             create work from this order
-                                        </a></li>   
+                                        </a></li> 
+                                    <?php if ($ord->getOrdstatus() == 70): ?>
+                                        <li>   <a  href="JavaScript:void(0);"  onclick="Confirmdelete('<? echo $ord->getOrderno(); ?>');" >cancel &nbsp<i class="icon-remove"></i> </a>  </li>
+                                    <?php endif; ?>
 
                                 </ul>
                             </div>
@@ -154,7 +157,25 @@
         $('#searchform').submit();
         
     }
+ function Confirmdelete(orderno)
 
+    {
+
+        if(confirm('Do you want to visit delete this order information')==true)
+
+        {
+
+            $.post('<? echo site_url('orders/cancleorder') ?>/'+orderno, function(data){
+                //alert(data);
+                eval(data);
+
+            });
+
+        }
+
+      
+
+    }
     $(document).ready(function(){
         $( ".datepicker" ).datepicker({
             buttonText: "..." ,

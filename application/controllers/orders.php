@@ -26,12 +26,12 @@ class Orders extends CI_Controller {
 
     public function previewfile($orderlineno) {
         $orderlineno = $this->orderlinedao->findbyid($orderlineno);
-        
-      //  var_dump($orderlineno->getFilepath());
-       
-      $this->output
-            ->set_content_type('pdf')
-              ->set_output(file_get_contents(base_url('uploads'.$orderlineno->getFilepath())));
+
+        //  var_dump($orderlineno->getFilepath());
+
+        $this->output
+                ->set_content_type('pdf')
+                ->set_output(file_get_contents(base_url('uploads' . $orderlineno->getFilepath())));
     }
 
     public function cus_comment() {
@@ -233,7 +233,7 @@ class Orders extends CI_Controller {
         $this->load->model('dao/ordsenddao');
         $this->load->model('dao/addressdao');
         $this->load->library('thailandutil');
-
+        $this->load->driver('cache', array('adapter' => 'file'));
 
         $data['user'] = $_SESSION['user'];
 
@@ -244,6 +244,9 @@ class Orders extends CI_Controller {
         $_SESSION['cart'] = array();
         $provincelist = $this->thailandutil->getAllprovinceList();
 
+        $tax = $data['tax'] = $this->cache->file->get('tax', true);
+        $data['taxlabel'] = "ภาษี$tax%";
+        $data['taxvalue']= (floatval($tax)/100)+1;
         $data['provincelist'] = $provincelist;
         $data['templatelist'] = $this->templatedao->findall();
         $data['paperlist'] = $this->paperdao->findall();
@@ -389,13 +392,13 @@ class Orders extends CI_Controller {
 
             $data['paymentview'] = $this->getpaymentlist($orderno);
         }
-        
-        
-        if($order->getEmail()!=$_SESSION['user']->getEmail()){
-           
-            show_error('คุณไม่มีสิทธ์เข้าถึงส่วนนี้',404,'คุณไม่มีสิทธ์เข้าถึงส่วนนี้');
-        }else{
-        $this->load->view(lang('viewOrderdetail'), $data);
+
+
+        if ($order->getEmail() != $_SESSION['user']->getEmail()) {
+
+            show_error('คุณไม่มีสิทธ์เข้าถึงส่วนนี้', 404, 'คุณไม่มีสิทธ์เข้าถึงส่วนนี้');
+        } else {
+            $this->load->view(lang('viewOrderdetail'), $data);
         }
     }
 
@@ -453,25 +456,25 @@ class Orders extends CI_Controller {
 
 
 //sent mail here;
-        if($_SESSION['user']->getIssentemail()=='T'){
-        $config = $this->emailutil->getServerconfig();
-        $form = lang('adminemail');
-        $to = $_SESSION['user']->getEmail();
-        $subject = "Colour Harmony:รายการสั่งซื้อ $orderno  สถานะตรวจสอบงาน";
-        $message = 'ท่านได้อัพโหลดงานเรียบร้อยแล้ว งานของท่านอยู่ในระหว่างการตรวจสอบความถูกต้องค่ะ';
+        if ($_SESSION['user']->getIssentemail() == 'T') {
+            $config = $this->emailutil->getServerconfig();
+            $form = lang('adminemail');
+            $to = $_SESSION['user']->getEmail();
+            $subject = "Colour Harmony:รายการสั่งซื้อ $orderno  สถานะตรวจสอบงาน";
+            $message = 'ท่านได้อัพโหลดงานเรียบร้อยแล้ว งานของท่านอยู่ในระหว่างการตรวจสอบความถูกต้องค่ะ';
 
-        $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
-         error_log("send email to $to result is" . var_export($emailresult, true), 0);
+            $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
+            error_log("send email to $to result is" . var_export($emailresult, true), 0);
         }
         //sent sms here
-         if($_SESSION['user']->getIssetsms()=='T'){
-        $phone = $_SESSION['user']->getMobilephone();
-        $phone = explode('-', $phone);
-        $phone = implode('', $phone);
-          $result = $this->smsutil->sentsms($phone, "Colour Harmony:รายการสั่งซื้อ $orderno  สถานะตรวจสอบงาน");
-         error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
-        // redirect("orders/viewOrderdetail/$orderno");
-         }
+        if ($_SESSION['user']->getIssetsms() == 'T') {
+            $phone = $_SESSION['user']->getMobilephone();
+            $phone = explode('-', $phone);
+            $phone = implode('', $phone);
+            $result = $this->smsutil->sentsms($phone, "Colour Harmony:รายการสั่งซื้อ $orderno  สถานะตรวจสอบงาน");
+            error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
+            // redirect("orders/viewOrderdetail/$orderno");
+        }
         redirect("orders");
     }
 

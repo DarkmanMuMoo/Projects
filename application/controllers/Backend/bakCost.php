@@ -21,8 +21,9 @@ class BakCost extends CI_Controller {
         $this->load->model('dao/ordsenddao');
         $this->load->model('dao/optiondao');
     }
-public function  deletetemp($tmpno){
-    $this->load->model('dao/templatedao');
+
+    public function deletetemp($tmpno) {
+        $this->load->model('dao/templatedao');
 
         $this->templatedao->delete($orderno);
 
@@ -30,15 +31,14 @@ public function  deletetemp($tmpno){
    document.location.reload();
    ";
         echo $javascript;
-   
-    
-}
+    }
+
     public function inserttemp() {
         $this->load->library('uploadutil');
         $this->load->model('dao/typedao');
         $this->load->model('dao/templatedao');
         $typeno = $this->input->post('typeno');
-       
+
         $name = $this->input->post('name');
         $size = $this->input->post('size');
         $platesize = $this->input->post('platesize');
@@ -51,27 +51,25 @@ public function  deletetemp($tmpno){
         $template->setPlatesize($platesize);
         $template->setTrimPerPrint($tpp);
         $template->setPrintperReam($ppr);
-    
+
         $config = array();
         $config['upload_path'] = './asset/templatefile';
         $config['allowed_types'] = 'pdf|ai';
         $config['max_size'] = '51200';
-        $upload=$this->uploadutil->upload($config,'file');
-         if ($upload == 'complete') {
+        $upload = $this->uploadutil->upload($config, 'file');
+        if ($upload == 'complete') {
 
             $data = $this->upload->data();
 
-            $template->setUrl( $data['file_name'] );
+            $template->setUrl($data['file_name']);
 
             $result = $this->templatedao->insert($template);
             error_log(var_export($result, true) . 'insert template', 0);
             redirect('Backend/bakCost/template');
         } else {
-         
+
             echo "<script>alert('$upload');</script>";
         }
-        
-        
     }
 
     public function index() {
@@ -83,6 +81,7 @@ public function  deletetemp($tmpno){
         $data['plateS'] = $this->cache->file->get('plateS', true);
         $data['print'] = $this->cache->file->get('print', true);
         $data['misc'] = $this->cache->file->get('misc', true);
+        $data['tax'] = $this->cache->file->get('tax', true);
         $_SESSION['paperlist'] = $data['paperlist'];
         $_SESSION['ordsendlist'] = $data['ordsendlist'];
         $_SESSION['optionlist'] = $data['optionlist'];
@@ -189,6 +188,7 @@ public function  deletetemp($tmpno){
         $this->cache->file->save('plateS', $this->input->post('plateS'), 0);
         $this->cache->file->save('print', $this->input->post('print'), 0);
         $this->cache->file->save('misc', $this->input->post('misc'), 0);
+         $this->cache->file->save('tax', $this->input->post('tax'), 0);
         $this->session->set_flashdata('ck', 'cal');
         redirect('Backend/bakCost');
     }

@@ -1,6 +1,8 @@
 <? $this->load->view(lang('header')) ?>
 <script>
     var totalprice;
+    var taxvalue=<? echo $taxvalue;?>;
+    
     $(function() {
         $("#phone").mask("99-999-9999");
         $("#phone1").mask("99-999-9999");
@@ -24,7 +26,7 @@
         var sid =document.getElementById('ordsend').options[document.getElementById('ordsend').selectedIndex].value;
         $.post('<? echo site_url('orders/ajaxordersendprice'); ?>', {id:sid}, function(data){      
             $('#adprice').html(data);   
-            $('#sumprice').html((parseFloat(data)+(totalprice*1.07)).toFixed(2));
+            $('#sumprice').html((parseFloat(data)+(totalprice*taxvalue)).toFixed(2));
         });
     
     }
@@ -276,9 +278,9 @@
             <td><strong><span  id="adprice">120.00</span> บาท</strong></td>
         </tr>
         <tr>
-            <td><strong>ภาษี 7%</strong></td> 
+            <td><strong><? echo $taxlabel ;?></strong></td> 
             <td><strong>&nbsp;: &nbsp;</strong></td>
-            <td><strong><? echo number_format($totalprice * 0.07, 2, '.', ','); ?>บาท</strong></td>
+            <td><strong><? echo number_format($totalprice * ($taxvalue-1), 2, '.', ','); ?>บาท</strong></td>
         </tr>
         <tr>
             <td><strong>ราคารวม</strong></td> 

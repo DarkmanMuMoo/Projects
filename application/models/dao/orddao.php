@@ -146,7 +146,8 @@ class Orddao extends CI_Model {
 
             $this->db->where($index, $row);
         }
-        $this->db->order_by('orderdate', 'desc');
+        $this->db->order_by('orderno', 'desc');
+        
         $query = $this->db->get('ord');
         $condition = array();
 
