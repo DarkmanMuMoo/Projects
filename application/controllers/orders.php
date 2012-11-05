@@ -453,6 +453,7 @@ class Orders extends CI_Controller {
 
 
 //sent mail here;
+        if($_SESSION['user']->getIssentemail()=='T'){
         $config = $this->emailutil->getServerconfig();
         $form = lang('adminemail');
         $to = $_SESSION['user']->getEmail();
@@ -461,13 +462,16 @@ class Orders extends CI_Controller {
 
         $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
          error_log("send email to $to result is" . var_export($emailresult, true), 0);
+        }
         //sent sms here
+         if($_SESSION['user']->getIssetsms()=='T'){
         $phone = $_SESSION['user']->getMobilephone();
         $phone = explode('-', $phone);
         $phone = implode('', $phone);
           $result = $this->smsutil->sentsms($phone, "Colour Harmony:รายการสั่งซื้อ $orderno  สถานะตรวจสอบงาน");
          error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
         // redirect("orders/viewOrderdetail/$orderno");
+         }
         redirect("orders");
     }
 

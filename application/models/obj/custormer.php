@@ -18,12 +18,29 @@ class Custormer extends CI_Model {
     private $password;
     private $validate;
     private $mobilephone;
-
+    private $issentemail;
+    private $issetsms;
+    
     public function getValidate() {
         return $this->validate;
     }
+    public function getIssentemail() {
+        return $this->issentemail;
+    }
 
-    public function getMobilephone() {
+    public function setIssentemail($issentemail) {
+        $this->issentemail = $issentemail;
+    }
+
+    public function getIssetsms() {
+        return $this->issetsms;
+    }
+
+    public function setIssetsms($issetsms) {
+        $this->issetsms = $issetsms;
+    }
+
+        public function getMobilephone() {
         return $this->mobilephone;
     }
 
@@ -67,21 +84,7 @@ class Custormer extends CI_Model {
         $this->password = $password;
     }
 
-    public function getAddress1() {
-        return $this->address1;
-    }
-
-    public function setAddress1($address1) {
-        $this->address1 = $address1;
-    }
-
-    public function getAddress2() {
-        return $this->address2;
-    }
-
-    public function setAddress2($address2) {
-        $this->address2 = $address2;
-    }
+   
 
 }
 

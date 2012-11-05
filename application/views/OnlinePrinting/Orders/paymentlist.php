@@ -132,12 +132,12 @@ $paidamount = 0;
                     </tr>
                     <tr>
                         <td scope="row">เวลา<span class="red">*</span>:</td>
-                        <td>ชั่วโมง<select style="width:20%;" name="hour"> 
+                        <td>ชั่วโมง<select style="width:25%;" name="hour"> 
                                 <?php foreach ($hour as $index => $h): ?>
 
                                     <option value="<? echo $index ?>"  >    <? echo $h ?>      </option>
                                 <?php endforeach; ?>
-                            </select> นาที<select style="width:20%;" name="min"> 
+                            </select> นาที<select style="width:25%;" name="min"> 
                             <?php foreach ($min as $index => $m): ?>
 
                                     <option value="<? echo $index ?>"  >    <? echo $m ?>      </option>

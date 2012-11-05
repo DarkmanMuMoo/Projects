@@ -274,38 +274,6 @@ class Bakorders extends CI_Controller {
         return $result;
     }
 
-    public function waitforpay2($orderno) {
-        $this->load->model('dao/orddao');
-        $this->load->library('smsutil');
-        $this->load->library('emailutil');
-        $this->changestatus('55', $orderno);
-
-
-        //sent mail here;
-        $config = $this->emailutil->getServerconfig();
-
-        $form = lang('adminemail');
-        $ord = $this->orddao->findbyid($orderno);
-        $to = $ord->getEmail();
-        $subject = 'Colour Harmony: สถานะรอชำระเงินก่อนส่งสินค้า';
-        $message = 'งามพิมพ์เสร็จแล้ว กรุณาโอนเงินที่เหลือ';
-
-
-
-
-        //sent sms here
-        $cus = $this->cusdao->findbyEmail($ord->getEmail());
-        $phone = $cus->getMobilephone();
-        $phone = explode('-', $phone);
-        $phone = implode('', $phone);
-
-        $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
-        error_log("send email to $to result is" . var_export($emailresult, true), 0);
-        $result = $this->smsutil->sentsms($phone, 'finaltest');
-        error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
-        redirect("Backend/bakorders/vieworderdetail/$orderno");
-    }
-
     public function waitforpay($orderno) {
         $this->load->model('dao/orddao');
 
@@ -316,6 +284,8 @@ class Bakorders extends CI_Controller {
 
 
         //sent mail here;
+
+
         $config = $this->emailutil->getServerconfig();
 
         $form = lang('adminemail');
@@ -332,11 +302,16 @@ class Bakorders extends CI_Controller {
         $phone = $cus->getMobilephone();
         $phone = explode('-', $phone);
         $phone = implode('', $phone);
+        if ($_SESSION['user']->getIssentemail() == 'T') {
+            $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
+            error_log("send email to $to result is" . var_export($emailresult, true), 0);
+        }
 
-        $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
-        error_log("send email to $to result is" . var_export($emailresult, true), 0);
-        $result = $this->smsutil->sentsms($phone, $messagephone);
-        error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
+        if ($_SESSION['user']->getIssetsms() == 'T') {
+            $result = $this->smsutil->sentsms($phone, $messagephone);
+            error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
+        }
+
         redirect("Backend/bakorders/vieworderdetail/$orderno");
     }
 
@@ -368,11 +343,16 @@ class Bakorders extends CI_Controller {
 
         $messagephone = "งานของท่านไม่ถูกต้อง กรุณาอัพโหลดงานใหม่ค่ะ \n";
         $messagephone.=$msg;
-        $emailresult = $this->emailutil->sendemail($config, $form, $ord->getEmail(), $subject, $message);
-        error_log("send email to" . $ord->getEmail() . " result is" . var_export($emailresult, true), 0);
-        //sent sms here
-        $result = $this->smsutil->sentsms($phone, $messagephone);
-        error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
+
+        if ($_SESSION['user']->getIssentemail() == 'T') {
+            $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
+            error_log("send email to $to result is" . var_export($emailresult, true), 0);
+        }
+
+        if ($_SESSION['user']->getIssetsms() == 'T') {
+            $result = $this->smsutil->sentsms($phone, $messagephone);
+            error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
+        }
         redirect("Backend/bakorders/vieworderdetail/$orderno");
     }
 
@@ -423,11 +403,15 @@ class Bakorders extends CI_Controller {
             $messagephone = "Colour Harmony:($orderno) สถานะกำลังส่ง \n";
             $messagephone.= $message;
 
-            $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
-            error_log("send email to $to result is" . var_export($emailresult, true), 0);
-            //sent sms here
-            $result = $this->smsutil->sentsms($phone, $messagephone);
-            error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
+            if ($_SESSION['user']->getIssentemail() == 'T') {
+                $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
+                error_log("send email to $to result is" . var_export($emailresult, true), 0);
+            }
+
+            if ($_SESSION['user']->getIssetsms() == 'T') {
+                $result = $this->smsutil->sentsms($phone, $messagephone);
+                error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
+            }
         } else {
             $this->session->set_flashdata('warning', 'ยังชำระเงินไม่ครบไม่สามารดำเนินการต่อไปได้');
         }
@@ -455,10 +439,15 @@ class Bakorders extends CI_Controller {
         $messagephone = "Colour Harmony: สถานะcomplete \n";
         $messagephone.= $message;
 
-        $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
-        error_log("send email to $to result is" . var_export($emailresult, true), 0);
-        //sent sms here
-        $result = $this->smsutil->sentsms($phone, $messagephone);
+         if ($_SESSION['user']->getIssentemail() == 'T') {
+            $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
+            error_log("send email to $to result is" . var_export($emailresult, true), 0);
+        }
+
+        if ($_SESSION['user']->getIssetsms() == 'T') {
+            $result = $this->smsutil->sentsms($phone, $messagephone);
+            error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
+        }
         redirect("Backend/bakorders/vieworderdetail/$orderno");
     }
 

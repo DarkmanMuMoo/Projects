@@ -35,7 +35,7 @@ class Userprofile extends CI_Controller {
     }
 
     public function updateaddress() {
-        
+
         $this->load->library('thailandutil');
         $this->load->model('dao/addressdao');
         //var_dump($this->input->post());
@@ -47,7 +47,7 @@ class Userprofile extends CI_Controller {
         $phone = $this->input->post('phone');
         $addressname = $this->input->post('addressname');
         $updateaddress->setAddressname($addressname);
-      
+
         $updateaddress->setAddress($address);
         $updateaddress->setProvince($province);
         $updateaddress->setPostcode($postcode);
@@ -59,7 +59,7 @@ class Userprofile extends CI_Controller {
         error_log(var_export($result, true) . 'change address', 0);
 
 
-       redirect('userprofile');
+        redirect('userprofile');
     }
 
     public function updateinfo() {
@@ -68,6 +68,10 @@ class Userprofile extends CI_Controller {
         $name = $this->input->post('name');
         $lastname = $this->input->post('lastname');
         $mphone = $this->input->post('mphone');
+        $issentemail = ($this->input->post('issentemail') ? 'T' : 'F');
+        $issentsms = ($this->input->post('issentsms') ? 'T' : 'F');
+        // var_dump($issentemail);
+        //var_dump($issentsms); 
         $update = false;
         if ($name != $_SESSION['user']->getLastname()) {
 
@@ -77,17 +81,26 @@ class Userprofile extends CI_Controller {
 
             $update = true;
         }
+        if ($issentemail != $_SESSION['user']->getIssentemail()) {
 
+            $update = true;
+        }
+        if ($issentsms != $_SESSION['user']->getIssetsms()) {
+
+            $update = true;
+        }
         if ($mphone != $_SESSION['user']->getMobilephone()) {
 
             $update = true;
         }
+        //  var_dump($update);
         if ($update) {
             //do update
             $_SESSION['user']->setName($name);
             $_SESSION['user']->setLastname($lastname);
             $_SESSION['user']->setMobilephone($mphone);
-
+            $_SESSION['user']->setIssentemail($issentemail);
+            $_SESSION['user']->setIssetsms($issentsms);
             $result = $this->cusdao->update($_SESSION['user']);
             error_log(var_export($result, true) . 'change emp password', 0);
             if (!$result) {
@@ -116,7 +129,6 @@ class Userprofile extends CI_Controller {
         }
     }
 
-    
     public function addaddress() {
 
         $this->load->library('thailandutil');
@@ -136,10 +148,10 @@ class Userprofile extends CI_Controller {
         $newaddress->setPostcode($postcode);
         $newaddress->setProvince($province->getProvincename());
 
-  
+
         $result = $this->addressdao->insert($newaddress);
-     
-        
+
+
         redirect('userprofile');
     }
 

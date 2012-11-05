@@ -128,8 +128,6 @@ table{
     <p style ="margin-bottom: 10px;">
     <h1><b>ลงทะเบียน</b></h1>
     <h4>สมัครฟรี ไม่เสียค่าใช้จ่าย</h4>
-    
-    
 </p>
 <hr></hr>
 
@@ -183,6 +181,12 @@ table{
         <td>ยืนยันรหัสผ่าน<span class="req">*</span></td> 
         <td></td>
         <td><input size="15" maxlength="15" type="password" name="confirm_password" id="confirm_password" /></td>
+        </tr>
+        <tr>
+        <td>การแจ้งเตือน<span class="req">*</span></td> 
+        <td></td>
+        <td><input type="checkbox" name="issentemail" checked="checked" value="T"> Email
+<input type="checkbox" name="issentsms" value="T" checked="checked" > SMS</td>
         </tr>
 </table>
 

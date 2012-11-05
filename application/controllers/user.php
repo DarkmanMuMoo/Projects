@@ -133,7 +133,7 @@ class User extends CI_Controller {
 
     private function sendemail(Custormer $cus,$visiblepass) {
         //for server
-        /*
+       
         $config = array();
         $config['protocol'] = 'sendmail';
         $config['mailpath'] = '/usr/sbin/sendmail';
@@ -141,8 +141,9 @@ class User extends CI_Controller {
         $config['wordwrap'] = TRUE;
         $config['mailtype'] = 'text';
 
-        */
+      
         //fortest
+          /*
          $config['protocol'] = 'smtp';
         $config['smtp_host'] = 'ssl://smtp.googlemail.com';
         $config['smtp_port'] = '465';
@@ -151,7 +152,7 @@ class User extends CI_Controller {
         $config['smtp_pass'] = '15710804';
         $config['mailtype'] = 'html';
         $config['charset'] = 'utf-8';
-        $config['newline'] = "\r\n";
+        $config['newline'] = "\r\n"; */
         $this->load->library('email', $config);
         $this->email->from('phairoj@colourharmony.co.th', 'Name');
         $this->email->to($cus->getEmail());

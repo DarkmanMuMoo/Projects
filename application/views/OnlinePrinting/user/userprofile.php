@@ -33,8 +33,8 @@
        height: 1px;}
 
 
-    
-    
+
+
     .leftadd{
         float: left;
         width: 35%;
@@ -91,6 +91,12 @@
                 <td></td>
             </tr>
             <tr>
+                <td>การแจ้งเตือน</td>
+                <td> <input type="checkbox" name="issentemail" <? echo ($updateuser->getIssentemail()=='T')? 'checked="checked"': ''; ?> value="T"> Email
+                    <input type="checkbox" name="issentsms" value="T" <? echo ($updateuser->getIssetsms()=='T')? 'checked="checked"': ''; ?> > SMS</td>
+                <td></td>
+            </tr>
+            <tr>
                 <td>รหัสผ่าน</td>
                 <td><input name="" type="password" value="12345678" readonly="readonly" /></td>
                 <td><a  href="javascript:void(0);" class="btn" onclick="changepassword();">เปลี่ยนรหัสผ่าน</a></td>
@@ -104,99 +110,99 @@
     </form>
 
 
-<h4 ><strong>รายการที่อยู่(ท่านสามารถสร้างที่อยู่ได้ไม่เกิน 3 ที่อยู่)</strong></h4>
+    <h4 ><strong>รายการที่อยู่(ท่านสามารถสร้างที่อยู่ได้ไม่เกิน 3 ที่อยู่)</strong></h4>
 
     <?php if (!empty($addresslist)): ?>
 
         <?php foreach ($addresslist as $address): ?>
             <div  id="<? echo $address->getAddressno(); ?>" class="address" >
-                      
-<table >
-        <tr>
-        	<td>ชื่อที่อยู่</td>
-        	<td><input type="text" name="addressname" id="addressname" value="<? echo $address->getAddressname(); ?>" /></td>
-        </tr>
-       	<tr>
-        	<td>ที่อยู่</td>
-            <td><textarea  style="height: 46px;" id="address" name="address" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง"><? echo $address->getAddress(); ?> </textarea></td>
-        </tr>
-       	<tr>
-         	<td>จังหวัด</td> 
-            <td><select name="province" id="province">
+
+                <table >
+                    <tr>
+                        <td>ชื่อที่อยู่</td>
+                        <td><input type="text" name="addressname" id="addressname" value="<? echo $address->getAddressname(); ?>" /></td>
+                    </tr>
+                    <tr>
+                        <td>ที่อยู่</td>
+                        <td><textarea  style="height: 46px;" id="address" name="address" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง"><? echo $address->getAddress(); ?> </textarea></td>
+                    </tr>
+                    <tr>
+                        <td>จังหวัด</td> 
+                        <td><select name="province" id="province">
+                                <?php foreach ($provincelist as $province): ?>
+                                    <option <? echo($province->getProvincename() == $address->getProvince()) ? 'selected="selected"' : ''; ?> value="<? echo $province->getProvinceid(); ?>"><? echo $province->getProvincename(); ?></option>
+                                <? endforeach; ?>
+                            </select></td>
+                    </tr>
+                    <tr>
+                        <td>รหัสไปรษณีย์</td> 
+                        <td><input type="text" name="postcode" id="postcode"  value="<? echo $address->getPostcode(); ?>"/></td>
+                    </tr>
+                    <tr>
+                        <td>เบอร์โทรศัพท์</td> 
+                        <td><input type="text" name="phone" id="phone" class="mark" value="<? echo $address->getPhone(); ?>"/></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><button class="btn btn-info" onclick="editaddress('<? echo $address->getAddressno(); ?>');"/>Save</button>
+                            <a class="btn btn-danger" href="<? echo site_url('userprofile/deleteaddress/' . $address->getAddressno()); ?>"  >Clear</a></td>
+                    <?php endforeach; ?></td>
+                </tr>
+            </table>
+            <form  id="editaddressform" action="<? echo site_url('userprofile/updateaddress'); ?>"  method="post">
+                <input type="hidden" name="addressno"  value=""/>
+                <input type="hidden" name="addressname"  value=""/>
+                <input type="hidden" name="address"  value="" />
+                <input type="hidden" name="province"   value=""/>
+                <input type="hidden" name="postcode"   value=""/>
+                <input type="hidden" name="phone"  value="" />
+            </form>
+        <?php else: ?>
+
+            <h6>ยังไม่มีที่อยู่กรุณาสร้างใหม่</h6> 
+
+        <?php endif; ?>
+    </div>
+    <?php if (count($addresslist) < 3): ?>
+        <button class="btn" onclick="swapaddaddress();"> เพิ่มที่อยู่</button>
+        <form id="addadress"  method="post" style="  display: none;margin: 0 auto;" action="<? echo site_url('userprofile/addaddress'); ?>">
+
+            <table>
+                <tr>
+                    <td>ชื่อที่อยู่</td>
+                    <td><input type="text" name="addressname" id="addressname" /></td>
+                </tr>
+                <tr>
+                    <td>ที่อยู่</td>
+                    <td><textarea  style="height: 46px;" id="address" name="address" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง">
+                       
+                        </textarea></td>
+                </tr>
+                <tr>
+                    <td>จังหวัด</td> 
+                    <td><select name="province" id="province">
                             <?php foreach ($provincelist as $province): ?>
-                                <option <? echo($province->getProvincename() == $address->getProvince()) ? 'selected="selected"' : ''; ?> value="<? echo $province->getProvinceid(); ?>"><? echo $province->getProvincename(); ?></option>
+                                <option  value="<? echo $province->getProvinceid(); ?>"><? echo $province->getProvincename(); ?></option>
                             <? endforeach; ?>
-                        </select></td>
-      	</tr>
-        <tr>
-       		<td>รหัสไปรษณีย์</td> 
-            <td><input type="text" name="postcode" id="postcode"  value="<? echo $address->getPostcode(); ?>"/></td>
-       	</tr>
-        <tr>
-        	<td>เบอร์โทรศัพท์</td> 
-            <td><input type="text" name="phone" id="phone" class="mark" value="<? echo $address->getPhone(); ?>"/></td>
-       </tr>
-  	<tr>
-       <td></td>
-       <td><button class="btn btn-info" onclick="editaddress('<? echo $address->getAddressno(); ?>');"/>Save</button>
-       	<a class="btn btn-danger" href="<? echo site_url('userprofile/deleteaddress/' . $address->getAddressno()); ?>"  >Clear</a></td>
-        <?php endforeach; ?></td>
-        </tr>
-        </table>
-        <form  id="editaddressform" action="<? echo site_url('userprofile/updateaddress'); ?>"  method="post">
-            <input type="hidden" name="addressno"  value=""/>
-            <input type="hidden" name="addressname"  value=""/>
-            <input type="hidden" name="address"  value="" />
-            <input type="hidden" name="province"   value=""/>
-            <input type="hidden" name="postcode"   value=""/>
-            <input type="hidden" name="phone"  value="" />
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>รหัสไปรษณีย์</td> 
+                    <td><input type="text" name="postcode" id="postcode" maxlength="5" /></td>
+                </tr>
+                <tr>
+                    <td>เบอร์โทรศัพท์</td> 
+                    <td><input type="text" name="phone" id="phone" class="mark"  value=""/></td>
+
+                </tr>
+                <tr>
+                    <td></td>   
+                    <td><input class="btn btn-info"  type="submit" value="Save"/></td>
+                </tr>
+            </table>
         </form>
-    <?php else: ?>
-
-        <h6>ยังไม่มีที่อยู่กรุณาสร้างใหม่</h6> 
-
     <?php endif; ?>
-</div>
-<?php if (count($addresslist)<3): ?>
-<button class="btn" onclick="swapaddaddress();"> เพิ่มที่อยู่</button>
-<form id="addadress"  method="post" style="  display: none;margin: 0 auto;" action="<? echo site_url('userprofile/addaddress'); ?>">
-    
-<table>
-	<tr>
-    	<td>ชื่อที่อยู่</td>
-        <td><input type="text" name="addressname" id="addressname" /></td>
-  	</tr>
-   	<tr>
-      	<td>ที่อยู่</td>
-        <td><textarea  style="height: 46px;" id="address" name="address" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง">
-                   
-                </textarea></td>
-	</tr>
-  	<tr>
-  		<td>จังหวัด</td> 
-      	<td><select name="province" id="province">
-                    <?php foreach ($provincelist as $province): ?>
-                        <option  value="<? echo $province->getProvinceid(); ?>"><? echo $province->getProvincename(); ?></option>
-                    <? endforeach; ?>
-                </select>
-     	</td>
-   	</tr>
-   	<tr>
-      	<td>รหัสไปรษณีย์</td> 
-      	<td><input type="text" name="postcode" id="postcode" maxlength="5" /></td>
- 	</tr>
-	<tr>
-     	<td>เบอร์โทรศัพท์</td> 
-       	<td><input type="text" name="phone" id="phone" class="mark"  value=""/></td>
-	
-     </tr>
-     <tr>
-     	<td></td>   
-    	<td><input class="btn btn-info"  type="submit" value="Save"/></td>
-</tr>
- </table>
-</form>
- <?php endif; ?>
 
 </div>
 <? $this->load->view(lang('footer')) ?>

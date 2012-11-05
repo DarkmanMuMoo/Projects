@@ -39,12 +39,14 @@ class Cusdao extends CI_Model {
 
     public function update(Custormer $cus) {
 
-     
+
         $data = array(
             'email' => $cus->getEmail(),
             'cus_name' => $cus->getName(),
             'lastname' => $cus->getLastname(),
             'mobilephone' => $cus->getMobilephone(),
+            'issentemail' => $cus->getIssentemail(),
+            'issentsms' => $cus->getIssetsms(),
             'password' => $cus->getPassword()
         );
         $this->db->where('email', $cus->getEmail());
@@ -78,13 +80,15 @@ class Cusdao extends CI_Model {
     public function insert(Custormer $cus) {
 
 
-    
+
         $data = array(
             'email' => $cus->getEmail(),
             'cus_name' => $cus->getName(),
             'lastname' => $cus->getLastname(),
             'mobilephone' => $cus->getMobilephone(),
             'password' => $cus->getPassword(),
+            'issentemail' => $cus->getIssentemail(),
+            'issentsms' => $cus->getIssetsms(),
             'validate' => 'F'
         );
 
@@ -121,7 +125,8 @@ class Cusdao extends CI_Model {
         $cus->setName($row->cus_name);
         $cus->setLastname($row->lastname);
         $cus->setPassword($row->password);
-
+        $cus->setIssentemail($row->issentemail);
+        $cus->setIssetsms($row->issentsms);
         $cus->setMobilephone($row->mobilephone);
 
         $cus->setValidate($row->validate);

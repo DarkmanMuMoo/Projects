@@ -44,7 +44,11 @@ class Register extends CI_Controller {
             $data['provincelist'] = $provincelist;
             $this->load->view(lang('registerform'), $data);
         } else {
+            $issentemail=($this->input->post('issentemail'))?'T':'F';
+            $issentsms=($this->input->post('issentsms'))?'T':'F';
             $cus = new Custormer();
+            $cus->setIssentemail($issentemail);
+            $cus->setIssetsms($issentsms);
             $cus->setEmail($this->input->post('email'));
             $cus->setName($this->input->post('name'));
             $cus->setLastname($this->input->post('lastname'));
