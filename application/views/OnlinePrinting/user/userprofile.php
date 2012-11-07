@@ -32,7 +32,9 @@
        background-color: orange;
        height: 1px;}
 
-
+.req {
+	color: #F00;
+}
 
 
     .leftadd{
@@ -119,15 +121,15 @@
 
                 <table >
                     <tr>
-                        <td>ชื่อที่อยู่</td>
+                        <td>ชื่อที่อยู่<span class="req">*</span></td>
                         <td><input type="text" name="addressname" id="addressname" value="<? echo $address->getAddressname(); ?>" /></td>
                     </tr>
                     <tr>
-                        <td>ที่อยู่</td>
+                        <td>ที่อยู่<span class="req">*</span></td>
                         <td><textarea  style="height: 46px;" id="address" name="address" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง"><? echo $address->getAddress(); ?> </textarea></td>
                     </tr>
                     <tr>
-                        <td>จังหวัด</td> 
+                        <td>จังหวัด<span class="req">*</span></td> 
                         <td><select name="province" id="province">
                                 <?php foreach ($provincelist as $province): ?>
                                     <option <? echo($province->getProvincename() == $address->getProvince()) ? 'selected="selected"' : ''; ?> value="<? echo $province->getProvinceid(); ?>"><? echo $province->getProvincename(); ?></option>
@@ -135,11 +137,11 @@
                             </select></td>
                     </tr>
                     <tr>
-                        <td>รหัสไปรษณีย์</td> 
+                        <td>รหัสไปรษณีย์<span class="req">*</span></td> 
                         <td><input type="text" name="postcode" id="postcode"  value="<? echo $address->getPostcode(); ?>"/></td>
                     </tr>
                     <tr>
-                        <td>เบอร์โทรศัพท์</td> 
+                        <td>เบอร์โทรศัพท์<span class="req">*</span></td> 
                         <td><input type="text" name="phone" id="phone" class="mark" value="<? echo $address->getPhone(); ?>"/></td>
                     </tr>
                     <tr>
@@ -169,17 +171,17 @@
 
             <table>
                 <tr>
-                    <td>ชื่อที่อยู่</td>
+                    <td>ชื่อที่อยู่<span class="req">*</span></td>
                     <td><input type="text" name="addressname" id="addressname" /></td>
                 </tr>
                 <tr>
-                    <td>ที่อยู่</td>
+                    <td>ที่อยู่<span class="req">*</span></td>
                     <td><textarea  style="height: 46px;" id="address" name="address" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง">
                        
                         </textarea></td>
                 </tr>
                 <tr>
-                    <td>จังหวัด</td> 
+                    <td>จังหวัด<span class="req">*</span></td> 
                     <td><select name="province" id="province">
                             <?php foreach ($provincelist as $province): ?>
                                 <option  value="<? echo $province->getProvinceid(); ?>"><? echo $province->getProvincename(); ?></option>
@@ -188,11 +190,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>รหัสไปรษณีย์</td> 
+                    <td>รหัสไปรษณีย์<span class="req">*</span></td> 
                     <td><input type="text" name="postcode" id="postcode" maxlength="5" /></td>
                 </tr>
                 <tr>
-                    <td>เบอร์โทรศัพท์</td> 
+                    <td>เบอร์โทรศัพท์<span class="req">*</span></td> 
                     <td><input type="text" name="phone" id="phone" class="mark"  value=""/></td>
 
                 </tr>
