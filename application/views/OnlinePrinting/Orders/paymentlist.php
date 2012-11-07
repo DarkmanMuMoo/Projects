@@ -73,7 +73,8 @@ $paidamount = 0;
 <?php endforeach; ?><br>
 <? $showform = true; ?></td>
        <td width="144"><strong>ยอดเงินที่ต้องชำระ&nbsp;&nbsp;</strong></td>
-       <td width="192" ><strong><u><?php if ($showform): ?>
+       <td width="192" ><strong><u>
+           <?php if ($showform): ?>
 
     <? echo ($ordpay->getPaymethod() == '10') ? number_format($order->getTotalprice(), 2, '.', ',') : number_format($order->getTotalprice() / 2, 2, '.', ',') ?>&nbsp;</u>บาท
 
@@ -99,7 +100,12 @@ $paidamount = 0;
 
                     <?php endif; ?></td>
              <td><strong>ค้างชำระ&nbsp;&nbsp;</strong></td>
-             <td class="red"> 0.00 บาท </td>       
+             <td class="red"> <?php if ($showform): ?>
+
+                        <? echo number_format($order->getTotalprice() - $paidamount, 2, '.', ',') ?>&nbsp;บาท
+                    <?php else: ?>
+                        0.00&nbsp;บาท
+<?php endif; ?> </td>       
             </tr>
             <tr>
             <td></td>
