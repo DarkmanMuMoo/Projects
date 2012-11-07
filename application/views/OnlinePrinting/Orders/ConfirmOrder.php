@@ -27,7 +27,7 @@
 </style>
 <div id="page">  
     <? echo form_open('orders/ordersummary') ?>
-
+    <img  width="380" height="60" src="<? echo base_url('asset/Sys_img/pic_step/02comfirmOrder.png') ?>"/>
     <p style ="margin-bottom: 10px;">
     <h1><b>Confirm Order</b></h1>
     <h4>ยืนยันการสั่งสินค้า</h4>
@@ -43,9 +43,9 @@
 
             <address id="line1" ><? echo $_SESSION['sendadd']->getAddress(); ?></address>
             <address id="line2" ><? echo $_SESSION['sendadd']->getProvince(); ?>
-                                 <? echo $_SESSION['sendadd']->getPostcode(); ?></address>
+                <? echo $_SESSION['sendadd']->getPostcode(); ?></address>
             <address id="line3" >โทรศัพท์ : <? echo $_SESSION['sendadd']->getPhone(); ?></address>
-           
+
 
         </div>
     </div>
@@ -54,7 +54,7 @@
         <div id="showreceiptadd" >
             <address id="line1" ><? echo $_SESSION['receiptadd']->getAddress(); ?></address>
             <address id="line2" ><? echo $_SESSION['receiptadd']->getProvince(); ?>
-                                 <? echo $_SESSION['receiptadd']->getPostcode(); ?></address>
+                <? echo $_SESSION['receiptadd']->getPostcode(); ?></address>
             <address id="line3" >โทรศัพท์ : <? echo $_SESSION['receiptadd']->getPhone(); ?></address>
         </div>
     </div>
@@ -85,25 +85,28 @@
                         <?php if ($orderline->getTempno() == $cart->getTempno()): ?>
                             <strong> <? echo $orderline->getName(); ?> &nbsp; <? echo $orderline->getTypeno(); ?>&nbsp;
                                 <? echo $orderline->getSize();
-                                break; ?>
+                                break;
+                                ?>
                             </strong>
                         <?php endif; ?>
-                    <? endforeach; ?>
+    <? endforeach; ?>
                 </td>
 
                 <td>   <?php foreach ($paperlist as $paper): ?>
-                        <?php if ($paper->getPaperno() == $cart->getPaperno()): ?>
+                            <?php if ($paper->getPaperno() == $cart->getPaperno()): ?>
                             <strong> <? echo $paper->getName(); ?> &nbsp; <? echo $paper->getGrame();
-                break; ?></strong>
+                    break;
+                                ?></strong>
                         <?php endif; ?>
 
-                    <? endforeach; ?>
+    <? endforeach; ?>
                 </td>
                 <td>   <?php foreach ($optionlist as $option): ?>
 
-                        <?php if ($option->getOptionno() == $cart->getOptionno()): ?>
+                            <?php if ($option->getOptionno() == $cart->getOptionno()): ?>
                             <strong> <? echo $option->getDescription();
-                break; ?> </strong>
+                    break;
+                                ?> </strong>
                         <?php endif; ?>
                     <? endforeach; ?>
                 </td>

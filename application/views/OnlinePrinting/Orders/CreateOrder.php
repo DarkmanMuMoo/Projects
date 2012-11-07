@@ -96,10 +96,12 @@
     }
 </style>
 <div id="page">
+    <img  width="380" height="60" src="<? echo base_url('asset/Sys_img/pic_step/01createOrder.png')  ?>"/>
     <p style ="margin-bottom: 10px;">
     <h1><b>Create Order</b></h1>
     <h4>สร้างออร์เดอร์</h4>
 </p>
+
 <hr></hr>
 
 <? echo form_open('orders/confirmorder') ?>
