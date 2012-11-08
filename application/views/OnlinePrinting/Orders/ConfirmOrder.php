@@ -27,7 +27,7 @@
 </style>
 <div id="page">  
     <? echo form_open('orders/ordersummary') ?>
-    <img  width="380" height="60" src="<? echo base_url('asset/Sys_img/pic_step/02comfirmOrder.png') ?>"/>
+    <img src="<? echo base_url('asset/Sys_img/pic_step/02comfirmOrder.png') ?>"/>
     <p style ="margin-bottom: 10px;">
     <h1><b>Confirm Order</b></h1>
     <h4>ยืนยันการสั่งสินค้า</h4>
