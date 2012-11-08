@@ -127,11 +127,11 @@
         <div  id="newsendadd" style="display: none;" >
             <table>
                 <tr>
-                    <td>ที่อยู่</td> 
+                    <td>ที่อย ู่ :</td> 
                     <td><textarea name="address" id="address" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง" > </textarea></td>
                 </tr>
                 <tr>
-                    <td>จังหวัด</td> 
+                    <td>จังหวัด :</td> 
                     <td><select name="province" id="province">
                             <?php foreach ($provincelist as $province): ?>
                                 <option  value="<? echo $province->getProvinceid(); ?>"><? echo $province->getProvincename(); ?></option>
@@ -139,11 +139,11 @@
                         </select></td>
                 </tr>
                 <tr>
-                    <td>รหัสไปรษณีย์ &nbsp;&nbsp;&nbsp;</td> 
+                    <td>รหัสไปรษณีย์ :&nbsp;&nbsp;&nbsp;</td> 
                     <td><input type="text"id="postcode" name="postcode" maxlength="5" value=""/></td>
                 </tr>
                 <tr>
-                    <td>โทรศัพท์</td> 
+                    <td>โทรศัพท์ :</td> 
                     <td><input type="text" name="phone" value=""  id="phone"/></td>
                 </tr>
             </table>
@@ -160,7 +160,8 @@
             <?php endforeach; ?>
             <option value="0">ที่อยู่อื่นๆ</option>
         </select>
-        <br/><h5>จัดส่ง</h5> <br/>
+        <br/>
+        <h5></h5> <br/> <br />
         <div id="showreceiptadd" >
             <address id="line1" ></address>
             <address id="line2" ></address>
@@ -170,11 +171,11 @@
         <div   id="newreceiptadd" style="display: none;" >
             <table>
                 <tr>
-                    <td>ที่อยู่</td> 
+                    <td>ที่อยู่ :</td> 
                     <td><textarea name="address1" id="address1" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง" > </textarea></td>
                 </tr>
                 <tr>
-                    <td>จังหวัด</td> 
+                    <td>จังหวัด :</td> 
                     <td><select name="province1" id="province1">
                             <?php foreach ($provincelist as $province): ?>
                                 <option  value="<? echo $province->getProvinceid(); ?>"><? echo $province->getProvincename(); ?></option>
@@ -182,11 +183,11 @@
                         </select></td>
                 </tr>
                 <tr>
-                    <td>รหัสไปรษณีย์ &nbsp;&nbsp;&nbsp;</td> 
+                    <td>รหัสไปรษณีย์ :&nbsp;&nbsp;&nbsp;</td> 
                     <td><input type="text"id="postcode1" name="postcode1" maxlength="5" value=""/></td>
                 </tr>
                 <tr>
-                    <td>โทรศัพท์</td> 
+                    <td>โทรศัพท์ :</td> 
                     <td><input type="text" name="phone1" value=""  id="phone1"/></td>
                 </tr>
             </table>
@@ -272,22 +273,26 @@
         <tr>
             <td><strong>ราคาสินค้า</strong></td> 
             <td><strong>&nbsp;: &nbsp;</strong></td>
-            <td><strong><? echo number_format($totalprice, 2, '.', ','); ?> บาท</strong></td>
+            <td align="right"><strong><? echo number_format($totalprice, 2, '.', ','); ?> </strong></td>
+            <td><strong> &nbsp;&nbsp;บาท</strong></td>
         </tr>
         <tr>
             <td><strong>ค่าจัดส่ง</strong></td> 
             <td><strong>&nbsp;: &nbsp;</strong></td>
-            <td><strong><span  id="adprice">120.00</span> บาท</strong></td>
+            <td align="right"><strong><span  id="adprice">120.00</span></strong></td>
+            <td><strong> &nbsp;&nbsp;บาท</strong></td>
         </tr>
         <tr>
             <td><strong><? echo $taxlabel ;?></strong></td> 
             <td><strong>&nbsp;: &nbsp;</strong></td>
-            <td><strong><? echo number_format($totalprice * ($taxvalue-1), 2, '.', ','); ?>บาท</strong></td>
+            <td align="right"><strong><? echo number_format($totalprice * ($taxvalue-1), 2, '.', ','); ?></strong></td>
+            <td><strong> &nbsp;&nbsp;บาท</strong></td>
         </tr>
         <tr>
             <td><strong>ราคารวม</strong></td> 
             <td><strong>&nbsp;: &nbsp;</strong></td>
-            <td><strong><span  id="sumprice"></span> บาท</strong></td>
+            <td align="right"><strong><span  id="sumprice"></span> </strong></td>
+            <td><strong> &nbsp;&nbsp;บาท</strong></td>
         </tr>
 
     </table>

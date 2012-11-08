@@ -26,7 +26,7 @@ $paidamount = 0;
 
           <td><? echo $payment->getSeqno(); ?> </td> 
                     <td><? echo $payment->getPeriod() ?> </td> 
-                    <td><? echo number_format($payment->getAmount(), 2, '.', ','); ?> &nbsp;</td> 
+                    <td align="right"><? echo number_format($payment->getAmount(), 2, '.', ','); ?> &nbsp;</td> 
                     <td> <?php if ($payment->getActive() == '1'): ?>
 
                             <span class="label label-success">Success</span>
@@ -62,8 +62,9 @@ $paidamount = 0;
                 <td><strong>วันที่</strong></td>
                 <td><? echo $order->getOrderdate(); ?></td>
             <tr>-->
-                <td width="121"><strong>การชำระเงิน</strong></td> 
-                <td width="215"><?php foreach ($ordpaylist as $ordpay): ?>
+                  <td width="121"><strong>การชำระเงิน :</strong></td>
+                
+                <td width="191"><?php foreach ($ordpaylist as $ordpay): ?>
                         <?php if ($ordpay->getPaymethod() == $order->getPaymethod()): ?>
                             <?
                             echo $ordpay->getDescription();
@@ -72,20 +73,20 @@ $paidamount = 0;
     <?php endif; ?>
 <?php endforeach; ?><br>
 <? $showform = true; ?></td>
-       <td width="144"><strong>ยอดเงินที่ต้องชำระ&nbsp;&nbsp;</strong></td>
-       <td width="192" ><strong><u>
+       <td width="143"><strong>ยอดเงินที่ต้องชำระ :&nbsp;&nbsp;</strong></td>
+       <td width="36" align="right" ><strong><u>
            <?php if ($showform): ?>
 
-    <? echo ($ordpay->getPaymethod() == '10') ? number_format($order->getTotalprice(), 2, '.', ',') : number_format($order->getTotalprice() / 2, 2, '.', ',') ?>&nbsp;</u>บาท
+    <? echo ($ordpay->getPaymethod() == '10') ? number_format($order->getTotalprice(), 2, '.', ',') : number_format($order->getTotalprice() / 2, 2, '.', ',') ?>&nbsp;</u>
 
                     <?php else: ?>
-                        0.00&nbsp;บาท
-                    <?php endif; ?></strong></td>     
+                        0.00&nbsp;
+                    <?php endif; ?></strong></td>     <td width="177"><strong> &nbsp;&nbsp;บาท</strong></td>
             
             </tr>
 
             <tr>
-                <td><strong>รอบการจ่ายเงิน&nbsp;&nbsp;</strong></td>
+                <td><strong>รอบการจ่ายเงิน :&nbsp;&nbsp;</strong></td>
                 <td><?php if ($ordpay->getPaymethod() == '10'): ?>
 
                         <?
@@ -99,19 +100,21 @@ $paidamount = 0;
                         ?>/2 ครั้ง
 
                     <?php endif; ?></td>
-             <td><strong>ค้างชำระ&nbsp;&nbsp;</strong></td>
-             <td class="red"> <?php if ($showform): ?>
+             <td><strong>ค้างชำระ :</strong></td>
+             <td class="red" align="right"> <?php if ($showform): ?>
 
-                        <? echo number_format($order->getTotalprice() - $paidamount, 2, '.', ',') ?>&nbsp;บาท
+                        <? echo number_format($order->getTotalprice() - $paidamount, 2, '.', ',') ?>&nbsp;
                     <?php else: ?>
-                        0.00&nbsp;บาท
+                        0.00&nbsp;
 <?php endif; ?> </td>       
+<td class="red"> &nbsp;&nbsp;บาท</td>
             </tr>
             <tr>
             <td></td>
             <td></td>
-              <td><strong>ยอดทั้งหมด&nbsp;&nbsp;</strong></td>
-              <td><? echo number_format($order->getTotalprice(), 2, '.', ',') ?>&nbsp;บาท&nbsp;</td>
+              <td><strong>ยอดทั้งหมด :&nbsp;&nbsp;</strong></td>
+              <td align="right"><? echo number_format($order->getTotalprice(), 2, '.', ',') ?>&nbsp;&nbsp;</td>
+              <td> &nbsp;&nbsp;บาท</td>
           </tr>
             <tr>
             <td></td>

@@ -147,43 +147,43 @@ table{
 <table>
     <tbody>
         <tr>
-            <td>อีเมลล์<span class="req">*</span></td>
+            <td>อีเมลล์<span class="req">*             </span>  :</td>
             <td></td>
             <td><input type="text" name="email" id="email" value="<?echo $this->input->post('email')?>"  />
                 <input class="btn" type="button" onclick="check_email();"  value="ตรวจสอบอีเมลล์"/></td>
         </tr>
 
         <tr>
-            <td>ชื่อ<span class="req">*</span></td>
+            <td>ชื่อ<span class="req">*</span> :</td>
             <td></td>
             <td><input type="text" name="name" id="name" value="<?echo $this->input->post('name')?>" /></td>
         </tr>
         
         <tr>
-        <td>นามสกุล<span class="req">*</span></td>
+        <td>นามสกุล<span class="req">*</span> :</td>
         <td></td>
         <td><input type="text" name="lastname" id="lastname"  value="<?echo $this->input->post('lastname')?>"/></td>
         </tr>
         
         <tr>
-        <td>โทรศัพท์มือถือ<span class="req">*</span></td>
+        <td>โทรศัพท์มือถือ<span class="req">*</span> :</td>
         <td></td>
         <td><input type="text" name="mphone"  value="<?echo $this->input->post('mphone')?>" id="mphone"/></td>
         </tr>
         
         <tr>
-        <td>รหัสผ่าน<span class="req">*</span></td>
+        <td>รหัสผ่าน<span class="req">*</span> :</td>
         <td></td>
         <td><input size="15" maxlength="15"  value="" type="password" name="password" id="password" /></td>
         </tr>
         
         <tr>
-        <td>ยืนยันรหัสผ่าน<span class="req">*</span></td> 
+        <td>ยืนยันรหัสผ่าน<span class="req">*</span> :</td> 
         <td></td>
         <td><input size="15" maxlength="15" type="password" name="confirm_password" id="confirm_password" /></td>
         </tr>
         <tr>
-        <td>การแจ้งเตือน<span class="req">*</span></td> 
+        <td>การแจ้งเตือน<span class="req">*</span> :</td> 
         <td></td>
         <td><input type="checkbox" name="issentemail" checked="checked" value="T"> Email
 <input type="checkbox" name="issentsms" value="T" checked="checked" > SMS</td>
@@ -196,19 +196,19 @@ table{
     width: 144px;
 "></td>
              
-             <td> <img  id="captcha" src="<? echo site_url('register/getcaptcha') ?>" width="150" heigth="40" /><a href="javascript:void(0)"  onclick="changecaptcha();"class="btn">เปลี่ยนรูป</a><br><br></td>
+             <td>&nbsp;&nbsp;&nbsp; <img  id="captcha" src="<? echo site_url('register/getcaptcha') ?>" width="150" heigth="40" /><a href="javascript:void(0)"  onclick="changecaptcha();"class="btn">เปลี่ยนรูป</a><br><br></td>
                   
     </tr>
               <tr>
-        <td>กรอกตัวอักษรในภาพ<span class="req">*</span></td>
+        <td>กรอกตัวอักษรในภาพ<span class="req">*</span> :</td>
        
-        <td><input type="text" name="captcha"  id="captcha"/> </td>
+        <td>&nbsp;&nbsp;&nbsp;<input type="text" name="captcha"  id="captcha"/> </td>
         </tr>
             
             <tr>
                 <td></td>
                 
-                <td><input class="btn-info" type="submit"  value="ตกลง"/></td>
+                <td>&nbsp;&nbsp;&nbsp;<input class="btn-info" type="submit"  value="ตกลง"/></td>
             </tr>
               </tbody>
               </table>
