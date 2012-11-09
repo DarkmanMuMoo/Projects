@@ -44,11 +44,23 @@
          }
      }
     $().ready(function() {
+    
+
+    
         // validate the comment form when it is submitted
         $("#mphone").mask("999-999-9999");
         // validate signup form on keyup and submit
         $("#signupForm").validate({
+            errorPlacement: function(error, element) {
+                     if (element.attr("name") == "email" ){
+                         
+                          error.insertAfter($('#chkemail'));
+                     }else{
+                          error.insertAfter(element);
+                     }
+            },
             rules: {
+                mphone:"required",
                 name:"required",
                 lastname:"required",
 	
@@ -73,6 +85,7 @@
                       
                         
             },messages: {
+                mphone:"ใส่เบอร์มือถือ",
                 name: "Please enter your firstname",
                 lastname: "Please enter your lastname",
 		
@@ -88,7 +101,7 @@
                       maxlength:"Your password must max 15 characters long",
                     equalTo: "Please enter the same password as above"
                 },
-                email: "Please enter a valid email address Example: someone@example.com",
+                email: "Please enter a valid email address",
                /* postcode2:{
                     required: "required",
                     digits:"Please enter digit only"
@@ -109,19 +122,29 @@
  
 </script>
 <style>
+    
+    td:first-child{
+        
+        width: 152px;
+    }
     hr{color: orangered;
 background-color: orange;
 height: 1px;}
     input.error { border: 1px dotted red; }
 
 table{
-   
+   margin-top: 10px;
     width: 100%;
    
 }
 #alert p{
     
     font-size: 18px;
+}
+label.error {
+    
+    margin-left: 10px;
+    display:inline;
 }
 </style>
 <div style="margin: 0 auto ; width: 80%;" > 
@@ -150,7 +173,7 @@ table{
             <td>อีเมลล์<span class="req">*             </span>  :</td>
             <td></td>
             <td><input type="text" name="email" id="email" value="<?echo $this->input->post('email')?>"  />
-                <input class="btn" type="button" onclick="check_email();"  value="ตรวจสอบอีเมลล์"/></td>
+                <input id="chkemail" style="margin-bottom: 9px;" class="btn" type="button" onclick="check_email();"  value="ตรวจสอบอีเมลล์"/></td>
         </tr>
 
         <tr>
@@ -190,19 +213,19 @@ table{
         </tr>
 </table>
 
-<table>
+<table >
     <tbody>
-         <tr><td style="
-    width: 144px;
-"></td>
+         <tr><td 
+  
+></td>
              
-             <td>&nbsp;&nbsp;&nbsp; <img  id="captcha" src="<? echo site_url('register/getcaptcha') ?>" width="150" heigth="40" /><a href="javascript:void(0)"  onclick="changecaptcha();"class="btn">เปลี่ยนรูป</a><br><br></td>
+             <td> <img  id="captcha" src="<? echo site_url('register/getcaptcha') ?>" width="150" heigth="40" /><a href="javascript:void(0)"  onclick="changecaptcha();"class="btn">เปลี่ยนรูป</a><br><br></td>
                   
     </tr>
               <tr>
         <td>กรอกตัวอักษรในภาพ<span class="req">*</span> :</td>
        
-        <td>&nbsp;&nbsp;&nbsp;<input type="text" name="captcha"  id="captcha"/> </td>
+        <td><input type="text" name="captcha"  id="captcha"/> </td>
         </tr>
             
             <tr>

@@ -112,7 +112,7 @@
                         <td></td>
                         <td><strong>รายละเอียดงาน</strong></td>
                         <td>:</td>
-                        <td><textarea>
+                        <td><textarea maxlength="255" >
 
                                     <? echo $work->getWorkDescription() ?>
 
@@ -162,7 +162,7 @@
                 </tr>
                 <tr>
                     <td>สถานะงาน</td>
-                    <td><textarea name="description" cols="" rows=""></textarea></td>
+                    <td><textarea maxlength="255" name="description" cols="" rows=""></textarea></td>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>

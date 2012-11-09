@@ -122,13 +122,16 @@ class Bakorders extends CI_Controller {
         $this->load->model('dao/ordsenddao');
         $this->load->model('dao/ordpaydao');
         $this->load->model('dao/orddao');
-
+        $this->load->driver('cache', array('adapter' => 'file'));
         $ordstatuslist = $this->ordstatusdao->findall();
         $orderlinelist = $this->orderlinedao->findjoinbyorderno($orderno);
         $ordsendlist = $this->ordsenddao->findall();
         $ordpaylist = $this->ordpaydao->findall();
         $order = $this->orddao->findbyid($orderno);
+        $tax = $data['tax'] = $this->cache->file->get('tax', true);
         $data = array();
+        $data['taxlabel'] = "ภาษี$tax%";
+        $data['taxvalue'] = (floatval($tax) / 100) + 1;
         $data['ordsendlist'] = $ordsendlist;
         $data['ordpaylist'] = $ordpaylist;
         $data['order'] = $order;
@@ -439,7 +442,7 @@ class Bakorders extends CI_Controller {
         $messagephone = "Colour Harmony: สถานะcomplete \n";
         $messagephone.= $message;
 
-         if ($_SESSION['user']->getIssentemail() == 'T') {
+        if ($_SESSION['user']->getIssentemail() == 'T') {
             $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
             error_log("send email to $to result is" . var_export($emailresult, true), 0);
         }

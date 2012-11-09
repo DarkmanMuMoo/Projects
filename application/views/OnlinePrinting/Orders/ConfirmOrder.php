@@ -146,19 +146,19 @@
             <td><strong> &nbsp;&nbsp;บาท</strong></td>
         </tr>
         <tr>
-            <td><strong>ภาษี7%</strong></td>
+            <td><strong><? echo $taxlabel ;?></strong></td>
             <td><strong>&nbsp;:&nbsp;</strong></td>
-            <td align="right"><strong><? echo number_format($totalprice * 0.07, 2, '.', ','); ?></strong></td>
+            <td align="right"><strong><? echo number_format($totalprice * ($taxvalue-1), 2, '.', ','); ?></strong></td>
             <td><strong> &nbsp;&nbsp;บาท</strong></td>
         </tr>
         <tr>
             <td><strong>ราคารวม</strong></td>
             <td><strong>&nbsp;:&nbsp;</strong></td>
-            <td align="right"><strong><? echo number_format(($totalprice * 1.07) + $ordsend->getSendprice(), 2, '.', ','); ?></strong> </td>
+            <td align="right"><strong><? echo number_format(($totalprice * ($taxvalue-1)) + $ordsend->getSendprice(), 2, '.', ','); ?></strong> </td>
             <td><strong> &nbsp;&nbsp;บาท</strong></td>
         </tr>
     </table><br>
-    <input type="hidden" name="totalprice" value="<? echo ($totalprice * 1.07) + $ordsend->getSendprice(); ?>">
+    <input type="hidden" name="totalprice" value="<? echo ($totalprice * ($taxvalue-1)) + $ordsend->getSendprice(); ?>">
 </div>
 
 

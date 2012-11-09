@@ -204,7 +204,7 @@ width: 100%;
             <th>กระดาษ</th>
             <th>ตัวเลือกพิเศษ</th>
             <th>จำนวน</th>
-            <th>ราคา</th>
+            <th>ราคา(บาท)</th>
 
             <th colspan="2" >ไฟล์</th>
             </thead>
@@ -228,7 +228,7 @@ width: 100%;
                             <?
                             echo number_format($orderline->getPrice(), 2, '.', ',');
                             $totalprice+=$orderline->getPrice();
-                            ?> &nbsp บาท
+                            ?> &nbsp 
                         </td>
                         <td width="20%"  >  <?php if (($orderline->getFilepath() == '') || ($orderline->getFilepath() == null)): ?>
                                 <h6 style="color:red" >Not upload</h6>'
@@ -263,7 +263,7 @@ width: 100%;
                 <tr>
                     <td><strong>ข้อความถึงโรงพิมพ์</strong></td>
 
-                    <td><textarea name="comment" > <? echo $order->getCusremark(); ?> </textarea>
+                    <td><textarea  maxlength="255" name="comment" > <? echo $order->getCusremark(); ?> </textarea>
 
                     </td>
                 </tr>
@@ -275,21 +275,50 @@ width: 100%;
 
             </table>
 
-            <div style="float:left ; width:50%;" >
+            <div style="float:left ; width:50%; height: 87px;" >
                 <strong>ข้อความจากโรงพิมพ์</strong>
 
                 <p>
                     <? echo $order->getSellerremark(); ?>
                 </p>
             </div>
+            
+            <div style="float: right; margin-right: 10%;" >
+    <table> 
+        <tr>
+            <td><strong>ราคาสินค้า</strong></td> 
+            <td> <strong>&nbsp;:&nbsp;</strong></td>
+            <td align="right"><strong><? echo number_format($totalprice, 2, '.', ','); ?></strong></td>
+            <td><strong> &nbsp;&nbsp;บาท</strong></td>
+        </tr>
+        <tr>
+            <td><strong>ค่าจัดส่ง</strong></td>
+            <td><strong>&nbsp;:&nbsp;</strong></td>
+            <td align="right"><strong><? echo number_format($ordsend->getSendprice(), 2, '.', ','); ?></strong></td>
+            <td><strong> &nbsp;&nbsp;บาท</strong></td>
+        </tr>
+        <tr>
+            <td><strong><? echo $taxlabel ;?></strong></td>
+            <td><strong>&nbsp;:&nbsp;</strong></td>
+            <td align="right"><strong><? echo number_format($totalprice * ($taxvalue-1), 2, '.', ','); ?></strong></td>
+            <td><strong> &nbsp;&nbsp;บาท</strong></td>
+        </tr>
+        <tr>
+            <td><strong>ราคารวม</strong></td>
+            <td><strong>&nbsp;:&nbsp;</strong></td>
+            <td align="right"><strong><? echo number_format(($totalprice * ($taxvalue-1)) + $ordsend->getSendprice(), 2, '.', ','); ?></strong> </td>
+            <td><strong> &nbsp;&nbsp;บาท</strong></td>
+        </tr>
+    </table><br>
+   
+</div>
             <input type="hidden" name="orderno" value="<? echo $order->getOrderno(); ?>">
 
         </div>
     </form>
+   
 
-
-
-
+   
 
     <?php if ($ordstatus->getStatus() <= 20): ?>
         <div align="left"  > <span style="margin-right: 3%; margin-left: 10%"> เมื่อ upload file ครบแล้ว คลิกที่นี่เพื่อดำเนินการต่อไป------> </span>

@@ -172,7 +172,7 @@
              
                 <tr>
                     <td>คำอธิบาย</td>
-                    <td><textarea name="description"></textarea></td>
+                    <td><textarea maxlength="255" name="description"></textarea></td>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>

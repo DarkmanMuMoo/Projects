@@ -7,7 +7,7 @@ and open the template in the editor.
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Colour Harmony Online Printing......ระบบสั่งงานพิมพ์ออนไลน์</title>
-      <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="<? echo base_url('favicon.ico')?>" type="image/x-icon" />
         <? $this->load->view(lang('includeheader')) ?>
         <script src="<? echo base_url("asset/javascript/bootstrap-dropdown.js"); ?>" >  </script>
         <link href="<? echo base_url("asset/css/main.css"); ?>" rel="stylesheet">

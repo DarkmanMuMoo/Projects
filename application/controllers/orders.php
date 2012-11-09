@@ -169,6 +169,7 @@ class Orders extends CI_Controller {
     public function orderpage() {
         $this->load->library('pagination');
         $this->load->model('dao/ordstatusdao');
+
         $user = $_SESSION['user'];
         $email = $user->getEmail();
         $condition = array();
@@ -246,7 +247,7 @@ class Orders extends CI_Controller {
 
         $tax = $data['tax'] = $this->cache->file->get('tax', true);
         $data['taxlabel'] = "ภาษี$tax%";
-        $data['taxvalue']= (floatval($tax)/100)+1;
+        $data['taxvalue'] = (floatval($tax) / 100) + 1;
         $data['provincelist'] = $provincelist;
         $data['templatelist'] = $this->templatedao->findall();
         $data['paperlist'] = $this->paperdao->findall();
@@ -270,6 +271,7 @@ class Orders extends CI_Controller {
         $this->load->model('dao/ordsenddao');
         $this->load->model('dao/addressdao');
         $this->load->library('thailandutil');
+        $this->load->driver('cache', array('adapter' => 'file'));
 
         $sendaddno = $this->input->post('choosesendaddress');
         $receiptaddno = $this->input->post('choosereceiptdaddress');
@@ -303,6 +305,9 @@ class Orders extends CI_Controller {
         $ordpaymethod = $this->input->post('ordpay');
         $this->session->set_flashdata('ordpay', $ordpaymethod);
         $cusremark = $this->input->post('cusremark');
+        $tax = $data['tax'] = $this->cache->file->get('tax', true);
+        $data['taxlabel'] = "ภาษี$tax%";
+        $data['taxvalue'] = (floatval($tax) / 100) + 1;
         $data['templatelist'] = $this->templatedao->findall();
         $data['paperlist'] = $this->paperdao->findall();
         $data['optionlist'] = $this->optiondao->findall();
@@ -368,14 +373,17 @@ class Orders extends CI_Controller {
         $this->load->model('dao/ordpaydao');
         $this->load->model('dao/ordsenddao');
         $this->load->model('dao/ordtrackingdao');
-
+        $this->load->driver('cache', array('adapter' => 'file'));
         $ordstatuslist = $this->ordstatusdao->findall();
         $orderlinelist = $this->orderlinedao->findjoinbyorderno($orderno);
         $ordsendlist = $this->ordsenddao->findall();
         $ordpaylist = $this->ordpaydao->findall();
-
+        $tax = $data['tax'] = $this->cache->file->get('tax', true);
         $order = $this->orddao->findbyid($orderno);
         $data = array();
+
+        $data['taxlabel'] = "ภาษี$tax%";
+        $data['taxvalue'] = (floatval($tax) / 100) + 1;
         $data['ordsendlist'] = $ordsendlist;
         $data['ordpaylist'] = $ordpaylist;
         $data['order'] = $order;

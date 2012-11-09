@@ -96,6 +96,7 @@
     }
 </style>
 <div id="page">
+    <? echo form_open('orders/confirmorder') ?>
     <img src="<? echo base_url('asset/Sys_img/pic_step/01createOrder.png')  ?>"/>
     <p style ="margin-bottom: 10px;">
     <h1><b>Create Order</b></h1>
@@ -104,7 +105,7 @@
 
 <hr></hr>
 
-<? echo form_open('orders/confirmorder') ?>
+
 <div id="addressbar">
     <div id="sendaddress">
         <h5>ที่อยู่จัดส่ง</h5> <br/>
@@ -128,7 +129,7 @@
             <table>
                 <tr>
                     <td>ที่อย ู่ :</td> 
-                    <td><textarea name="address" id="address" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง" > </textarea></td>
+                    <td><textarea  maxlength="255"  name="address" id="address" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง" > </textarea></td>
                 </tr>
                 <tr>
                     <td>จังหวัด :</td> 
@@ -172,7 +173,7 @@
             <table>
                 <tr>
                     <td>ที่อยู่ :</td> 
-                    <td><textarea name="address1" id="address1" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง" > </textarea></td>
+                    <td><textarea  maxlength="255" name="address1" id="address1" placeholder ="111/235 ซ.ตัวอย่าง ถ.ตัวอย่าง แขวงตัวอย่าง เขตตัวอย่าง" > </textarea></td>
                 </tr>
                 <tr>
                     <td>จังหวัด :</td> 
@@ -316,7 +317,7 @@
 </p>
 
 <label> ข้อความถึงโรงพิมพ์: </label>
-<textarea name="cusremark">
+<textarea  maxlength="255"   name="cusremark">
 
 
 </textarea>
