@@ -125,7 +125,7 @@
                 <table >
                     <tr>
                         <td>ชื่อที่อยู่<span class="req">*</span> :</td>
-                        <td><input type="text" name="addressname" id="addressname" value="<? echo $address->getAddressname(); ?>" /></td>
+                        <td><input type="text"  name="addressname" id="addressname" value="<? echo $address->getAddressname(); ?>" /><em>(ใช้อ้างอิงเพื่อสร้างOrder)</em></td>
                     </tr>
                     <tr>
                         <td>ที่อยู่<span class="req">*</span> :</td>
@@ -141,7 +141,11 @@
                     </tr>
                     <tr>
                         <td>รหัสไปรษณีย์<span class="req">*</span> :</td> 
+<<<<<<< HEAD
                         <td><input style="width: 150px;" type="text" name="postcode" id="postcode"  value="<? echo $address->getPostcode(); ?>"/></td>
+=======
+                        <td><input type="text" name="postcode" id="postcode" maxlength="5" value="<? echo $address->getPostcode(); ?>"/></td>
+>>>>>>> 299ba436800ea9146ed496245012875d4917db7d
                     </tr>
                     <tr>
                         <td>เบอร์โทรศัพท์<span class="req">*</span> :</td> 
@@ -178,7 +182,7 @@
             <table>
                 <tr>
                     <td>ชื่อที่อยู่<span class="req">*</span> :</td>
-                    <td><input type="text" name="addressname" id="addressname" /></td>
+                    <td><input type="text" name="addressname" id="addressname" /> <em>(ใช้อ้างอิงเพื่อสร้างOrder)</em></td>
                 </tr>
                 <tr>
                     <td>ที่อยู่<span class="req">*</span> :</td>

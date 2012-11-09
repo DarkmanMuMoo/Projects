@@ -228,6 +228,7 @@ width: 100%;
                             <?
                             echo number_format($orderline->getPrice(), 2, '.', ',');
                             $totalprice+=$orderline->getPrice();
+
                             ?> &nbsp 
                         </td>
                         <td width="20%"  >  <?php if (($orderline->getFilepath() == '') || ($orderline->getFilepath() == null)): ?>

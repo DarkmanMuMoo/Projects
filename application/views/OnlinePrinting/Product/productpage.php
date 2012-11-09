@@ -59,10 +59,10 @@
             <img class="typeimg" src="<? echo base_url($type->getPicurl()); ?>"   />  
             <div class="caption">
                 <h4> <? echo $type->getType(); ?>  </h4>
-                <p><? echo $type->getDescription(); ?></p>
-                <p>
+                <p align="justify"><? echo $type->getDescription(); ?></p>
+                <p align="right">
                     <a class=" btn btn-primary" href="<? echo site_url("product/chooseProduct") . "/" . $type->getTypeno(); ?>"  > 
-                        สั่งซื้อสินค้า </a>
+                        choose </a>
                 </p>
 
 
