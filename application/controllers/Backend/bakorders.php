@@ -268,11 +268,15 @@ class Bakorders extends CI_Controller {
         $phone = explode('-', $phone);
         $phone = implode('', $phone);
         $messagephone = $subject . "\n" . $message;
-        $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
-        error_log("send email to $to result is" . var_export($emailresult, true), 0);
-        // sent sms here
-        $result = $this->smsutil->sentsms($phone, $messagephone);
-        error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
+         if ($cus->getIssentemail() == 'T') {
+            $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
+            error_log("send email to $to result is" . var_export($emailresult, true), 0);
+        }
+
+        if ($cus->getIssetsms() == 'T') {
+            $result = $this->smsutil->sentsms($phone, $messagephone);
+            error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
+        }
 
         return $result;
     }
@@ -305,12 +309,12 @@ class Bakorders extends CI_Controller {
         $phone = $cus->getMobilephone();
         $phone = explode('-', $phone);
         $phone = implode('', $phone);
-        if ($_SESSION['user']->getIssentemail() == 'T') {
+        if ($cus->getIssentemail() == 'T') {
             $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
             error_log("send email to $to result is" . var_export($emailresult, true), 0);
         }
 
-        if ($_SESSION['user']->getIssetsms() == 'T') {
+        if ($cus->getIssetsms() == 'T') {
             $result = $this->smsutil->sentsms($phone, $messagephone);
             error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
         }
@@ -331,7 +335,7 @@ class Bakorders extends CI_Controller {
 
         // $to = $email;
         $subject = "Colour Harmony: รายการสั่งซื้อ $orderno สถานะปฏิเสธ";
-        $message = 'งานของท่านไม่ถูกต้อง กรุณาอัพโหลดงานใหม่ค่ะ ';
+        $message = 'งานของท่านไม่ถูกต้อง กรุณาอัพโหลดงานใหม่ค่ะ  ';
         $message .= '<p>';
         $message .= $msg;
         $message .= '</p>';
@@ -347,12 +351,12 @@ class Bakorders extends CI_Controller {
         $messagephone = "งานของท่านไม่ถูกต้อง กรุณาอัพโหลดงานใหม่ค่ะ \n";
         $messagephone.=$msg;
 
-        if ($_SESSION['user']->getIssentemail() == 'T') {
+        if ($cus->getIssentemail() == 'T') {
             $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
             error_log("send email to $to result is" . var_export($emailresult, true), 0);
         }
 
-        if ($_SESSION['user']->getIssetsms() == 'T') {
+        if ($cus->getIssetsms() == 'T') {
             $result = $this->smsutil->sentsms($phone, $messagephone);
             error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
         }
@@ -394,8 +398,8 @@ class Bakorders extends CI_Controller {
             $ord = $this->orddao->findbyid($orderno);
             $to = $ord->getEmail();
             //  $to = $email;
-            $subject = 'Colour Harmony: สถานะสำเร็จ';
-            $message = 'งานของท่านเสร็จเรียบร้อยแล้วค่ะ';
+            $subject = 'Colour Harmony: จัดส่ง';
+            $message = 'งานของท่านอยู่ระหว่างการจัดส่ง (สามารถตรวจสอบเลข Tracking number  ได้ในกรณีที่ ส่งทางไปรษณีย์)';
 
 
             $cus = $this->cusdao->findbyEmail($ord->getEmail());
@@ -406,12 +410,12 @@ class Bakorders extends CI_Controller {
             $messagephone = "Colour Harmony:($orderno) สถานะกำลังส่ง \n";
             $messagephone.= $message;
 
-            if ($_SESSION['user']->getIssentemail() == 'T') {
+            if ($cus->getIssentemail() == 'T') {
                 $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
                 error_log("send email to $to result is" . var_export($emailresult, true), 0);
             }
 
-            if ($_SESSION['user']->getIssetsms() == 'T') {
+            if ($cus->getIssetsms() == 'T') {
                 $result = $this->smsutil->sentsms($phone, $messagephone);
                 error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
             }
@@ -433,7 +437,7 @@ class Bakorders extends CI_Controller {
         $ord = $this->orddao->findbyid($orderno);
         $to = $ord->getEmail();
         $subject = 'Colour Harmony: สถานะcomplete';
-        $message = 'Order Complete';
+        $message = 'Order ของคุนเสร็จสมบูรณ์ ขอบคุณที่ใช่บริการกับเรา ขอบคุณครับ';
         $cus = $this->cusdao->findbyEmail($ord->getEmail());
         $phone = $cus->getMobilephone();
         $phone = explode('-', $phone);
@@ -442,12 +446,12 @@ class Bakorders extends CI_Controller {
         $messagephone = "Colour Harmony: สถานะcomplete \n";
         $messagephone.= $message;
 
-        if ($_SESSION['user']->getIssentemail() == 'T') {
+        if ($cus->getIssentemail() == 'T') {
             $emailresult = $this->emailutil->sendemail($config, $form, $to, $subject, $message);
             error_log("send email to $to result is" . var_export($emailresult, true), 0);
         }
 
-        if ($_SESSION['user']->getIssetsms() == 'T') {
+        if ($cus->getIssetsms() == 'T') {
             $result = $this->smsutil->sentsms($phone, $messagephone);
             error_log("send sms to $phone result is" . var_export($result, true) . "because " . $this->smsutil->getDebumsg(), 0);
         }

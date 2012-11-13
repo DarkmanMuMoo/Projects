@@ -141,11 +141,9 @@
                     </tr>
                     <tr>
                         <td>รหัสไปรษณีย์<span class="req">*</span> :</td> 
-<<<<<<< HEAD
-                        <td><input style="width: 150px;" type="text" name="postcode" id="postcode"  value="<? echo $address->getPostcode(); ?>"/></td>
-=======
-                        <td><input type="text" name="postcode" id="postcode" maxlength="5" value="<? echo $address->getPostcode(); ?>"/></td>
->>>>>>> 299ba436800ea9146ed496245012875d4917db7d
+
+                        <td><input maxlength="5" style="width: 150px;" type="text" name="postcode" id="postcode"  value="<? echo $address->getPostcode(); ?>"/></td>
+
                     </tr>
                     <tr>
                         <td>เบอร์โทรศัพท์<span class="req">*</span> :</td> 
@@ -192,7 +190,7 @@
                 </tr>
                 <tr>
                     <td>จังหวัด<span class="req">*</span> :</td> 
-                    <td>< style="width: 150px;" select name="province" id="province">
+                    <td><select style="width: 150px;"  name="province" id="province">
                             <?php foreach ($provincelist as $province): ?>
                                 <option  value="<? echo $province->getProvinceid(); ?>"><? echo $province->getProvincename(); ?></option>
                             <? endforeach; ?>

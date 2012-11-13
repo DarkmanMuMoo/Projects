@@ -235,25 +235,27 @@ class Testsome extends CI_Controller {
 
 
         $config = array();
-        $config['protocol'] = 'smtp';
+      
+        $config['protocol'] = 'sendmail';
         $config['mailpath'] = '/usr/sbin/sendmail';
-        $config['smtp_host'] = 'mail.colourharmony.co.th';
-        $config['charset'] = 'iso-8859-1';
+        $config['charset'] = 'utf-8';
         $config['wordwrap'] = TRUE;
-        $config['smtp_user'] = 'phairoj@colourharmony.co.th';
-        $config['smtp_pass'] = 'p5h1a2i1';
-        /* $config['protocol'] = 'sendmail';
-          $config['mailpath'] = '/usr/sbin/sendmail';
-          $config['charset'] = 'iso-8859-1';
-          $config['wordwrap'] = TRUE; */
+        $config['mailtype'] = 'text';
+        $config['newline'] = "\r\n";
 
         $this->load->library('email', $config);
         $this->email->from('phairoj@colourharmony.co.th', 'Name');
         $this->email->to('darkmanmumoonaja@gmail.com');
 
 
-        $this->email->subject('Email Test');
-        $this->email->message('Testing the email class' . "\r\n");
+        $this->email->subject('ยืนยันการเป็นสมาชิก');
+        $url = site_url("register/validate_user/");
+        $alink = "<a href=\"$url\" >กดเพื่อยืนยันการเป็นสมาชิก</a>";
+        $message = ' อีเมลล์ที่ใช้เข้าสู่ระบบของคุณคือ' . '' . ' <br/> validate email link ' . '<br> <p>' . $alink . '</p> ';
+        $this->email->message($message);
+
+        
+       // return $this->email->send();
 
         $this->email->send();
 

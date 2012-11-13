@@ -57,7 +57,10 @@ width: 100%;
 </style>
 <script src="<? echo base_url("asset/javascript/priceformat.js"); ?>" >  </script>
 <div id="page">
-
+    <div style="margin: 10px auto; " >
+    <? $imgid=($order->getOrdstatus()<20)?'20':$order->getOrdstatus();?>
+    <img   src="<? echo base_url("asset/Sys_img/pic_status/$imgid.png"); ?>" />
+    </div>
     <div id="head" >
         <div id="order" class="headelement">
             <h2 >เลขใบสั่งซื้อ <span class="orange" ><? echo $order->getOrderno(); ?></span></h2> <h3>สถานะ 
@@ -307,7 +310,7 @@ width: 100%;
         <tr>
             <td><strong>ราคารวม</strong></td>
             <td><strong>&nbsp;:&nbsp;</strong></td>
-            <td align="right"><strong><? echo number_format(($totalprice * ($taxvalue-1)) + $ordsend->getSendprice(), 2, '.', ','); ?></strong> </td>
+            <td align="right"><strong><? echo number_format(($totalprice * ($taxvalue)) + $ordsend->getSendprice(), 2, '.', ','); ?></strong> </td>
             <td><strong> &nbsp;&nbsp;บาท</strong></td>
         </tr>
     </table><br>

@@ -103,7 +103,7 @@ class Register extends CI_Controller {
         $config['mailpath'] = '/usr/sbin/sendmail';
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = TRUE;
-        $config['mailtype'] = 'html';
+        $config['mailtype'] = 'text';
         $config['newline'] = "\r\n";
 
 
@@ -125,8 +125,8 @@ class Register extends CI_Controller {
         $encrypted_email = $this->myencrypt->encode($cus->getEmail());
         $this->email->subject('ยืนยันการเป็นสมาชิก');
         $url = site_url("register/validate_user/$encrypted_email");
-        $alink = "<a href=\"$url\" >กดเพื่อยืนยันการเป็นสมาชิก</a>";
-        $message = ' อีเมลล์ที่ใช้เข้าสู่ระบบของคุณคือ' . $cus->getEmail() . ' <br/> validate email link ' . '<br> <p>' . $alink . '</p> ';
+        
+        $message = ' อีเมลล์ที่ใช้เข้าสู่ระบบของคุณคือ' . $cus->getEmail() .'กดที่ลิ้งนี้เพื่อยืนยันการเป็นสมาชิก'.$url;
         $this->email->message($message);
 
         return $this->email->send();

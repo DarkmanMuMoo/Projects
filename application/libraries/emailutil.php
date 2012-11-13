@@ -30,7 +30,7 @@ class Emailutil {
         $this->serverconfig['mailpath'] = '/usr/sbin/sendmail';
         $this->serverconfig['charset'] = 'utf-8';
         $this->serverconfig['wordwrap'] = TRUE;
-        $this->serverconfig['mailtype'] = 'html';
+        $this->serverconfig['mailtype'] = 'text';
 
         $this->smtpconfig['protocol'] = 'smtp';
         $this->smtpconfig['smtp_host'] = 'ssl://smtp.googlemail.com';

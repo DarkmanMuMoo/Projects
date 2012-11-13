@@ -26,6 +26,17 @@
         margin-bottom: 5%;
 
     }
+    
+    .description{
+        
+        color: red;
+text-align: left;
+line-height: 2em;
+width: 80%;
+margin: 0 auto;
+        
+        
+    }
 </style>
 
 <div class="container" >
@@ -109,7 +120,7 @@
 
             </tbody>
         </table>
-         <? echo $this->pagination->create_onclick_links(); ?>
+        <? echo $this->pagination->create_onclick_links(); ?>
     </div>
     <button onclick="showinsertform();" class="btn" >เพิ่ม Template</button>
     <div  id="inserttemp" class="divcenter">
@@ -143,7 +154,7 @@
                     <td>&nbsp;</td>
                     <td><select name="platesize">
                             <option value="L">L</option>
-                             <option value="S">S</option>
+                            <option value="S">S</option>
                         </select></input></td>
                 </tr>
                 <tr>
@@ -169,7 +180,12 @@
             </table>
 
         </form>
-
+        <p class="description"> 
+            ***<strong>Platesize</strong> L=เพลทขนาด745.00x605.00 mm <br/>
+            <span style="padding-left: 75px;">S=เพลทขนาด525.00x459.00 mm </span><br/> 
+            ***<strong>Print Per Ream</strong> = กระดาษตัด (=1ใบรีมแบ่งได้กี่ใบพิมพ์) <br/> 
+            ***<strong>Trim Per Print</strong> =1ใบพิมพ์ลงได้กี่ใบงาน (=จำนวนชิ้นงานสำเร็จรูปใน1ใบพิมพ์)
+        </p>
     </div>
     <div id="showuploaddialog" style="display:none;">
         <iframe id="uploaddialog" width="500"  style="border-style:none;" scrolling="no"  ></iframe>

@@ -318,7 +318,7 @@
         <tr>
             <td><strong>ราคารวม</strong></td>
             <td><strong>&nbsp;:&nbsp;</strong></td>
-            <td align="right"><strong><? echo number_format(($totalprice * ($taxvalue-1)) + $ordsend->getSendprice(), 2, '.', ','); ?></strong> </td>
+            <td align="right"><strong><? echo number_format(($totalprice * ($taxvalue)) + $ordsend->getSendprice(), 2, '.', ','); ?></strong> </td>
             <td><strong> &nbsp;&nbsp;บาท</strong></td>
         </tr>
     </table><br>

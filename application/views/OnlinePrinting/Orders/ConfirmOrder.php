@@ -27,7 +27,9 @@
 </style>
 <div id="page">  
     <? echo form_open('orders/ordersummary') ?>
+     
     <img src="<? echo base_url('asset/Sys_img/pic_step/02comfirmOrder.png') ?>"/>
+    
     <p style ="margin-bottom: 10px;">
     <h1><b>Confirm Order</b></h1>
     <h4>ยืนยันการสั่งสินค้า</h4>
@@ -154,11 +156,11 @@
         <tr>
             <td><strong>ราคารวม</strong></td>
             <td><strong>&nbsp;:&nbsp;</strong></td>
-            <td align="right"><strong><? echo number_format(($totalprice * ($taxvalue-1)) + $ordsend->getSendprice(), 2, '.', ','); ?></strong> </td>
+            <td align="right"><strong><? echo number_format(($totalprice * ($taxvalue)) + $ordsend->getSendprice(), 2, '.', ','); ?></strong> </td>
             <td><strong> &nbsp;&nbsp;บาท</strong></td>
         </tr>
     </table><br>
-    <input type="hidden" name="totalprice" value="<? echo ($totalprice * ($taxvalue-1)) + $ordsend->getSendprice(); ?>">
+    <input type="hidden" name="totalprice" value="<? echo ($totalprice * ($taxvalue)) + $ordsend->getSendprice(); ?>">
 </div>
 
 
